@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Validation Example</title>
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="../javascripts/jquery.js"></script>
+
+	<!-- jQuery Validation -->
+	<script type="text/javascript" src="../javascripts/jquery-validation.js"></script>
+
+	<!-- JavaSript -->
+	<script type="text/javascript">
+		$(function() {
+			$("#commentForm").validate();
+		});
+	</script>
+</head>
+<body>
+	<h2>jQuery Validation Example</h2>
+	<form class="cmxform" id="commentForm" method="post" action="">
+		<fieldset>
+			<legend>Please provide your name, email address (won't be published) and a comment</legend>
+			<p>
+				<label for="cname">Name (required, at least 2 characters)</label>
+				<input id="cname" name="name" class="required" minlength="2" />
+			</p>
+			<p>
+				<label for="cemail">E-Mail (required)</label>
+				<input id="cemail" name="email" class="required email" />
+			</p>
+			<p>
+				<label for="curl">URL (optional)</label>
+				<input id="curl" name="url" class="url" value="" />
+			</p>
+			<p>
+				<label for="ccomment">Your comment (required)</label>
+				<textarea id="ccomment" name="comment" class="required"></textarea>
+			</p>
+			<p>
+				<input class="submit" type="submit" value="Submit"/>
+			</p>
+		</fieldset>
+	</form>
+</body>
+</html>
