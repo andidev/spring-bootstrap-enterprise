@@ -5,11 +5,11 @@
 <!-- For professional support please see                            -->
 <!--    http://www.qos.ch/shop/products/professionalSupport         -->
 <!--                                                                -->
-<configuration debug="true">
+<configuration>
     
     <property name="USER_HOME" value="/Users/anders" />
      
-    <!-- console appender
+    <!-- Console Appender
     http://logback.qos.ch/manual/appenders.html#RollingFileAppender 
     http://logback.qos.ch/manual/layouts.html#customConversionSpecifier -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -18,13 +18,13 @@
             <layout class="org.andidev.logging.logback.CustomPatternLayout">
                 <param name="Pattern" value='%colorpurple%d{"HH:mm ss"}%coloroff   %colorlevel%-5level - %-130message%coloroff   %colorpurple%c{0}:%line%coloroff%n' />
             </layout>
-        </encoder>
+        </encoder>    
     </appender>
 
-    <!-- file appender, time based
+    <!-- File Appender, Time Based
     http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${USER_HOME}/Development/log/test.log</file>
+        <file>${USER_HOME}/Development/log/server.log</file>
         <encoder name="enc" class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.andidev.logging.logback.CustomPatternLayout">
                 <param name="Pattern" value='%colorpurple%d{"HH:mm ss"}%coloroff   %colorlevel%-5level - %-130message%coloroff   %colorpurple%thread:%session:%user:%c:%line%coloroff%n' />
@@ -42,10 +42,10 @@
         </rollingPolicy>
     </appender>
     
-    <!-- html file appender, time based
+    <!-- Html File Appender, Time Based
     http://logback.qos.ch/manual/layouts.html#ClassicHTMLLayout -->
     <appender name="html-file" class="ch.qos.logback.core.FileAppender">
-        <file>${USER_HOME}/Development/log/test.log.html</file>
+        <file>${USER_HOME}/Development/log/server.log.html</file>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.html.HTMLLayout">
                 <pattern>%d{"HH:mm ss"}%mdc%thread%logger%level%message</pattern>                
@@ -53,13 +53,13 @@
         </encoder>     
     </appender>
     
-    <!-- spring -->
+    <!-- Spring -->
     <logger name="org.springframework" level="INHERITED"/>
     
-    <!-- hibernate -->
+    <!-- Hibernate -->
     <logger name="org.hibernate" level="INHERITED"/>
     
-    <!-- sql -->
+    <!-- Sql -->
     <logger name="jdbc.sqlonly" level="INHERITED"/>
     <logger name="jdbc.sqltiming" level="INHERITED"/>
     <logger name="jdbc.audit" level="ERROR"/>
@@ -67,10 +67,10 @@
     <logger name="jdbc.connection" level="ERROR"/>
     <logger name="log4jdbc.debug" level="ERROR"/>
     
-    <!-- andidev -->
+    <!-- AndiDev -->
     <logger name="org.andidev" level="TRACE"/>
     
-    <!-- main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
+    <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">
         <appender-ref ref="console"/>        
         <appender-ref ref="file"/>
