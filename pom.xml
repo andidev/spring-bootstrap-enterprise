@@ -20,6 +20,8 @@
         <selenium.version>2.25.0</selenium.version>
         <querydsl.version>2.8.2</querydsl.version>
         <hsqldb.version>2.2.9</hsqldb.version>
+        <logback.version>1.0.7</logback.version>
+        <slf4j.version>1.7.2</slf4j.version>        
     </properties>
 
     <dependencies>
@@ -209,7 +211,22 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.0.1</version>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>      
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <!-- Slf4j -->
@@ -507,12 +524,13 @@
             -->
 
             <!-- Tomcat Plugin -->
-            <!-- see http://mojo.codehaus.org/tomcat-maven-plugin/ -->
+            <!-- http://tomcat.apache.org/maven-plugin-2.0/ -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>1.1</version>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.0</version>
                 <configuration>
+                    <port>8080</port>
                     <path>/</path>
                     <charset>UTF-8</charset>
                     <uriEncoding>UTF-8</uriEncoding>
@@ -520,16 +538,40 @@
             </plugin>
 
             <!-- Jetty Plugin -->
-            <!-- see http://maven.apache.org/plugins/maven-war-plugin/examples/rapid-testing-jetty6-plugin.html -->
+            <!-- http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin -->
+            <!-- Use with netbeans, see https://cwiki.apache.org/WICKET/maven-jetty-plugin.html#MavenJettyplugin-UsingNetbeans%2528thankstomrhaki -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.26</version>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.8.v20121106</version>
                 <configuration>
-                    <stopPort>9966</stopPort>
+                    <stopPort>18080</stopPort>
                     <stopKey>jetty-stop</stopKey>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8080</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>application.properties.file</name>
+                            <value>${basedir}/src/main/resources/application_local.properties</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>logback.configurationFile</name>
+                            <value>${basedir}/src/main/resources/logback.xml</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>servlet-api</artifactId>
+                        <version>2.5</version>
+                    </dependency>
+                </dependencies>                
             </plugin>
 
             <!-- Sonar Plugin -->
