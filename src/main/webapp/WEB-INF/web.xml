@@ -23,7 +23,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- spring sequrity -->
+    <!-- Spring Sequrity -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -42,7 +42,7 @@
         </param-value>
     </context-param>
 
-    <!-- enable user agent data in logging with logback
+    <!-- Enable user agent data in logging with logback
          http://logback.qos.ch/manual/mdc.html#mis -->
     <filter>
         <filter-name>MDCInsertingServletFilter</filter-name>
@@ -55,7 +55,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping> 
 
-    <!-- enable SecurityContextHolder and RequestContextHolder in logback logging Converters 
+    <!-- Enable SecurityContextHolder and RequestContextHolder in logback logging Converters 
          e.g. UserConverter.java and SessionConverter.java
          http://www.codelord.net/2010/08/27/logging-with-a-context-users-in-logback-and-spring-security/ 
          http://stackoverflow.com/questions/3542026/retrieving-session-id-with-spring-security -->
@@ -63,7 +63,7 @@
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
-    <!-- utf-8 encoding
+    <!-- UTF-8 Encoding
          http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter -->
     <filter>  
         <filter-name>encodingFilter</filter-name>  
@@ -80,7 +80,7 @@
     <filter-mapping>  
         <filter-name>encodingFilter</filter-name>  
         <url-pattern>/*</url-pattern>  
-    </filter-mapping> 
+    </filter-mapping>
     
     <!-- RESTful support 
          http://static.springsource.org/spring/docs/current/spring-framework-reference/html/view.html#rest-method-conversion -->
