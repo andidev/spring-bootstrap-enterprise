@@ -28,7 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration("/applicationContext.xml")
 @Transactional
 @Slf4j
-@Ignore
 public class OpinionServiceTest {
 
     @Autowired

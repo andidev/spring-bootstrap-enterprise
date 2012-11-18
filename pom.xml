@@ -19,6 +19,7 @@
         <javax.jstl-taglibs.version>1.1.2</javax.jstl-taglibs.version>
         <selenium.version>2.25.0</selenium.version>
         <querydsl.version>2.8.2</querydsl.version>
+        <hsqldb.version>2.2.9</hsqldb.version>
     </properties>
 
     <dependencies>
@@ -151,9 +152,9 @@
         <!-- HSQL DB Driver -->
         <!-- see http://hsqldb.org/ -->
         <dependency>
-            <groupId>hsqldb</groupId>
+            <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>1.8.0.10</version>
+            <version>${hsqldb.version}</version>
         </dependency>
 
         <!-- Commons Database Connection Pool -->
