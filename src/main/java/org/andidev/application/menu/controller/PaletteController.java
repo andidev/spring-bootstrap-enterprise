@@ -1,11 +1,12 @@
 package org.andidev.application.menu.controller;
 
+import org.andidev.controller.AbstractApplicationController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/development/painter/palette")
-public class PaletteController {
+public class PaletteController extends AbstractApplicationController {
 
     @RequestMapping
     public String getDefaultPage() {

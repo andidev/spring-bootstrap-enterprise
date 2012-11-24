@@ -5,7 +5,7 @@
 <!-- For professional support please see                            -->
 <!--    http://www.qos.ch/shop/products/professionalSupport         -->
 <!--                                                                -->
-<configuration>
+<configuration scan="true">
     
     <property name="USER_HOME" value="/Users/anders" />
      

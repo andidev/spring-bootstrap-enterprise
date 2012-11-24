@@ -1,5 +1,7 @@
 package org.andidev.login.controller;
 
+import org.andidev.controller.AbstractApplicationController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping
-public class LoginController {
-
+public class LoginController extends AbstractApplicationController  {
+    
     @RequestMapping("/login")
     public String login(Model model, @RequestParam(required = false) String message) {
         model.addAttribute("message", message);

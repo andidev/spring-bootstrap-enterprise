@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
+import org.andidev.controller.AbstractApplicationController;
 import org.andidev.opinion.domain.Opinion;
 import org.andidev.opinion.repository.OpinionRepository;
 import org.andidev.opinion.service.OpinionService;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("/")
-public class MediatorController {
+public class MediatorController extends AbstractApplicationController {
 
     private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     //

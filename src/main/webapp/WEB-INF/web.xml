@@ -8,42 +8,54 @@
     
     <display-name>Template Spring Jpa</display-name>
 
+    <!-- ContextLoaderListener -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            org.andidev.config.AppConfig
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Enable SecurityContextHolder and RequestContextHolder in logback logging Converters 
+    e.g. UserConverter.java and SessionConverter.java
+    http://www.codelord.net/2010/08/27/logging-with-a-context-users-in-logback-and-spring-security/ 
+    http://stackoverflow.com/questions/3542026/retrieving-session-id-with-spring-security -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!-- Spring Dispatcher Servlet -->
     <servlet>
         <servlet-name>spring</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>       
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
     <!-- Spring Sequrity -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
-	
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/spring-security.xml
-            /WEB-INF/applicationContext.xml
-        </param-value>
-    </context-param>
-
     <!-- Enable user agent data in logging with logback
-         http://logback.qos.ch/manual/mdc.html#mis -->
+    http://logback.qos.ch/manual/mdc.html#mis -->
     <filter>
         <filter-name>MDCInsertingServletFilter</filter-name>
         <filter-class>
@@ -55,26 +67,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping> 
 
-    <!-- Enable SecurityContextHolder and RequestContextHolder in logback logging Converters 
-         e.g. UserConverter.java and SessionConverter.java
-         http://www.codelord.net/2010/08/27/logging-with-a-context-users-in-logback-and-spring-security/ 
-         http://stackoverflow.com/questions/3542026/retrieving-session-id-with-spring-security -->
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener>
-
     <!-- UTF-8 Encoding
-         http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter -->
+    http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter -->
     <filter>  
         <filter-name>encodingFilter</filter-name>  
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
         <init-param>  
             <param-name>encoding</param-name>  
             <param-value>UTF-8</param-value>  
-        </init-param>  
-        <init-param>  
-            <param-name>forceEncoding</param-name>  
-            <param-value>true</param-value>  
         </init-param>  
     </filter>  
     <filter-mapping>  
@@ -83,7 +83,7 @@
     </filter-mapping>
     
     <!-- RESTful support 
-         http://static.springsource.org/spring/docs/current/spring-framework-reference/html/view.html#rest-method-conversion -->
+    http://static.springsource.org/spring/docs/current/spring-framework-reference/html/view.html#rest-method-conversion -->
     <filter>
         <filter-name>httpMethodFilter</filter-name>
         <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
