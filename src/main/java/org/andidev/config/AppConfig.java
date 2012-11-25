@@ -6,15 +6,15 @@ import org.andidev.config.appconfig.HsqlDatabaseConfig;
 import org.andidev.config.appconfig.TraceLoggingConfig;
 import org.andidev.config.appconfig.WebMvcConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -43,10 +43,10 @@ public class AppConfig {
 
     // Properties, nedded for @PropertySource annotation, see https://jira.springsource.org/browse/SPR-8539
     @Bean
-    public static PropertySourcesPlaceholderConfigurer properties() {
+    public static PropertySourcesPlaceholderConfigurer properties(Environment environment) {
         PropertySourcesPlaceholderConfigurer pspc =
                 new PropertySourcesPlaceholderConfigurer();
-        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application.properties")};
+        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application_"+environment.getProperty("spring.profiles.active") +".properties")};
         pspc.setLocations(resources);
         return pspc;
     }
