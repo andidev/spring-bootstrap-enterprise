@@ -14,7 +14,7 @@
 
     </head>
 
-    <body class="body">
+    <body class="body" id="loginPage">
         <div class="body-content" style="margin: 0 50%; padding: 20px 200px 0px 0px;"> 
 
             <jsp:include page="/WEB-INF/jsp/login/menu.jsp" />
@@ -52,7 +52,7 @@
                             <div class="content">
                                 <ul class="data checkbox">
                                     <li>
-                                        <input class="data checkbox" id="CHECKBOX_ID-VALUE_1" name="CHECKBOX_ID-VALUE_1" type="checkbox" checked="checked" />
+                                        <input class="data checkbox" id="rememberMe" name="rememberMe" type="checkbox" checked="checked" />
                                         <label for="CHECKBOX_ID-VALUE_1">Remember Me</label>
                                     </li>
                                 </ul>
@@ -60,10 +60,10 @@
                         </div>   
 
                         <div class="content"> 
-                            <button class="button login" type="submit">Login</button>
+                            <button class="button login" id="loginButton" type="submit">Login</button>
                         </div>  
 
-                        <div class="content information"> 
+                        <div class="content information" id="message"> 
                             ${message}
                         </div>  
 
