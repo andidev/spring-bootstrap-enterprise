@@ -1,6 +1,7 @@
 package org.andidev.config.appconfig;
 
 import javax.sql.DataSource;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +10,16 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter;
 
 @Configuration
-@Profile("dev")
-public class HsqlDatabaseConfig {
+@Profile("prod")
+public class MySqlDatabaseConfig {
 
     @Value("${database.url}")
     private String url;
+    @Value("${database.driver}")
+    private String driver;
     @Value("${database.username}")
     private String username;
     @Value("${database.password}")
@@ -24,18 +28,19 @@ public class HsqlDatabaseConfig {
     // Data Source
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        return dataSource;
+        BasicDataSource bds = new BasicDataSource();
+        bds.setUrl(url);
+        bds.setDriverClassName(driver);
+        bds.setUsername(username);
+        bds.setPassword(password);
+        return bds;
     }
 
     // Jpa Vendor Adapter
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setDatabase(Database.HSQL);
+        jpaVendorAdapter.setDatabase(Database.MYSQL);
         jpaVendorAdapter.setShowSql(false);
         jpaVendorAdapter.setGenerateDdl(false);
         return jpaVendorAdapter;

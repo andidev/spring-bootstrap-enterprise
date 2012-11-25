@@ -9,7 +9,6 @@ import javax.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.controller.AbstractApplicationController;
 import org.andidev.opinion.domain.Opinion;
-import org.andidev.opinion.repository.OpinionRepository;
 import org.andidev.opinion.service.OpinionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

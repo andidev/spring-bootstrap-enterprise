@@ -21,6 +21,16 @@
             org.andidev.config.AppConfig
         </param-value>
     </context-param>
+<!-- http://stackoverflow.com/questions/8587489/how-to-set-active-spring-3-1-environment-profile-via-a-properites-file-and-not-v
+    class SpringInitializer extends WebApplicationInitializer {
+
+    void onStartup(ServletContext container) {
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.getEnvironment().setActiveProfiles("profileName");
+        rootContext.register(SpringConfiguration.class);
+        container.addListener(new ContextLoaderListener(rootContext));
+    }
+}          -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
