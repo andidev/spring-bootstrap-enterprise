@@ -115,4 +115,79 @@ public class WebDriverBot {
     private static void delay() {
         delay(delayTime);
     }
+    
+    public static class AssertThatCommands {
+        WebElement webElement;
+        public AssertThatCommands(WebElement webElement) {
+            this.webElement = webElement;
+        }
+        
+        public void textEquals(String expected) {
+            Assert.assertEquals(expected, webElement.getText());
+        }
+        
+        public void textContains(String expected) {
+            Assert.assertEquals(expected, webElement.getText());
+        }
+
+    }
+    
+    public static AssertThatCommands assertThat(WebElement webElement) {
+        delay();
+        return new AssertThatCommands(webElement);
+        
+    }    
+
+    
+
+    public static class TypeCommands {
+        String str;
+        public TypeCommands(String str) {
+            this.str = str;
+        }
+        
+        public TypeCommands in(WebElement webElement) {
+            webElement.sendKeys(str);
+            return this;
+        }
+        
+        public TypeCommands and(WebElement webElement) {
+            webElement.sendKeys(str);
+            return this;
+        }
+
+    }
+    
+    public static TypeCommands type(String str) {
+        delay();
+        if (str == null) {
+            return null;
+        }
+        return new TypeCommands(str);
+    }
+    
+    public static void clickOn(WebElement webElement) {
+        delay();
+        webElement.click();
+    }   
+
+
+    
+    public static class SelectCommands {
+        TextEnum en;
+        public SelectCommands(TextEnum en) {
+            this.en = en;
+        }
+        
+        public void fromDropDownList(WebElement webElement) {
+            new Select(webElement).selectByVisibleText(en.getText());
+        }
+        
+    }    
+    
+    public static SelectCommands select(TextEnum en) {
+        delay();
+        return new SelectCommands(en);
+    } 
+    
 }
