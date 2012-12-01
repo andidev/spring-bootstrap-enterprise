@@ -9,6 +9,104 @@
     <name>Webapp Template Spring</name>
     <url>http://maven.apache.org</url>
 
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <property>
+                    <name>!env.type</name>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>dev</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>local</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>local</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>local</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>dev</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>test</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>test</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>int</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>int</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>int</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>demo</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>demo</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>demo</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>stage</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>stage</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>stage</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <property>
+                    <name>env.type</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>prod</application.environment>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -22,9 +120,10 @@
         <hsqldb.version>2.2.9</hsqldb.version>
         <logback.version>0.9.29</logback.version>
         <slf4j.version>1.6.4</slf4j.version>  
+        <!--        <application.environment>dev</application.environment>-->
 
         <!-- Application Build Properties -->
-        <application.build.version>${pom.version}</application.build.version>
+        <application.build.version>${project.version}</application.build.version>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <application.build.timestamp>${maven.build.timestamp}</application.build.timestamp>              
     </properties>
@@ -289,8 +388,14 @@
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.spi</artifactId>
-            <version>2.0</version>
+            <version>2.0.1</version>
         </dependency>
+        <!--        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-jsptags</artifactId>
+            <version>1.1.1</version>
+            <scope>runtime</scope>
+        </dependency>-->
 
         <!-- JUnit -->
         <!-- see  -->
@@ -409,6 +514,7 @@
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert-core</artifactId>
             <version>2.0M8</version>
+            <scope>test</scope>
         </dependency>        
 
         <!-- Apache Commons Lang -->
@@ -486,7 +592,49 @@
         </pluginManagement>
 
         <plugins>
-            
+
+            <!-- Load logback.xml for Maven Jetty Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--                    <systemProperties>
+                        <systemProperty>
+                            <key>logback.configurationFile</key>
+                            <value>src/main/resources/logback.xml</value>
+                        </systemProperty>
+                    </systemProperties>-->
+                </configuration>
+            </plugin>
+                                    
+            <!-- Import application properties -->
+            <!--            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${basedir}/src/main/resources/application_dev.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+      
             <!-- Compiler Plugin -->
             <!-- see http://maven.apache.org/plugins/maven-compiler-plugin/ -->
             <plugin>
@@ -590,12 +738,17 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.8.v20121106</version>
                 <configuration>
-                    <!--
-                    <jettyConfig>${basedir}/src/main/webapp/WEB-INF/jetty.xml</jettyConfig>
-                    -->
+                    <!--<jettyConfig>${basedir}/src/main/webapp/WEB-INF/jetty.xml</jettyConfig>-->
                     <stopPort>18080</stopPort>
                     <stopKey>jetty-stop</stopKey>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">
+                        <filename>target/logs/server-request-yyyy-mm-dd.log</filename>
+                        <retainDays>30</retainDays>
+                        <append>true</append>
+                        <extended>false</extended>
+                        <logTimeZone>GMT</logTimeZone>
+                    </requestLog>                    
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>8080</port>
@@ -607,15 +760,13 @@
                             <name>spring.profiles.active</name>
                             <value>dev</value>
                         </systemProperty>
-                        <!--
                         <systemProperty>
                             <name>logback.configurationFile</name>
-                            <value>${basedir}/src/main/resources/logback.xml</value>
+                            <value>src/main/resources/logback.xml</value>
                         </systemProperty>
-                        -->
                     </systemProperties>
                 </configuration>
-                <!--
+
                 <dependencies>
                     <dependency>
                         <groupId>ch.qos.logback</groupId>
@@ -627,8 +778,12 @@
                         <artifactId>slf4j-api</artifactId>
                         <version>${slf4j.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-core</artifactId>
+                        <version>${logback.version}</version>
+                    </dependency>
                 </dependencies>                
-                -->
             </plugin>
 
             <!-- Use web.xml java config -->

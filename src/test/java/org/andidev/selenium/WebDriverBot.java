@@ -1,6 +1,9 @@
 package org.andidev.selenium;
 
-import junit.framework.Assert;
+import org.junit.Assert;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.fest.assertions.api.Assertions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -92,12 +95,12 @@ public class WebDriverBot {
 
     public static void assertText(String expected, WebElement webElement) {
         delay();
-        Assert.assertEquals(expected, webElement.getText());
+        Assertions.assertThat(webElement.getText()).isNotEmpty();
     }
 
     public static void assertTextContains(String expected, WebElement webElement) {
         delay();
-        Assert.assertTrue(webElement.getText().contains(expected));
+        Assertions.assertThat(webElement.getText()).contains(expected);
     }
 
     public static void delay(double seconds) {
@@ -116,18 +119,23 @@ public class WebDriverBot {
         delay(delayTime);
     }
     
+    
+    
+    /*
+     * FEST like bot
+     */
     public static class AssertThatCommands {
         WebElement webElement;
         public AssertThatCommands(WebElement webElement) {
             this.webElement = webElement;
         }
         
-        public void textEquals(String expected) {
-            Assert.assertEquals(expected, webElement.getText());
+        public void equals(String expected) {
+            Assertions.assertThat(webElement.getText()).equals(expected);
         }
         
-        public void textContains(String expected) {
-            Assert.assertEquals(expected, webElement.getText());
+        public void contains(String expected) {
+            Assertions.assertThat(webElement.getText()).contains(expected);
         }
 
     }
@@ -155,7 +163,6 @@ public class WebDriverBot {
             webElement.sendKeys(str);
             return this;
         }
-
     }
     
     public static TypeCommands type(String str) {
@@ -165,11 +172,6 @@ public class WebDriverBot {
         }
         return new TypeCommands(str);
     }
-    
-    public static void clickOn(WebElement webElement) {
-        delay();
-        webElement.click();
-    }   
 
 
     
@@ -182,7 +184,6 @@ public class WebDriverBot {
         public void fromDropDownList(WebElement webElement) {
             new Select(webElement).selectByVisibleText(en.getText());
         }
-        
     }    
     
     public static SelectCommands select(TextEnum en) {
