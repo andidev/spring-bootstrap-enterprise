@@ -1,0 +1,42 @@
+<configuration scan="true">
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <filter class="ch.qos.logback.access.filter.CountingFilter">
+        <name>countingFilter</name>
+    </filter>
+
+    <!-- Console Request-Response Appender-->
+    <appender name="console-request-response" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%n%n%fullRequest%n%n%fullResponse%n%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Request-Response Appender, Time Based -->
+    <appender name="file-application-request-response" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/application-request-response.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${user.dir}/logs/application-request-response.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>356</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%n%n%fullRequest%n%n%fullResponse%n%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Access Appender, Time Based -->
+    <appender name="file-application-access" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/application-access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>target/logs/application-access.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>356</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>combined</pattern>
+        </encoder>
+    </appender>
+    
+    <!--<appender-ref ref="console-request-response" />-->
+    <appender-ref ref="file-application-request-response"/>
+    <appender-ref ref="file-application-access"/>
+</configuration>

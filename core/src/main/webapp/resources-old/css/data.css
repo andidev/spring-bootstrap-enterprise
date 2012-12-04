@@ -1,0 +1,467 @@
+/* Area 51
+----------------------------------*/
+
+.button {
+    margin: 2px 0px !important;
+    -ms-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box; 
+    box-sizing:border-box;
+}
+
+
+/* Transitions
+----------------------------------*/
+
+/* main color effect */
+.data * {
+	-webkit-transition: color 200ms ease;
+	-moz-transition: color 200ms ease;
+	-o-transition: color 200ms ease;
+	transition: color 200ms ease;
+}
+
+
+
+/* Common Help Classes
+----------------------------------*/
+
+/* inline, use it to place list items in line */
+.inline li {
+	display: inline;  
+}
+
+
+
+/* placeholder color, used */
+.placeholder
+{
+  color: #aaa;
+}
+
+
+
+
+
+
+
+
+
+
+/* Standard Inputs
+----------------------------------*/
+
+/* data common */
+span.data.hidden-text, 
+span.data.static-text, 
+input.data.text, 
+input.data.text-autocomplete, 
+select.data.select, 
+select.data.select-autocomplete, 
+input.data.range, 
+ul.data.radio input, 
+ul.data.radio label, 
+ul.data.checkbox input, 
+ul.data.checkbox label {
+	-ms-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box; 
+	box-sizing:border-box;
+}
+
+
+
+/* data hidden-text */
+input.data.hidden-text {
+	width: 200px;
+	margin: 2px 0px;
+	padding: 2px 2px;
+	display: block;
+}
+
+
+
+/* data static-text */
+span.data.static-text {
+	width: 200px;
+	margin: 2px 0px;
+	padding: 2px 2px;
+	display: block;
+}
+
+
+
+/* data text */
+input.data.text {
+	width: 200px;
+	margin: 2px 0px;
+	padding: 0px 2px;
+}
+
+
+
+/* data text-autocomplete */
+input.data.text-autocomplete {
+	width: 200px;
+	margin: 2px 0px;
+	padding: 0px 2px;
+}
+
+
+
+/* data select */
+select.data.select {
+	width: 200px;
+	margin: 2px 0px;
+	padding: 0px;
+}
+
+
+
+/* data select-autocomplete */
+select.data.select-autocomplete {
+    width: 200px;
+	margin: 2px 0px;
+	padding: 0px;
+}
+
+
+
+/* data input type="range" */
+input.data.range {
+    width: 200px;
+}
+
+
+
+/* data input type="checkbox" */
+/* data input type="radio" */
+/* data checkbox-toggle */
+/* data radio-toggle */
+ul.data.checkbox li,
+ul.data.radio li,
+ul.data.checkbox-toggle li,
+ul.data.radio-toggle li {
+	width: 200px;
+	position: relative;
+	display: block;
+	float: left;
+	clear: both;
+}
+ul.data.checkbox input,
+ul.data.radio input,
+ul.data.checkbox-toggle input,
+ul.data.radio-toggle input {
+	width: auto;
+	margin: 5px 0px 6px 0px;
+	padding: 0px;
+	position: absolute;
+	left: 0px;
+	cursor: pointer;
+}
+ul.data.checkbox label,
+ul.data.radio label,
+ul.data.checkbox-toggle label,
+ul.data.radio-toggle label {
+	width: 200px;
+	margin: 2px 0px;
+	padding: 2px 4px 2px 20px;
+	float: left;
+	cursor: pointer;
+
+    color: #777;
+	text-shadow:#eee 1px 1px 0;
+}
+ul.data.checkbox input:checked ~ label,
+ul.data.radio input:checked ~ label,
+ul.data.checkbox-toggle input:checked ~ label,
+ul.data.radio-toggle input:checked ~ label {
+	color: black !important;
+	text-shadow: none;
+}
+ul.data.checkbox label:hover,
+ul.data.checkbox input:hover ~ label,
+ul.data.radio label:hover,
+ul.data.radio input:hover ~ label,
+ul.data.checkbox-toggle label:hover,
+ul.data.checkbox-toggle input:hover ~ label,
+ul.data.radio-toggle label:hover,
+ul.data.radio-toggle input:hover ~ label {
+    color: #555;
+}
+ul.data.checkbox input:focus ~ label, 
+ul.data.radio input:focus ~ label, 
+ul.data.checkbox-toggle input:focus ~ label, 
+ul.data.radio-toggle input:focus ~ label { /* focus style */
+	text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff !important;
+	filter: dropshadow(color=#ffffff, offx=2, offy=2);
+}
+
+
+
+/* data checkbox-toggle */
+ul.data.checkbox-toggle input {
+	position: absolute;
+}
+ul.data.checkbox-toggle label {
+	width: auto;
+	clear: none;
+	position: absolute;
+	
+	transition: all 0.2s, height 0.2s;
+	-moz-transition: all 0.2s, height 0.2s, -moz-transform 0.2s; /* Firefox 4 */
+	-webkit-transition: all 0.2s, height 0.2s, -webkit-transform 0.2s; /* Safari and Chrome */
+	-o-transition: all 0.2s, height 0.2s, -o-transform 0.2s; /* Opera */
+}
+ul.data.checkbox-toggle input:checked ~ label:first-of-type, /* yes selected */
+ul.data.checkbox-toggle input ~ label { /* no selected */
+	color: black !important;
+	text-shadow: none;
+	display: inline;
+}
+ul.data.checkbox-toggle input:checked ~ label:first-of-type { /* yes selected */
+    top: 0px !important;
+	opacity: 1;
+}
+ul.data.checkbox-toggle input:checked ~ label { /* no not selected */
+    top: 18px !important;	
+	opacity: 0;
+}
+ul.data.checkbox-toggle input ~ label:first-of-type { /* yes not selected */
+    top: -18px !important;
+	opacity: 0;
+}
+ul.data.checkbox-toggle input ~ label { /* no selected */
+    top: 0px !important;
+	opacity: 1;
+}
+
+
+
+/* data radio-toggle */
+ul.data.radio-toggle li {
+	width: auto;
+	clear: none;
+}
+ul.data.radio-toggle input {
+	position: absolute;
+	z-index: -1;
+}
+ul.data.radio-toggle label {
+	width: auto !important;
+	padding: 2px 5px;
+}
+ul.data.radio-toggle li:first-child label {
+	padding-left: 0px;
+}
+
+
+
+
+/* Choice Related
+----------------------------------*/
+input.data.text.digits::-webkit-inner-spin-button,
+input.data.text.digits::-webkit-outer-spin-button,
+input.data.text.number::-webkit-inner-spin-button,
+input.data.text.number::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+
+/* Choice Related
+----------------------------------*/
+
+
+
+
+/* Time Related
+----------------------------------*/
+
+/* data minutes */
+ul.data.text.digits.minutes li {
+	display: inline;
+}
+input.data.text.digits.minutes {
+    width: 24px;
+    text-align: right;
+}
+
+
+
+/* data hours */
+ul.data.text.digits.hours li {
+	display: inline;
+}
+input.data.text.digits.hours {
+    width: 24px;
+    text-align: right;
+}
+
+
+
+/* data hours-minutes */
+ul.data.text.digits.hours-minutes li {
+	display: inline;
+}
+
+
+
+/* data days */
+ul.data.text.digits.days li {
+	display: inline;
+}
+input.data.text.digits.days {
+    width: 24px;
+    text-align: right;
+}
+
+
+
+/* data days-hours-minutes */
+ul.data.text.digits.days-hours-minutes li {
+	display: inline;
+}
+
+
+
+/* data time */
+input.data.text.time {
+    width: 44px;
+}
+
+
+
+/* data time range */
+ul.data.text.time.range li {
+	display: inline;
+	clear: both;
+}
+
+
+
+
+/* Date Related
+----------------------------------*/
+
+/* data week */
+input.data.text.digits.week {
+    width: 24px;
+    text-align: right;
+}
+
+
+
+/* data week range */
+ul.data.text.digits.week.range li {
+	display: inline;
+}
+
+
+
+/* data date */
+input.data.text.date {
+    width: 76px;
+}
+
+
+
+/* data date-range */
+input.data.text.date-range {
+    width: 158px;
+}
+
+
+
+/* data date-time */
+input.data.text.date-time {
+    width: 158px;
+}
+
+
+
+/* data date-time range */
+ul.data.date-time.range li {
+	display: inline;
+}
+
+
+
+
+/* Unit Related
+----------------------------------*/
+
+/* data distance */
+input.data.text.digits.distance {
+	width: 60px;
+}
+
+
+
+/* data distance range */
+ul.data.text.digits.distance.range li {
+	display: inline;
+}
+
+
+
+/* data weight */
+input.data.text.number.weight {
+	width: 60px;
+}
+
+
+
+/* data weight range */
+ul.data.text.number.weight.range li {
+	display: inline;
+}
+
+
+
+/* data volume */
+input.data.text.number.volume {
+	width: 60px;
+}
+
+
+
+/* data volume range */
+ul.data.text.number.volume.range li {
+	display: inline;
+}
+
+
+
+/* jquery validation error message style
+/* see http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+--------------------------------------------------------------------------*/
+
+input.error {
+	background: #fff;
+	border: 1px solid red;
+	-webkit-box-shadow: 0px 0px 2px 2px #f66;
+	-moz-box-shadow: 0px 0px 2px 2px #f66;
+	box-shadow: 0px 0px 2px 2px #f66;
+}
+
+
+
+label.error {
+	padding: 2px 0px;
+    color: #c22; 
+	font-size: 12px;
+    text-shadow: 1px 1px 1px #f66;
+	filter: dropshadow(color=#ff6666, offx=1, offy=1);	
+    display: block; 
+
+	visibility: vissible;
+
+	transition: all linear 500ms;
+	-o-transition: all linear 500ms;
+	-moz-transition: all linear 500ms;
+	-webkit-transition: all linear 500ms;
+}
+label.error.animated {
+	visibility: visible;
+}

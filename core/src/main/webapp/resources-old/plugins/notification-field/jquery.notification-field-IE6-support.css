@@ -1,0 +1,14 @@
+#notification-field .notification {
+	background-color: #424242;
+}
+#notification-field .notification.error {
+	background-color: #B40404;
+}
+#notification-field .notification.loading-success {
+	background-color: #424242;
+}
+#notification-field {  
+	position:absolute; /* position fixed for IE6 */  
+	top:expression(10+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');  
+	right:expression(10+((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft)+'px');  
+}  

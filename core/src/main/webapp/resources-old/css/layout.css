@@ -1,0 +1,125 @@
+/* Area 51
+----------------------------------*/
+
+.group div.group-content {
+	-box-shadow: 1px 1px 3px 0px #bbbbbb;
+
+}
+
+
+
+/* Form
+----------------------------------*/
+
+
+
+/* Group
+----------------------------------*/
+
+div.group,
+form.group {
+    padding: 15px 24px 15px 24px; /* top, right, bottom, left */
+    display: block;
+    float: left; 
+
+    text-align: left; /* reset inheritance of text-align from body style */
+}
+h3,
+.group h3.group-header {
+    margin: 0px;
+    border-width: 0px;
+    padding: 4px 8px;
+    
+    color: #959595;
+    background-color: transparent;
+    
+    border-radius: 0px;
+    border-style: solid;
+    border-color: white;
+    
+    font-size: small;
+    font-weight: bold;
+    text-align: left;
+
+    display: block;
+    float: left;     
+}
+form.group div.group-content,
+div.group div.group-content {
+    margin: 0px;
+    border-width: 1px 1px 1px 1px; /* top, right, bottom, left */
+    padding: 4px 8px; /* top/bottom, right/left */
+
+    color: black;
+    background-color: #e4e4e4; /* FALLBACK: color for old browsers */
+	background: linear-gradient(top, #ddd 0%, #ccc 100%);
+	background: -o-linear-gradient(top, #ddd 0%, #ccc 100%);
+	background: -moz-linear-gradient(top, #ddd 0%, #ccc 100%);
+	background: -webkit-linear-gradient(top, #ddd 0%, #ccc 100%);
+	background: -ms-linear-gradient(top, #ddd 0%, #ccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dddddd", endColorstr="#cccccc"); /* IE */
+
+    border-radius: 0px;
+    border-style: solid;
+    border-color: lightgrey;
+    
+    display: block;
+    float: left;
+    clear: both;
+}
+
+
+
+/* Group Columns
+----------------------------------*/
+
+/* column style */
+.column { 
+    display: block;
+    float: left; 
+}
+
+
+
+/* left column */
+.group .group-content .column:first-child, /* first-child class is a fix for IE6's and IE7's lack of first-child css selector, class is set onload by jquery */
+.group .group-content .column.first-child {
+    margin-left: 0px !important;  
+}
+
+
+
+/* middle columns */
+.group .group-content .column {
+    margin: 0px 33px; /* add margin between two columns */  
+    border: 0px;
+    padding: 0px; 
+    
+    display: block;
+    float: left;
+}
+
+
+
+/* right column */
+.group .group-content .column:last-child, /* last-child class is a fix for IE6's and IE7's lack of last-child css selector, class is set onload by jquery */
+.group .group-content .column.last-child {
+    margin-right: 0px !important;   
+}
+
+
+
+/* Group and Column Linebreaks
+----------------------------------*/
+
+.group {
+    clear: both;
+}
+.column {
+    clear: both;
+}
+.column ~ .column {
+    clear: none;
+    /* WORKAROUND: n:th-child not supported in IE6, IE7 and IE8 hence use div.column ~ div.column selector temporarly */
+    /* TODO: add n:th-child support with jquery and add linebreak at n=2 */
+}

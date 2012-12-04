@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+
+	<title>jquery.pngFix.js - PNG transparency for Windows IE 5.5 &amp; 6 (IE PNG Fix)</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+	<meta name="description" content="jquery.pngFix.js - PNG transparency for Windows IE 5.5 &amp; 6 (IE PNG Fix)" />
+	<meta name="keywords" content="png, pngfix, ie png fix, fix for png transparency for ie, jQuery, Plugin, JavaScript Library, snippet, jQuery-Plugin, JavaScript, Ajax, Css" />
+	<meta http-equiv="keywords" content="png, pngfix, ie png fix, fix for png transparency for ie, jQuery, Plugin, JavaScript Library, snippet, jQuery-Plugin, JavaScript, Ajax, Css" />
+	<meta name="verify-v1" content="Eal6+fiCjgKAZb5A6pRvSLmsh9NLF2AsqxqJrLuFoAs=" />
+
+	<meta name="robots" content="index,follow" />
+	<meta name="revisit-after" content="7 days" />
+	<meta name="siteinfo" content="http://jquery.andreaseberhard.de/robots.txt" />
+
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen,projection" />
+
+	<link rel="icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="favicon.ico" />
+
+	<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="pluginpage.js"></script>
+
+	<script type="text/javascript" src="jquery.pngFix.pack.js"></script>
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('div.examples').pngFix( );
+	});
+</script>
+
+<!-- Chili the jQuery code highlighter plugin -->
+<script type="text/javascript" src="chili/chili.pack.js"></script>
+<script id="setup" type="text/javascript">
+ChiliBook.recipeFolder     = "chili/";
+ChiliBook.stylesheetFolder = "chili/";
+</script>
+
+  </head>
+
+  <body>
+
+	<div id="page">
+
+		<div class="intro">
+			<h1>
+				<a href="./index.html" title="jquery.pngFix.js - PNG-Transparency for Windows IE 5.5 &amp; 6 (IE PNG Fix)">jquery.pngFix.js<br />PNG-Transparency for Windows IE 5.5 &amp; 6</a>
+			</h1>
+			<div class="introtext">
+				This plugin will fix the missing PNG-Transparency in Windows Internet Explorer 5.5 &amp; 6.
+				<br /><br />
+				<h2>Features</h2>
+				<ul>
+					<li>unobtrusive script, simple to setup</li>
+					<li>works now also with CSS-Backgrounds (but scaling backgrounds)</li>
+					<li>works with PNG-Images within Links</li>
+					<li>TITLE, ALT, CLASS and STYLE-Attributes are considered</li>
+				</ul>
+				<p class="light">This page uses jQuery Version <script type="text/javascript">document.write(jQuery(document).jquery);</script></p>
+			</div>
+			<div class="sidebar">
+				<p>
+				Version 1.1, 2007-09-11
+				</p>
+				<p>
+					Tested on Windows XP SP2 with<br />
+					- IE 5.5 + 6 + 7
+				</p>
+				<div class="download"><a href="http://jquery.andreaseberhard.de/download/pngFix.zip" title="Download this site">Download</a></div>
+			</div>
+		</div>
+
+		<div class="examples">
+			<h2>E x a m p l e s:</h2>
+
+<pre><code class="html">PNG with transparency
+
+&lt;img src="pngtest.png" width="173" height="173" alt="This is the alt-Text" /&gt;
+</code></pre>
+			<img src="pngtest.png" width="173" height="173" alt="This is the alt-Text" />
+			<br /><br />
+			
+<pre><code class="html">PNG with TITLE-Attribute
+
+&lt;img src="pngtest.png" width="173" height="173"
+	title="This is the title-Text" alt="This is the alt-Text" /&gt;
+</code></pre>
+			<img src="pngtest.png" width="173" height="173" title="This is the title-Text" alt="This is the alt-Text" />
+			<br /><br />
+			
+<pre><code class="html">PNG within a link
+
+&lt;a href="#" onclick="alert('click');return false;"&gt;
+	&lt;img src="pngtest.png" width="173" height="173"
+		title="This is the title-Text" alt="This is the alt-Text" /&gt;
+&lt;/a&gt;
+</code></pre>
+			<a href="#" onclick="alert('click');return false;"><img src="pngtest.png" width="173" height="173" title="This is the title-Text" alt="This is the alt-Text" /></a>
+			<br /><br />
+			
+<pre><code class="html">PNG within a link and a STYLE-Attribute
+
+&lt;a href="#" onclick="alert('click');return false;"&gt;
+	&lt;img src="pngtest.png" width="173" height="173"
+		style="border:1.0em dashed #090;padding:10px;margin:10px;"
+		title="This is the title-Text" alt="This is the alt-Text" /&gt;
+&lt;/a&gt;
+</code></pre>
+			<a href="#" onclick="alert('click');return false;"><img src="pngtest.png" width="173" height="173" style="border:1.0em dashed #090;padding:10px;margin:10px;" title="This is the title-Text" alt="This is the alt-Text" /></a>
+			<br /><br />
+
+<pre><code class="html">Div with PNG-Background via CSS
+
+&lt;div&gt;
+&lt;div style="float:left;width:173px;height:173px;
+background: url(pngtest.png);"&gt;
+This is a div-Container using a png as background ...
+&lt;/div&gt;
+&lt;div style="float:right;width:346px;height:346px;
+background: white url(pngtest.png);"&gt;
+This is a div-Container using a png as background ...
+&lt;/div&gt;
+&lt;div style="clear:both;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div>
+<div style="float:left;width:173px;height:173px;background: url(pngtest.png);">
+This is a div-Container using a png as background ...
+</div>
+<div style="float:right;width:273px;height:273px;background: white url(pngtest.png);">
+This is a div-Container using a png as background ...
+</div>
+<div style="clear:both;"></div>
+</div>
+			<br /><br />
+			
+<pre><code class="html">Input with PNG-Source
+
+&lt;form&gt;
+&lt;input type="image" src="pngtest.png" width="173" height="173" /&gt;
+&lt;/form&gt;
+</code></pre>
+<form>
+<input type="image" src="pngtest.png" width="173" height="173" />
+</form>
+
+		</div>
+		
+		<div class="content">
+			<h2>How to use <em>jquery.pngFix.js</em></h2>
+			<p>
+				<strong>1.</strong><br /><a rel="external" href="http://jquery.com/">Download jQuery</a>
+				<br /><a rel="external" href="http://jquery.andreaseberhard.de/download/pngFix.zip">Download pngFix.zip</a>
+				<a class="jsource" href="jquery.pngFix.js">View Source</a>
+			</p>
+			<p>
+				<strong>2.</strong><br />Add <em>jQuery</em> and <em>pngFix</em> to the HEAD-Section of your HTML ...
+			</p>
+<pre><code class="html">&lt;head&gt;
+...
+&lt;script type="text/javascript" src="jquery-latest.pack.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.pngFix.js"&gt;&lt;/script&gt;
+...
+&lt;/head&gt;</code></pre>
+			<p>
+				<strong>3.</strong><br />Activate pngFix on document.ready <br />
+			</p>
+<pre><code class="javascript">&lt;head&gt;
+...
+&lt;script type="text/javascript"&gt;
+	$(document).ready(function(){
+		$(document).pngFix();
+	});
+&lt;/script&gt;
+...
+&lt;/head&gt;</code></pre>
+			<p>
+				Test PNG (without transparency in IE 5.5 &amp; 6)<br />
+				<img src="pngtest.png" width="173" height="173" alt="PNG without transparency" />
+				<img src="pngtest.png" width="173" height="173" alt="This is the alt-Text" style="position:absolute;top:3350px;left:60%;" />
+				<br />
+				<a href="#" onclick="$('div.content').pngFix();$(this).hide();return false;">Switch above PNG to transparency</a>
+			</p>
+		</div>
+
+	</div>
+
+	<div class="footer">
+		<p>
+		&copy; Andreas Eberhard, andreas.eberhard(at)gmail.com
+		<br />
+		<a href="http://jquery.andreaseberhard.de/">http://jquery.andreaseberhard.de/</a>
+		</p>
+		<a class="top" href="#page">Top |</a>
+	</div>
+
+<!--[if lt IE 5.5]>
+	<div class="toocool"><h1>Too cool for your old IE ;-)</h1></div>
+<![endif]-->
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2220699-1";
+urchinTracker();
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,71 @@
+/* Area 51
+----------------------------------*/
+
+
+
+
+
+/* Time Related
+----------------------------------*/
+table th.time {
+    min-width: 48px;
+}
+table th.timezone{
+    min-width: 48px;
+}
+
+
+
+/* Date Related
+----------------------------------*/
+table th.date {
+    min-width: 74px;
+}
+table th.datetime {
+    min-width: 174px;
+}
+table th.week {
+    min-width: 54px;
+}
+
+
+
+/* Locale and Address Related
+---------------------------------------------------*/
+table th.name {
+    min-width: 94px;
+}
+table th.street {
+    min-width: 54px;
+}
+table th.city {
+    min-width: 54px;
+}
+table th.zip {
+    min-width: 54px;
+}
+table th.state {
+    min-width: 54px;
+}
+table th.country {
+    min-width: 54px;
+}
+
+
+
+/* Contact
+----------------------------------*/
+table th.mobile {
+    min-width: 54px;
+}
+table th.email {
+    min-width: 300px;
+}
+
+
+
+/* DCIX
+----------------------------------*/
+table th.carrier {
+    min-width: 120px;
+}

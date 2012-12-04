@@ -1,0 +1,132 @@
+/* Area 51
+----------------------------------*/
+
+
+
+/* Sticky Footer by Ryan Fait, see http://ryanfait.com/
+----------------------------------*/
+
+html,body{
+    height: 100%
+}
+
+#holder {
+    min-height: 100%;
+    position:relative;
+}
+
+#body {
+    padding-bottom: 100px;    /* height of footer */
+}
+
+footer{
+    bottom: 0;
+    height: 100px; 
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+
+
+
+/* Html
+----------------------------------*/
+
+html {
+    background-color: #ffffff;    
+
+    /* font style (this will be inherited) */
+    font-size: small;
+    font-family: arial,sans-serif;
+}
+
+
+
+/* Body
+----------------------------------*/
+
+body {
+    height: 100%;
+    width: 100%;
+    
+    text-align: center; /* center body-content */
+	
+    display: block;
+    float: left; 
+}
+h1:first-child,
+h1:last-child,
+h1.first-child,
+h1.last-child,
+body h1.body-header:first-child,
+body h1.body-header:last-child,
+body h1.body-header.first-child,
+body h1.body-header.last-child {
+    margin-top: 8px;
+}
+h1,
+body h1.body-header {
+    margin: 64px 0px 15px 0px; /* top, right, bottom, left */
+    border-width: 1px 0px; /* top/bottom, right/left */
+    padding: 4px 8px; /* top/bottom, right/left */
+    
+    color: #ffffff;
+    background-color: lightgrey;
+    background-color: #e4e4e4; /* FALLBACK: color for old browsers */
+    background: linear-gradient(top, #ddd 0%, #000 100%);
+    background: -o-linear-gradient(top, #ddd 0%, #000 100%);
+    background: -moz-linear-gradient(top, #ddd 0%, #000 100%);
+    background: -webkit-linear-gradient(top, #ddd 0%, #000 100%);
+    background: -ms-linear-gradient(top, #ddd 0%, #000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dddddd", endColorstr="#cccccc"); /* IE */
+    
+    border-radius: 0px;
+    border-style: solid;
+    border-color: transparent;
+    
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+body div.body-content {
+    display: block; /* wrap around content (in other words avoid 100% width of body) */
+    vertical-align: top;
+}
+
+
+
+/* General (Style for not styled tags)
+----------------------------------*/
+
+/* span */
+span {
+
+}
+
+
+
+/* label */
+label {
+
+}
+
+
+
+/* input */
+input {
+
+}
+table input {
+    width: 100%;
+}
+
+
+
+/* select */
+select {
+
+}
+table select {
+    width: 100%;
+}

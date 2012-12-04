@@ -1,0 +1,21 @@
+Jpa Entity Introduction
+http://java.sun.com/developer/technicalArticles/J2SE/Desktop/persistenceapi/
+
+Jpa Entity Annotation Search: Documentation + Examples
+http://www.objectdb.com//object/database
+
+
+
+Lombok Feature Overview
+http://projectlombok.org/features/index.html
+
+Lombok @Data annotation
+http://projectlombok.org/features/Data.html
+
+Lombok @NoArgsConstructor, @RequiredArgsConstructor, @NonNull annotation
+http://projectlombok.org/features/Constructor.html
+
+Thumbrules wehn Designing and 
+Why use @Data, @NoArgsConstructor(access = AccessLevel.PROTECTED), @RequiredArgsConstructor on all Entities?
+http://stackoverflow.com/questions/6033905/create-the-perfect-jpa-entity
+http://techpolesen.blogspot.se/2007/11/10-tips-on-jpa-domain-modelling.html

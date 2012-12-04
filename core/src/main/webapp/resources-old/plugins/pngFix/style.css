@@ -1,0 +1,238 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	line-height: 1.3em;
+	font-size: 100.1%;
+	font-family : Verdana, Geneva, Tahoma, Helvetica, sans-serif;
+	background: #e3e3e3;
+	text-align: center;
+	margin-bottom: 4.0em;
+}
+
+h1 {
+	line-height: 2.0em;
+	font-size: 1.8em;
+	color: #9c0;
+	margin-bottom: 1.0em;
+}
+h2 {
+	line-height: 1.5em;
+	font-size: 1.5em;
+	color: #9c0;
+	margin-bottom: 1.0em;
+}
+p {
+	margin-bottom: 1.5em;
+}
+
+a img {border:0;}
+a {
+	text-decoration: underline;
+	color: #0040B6;
+}
+a:link { color: #0040B6; }
+a:visited { color: #0040B6; }
+a:hover { color: #c00; text-decoration: none; }
+a:active { color: #c00; }
+
+.external {
+	text-decoration:none;
+	background:url('ext.gif') center right no-repeat;
+	padding-right:10px;
+}
+.clear { clear:both; height:0px; font-size:0px; }
+.jsource { padding: 5px 5px 5px 20px; background:url('js.gif') center left no-repeat; margin-left:30px;}
+
+span.soon {margin-left:30px;color:#c00;font-weight:bold;}
+a.soon, a:link.soon, a:visited.soon {text-decoration: line-through;color:#666;}
+
+ul {
+	margin: 20px 0;
+}
+li {
+	margin-left: 40px;
+}
+fieldset {
+	padding: 10px;
+}
+hr {
+	color : #fff;
+	height : 1px;
+	padding : 0;
+	border-color : #f6f6f6;
+	border-width : 1px 0 0 0;
+	border-style : solid;
+	margin: 2.0em 0;
+}
+
+pre {
+	font-size: 12px;
+	line-height:1.4em;
+	padding: 10px;
+	background: #ffffee;
+	border: solid 1px #ddd;
+	margin: 0 0 20px 0;
+	/* Wordwrap Hack */
+	white-space: pre-wrap;		/* css-3 */
+	white-space: -moz-pre-wrap !important;		/* Mozilla, since 1999 */
+	white-space: -pre-wrap;		/* Opera 4-6 */
+	white-space: -o-pre-wrap;	/* Opera 7 */
+	word-wrap: break-word;		/* Internet Explorer 5.5+ */
+}
+
+#page {
+	margin: 0 auto;
+	width: 720px;
+	font-size:0.8em;
+	background: #fff url('bgw.gif') repeat-y top center;
+	text-align: left;
+}
+
+.intro {
+	border-top:solid 1px #e3e3e3;
+	position:relative;
+	background: url('bgi.gif') no-repeat top center;
+	padding-bottom:20px;
+	clear:both;
+}
+.intro h1 {
+	margin: 65px 50px 40px 50px;
+	padding-left: 10px;
+	border-left: solid 5px #e3e3e3;
+}
+.intro h1 a:link, .intro h1 a:visited {
+	display: block;
+	color: #636363;
+	text-decoration: none;
+}
+.intro h1 a:hover { color: #c00; }
+
+.intro h2 {
+	border: 0;
+}
+.introtext {
+	display:block;
+	width: 350px;
+	margin-left:50px;
+}
+.sidebar {
+	position: absolute;
+	right:50px;
+	top:190px;
+	font-size: 0.9em;
+	width: 210px;
+	padding: 10px;
+	border: solid 1px #CCE680;
+	background: #E6F3BA;
+}
+.sidebar p {
+	font-size: 0.9em;
+	line-height: 1.2em;
+}
+.more {
+	text-align: right;
+	padding-right: 20px;
+}
+
+.content {
+	padding: 0 40px 0 40px;
+	margin: 30px 10px 0 10px;
+	background: #fff url('bgc.gif') no-repeat top center;
+	overflow: hidden;
+}
+.content h2 {
+	border-bottom: solid 5px #f6f6f6;
+}
+
+.examples, .examples2 {
+	border: solid 1px #e3e3e3;
+	background: #f6f6f6;
+	padding: 20px;
+	margin: 0 50px 0 50px;
+	overflow: hidden;
+}
+.examples hr, .examples2 hr {
+	color : #fff;
+	height : 1px;
+	padding : 0;
+	border-color : #fff;
+	border-width : 1px 0 0 0;
+	border-style : solid;
+	margin: 2.0em 0;
+}
+
+.footer {
+	color: #636363;
+	font-size: 0.7em;
+	width: 720px;
+	height: 130px;
+	text-align: center;
+	margin: 0 auto;
+	background: #fff url('bgf.gif') repeat-x bottom center;
+}
+.footer p {
+	padding-top:50px;
+}
+.top {
+	text-decoration: none;
+	float: right;
+	margin: -40px 50px 0 0;
+}
+
+.download {
+	display: block;
+	width: 170px;
+	height:31px;
+	margin: 0 auto;
+}
+.download a {
+	display: block;
+	width: 170px;
+	height: 31px;
+	background: url('download.gif') top left no-repeat;
+	line-height:93px;
+	overflow: hidden;
+}
+.download a:hover {
+	background: url('download.gif') no-repeat -170px 0px;
+}
+
+.toocool {
+	position:absolute;
+	top:13px;
+	margin:0 auto;
+	margin-left:-310px;
+}
+.toocool h1 {
+	background:#99cc00;
+	color:#fff;
+	padding: 0 10px;
+	border-left: solid 5px #e3e3e3;
+}
+
+table, td, th {
+	font-size: 1.0em;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+	margin:0 20px;
+}
+th {
+	font-weight:bold;
+}
+th, td {
+	padding: 0.3em;
+	border:1px solid #ccc;
+	vertical-align:top;
+	text-align:left;
+}
+
+.light {
+	color: #636363;
+	font-size: 0.8em;
+	line-height: 1.2em;
+}

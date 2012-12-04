@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prettify Example</title>
+
+	<!-- Prettify -->
+	<link rel="stylesheet" type="text/css" href="../stylesheets/prettify-bootstrap.css" />
+	<script type="text/javascript" src="../javascripts/prettify.js"></script>
+
+	<!-- JavaScript -->
+	<script type="text/javascript">
+		window.onload = function(){
+			prettyPrint();
+		}
+	</script>
+</head>
+<body>
+	<h2>Prettify Example</h2>
+	<pre class="prettyprint linenums">
+int x = foo();  /* This is a comment  <span class="nocode">This is not code</span>
+  Continuation of comment */
+int y = bar();</pre>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" 
+         xmlns="http://java.sun.com/xml/ns/j2ee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="
+            http://java.sun.com/xml/ns/j2ee   
+            http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    
+    <display-name>Template Spring Jpa</display-name>
+
+    <!-- ContextLoaderListener -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            org.andidev.config.AppConfig
+        </param-value>
+    </context-param>
+<!-- http://stackoverflow.com/questions/8587489/how-to-set-active-spring-3-1-environment-profile-via-a-properites-file-and-not-v
+    class SpringInitializer extends WebApplicationInitializer {
+
+    void onStartup(ServletContext container) {
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.getEnvironment().setActiveProfiles("profileName");
+        rootContext.register(SpringConfiguration.class);
+        container.addListener(new ContextLoaderListener(rootContext));
+    }
+}          -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Spring Dispatcher Servlet -->
+    <servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>       
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Spring Sequrity -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- UTF-8 Encoding
+    http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter -->
+    <filter>  
+        <filter-name>encodingFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+        <init-param>  
+            <param-name>encoding</param-name>  
+            <param-value>UTF-8</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>encodingFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>
+    
+    <!-- RESTful support for hrrp-methods GET, PUT, POST, and DELETE
+    http://static.springsource.org/spring/docs/current/spring-framework-reference/html/view.html#rest-method-conversion -->
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <servlet-name>spring</servlet-name>
+    </filter-mapping>
+    
+    <!--  ***** ****************************************** ***** -->
+    <!--  *****               Logback                      ***** -->
+    <!--  ***** ****************************************** ***** -->
+
+    <!-- Enable SecurityContextHolder and RequestContextHolder in logback logging Converters 
+    e.g. UserConverter.java and SessionConverter.java
+    http://www.codelord.net/2010/08/27/logging-with-a-context-users-in-logback-and-spring-security/ 
+    http://stackoverflow.com/questions/3542026/retrieving-session-id-with-spring-security -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    
+    <!-- Handling System.out and System.err -->
+    <listener>
+        <listener-class>uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener</listener-class>
+    </listener>
+    
+    <!-- Enable user agent data in logging with logback
+    http://logback.qos.ch/manual/mdc.html#mis -->
+    <filter>
+        <filter-name>MDCInsertingServletFilter</filter-name>
+        <filter-class>
+            ch.qos.logback.classic.helpers.MDCInsertingServletFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MDCInsertingServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Handling HttpRequest and HttpResponse w Logback-Access -->
+    <filter>
+        <filter-name>TeeFilter</filter-name>
+        <filter-class>ch.qos.logback.access.servlet.TeeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TeeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Providing URL for Logback Status with OnStatusConsoleListener -->
+    <servlet>
+        <servlet-name>ViewStatusMessages</servlet-name>
+        <servlet-class>ch.qos.logback.classic.ViewStatusMessagesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewStatusMessages</servlet-name>
+        <url-pattern>/logback</url-pattern>
+    </servlet-mapping>
+</web-app>

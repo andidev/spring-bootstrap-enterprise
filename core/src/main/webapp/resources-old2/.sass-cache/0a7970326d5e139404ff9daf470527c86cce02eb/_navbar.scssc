@@ -1,0 +1,1047 @@
+3.1.19 (Brainy Betty)
+3beed7a46875a0dd54bd4d2cbd9f06f6ba562674
+o:Sass::Tree::RootNode
+:
+@linei:@template"j!// NAVBAR (FIXED AND STATIC)
+// -------------------------
+
+
+// COMMON STYLES
+// -------------
+
+.navbar {
+  // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
+  *position: relative;
+  *z-index: 2;
+
+  overflow: visible;
+  margin-bottom: $baseLineHeight;
+}
+
+// Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
+.navbar-inner {
+  min-height: $navbarHeight;
+  padding-left:  20px;
+  padding-right: 20px;
+  @include gradient-vertical($navbarBackgroundHighlight, $navbarBackground);
+  @include border-radius(4px);
+  @include box-shadow(#{0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)});
+}
+
+// Set width to auto for default container
+// We then reset it for fixed navbars in the #gridSystem mixin
+.navbar .container {
+  width: auto;
+}
+
+// Override the default collapsed state
+.nav-collapse.collapse {
+  height: auto;
+}
+
+
+// Brand, links, text, and buttons
+.navbar {
+  color: $navbarText;
+  // Hover and active states
+  .brand:hover {
+    text-decoration: none;
+  }
+  // Website or project name
+  .brand {
+    float: left;
+    display: block;
+    // Vertically center the text given $navbarHeight
+    $elementHeight: 20px;
+    padding: (($navbarHeight - $elementHeight) / 2 - 2) 20px (($navbarHeight - $elementHeight) / 2 + 2);
+    margin-left: -20px; // negative indent to left-align the text down the page
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 1;
+    color: $navbarBrandColor;
+  }
+  // Plain text in topbar
+  .navbar-text {
+    margin-bottom: 0;
+    line-height: $navbarHeight;
+  }
+  // Janky solution for now to account for links outside the .nav
+  .navbar-link {
+    color: $navbarLinkColor;
+    &:hover {
+      color: $navbarLinkColorHover;
+    }
+  }
+  // Buttons in navbar
+  .btn,
+  .btn-group {
+    @include navbarVerticalAlign(30px); // Vertically center in navbar
+  }
+  .btn-group .btn {
+    margin: 0; // then undo the margin here so we don't accidentally double it
+  }
+}
+
+// Navbar forms
+.navbar-form {
+  margin-bottom: 0; // remove default bottom margin
+  @include clearfix();
+  input,
+  select,
+  .radio,
+  .checkbox {
+    @include navbarVerticalAlign(30px); // Vertically center in navbar
+  }
+  input,
+  select {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  input[type="image"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    margin-top: 3px;
+  }
+  .input-append,
+  .input-prepend {
+    margin-top: 6px;
+    white-space: nowrap; // preven two  items from separating within a .navbar-form that has .pull-left
+    input {
+      margin-top: 0; // remove the margin on top since it's on the parent
+    }
+  }
+}
+
+// Navbar search
+.navbar-search {
+  position: relative;
+  float: left;
+  @include navbarVerticalAlign(28px); // Vertically center in navbar
+  margin-bottom: 0;
+  .search-query {
+    padding: 4px 9px;
+    @include font-sans-serif(13px, normal, 1);
+    color: $white;
+    background-color: $navbarSearchBackground;
+    border: 1px solid $navbarSearchBorder;
+    @include box-shadow(#{inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15)});
+    @include transition(none);
+
+    @include placeholder($navbarSearchPlaceholderColor);
+
+    // Focus states (we use .focused since IE7-8 and down doesn't support :focus)
+    &:focus,
+    &.focused {
+      padding: 5px 10px;
+      color: $grayDark;
+      text-shadow: 0 1px 0 $white;
+      background-color: $navbarSearchBackgroundFocus;
+      border: 0;
+      @include box-shadow(0 0 3px rgba(0,0,0,.15));
+      outline: 0;
+    }
+  }
+}
+
+
+
+// FIXED NAVBAR
+// ------------
+
+// Shared (top/bottom) styles
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: $zindexFixedNavbar;
+  margin-bottom: 0; // remove 18px margin for static navbar
+}
+.navbar-fixed-top .navbar-inner,
+.navbar-fixed-bottom .navbar-inner {
+  padding-left:  0;
+  padding-right: 0;
+  @include border-radius(0);
+}
+
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  @include core-span($gridColumns);
+}
+
+// Fixed to top
+.navbar-fixed-top {
+  top: 0;
+}
+
+// Fixed to bottom
+.navbar-fixed-bottom {
+  bottom: 0;
+}
+
+
+
+// NAVIGATION
+// ----------
+
+.navbar .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+.navbar .nav.pull-right {
+  float: right; // redeclare due to specificity
+}
+.navbar .nav > li {
+  display: block;
+  float: left;
+}
+
+// Links
+.navbar .nav > li > a {
+  float: none;
+  // Vertically center the text given $navbarHeight
+  $elementHeight: 20px;
+  padding: (($navbarHeight - $elementHeight) / 2 - 1) 10px (($navbarHeight - $elementHeight) / 2 + 1);
+  line-height: 19px;
+  color: $navbarLinkColor;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+// Buttons
+.navbar .btn {
+  display: inline-block;
+  padding: 4px 10px 4px;
+  // Vertically center the button given @navbarHeight
+  $elementHeight: 28px;
+  margin: (($navbarHeight - $elementHeight) / 2 - 1) 5px (($navbarHeight - $elementHeight) / 2);
+  line-height: $baseLineHeight;
+}
+.navbar .btn-group {
+  margin: 0;
+  // Vertically center the button given @navbarHeight
+  $elementHeight: 28px;
+  padding: (($navbarHeight - $elementHeight) / 2 - 1) 5px (($navbarHeight - $elementHeight) / 2);
+}
+// Hover
+.navbar .nav > li > a:hover {
+  background-color: $navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover from .active
+  color: $navbarLinkColorHover;
+  text-decoration: none;
+}
+
+// Active nav items
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  color: $navbarLinkColorActive;
+  text-decoration: none;
+  background-color: $navbarLinkBackgroundActive;
+}
+
+// Dividers (basically a vertical hr)
+.navbar .divider-vertical {
+  height: $navbarHeight;
+  width: 1px;
+  margin: 0 9px;
+  overflow: hidden;
+  background-color: $navbarBackground;
+  border-right: 1px solid $navbarBackgroundHighlight;
+}
+
+// Secondary (floated right) nav in topbar
+.navbar .nav.pull-right {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+// Navbar button for toggling navbar items in responsive layouts
+// These definitions need to come after '.navbar .btn'
+.navbar .btn-navbar {
+  display: none;
+  float: right;
+  padding: 7px 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  @include buttonBackground($navbarBackgroundHighlight, $navbarBackground);
+  @include box-shadow(#{inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.075)});
+}
+.navbar .btn-navbar .icon-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #f5f5f5;
+  @include border-radius(1px);
+  @include box-shadow(0 1px 0 rgba(0,0,0,.25));
+}
+.btn-navbar .icon-bar + .icon-bar {
+  margin-top: 3px;
+}
+
+
+// Dropdown menus
+// --------------
+
+// Menu position and menu carets
+.navbar .dropdown-menu {
+  &:before {
+    content: '';
+    display: inline-block;
+    border-left:   7px solid transparent;
+    border-right:  7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-bottom-color: $dropdownBorder;
+    position: absolute;
+    top: -7px;
+    left: 9px;
+  }
+  &:after {
+    content: '';
+    display: inline-block;
+    border-left:   6px solid transparent;
+    border-right:  6px solid transparent;
+    border-bottom: 6px solid $dropdownBackground;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+  }
+}
+// Menu position and menu caret support for dropups via extra dropup class
+.navbar-fixed-bottom .dropdown-menu {
+  &:before {
+    border-top: 7px solid #ccc;
+    border-top-color: $dropdownBorder;
+    border-bottom: 0;
+    bottom: -7px;
+    top: auto;
+  }
+  &:after {
+    border-top: 6px solid $dropdownBackground;
+    border-bottom: 0;
+    bottom: -6px;
+    top: auto;
+  }
+}
+// Dropdown toggle caret
+.navbar .nav li.dropdown .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open .caret {
+  border-top-color: $white;
+  border-bottom-color: $white;
+}
+.navbar .nav li.dropdown.active .caret {
+  @include opacity(100);
+}
+
+// Remove background color from open dropdown
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: transparent;
+}
+
+// Dropdown link on hover
+.navbar .nav li.dropdown.active > .dropdown-toggle:hover {
+  color: $white;
+}
+
+// Right aligned menus need alt position
+// TODO: rejigger this at some point to simplify the selectors
+.navbar .pull-right .dropdown-menu,
+.navbar .dropdown-menu.pull-right {
+  left: auto;
+  right: 0;
+  &:before {
+    left: auto;
+    right: 12px;
+  }
+  &:after {
+    left: auto;
+    right: 13px;
+  }
+}:@children[@o:Sass::Tree::CommentNode:@value["A/* NAVBAR (FIXED AND STATIC)
+ * ------------------------- */;i:
+@loud0;[ :@options{ :@silenti o;	;
+[")/* COMMON STYLES
+ * ------------- */;i
+;0;[ ;@;i o:Sass::Tree::RuleNode:
+@tabsi ;i:
+@rule[".navbar:@parsed_ruleso:"Sass::Selector::CommaSequence;i:@members[o:Sass::Selector::Sequence;[o:#Sass::Selector::SimpleSequence;i;[o:Sass::Selector::Class;i:
+@name["navbar:@filename" ;@;@;[
+o;	;
+["g/* Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar */;i;0;[ ;@;i o:Sass::Tree::PropNode;i ;
+o:Sass::Script::String;
+"relative;@:
+@type:identifier;i:@prop_syntax:new;["*position;[ ;@o;;i ;
+o;;
+"2;@;;;i;;;["*z-index;[ ;@o;;i ;
+o;;
+"visible;@;;;i;;;["overflow;[ ;@o;;i ;
+o:Sass::Script::Variable	;i;"baseLineHeight;@:@underscored_name"baseLineHeight;i;;;["margin-bottom;[ ;@;@:@has_childrenTo;	;
+["w/* Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present */;i;0;[ ;@;i o;;i ;i;[".navbar-inner;o;;i;[o;;[o;;i;[o;;i;["navbar-inner;" ;@L;@L;[o;;i ;
+o;	;i;"navbarHeight;@; "navbarHeight;i;;;["min-height;[ ;@o;;i ;
+o;;
+"	20px;@;;;i;;;["padding-left;[ ;@o;;i ;
+o;;
+"	20px;@;;;i;;;["padding-right;[ ;@o:Sass::Tree::MixinNode;i;"gradient-vertical:@keywords{ ;[ :
+@args[o;	;i;"navbarBackgroundHighlight;@; "navbarBackgroundHighlighto;	;i;"navbarBackground;@; "navbarBackground;@o;";i;"border-radius;#{ ;[ ;$[o:Sass::Script::Number:@denominator_units[ ;
+i	;i:@numerator_units["px:@original"4px;@;@o;";i;"box-shadow;#{ ;[ ;$[o: Sass::Script::Interpolation:@after0;i:@originally_textF:	@mido:Sass::Script::List	;
+[o;-	;
+[	o;%;&[ ;
+i ;i;'[ ;("0;@o;%;&[ ;
+i;i;'["px;("1px;@o;%;&[ ;
+i;i;'["px;("3px;@o:Sass::Script::Funcall
+;i;"	rgba;#{ ;$[	o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+f	0.25;i;'[ ;("	0.25;@;@;i:@separator:
+space;@o;-	;
+[
+o;	;
+"
+inset;i;@;;o;%;&@|;
+i ;i;'[ ;("0;@o;%;&[ ;
+i˙;i;'["px;("	-1px;@o;%;&@|;
+i ;i;'[ ;("0;@o;.
+;i;"	rgba;#{ ;$[	o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+f0.10000000000000001 ôö;i;'[ ;("0.1;@;@;i;/;0;@;i;/:
+comma;@:@whitespace_after0:@before0;@:@whitespace_before0;@;@;!To;	;
+["q/* Set width to auto for default container
+ * We then reset it for fixed navbars in the #gridSystem mixin */;i ;0;[ ;@;i o;;i ;i";[".navbar .container;o;;i";[o;;[o;;i";[o;;i";["navbar;" ;@ o;;i";[o;;i";["container;@ ;@ ;@ ;[o;;i ;
+o;;
+"	auto;@;;;i#;;;["
+width;[ ;@;@;!To;	;
+["//* Override the default collapsed state */;i&;0;[ ;@;i o;;i ;i';[".nav-collapse.collapse;o;;i';[o;;[o;;i';[o;;i';["nav-collapse;" o;;i';["collapse;@Á;@Á;@Á;[o;;i ;
+o;;
+"	auto;@;;;i(;;;["height;[ ;@;@;!To;	;
+["*/* Brand, links, text, and buttons */;i,;0;[ ;@;i o;;i ;i-;[".navbar;o;;i-;[o;;[o;;i-;[o;;i-;["navbar;" ;@;@;[o;;i ;
+o;	;i.;"navbarText;@; "navbarText;i.;;;["
+color;[ ;@o;	;
+[""/* Hover and active states */;i/;0;[ ;@;i o;;i ;i0;[".brand:hover;o;;i0;[o;;[o;;i0;[o;;i0;["
+brand;" o:Sass::Selector::Pseudo
+;i0;["
+hover:	@arg0;:
+class;@;@;@;[o;;i ;
+o;;
+"	none;@;;;i1;;;["text-decoration;[ ;@;@;!To;	;
+[""/* Website or project name */;i3;0;[ ;@;i o;;i ;i4;[".brand;o;;i4;[o;;[o;;i4;[o;;i4;["
+brand;" ;@6;@6;[o;;i ;
+o;;
+"	left;@;;;i5;;;["
+float;[ ;@o;;i ;
+o;;
+"
+block;@;;;i6;;;["display;[ ;@o;	;
+["9/* Vertically center the text given $navbarHeight */;i7;0;[ ;@;i o:Sass::Tree::VariableNode;i8:
+@expro;%;&[ ;
+i;i8;'["px;("	20px;@;"elementHeight;[ ;@:@guarded0o;;i ;
+o;-	;
+[o:Sass::Script::Operation
+;i9:@operand2o;%;&@|;
+i;i9;'[ ;("2;@:@operator:
+minus:@operand1o;;
+;i9;<o;%
+;&@|;
+i;i9;'[ ;@;=:div;?o;;
+;i9;<o;	;i9;"elementHeight;@; "elementHeight;=;>;?o;	;i9;"navbarHeight;@; "navbarHeight;@;@;@o;%;&[ ;
+i;i9;'["px;("	20px;@o;;
+;i9;<o;%;&@|;
+i;i9;'[ ;("2;@;=:	plus;?o;;
+;i9;<o;%
+;&@|;
+i;i9;'[ ;@;=;@;?o;;
+;i9;<o;	;i9;"elementHeight;@; "elementHeight;=;>;?o;	;i9;"navbarHeight;@; "navbarHeight;@;@;@;i9;/;0;@;i9;;;["padding;[ ;@o;;i ;
+o;%;&[ ;
+iÁ;i:;'["px;("
+-20px;@;i:;;;["margin-left;[ ;@o;	;
+["?/* negative indent to left-align the text down the page */;i:;0;[ ;@;i o;;i ;
+o;;
+"	20px;@;;;i;;;;["font-size;[ ;@o;;i ;
+o;;
+"200;@;;;i<;;;["font-weight;[ ;@o;;i ;
+o;;
+"1;@;;;i=;;;["line-height;[ ;@o;;i ;
+o;	;i>;"navbarBrandColor;@; "navbarBrandColor;i>;;;["
+color;[ ;@;@;!To;	;
+["/* Plain text in topbar */;i@;0;[ ;@;i o;;i ;iA;[".navbar-text;o;;iA;[o;;[o;;iA;[o;;iA;["navbar-text;" ;@≠;@≠;[o;;i ;
+o;;
+"0;@;;;iB;;;["margin-bottom;[ ;@o;;i ;
+o;	;iC;"navbarHeight;@; "navbarHeight;iC;;;["line-height;[ ;@;@;!To;	;
+["G/* Janky solution for now to account for links outside the .nav */;iE;0;[ ;@;i o;;i ;iF;[".navbar-link;o;;iF;[o;;[o;;iF;[o;;iF;["navbar-link;" ;@Ã;@Ã;[o;;i ;
+o;	;iG;"navbarLinkColor;@; "navbarLinkColor;iG;;;["
+color;[ ;@o;;i ;iH;["&:hover;o;;iH;[o;;[o;;iH;[o:Sass::Selector::Parent;iH;" o;5
+;iH;["
+hover;60;;7;@ﬂ;@ﬂ;@ﬂ;[o;;i ;
+o;	;iI;"navbarLinkColorHover;@; "navbarLinkColorHover;iI;;;["
+color;[ ;@;@;!T;@;!To;	;
+["/* Buttons in navbar */;iL;0;[ ;@;i o;;i ;iN;[".btn,
+  .btn-group;o;;iN;[o;;[o;;iN;[o;;iN;["btn;" ;@˚o;;["
+o;;iN;[o;;iN;["btn-group;@˚;@˚;@˚;[o;";iO;"navbarVerticalAlign;#{ ;[ ;$[o;%;&[ ;
+i#;iO;'["px;("	30px;@;@o;	;
+["&/* Vertically center in navbar */;iO;0;[ ;@;i ;@;!To;;i ;iQ;[".btn-group .btn;o;;iQ;[o;;[o;;iQ;[o;;iQ;["btn-group;" ;@o;;iQ;[o;;iQ;["btn;@;@;@;[o;;i ;
+o;;
+"0;@;;;iR;;;["margin;[ ;@o;	;
+["G/* then undo the margin here so we don't accidentally double it */;iR;0;[ ;@;i ;@;!T;@;!To;	;
+["/* Navbar forms */;iV;0;[ ;@;i o;;i ;iW;[".navbar-form;o;;iW;[o;;[o;;iW;[o;;iW;["navbar-form;" ;@@;@@;[o;;i ;
+o;;
+"0;@;;;iX;;;["margin-bottom;[ ;@o;	;
+["'/* remove default bottom margin */;iX;0;[ ;@;i o;";iY;"clearfix;#{ ;[ ;$[ ;@o;;i ;i];["+input,
+  select,
+  .radio,
+  .checkbox;o;;i];[	o;;[o;;i];[o:Sass::Selector::Element	;i]:@namespace0;["
+input;" ;@]o;;["
+o;;i];[o;C	;i];D0;["select;@];@]o;;["
+o;;i];[o;;i];["
+radio;@];@]o;;["
+o;;i];[o;;i];["checkbox;@];@];@];[o;";i^;"navbarVerticalAlign;#{ ;[ ;$[o;%;&[ ;
+i#;i^;'["px;("	30px;@;@o;	;
+["&/* Vertically center in navbar */;i^;0;[ ;@;i ;@;!To;;i ;ia;["input,
+  select;o;;ia;[o;;[o;;ia;[o;C	;ia;D0;["
+input;" ;@ëo;;["
+o;;ia;[o;C	;ia;D0;["select;@ë;@ë;@ë;[o;;i ;
+o;;
+"inline-block;@;;;ib;;;["display;[ ;@o;;i ;
+o;;
+"0;@;;;ic;;;["margin-bottom;[ ;@;@;!To;;i ;ig;["Iinput[type="image"],
+  input[type="checkbox"],
+  input[type="radio"];o;;ig;[o;;[o;;ig;[o;C	;ig;D0;["
+input;" o:Sass::Selector::Attribute;
+[""image";ig;D0;["	type;="=;@≥;@≥o;;["
+o;;ig;[o;C	;ig;D0;["
+input;@≥o;E;
+[""checkbox";ig;D0;["	type;="=;@≥;@≥o;;["
+o;;ig;[o;C	;ig;D0;["
+input;@≥o;E;
+[""radio";ig;D0;["	type;="=;@≥;@≥;@≥;[o;;i ;
+o;;
+"3px;@;;;ih;;;["margin-top;[ ;@;@;!To;;i ;ik;["$.input-append,
+  .input-prepend;o;;ik;[o;;[o;;ik;[o;;ik;["input-append;" ;@Èo;;["
+o;;ik;[o;;ik;["input-prepend;@È;@È;@È;[	o;;i ;
+o;;
+"6px;@;;;il;;;["margin-top;[ ;@o;;i ;
+o;;
+"nowrap;@;;;im;;;["white-space;[ ;@o;	;
+["V/* preven two  items from separating within a .navbar-form that has .pull-left */;im;0;[ ;@;i o;;i ;in;["
+input;o;;in;[o;;[o;;in;[o;C	;in;D0;["
+input;" ;@;@;[o;;i ;
+o;;
+"0;@;;;io;;;["margin-top;[ ;@o;	;
+["</* remove the margin on top since it's on the parent */;io;0;[ ;@;i ;@;!T;@;!T;@;!To;	;
+["/* Navbar search */;it;0;[ ;@;i o;;i ;iu;[".navbar-search;o;;iu;[o;;[o;;iu;[o;;iu;["navbar-search;" ;@+;@+;[o;;i ;
+o;;
+"relative;@;;;iv;;;["position;[ ;@o;;i ;
+o;;
+"	left;@;;;iw;;;["
+float;[ ;@o;";ix;"navbarVerticalAlign;#{ ;[ ;$[o;%;&[ ;
+i!;ix;'["px;("	28px;@;@o;	;
+["&/* Vertically center in navbar */;ix;0;[ ;@;i o;;i ;
+o;;
+"0;@;;;iy;;;["margin-bottom;[ ;@o;;i ;iz;[".search-query;o;;iz;[o;;[o;;iz;[o;;iz;["search-query;" ;@Y;@Y;[o;;i ;
+o;;
+"4px 9px;@;;;i{;;;["padding;[ ;@o;";i|;"font-sans-serif;#{ ;[ ;$[o;%;&[ ;
+i;i|;'["px;("	13px;@o;	;
+"normal;i|;@;;o;%;&@|;
+i;i|;'[ ;("1;@;@o;;i ;
+o;	;i};"
+white;@; "
+white;i};;;["
+color;[ ;@o;;i ;
+o;	;i~;"navbarSearchBackground;@; "navbarSearchBackground;i~;;;["background-color;[ ;@o;;i ;
+o;-	;
+[o;%;&[ ;
+i;i;'["px;("1px;@o;	;
+"
+solid;i;@;;o;	;i;"navbarSearchBorder;@; "navbarSearchBorder;i;/;0;@;i;;;["border;[ ;@o;";i{;"box-shadow;#{ ;[ ;$[o;);*0;i{;+F;,o;-	;
+[o;-	;
+[
+o;	;
+"
+inset;i{;@;;o;%;&@|;
+i ;i{;'[ ;("0;@o;%;&[ ;
+i;i{;'["px;("1px;@o;%;&[ ;
+i;i{;'["px;("2px;@o;.
+;i{;"	rgba;#{ ;$[	o;%;&@|;
+i ;i{;'[ ;("0;@o;%;&@|;
+i ;i{;'[ ;("0;@o;%;&@|;
+i ;i{;'[ ;("0;@o;%;&@|;
+f0.10000000000000001 ôö;i{;'[ ;("0.1;@;@;i{;/;0;@o;-	;
+[	o;%;&@|;
+i ;i{;'[ ;("0;@o;%;&[ ;
+i;i{;'["px;("1px;@o;%;&@|;
+i ;i{;'[ ;("0;@o;.
+;i{;"	rgba;#{ ;$[	o;%;&@|;
+iˇ;i{;'[ ;("255;@o;%;&@|;
+iˇ;i{;'[ ;("255;@o;%;&@|;
+iˇ;i{;'[ ;("255;@o;%;&@|;
+f0.14999999999999999 33;i{;'[ ;("	0.15;@;@;i{;/;0;@;i{;/;1;@;20;30;@;40;@o;";i|;"transition;#{ ;[ ;$[o;	;
+"	none;i|;@;;;@o;";i~;"placeholder;#{ ;[ ;$[o;	;i~;"!navbarSearchPlaceholderColor;@; "!navbarSearchPlaceholderColor;@o;	;
+["U/* Focus states (we use .focused since IE7-8 and down doesn't support :focus) */;iÄ;0;[ ;@;i o;;i ;iÇ;["&:focus,
+    &.focused;o;;iÇ;[o;;[o;;iÇ;[o;B;iÇ;" o;5
+;iÇ;["
+focus;60;;7;@Û;@Ûo;;["
+o;;iÇ;[o;B;iÇ;@Ûo;;iÇ;["focused;@Û;@Û;@Û;[o;;i ;
+o;;
+"5px 10px;@;;;iÉ;;;["padding;[ ;@o;;i ;
+o;	;iÑ;"grayDark;@; "grayDark;iÑ;;;["
+color;[ ;@o;;i ;
+o;-	;
+[	o;%;&@|;
+i ;iÖ;'[ ;("0;@o;%;&[ ;
+i;iÖ;'["px;("1px;@o;%;&@|;
+i ;iÖ;'[ ;("0;@o;	;iÖ;"
+white;@; "
+white;iÖ;/;0;@;iÖ;;;["text-shadow;[ ;@o;;i ;
+o;	;iÜ;" navbarSearchBackgroundFocus;@; " navbarSearchBackgroundFocus;iÜ;;;["background-color;[ ;@o;;i ;
+o;;
+"0;@;;;iá;;;["border;[ ;@o;";ià;"box-shadow;#{ ;[ ;$[o;-	;
+[	o;%;&@|;
+i ;ià;'[ ;("0;@o;%;&@|;
+i ;ià;'[ ;("0;@o;%;&[ ;
+i;ià;'["px;("3px;@o;.
+;ià;"	rgba;#{ ;$[	o;%;&@|;
+i ;ià;'[ ;("0;@o;%;&@|;
+i ;ià;'[ ;("0;@o;%;&@|;
+i ;ià;'[ ;("0;@o;%;&@|;
+f0.14999999999999999 33;ià;'[ ;("	0.15;@;@;ià;/;0;@;@o;;i ;
+o;;
+"0;@;;;iâ;;;["outline;[ ;@;@;!T;@;!T;@;!To;	;
+["'/* FIXED NAVBAR
+ * ------------ */;iê;0;[ ;@;i o;	;
+["%/* Shared (top/bottom) styles */;iì;0;[ ;@;i o;;i ;iï;[",.navbar-fixed-top,
+.navbar-fixed-bottom;o;;iï;[o;;[o;;iï;[o;;iï;["navbar-fixed-top;" ;@lo;;["
+o;;iï;[o;;iï;["navbar-fixed-bottom;@l;@l;@l;[o;;i ;
+o;;
+"
+fixed;@;;;iñ;;;["position;[ ;@o;;i ;
+o;;
+"0;@;;;ió;;;["
+right;[ ;@o;;i ;
+o;;
+"0;@;;;iò;;;["	left;[ ;@o;;i ;
+o;	;iô;"zindexFixedNavbar;@; "zindexFixedNavbar;iô;;;["z-index;[ ;@o;;i ;
+o;;
+"0;@;;;iö;;;["margin-bottom;[ ;@o;	;
+["//* remove 18px margin for static navbar */;iö;0;[ ;@;i ;@;!To;;i ;iù;["H.navbar-fixed-top .navbar-inner,
+.navbar-fixed-bottom .navbar-inner;o;;iù;[o;;[o;;iù;[o;;iù;["navbar-fixed-top;" ;@•o;;iù;[o;;iù;["navbar-inner;@•;@•o;;["
+o;;iù;[o;;iù;["navbar-fixed-bottom;@•;@•o;;iù;[o;;iù;["navbar-inner;@•;@•;@•;[o;;i ;
+o;;
+"0;@;;;iû;;;["padding-left;[ ;@o;;i ;
+o;;
+"0;@;;;iü;;;["padding-right;[ ;@o;";i†;"border-radius;#{ ;[ ;$[o;%;&@|;
+i ;i†;'[ ;("0;@;@;@;!To;;i ;i§;["B.navbar-fixed-top .container,
+.navbar-fixed-bottom .container;o;;i§;[o;;[o;;i§;[o;;i§;["navbar-fixed-top;" ;@Ÿo;;i§;[o;;i§;["container;@Ÿ;@Ÿo;;["
+o;;i§;[o;;i§;["navbar-fixed-bottom;@Ÿ;@Ÿo;;i§;[o;;i§;["container;@Ÿ;@Ÿ;@Ÿ;[o;";i•;"core-span;#{ ;[ ;$[o;	;i•;"gridColumns;@; "gridColumns;@;@;!To;	;
+["/* Fixed to top */;i®;0;[ ;@;i o;;i ;i©;[".navbar-fixed-top;o;;i©;[o;;[o;;i©;[o;;i©;["navbar-fixed-top;" ;@;@;[o;;i ;
+o;;
+"0;@;;;i™;;;["top;[ ;@;@;!To;	;
+["/* Fixed to bottom */;i≠;0;[ ;@;i o;;i ;iÆ;[".navbar-fixed-bottom;o;;iÆ;[o;;[o;;iÆ;[o;;iÆ;["navbar-fixed-bottom;" ;@;@;[o;;i ;
+o;;
+"0;@;;;iØ;;;["bottom;[ ;@;@;!To;	;
+["#/* NAVIGATION
+ * ---------- */;i¥;0;[ ;@;i o;;i ;i∑;[".navbar .nav;o;;i∑;[o;;[o;;i∑;[o;;i∑;["navbar;" ;@5o;;i∑;[o;;i∑;["nav;@5;@5;@5;[
+o;;i ;
+o;;
+"relative;@;;;i∏;;;["position;[ ;@o;;i ;
+o;;
+"0;@;;;iπ;;;["	left;[ ;@o;;i ;
+o;;
+"
+block;@;;;i∫;;;["display;[ ;@o;;i ;
+o;;
+"	left;@;;;iª;;;["
+float;[ ;@o;;i ;
+o;;
+"0 10px 0 0;@;;;iº;;;["margin;[ ;@;@;!To;;i ;iæ;[".navbar .nav.pull-right;o;;iæ;[o;;[o;;iæ;[o;;iæ;["navbar;" ;@fo;;iæ;[o;;iæ;["nav;@fo;;iæ;["pull-right;@f;@f;@f;[o;;i ;
+o;;
+"
+right;@;;;iø;;;["
+float;[ ;@o;	;
+["'/* redeclare due to specificity */;iø;0;[ ;@;i ;@;!To;;i ;i¡;[".navbar .nav > li;o;;i¡;[o;;[	o;;i¡;[o;;i¡;["navbar;" ;@Üo;;i¡;[o;;i¡;["nav;@Ü;@Ü">o;;i¡;[o;C	;i¡;D0;["li;@Ü;@Ü;@Ü;[o;;i ;
+o;;
+"
+block;@;;;i¬;;;["display;[ ;@o;;i ;
+o;;
+"	left;@;;;i√;;;["
+float;[ ;@;@;!To;	;
+["/* Links */;i∆;0;[ ;@;i o;;i ;i«;[".navbar .nav > li > a;o;;i«;[o;;[o;;i«;[o;;i«;["navbar;" ;@Øo;;i«;[o;;i«;["nav;@Ø;@Ø">o;;i«;[o;C	;i«;D0;["li;@Ø;@Ø">o;;i«;[o;C	;i«;D0;["a;@Ø;@Ø;@Ø;[o;;i ;
+o;;
+"	none;@;;;i»;;;["
+float;[ ;@o;	;
+["9/* Vertically center the text given $navbarHeight */;i…;0;[ ;@;i o;8;i ;9o;%;&[ ;
+i;i ;'["px;("	20px;@;"elementHeight;[ ;@;:0o;;i ;
+o;-	;
+[o;;
+;iÀ;<o;%;&@|;
+i;iÀ;'[ ;("1;@;=;>;?o;;
+;iÀ;<o;%
+;&@|;
+i;iÀ;'[ ;@;=;@;?o;;
+;iÀ;<o;	;iÀ;"elementHeight;@; "elementHeight;=;>;?o;	;iÀ;"navbarHeight;@; "navbarHeight;@;@;@o;%;&[ ;
+i;iÀ;'["px;("	10px;@o;;
+;iÀ;<o;%;&@|;
+i;iÀ;'[ ;("1;@;=;A;?o;;
+;iÀ;<o;%
+;&@|;
+i;iÀ;'[ ;@;=;@;?o;;
+;iÀ;<o;	;iÀ;"elementHeight;@; "elementHeight;=;>;?o;	;iÀ;"navbarHeight;@; "navbarHeight;@;@;@;iÀ;/;0;@;iÀ;;;["padding;[ ;@o;;i ;
+o;;
+"	19px;@;;;iÃ;;;["line-height;[ ;@o;;i ;
+o;	;iÕ;"navbarLinkColor;@; "navbarLinkColor;iÕ;;;["
+color;[ ;@o;;i ;
+o;;
+"	none;@;;;iŒ;;;["text-decoration;[ ;@o;;i ;
+o;-	;
+[	o;%;&@|;
+i ;iœ;'[ ;("0;@o;%;&[ ;
+i˙;iœ;'["px;("	-1px;@o;%;&@|;
+i ;iœ;'[ ;("0;@o;.
+;iœ;"	rgba;#{ ;$[	o;%;&@|;
+i ;iœ;'[ ;("0;@o;%;&@|;
+i ;iœ;'[ ;("0;@o;%;&@|;
+i ;iœ;'[ ;("0;@o;%;&@|;
+f	0.25;iœ;'[ ;("	0.25;@;@;iœ;/;0;@;iœ;;;["text-shadow;[ ;@;@;!To;	;
+["/* Buttons */;i—;0;[ ;@;i o;;i ;i“;[".navbar .btn;o;;i“;[o;;[o;;i“;[o;;i“;["navbar;" ;@@o;;i“;[o;;i“;["btn;@@;@@;@@;[o;;i ;
+o;;
+"inline-block;@;;;i”;;;["display;[ ;@o;;i ;
+o;;
+"4px 10px 4px;@;;;i‘;;;["padding;[ ;@o;	;
+[";/* Vertically center the button given @navbarHeight */;i’;0;[ ;@;i o;8;i÷;9o;%;&[ ;
+i!;i÷;'["px;("	28px;@;"elementHeight;[ ;@;:0o;;i ;
+o;-	;
+[o;;
+;i◊;<o;%;&@|;
+i;i◊;'[ ;("1;@;=;>;?o;;
+;i◊;<o;%
+;&@|;
+i;i◊;'[ ;@;=;@;?o;;
+;i◊;<o;	;i◊;"elementHeight;@; "elementHeight;=;>;?o;	;i◊;"navbarHeight;@; "navbarHeight;@;@;@o;%;&[ ;
+i
+;i◊;'["px;("5px;@o;;
+;i◊;<o;%
+;&@|;
+i;i◊;'[ ;@;=;@;?o;;
+;i◊;<o;	;i◊;"elementHeight;@; "elementHeight;=;>;?o;	;i◊;"navbarHeight;@; "navbarHeight;@;@;i◊;/;0;@;i◊;;;["margin;[ ;@o;;i ;
+o;	;iÿ;"baseLineHeight;@; "baseLineHeight;iÿ;;;["line-height;[ ;@;@;!To;;i ;i⁄;[".navbar .btn-group;o;;i⁄;[o;;[o;;i⁄;[o;;i⁄;["navbar;" ;@ïo;;i⁄;[o;;i⁄;["btn-group;@ï;@ï;@ï;[	o;;i ;
+o;;
+"0;@;;;i€;;;["margin;[ ;@o;	;
+[";/* Vertically center the button given @navbarHeight */;i‹;0;[ ;@;i o;8;i›;9o;%;&[ ;
+i!;i›;'["px;("	28px;@;"elementHeight;[ ;@;:0o;;i ;
+o;-	;
+[o;;
+;iﬁ;<o;%;&@|;
+i;iﬁ;'[ ;("1;@;=;>;?o;;
+;iﬁ;<o;%
+;&@|;
+i;iﬁ;'[ ;@;=;@;?o;;
+;iﬁ;<o;	;iﬁ;"elementHeight;@; "elementHeight;=;>;?o;	;iﬁ;"navbarHeight;@; "navbarHeight;@;@;@o;%;&[ ;
+i
+;iﬁ;'["px;("5px;@o;;
+;iﬁ;<o;%
+;&@|;
+i;iﬁ;'[ ;@;=;@;?o;;
+;iﬁ;<o;	;iﬁ;"elementHeight;@; "elementHeight;=;>;?o;	;iﬁ;"navbarHeight;@; "navbarHeight;@;@;iﬁ;/;0;@;iﬁ;;;["padding;[ ;@;@;!To;	;
+["/* Hover */;i‡;0;[ ;@;i o;;i ;i·;[" .navbar .nav > li > a:hover;o;;i·;[o;;[o;;i·;[o;;i·;["navbar;" ;@·o;;i·;[o;;i·;["nav;@·;@·">o;;i·;[o;C	;i·;D0;["li;@·;@·">o;;i·;[o;C	;i·;D0;["a;@·o;5
+;i·;["
+hover;60;;7;@·;@·;@·;[	o;;i ;
+o;	;i‚;"navbarLinkBackgroundHover;@; "navbarLinkBackgroundHover;i‚;;;["background-color;[ ;@o;	;
+["H/* "transparent" is default to differentiate :hover from .active */;i‚;0;[ ;@;i o;;i ;
+o;	;i„;"navbarLinkColorHover;@; "navbarLinkColorHover;i„;;;["
+color;[ ;@o;;i ;
+o;;
+"	none;@;;;i‰;;;["text-decoration;[ ;@;@;!To;	;
+["/* Active nav items */;iÁ;0;[ ;@;i o;;i ;iÈ;["=.navbar .nav .active > a,
+.navbar .nav .active > a:hover;o;;iÈ;[o;;[
+o;;iÈ;[o;;iÈ;["navbar;" ;@o;;iÈ;[o;;iÈ;["nav;@;@o;;iÈ;[o;;iÈ;["active;@;@">o;;iÈ;[o;C	;iÈ;D0;["a;@;@o;;["
+o;;iÈ;[o;;iÈ;["navbar;@;@o;;iÈ;[o;;iÈ;["nav;@;@o;;iÈ;[o;;iÈ;["active;@;@">o;;iÈ;[o;C	;iÈ;D0;["a;@o;5
+;iÈ;["
+hover;60;;7;@;@;@;[o;;i ;
+o;	;iÍ;"navbarLinkColorActive;@; "navbarLinkColorActive;iÍ;;;["
+color;[ ;@o;;i ;
+o;;
+"	none;@;;;iÎ;;;["text-decoration;[ ;@o;;i ;
+o;	;iÏ;"navbarLinkBackgroundActive;@; "navbarLinkBackgroundActive;iÏ;;;["background-color;[ ;@;@;!To;	;
+["-/* Dividers (basically a vertical hr) */;iÔ;0;[ ;@;i o;;i ;i;[".navbar .divider-vertical;o;;i;[o;;[o;;i;[o;;i;["navbar;" ;@po;;i;[o;;i;["divider-vertical;@p;@p;@p;[o;;i ;
+o;	;iÒ;"navbarHeight;@; "navbarHeight;iÒ;;;["height;[ ;@o;;i ;
+o;;
+"1px;@;;;iÚ;;;["
+width;[ ;@o;;i ;
+o;;
+"
+0 9px;@;;;iÛ;;;["margin;[ ;@o;;i ;
+o;;
+"hidden;@;;;iÙ;;;["overflow;[ ;@o;;i ;
+o;	;iı;"navbarBackground;@; "navbarBackground;iı;;;["background-color;[ ;@o;;i ;
+o;-	;
+[o;%;&[ ;
+i;iˆ;'["px;("1px;@o;	;
+"
+solid;iˆ;@;;o;	;iˆ;"navbarBackgroundHighlight;@; "navbarBackgroundHighlight;iˆ;/;0;@;iˆ;;;["border-right;[ ;@;@;!To;	;
+["2/* Secondary (floated right) nav in topbar */;i˘;0;[ ;@;i o;;i ;i˙;[".navbar .nav.pull-right;o;;i˙;[o;;[o;;i˙;[o;;i˙;["navbar;" ;@∑o;;i˙;[o;;i˙;["nav;@∑o;;i˙;["pull-right;@∑;@∑;@∑;[o;;i ;
+o;;
+"	10px;@;;;i˚;;;["margin-left;[ ;@o;;i ;
+o;;
+"0;@;;;i¸;;;["margin-right;[ ;@;@;!To;	;
+["/* Navbar button for toggling navbar items in responsive layouts
+ * These definitions need to come after '.navbar .btn' */;iˇ;0;[ ;@;i o;;i ;i;[".navbar .btn-navbar;o;;i;[o;;[o;;i;[o;;i;["navbar;" ;@›o;;i;[o;;i;["btn-navbar;@›;@›;@›;[o;;i ;
+o;;
+"	none;@;;;i;;;["display;[ ;@o;;i ;
+o;;
+"
+right;@;;;i;;;["
+float;[ ;@o;;i ;
+o;;
+"7px 10px;@;;;i;;;["padding;[ ;@o;;i ;
+o;;
+"5px;@;;;i;;;["margin-left;[ ;@o;;i ;
+o;;
+"5px;@;;;i;;;["margin-right;[ ;@o;";i;"buttonBackground;#{ ;[ ;$[o;	;i;"navbarBackgroundHighlight;@; "navbarBackgroundHighlighto;	;i;"navbarBackground;@; "navbarBackground;@o;";i;"box-shadow;#{ ;[ ;$[o;);*0;i;+F;,o;-	;
+[o;-	;
+[
+o;	;
+"
+inset;i;@;;o;%;&@|;
+i ;i;'[ ;("0;@o;%;&[ ;
+i;i;'["px;("1px;@o;%;&@|;
+i ;i;'[ ;("0;@o;.
+;i;"	rgba;#{ ;$[	o;%;&@|;
+iˇ;i;'[ ;("255;@o;%;&@|;
+iˇ;i;'[ ;("255;@o;%;&@|;
+iˇ;i;'[ ;("255;@o;%;&@|;
+f0.10000000000000001 ôö;i;'[ ;("0.1;@;@;i;/;0;@o;-	;
+[	o;%;&@|;
+i ;i;'[ ;("0;@o;%;&[ ;
+i;i;'["px;("1px;@o;%;&@|;
+i ;i;'[ ;("0;@o;.
+;i;"	rgba;#{ ;$[	o;%;&@|;
+iˇ;i;'[ ;("255;@o;%;&@|;
+iˇ;i;'[ ;("255;@o;%;&@|;
+iˇ;i;'[ ;("255;@o;%;&@|;
+f0.074999999999999997 33;i;'[ ;("
+0.075;@;@;i;/;0;@;i;/;1;@;20;30;@;40;@;@;!To;;i ;i
+;["".navbar .btn-navbar .icon-bar;o;;i
+;[o;;[o;;i
+;[o;;i
+;["navbar;" ;@_o;;i
+;[o;;i
+;["btn-navbar;@_;@_o;;i
+;[o;;i
+;["icon-bar;@_;@_;@_;[o;;i ;
+o;;
+"
+block;@;;;i;;;["display;[ ;@o;;i ;
+o;;
+"	18px;@;;;i;;;["
+width;[ ;@o;;i ;
+o;;
+"2px;@;;;i;;;["height;[ ;@o;;i ;
+o;;
+"#f5f5f5;@;;;i;;;["background-color;[ ;@o;";i;"border-radius;#{ ;[ ;$[o;%;&[ ;
+i;i;'["px;("1px;@;@o;";i;"box-shadow;#{ ;[ ;$[o;-	;
+[	o;%;&@|;
+i ;i;'[ ;("0;@o;%;&[ ;
+i;i;'["px;("1px;@o;%;&@|;
+i ;i;'[ ;("0;@o;.
+;i;"	rgba;#{ ;$[	o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+i ;i;'[ ;("0;@o;%;&@|;
+f	0.25;i;'[ ;("	0.25;@;@;i;/;0;@;@;@;!To;;i ;i;["&.btn-navbar .icon-bar + .icon-bar;o;;i;[o;;[	o;;i;[o;;i;["btn-navbar;" ;@ºo;;i;[o;;i;["icon-bar;@º;@º"+o;;i;[o;;i;["icon-bar;@º;@º;@º;[o;;i ;
+o;;
+"3px;@;;;i;;;["margin-top;[ ;@;@;!To;	;
+["+/* Dropdown menus
+ * -------------- */;i;0;[ ;@;i o;	;
+["(/* Menu position and menu carets */;i;0;[ ;@;i o;;i ;i;[".navbar .dropdown-menu;o;;i;[o;;[o;;i;[o;;i;["navbar;" ;@„o;;i;[o;;i;["dropdown-menu;@„;@„;@„;[o;;i ;i;["&:before;o;;i;[o;;[o;;i;[o;B;i;" o;5
+;i;["before;60;;7;@Ù;@Ù;@Ù;[o;;i ;
+o;;
+"'';@;;;i;;;["content;[ ;@o;;i ;
+o;;
+"inline-block;@;;;i;;;["display;[ ;@o;;i ;
+o;;
+"7px solid transparent;@;;;i;;;["border-left;[ ;@o;;i ;
+o;;
+"7px solid transparent;@;;;i ;;;["border-right;[ ;@o;;i ;
+o;;
+"7px solid #ccc;@;;;i!;;;["border-bottom;[ ;@o;;i ;
+o;	;i";"dropdownBorder;@; "dropdownBorder;i";;;["border-bottom-color;[ ;@o;;i ;
+o;;
+"absolute;@;;;i#;;;["position;[ ;@o;;i ;
+o;%;&[ ;
+iÙ;i$;'["px;("	-7px;@;i$;;;["top;[ ;@o;;i ;
+o;;
+"9px;@;;;i%;;;["	left;[ ;@;@;!To;;i ;i';["&:after;o;;i';[o;;[o;;i';[o;B;i';" o;5
+;i';["
+after;60;;7;@=	;@=	;@=	;[o;;i ;
+o;;
+"'';@;;;i(;;;["content;[ ;@o;;i ;
+o;;
+"inline-block;@;;;i);;;["display;[ ;@o;;i ;
+o;;
+"6px solid transparent;@;;;i*;;;["border-left;[ ;@o;;i ;
+o;;
+"6px solid transparent;@;;;i+;;;["border-right;[ ;@o;;i ;
+o;-	;
+[o;%;&[ ;
+i;i,;'["px;("6px;@o;	;
+"
+solid;i,;@;;o;	;i,;"dropdownBackground;@; "dropdownBackground;i,;/;0;@;i,;;;["border-bottom;[ ;@o;;i ;
+o;;
+"absolute;@;;;i-;;;["position;[ ;@o;;i ;
+o;%;&[ ;
+iı;i.;'["px;("	-6px;@;i.;;;["top;[ ;@o;;i ;
+o;;
+"	10px;@;;;i/;;;["	left;[ ;@;@;!T;@;!To;	;
+["R/* Menu position and menu caret support for dropups via extra dropup class */;i2;0;[ ;@;i o;;i ;i3;["(.navbar-fixed-bottom .dropdown-menu;o;;i3;[o;;[o;;i3;[o;;i3;["navbar-fixed-bottom;" ;@è	o;;i3;[o;;i3;["dropdown-menu;@è	;@è	;@è	;[o;;i ;i4;["&:before;o;;i4;[o;;[o;;i4;[o;B;i4;" o;5
+;i4;["before;60;;7;@†	;@†	;@†	;[
+o;;i ;
+o;;
+"7px solid #ccc;@;;;i5;;;["border-top;[ ;@o;;i ;
+o;	;i6;"dropdownBorder;@; "dropdownBorder;i6;;;["border-top-color;[ ;@o;;i ;
+o;;
+"0;@;;;i7;;;["border-bottom;[ ;@o;;i ;
+o;%;&[ ;
+iÙ;i8;'["px;("	-7px;@;i8;;;["bottom;[ ;@o;;i ;
+o;;
+"	auto;@;;;i9;;;["top;[ ;@;@;!To;;i ;i;;["&:after;o;;i;;[o;;[o;;i;;[o;B;i;;" o;5
+;i;;["
+after;60;;7;@—	;@—	;@—	;[	o;;i ;
+o;-	;
+[o;%;&[ ;
+i;i<;'["px;("6px;@o;	;
+"
+solid;i<;@;;o;	;i<;"dropdownBackground;@; "dropdownBackground;i<;/;0;@;i<;;;["border-top;[ ;@o;;i ;
+o;;
+"0;@;;;i=;;;["border-bottom;[ ;@o;;i ;
+o;%;&[ ;
+iı;i>;'["px;("	-6px;@;i>;;;["bottom;[ ;@o;;i ;
+o;;
+"	auto;@;;;i?;;;["top;[ ;@;@;!T;@;!To;	;
+[" /* Dropdown toggle caret */;iB;0;[ ;@;i o;;i ;iD;["[.navbar .nav li.dropdown .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open .caret;o;;iD;[o;;[
+o;;iD;[o;;iD;["navbar;" ;@
+o;;iD;[o;;iD;["nav;@
+;@
+o;;iD;[o;C	;iD;D0;["li;@
+o;;iD;["dropdown;@
+;@
+o;;iD;[o;;iD;["dropdown-toggle;@
+;@
+o;;iD;[o;;iD;["
+caret;@
+;@
+o;;[
+"
+o;;iD;[o;;iD;["navbar;@
+;@
+o;;iD;[o;;iD;["nav;@
+;@
+o;;iD;[o;C	;iD;D0;["li;@
+o;;iD;["dropdown;@
+o;;iD;["	open;@
+;@
+o;;iD;[o;;iD;["
+caret;@
+;@
+;@
+;[o;;i ;
+o;	;iE;"
+white;@; "
+white;iE;;;["border-top-color;[ ;@o;;i ;
+o;	;iF;"
+white;@; "
+white;iF;;;["border-bottom-color;[ ;@;@;!To;;i ;iH;["+.navbar .nav li.dropdown.active .caret;o;;iH;[o;;[	o;;iH;[o;;iH;["navbar;" ;@[
+o;;iH;[o;;iH;["nav;@[
+;@[
+o;;iH;[o;C	;iH;D0;["li;@[
+o;;iH;["dropdown;@[
+o;;iH;["active;@[
+;@[
+o;;iH;[o;;iH;["
+caret;@[
+;@[
+;@[
+;[o;";iI;"opacity;#{ ;[ ;$[o;%;&@|;
+ii;iI;'[ ;("100;@;@;@;!To;	;
+["5/* Remove background color from open dropdown */;iL;0;[ ;@;i o;;i ;iO;["ù.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle;o;;iO;[o;;[
+o;;iO;[o;;iO;["navbar;" ;@ä
+o;;iO;[o;;iO;["nav;@ä
+;@ä
+o;;iO;[o;C	;iO;D0;["li;@ä
+o;;iO;["dropdown;@ä
+o;;iO;["	open;@ä
+;@ä
+">o;;iO;[o;;iO;["dropdown-toggle;@ä
+;@ä
+o;;["
+o;;iO;[o;;iO;["navbar;@ä
+;@ä
+o;;iO;[o;;iO;["nav;@ä
+;@ä
+o;;iO;[o;C	;iO;D0;["li;@ä
+o;;iO;["dropdown;@ä
+o;;iO;["active;@ä
+;@ä
+">o;;iO;[o;;iO;["dropdown-toggle;@ä
+;@ä
+o;;["
+o;;iO;[o;;iO;["navbar;@ä
+;@ä
+o;;iO;[o;;iO;["nav;@ä
+;@ä
+o;;iO;[	o;C	;iO;D0;["li;@ä
+o;;iO;["dropdown;@ä
+o;;iO;["	open;@ä
+o;;iO;["active;@ä
+;@ä
+">o;;iO;[o;;iO;["dropdown-toggle;@ä
+;@ä
+;@ä
+;[o;;i ;
+o;;
+"transparent;@;;;iP;;;["background-color;[ ;@;@;!To;	;
+["!/* Dropdown link on hover */;iS;0;[ ;@;i o;;i ;iT;["=.navbar .nav li.dropdown.active > .dropdown-toggle:hover;o;;iT;[o;;[
+o;;iT;[o;;iT;["navbar;" ;@˜
+o;;iT;[o;;iT;["nav;@˜
+;@˜
+o;;iT;[o;C	;iT;D0;["li;@˜
+o;;iT;["dropdown;@˜
+o;;iT;["active;@˜
+;@˜
+">o;;iT;[o;;iT;["dropdown-toggle;@˜
+o;5
+;iT;["
+hover;60;;7;@˜
+;@˜
+;@˜
+;[o;;i ;
+o;	;iU;"
+white;@; "
+white;iU;;;["
+color;[ ;@;@;!To;	;
+["o/* Right aligned menus need alt position
+ * TODO: rejigger this at some point to simplify the selectors */;iX;0;[ ;@;i o;;i ;i[;["J.navbar .pull-right .dropdown-menu,
+.navbar .dropdown-menu.pull-right;o;;i[;[o;;[o;;i[;[o;;i[;["navbar;" ;@)o;;i[;[o;;i[;["pull-right;@);@)o;;i[;[o;;i[;["dropdown-menu;@);@)o;;["
+o;;i[;[o;;i[;["navbar;@);@)o;;i[;[o;;i[;["dropdown-menu;@)o;;i[;["pull-right;@);@);@);[	o;;i ;
+o;;
+"	auto;@;;;i\;;;["	left;[ ;@o;;i ;
+o;;
+"0;@;;;i];;;["
+right;[ ;@o;;i ;i^;["&:before;o;;i^;[o;;[o;;i^;[o;B;i^;" o;5
+;i^;["before;60;;7;@[;@[;@[;[o;;i ;
+o;;
+"	auto;@;;;i_;;;["	left;[ ;@o;;i ;
+o;;
+"	12px;@;;;i`;;;["
+right;[ ;@;@;!To;;i ;ib;["&:after;o;;ib;[o;;[o;;ib;[o;B;ib;" o;5
+;ib;["
+after;60;;7;@v;@v;@v;[o;;i ;
+o;;
+"	auto;@;;;ic;;;["	left;[ ;@o;;i ;
+o;;
+"	13px;@;;;id;;;["
+right;[ ;@;@;!T;@;!T;@;!T

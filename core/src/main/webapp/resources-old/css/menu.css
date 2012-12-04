@@ -1,0 +1,139 @@
+/* Area 51
+----------------------------------*/
+
+
+
+
+/* Transitions
+----------------------------------*/
+
+/* main color effect */
+.menu * {
+    -webkit-transition: background-color 200ms ease;
+    -moz-transition: background-color 200ms ease;
+    -o-transition: background-color 200ms ease;
+    transition: background-color 200ms ease;
+}
+
+
+
+
+/* Menu, see http://jamesowers.co.uk/css-tutorials/50/horizontal-css-list-menu/
+----------------------------------*/
+
+/* common menu */
+.menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    width: 100%;
+    background-color: #333; /* default color */
+}
+
+.menu ul {
+    float: left;
+    margin: 0; 
+    padding: 0;
+}
+
+.menu ul li {
+    float: left;
+    position: relative;
+}
+
+.menu ul li a {
+    float: left; 
+    text-decoration: none;
+    color: white;
+    padding: 10.5px 11px;
+}
+
+
+
+/* menu selected */
+.menu li.selected > a {
+    background-color: #0b75b2 !important; /* seleced color */
+}
+
+/* menu hover */
+.menu ul li:hover > a {
+    background-color: #555; /* hover color */
+}
+
+/* menu active (click) */
+.menu ul li:active > a {
+    background-color: #4bb5f2; /* active color */
+}
+
+
+
+/* hover menu */
+.menu ul.hover-menu {
+    position: absolute;
+    top: 35px;
+    z-index: 3;
+    background-color: grey; /* default color */
+    background: rgba(99, 99, 99, 0.9);
+    visibility: hidden;
+}
+
+.menu ul.hover-menu li {
+    clear: both;
+}
+
+.menu ul.hover-menu li a {
+    text-align: left;
+}
+
+
+/* show menu on hover */
+.menu ul li:hover ul.hover-menu {
+    visibility: visible;
+}
+
+/* hover menu selected */
+.menu ul.hover-menu li.selected > a {
+    background-color: grey !important; /* seleced color */
+}
+
+/* hover menu hover */
+.menu ul.hover-menu ul li:hover > a {
+    background-color: #555; /* hover color */
+}
+
+/* hover menu active (click) */
+.menu ul.hover-menu ul li:active > a {
+    background-color: #4bb5f2; /* active color */
+}
+
+
+
+/* domain menu */
+.menu ul.domain-menu {
+    float: left;
+}
+
+.menu ul.domain-menu li.home a {
+    /* TODO: replace text with image of house*/
+}
+
+.menu ul.domain-menu ul.hover-menu {
+    left: 0px;
+}
+
+
+
+/* system menu */
+.menu ul.system-menu {
+    float: right;
+}
+
+.menu ul.system-menu li.logout a {
+    color: red;
+}
+
+.menu ul.system-menu li.logout ul.hover-menu {
+    right: 0px;
+}
+

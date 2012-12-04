@@ -1,0 +1,598 @@
+/* Edit Row Buttons
+----------------------------------*/
+
+/* common layout */
+.ui-buttonset button.ui-button {
+	float: left;
+	text-align: left;
+	width: auto;
+	padding: 0px 10px;
+	padding-left: 19px;
+	font-family: arial,sans-serif;
+	font-size: 14px;
+	margin-right: -1px;
+}
+.ui-buttonset button span.ui-icon {
+	position: absolute;
+	float: left;
+	top: 50%;
+	left: 7px;
+	margin-top: -8px;
+}
+.ui-buttonset button .ui-button-text {
+	padding: 2px;
+	padding-left: 10px;
+}
+.ui-buttonset button .ui-button-text.icon-only {
+	display: none;
+}
+
+
+
+/* button menu layout */
+div.DTTT_collection.ui-buttonset.ui-buttonset-multi {
+	width: 100px;
+}
+/* button menu background */
+body div.DTTT_collection_background {
+	background: none;
+}
+
+
+
+/* edit/revert-save button separator */
+.ui-buttonset button.edit, .ui-buttonset button.revert  {
+	margin-left: 10px;
+}
+.ui-buttonset button.save  {
+	margin-left: 10px;
+}
+/* edit/revert/save button width */
+.ui-buttonset button.edit, .ui-buttonset button.revert, .ui-buttonset button.save  {
+	width: 100px;
+}
+/* color revert-save hovered/active */
+.ui-buttonset button.save span.ui-icon {
+	width: 16px; height: 16px; background-image: url(../../../../jquery-ui/css/custom-theme/images/ui-icons_green_256x240.png) ;  /* ui-icon "green" */
+}
+.ui-buttonset button.revert span.ui-icon {
+	width: 16px; height: 16px; background-image: url(../../../../jquery-ui/css/custom-theme/images/ui-icons_cd0a0a_256x240.png);  /* ui-icon "red" */
+}
+
+
+/* view-state */
+div.table-simple.view-state  button.edit-table {
+	display: inline;
+}
+div.table-simple.view-state  button.revert-table {
+	display: none;
+}
+div.table-simple.view-state  button.save-table {
+	display: none;
+}
+div.table-simple.view-state  div.dataTables_filter {
+	display: block;
+}
+
+
+/* edit-state */
+div.table-simple.edit-state  button.edit-table {
+	display: none;
+}
+div.table-simple.edit-state  button.revert-table {
+	display: inline;
+}
+div.table-simple.edit-state  button.save-table {
+	display: inline;
+}
+div.table-simple.edit-state  div.dataTables_filter {
+	display: none;
+}
+
+
+
+
+
+
+
+
+/* Edit State Columns
+----------------------------------*/
+
+/* row id column */
+table th.row-id-column {
+	text-align: center;
+	width: 48px;
+}
+table td.row-id {
+	text-align: center;
+}
+
+
+
+/* edit menu column */
+table th.edit-menu-column {
+	text-align: center;
+	width: 62px;
+}
+
+
+
+
+
+
+
+
+
+/* Edit Row Buttons
+----------------------------------*/
+
+/* common layout */
+span.edit-menu-item {
+	float: left;
+	margin: 0x;
+	cursor: pointer;
+}
+table tr input,
+table tr select  {
+	height: 20px;
+}
+/* row paddings */
+table tr.add-row-state td,
+table tr.edit-row-state td  {
+	padding-top:1px;
+	padding-bottom:1px;
+}
+
+
+	
+/* icons */
+span.edit-menu-item {
+	width: 16px; height: 16px; background-image: url(../../../../jquery-ui/css/custom-theme/images/ui-icons_888888_256x240.png);  /* ui-icon "grey" */
+	border-radius: 6px;
+}
+
+
+
+/* hover icon background */
+span.edit-menu-item:hover {
+	background-color: whitesmoke;
+}
+/* color edit-menu-item hovered/active */
+span.edit-menu-item:hover {
+	width: 16px; height: 16px; background-image: url(../../../../jquery-ui/css/custom-theme/images/ui-icons_222222_256x240.png);  /* ui-icon "black" */
+}
+/* color edit-menu-item remove-row hovered/active */
+span.edit-menu-item.remove-row:hover,
+span.edit-menu-item.revert-row:hover,
+tr.remove-row-state:hover span.edit-menu-item.revert-row {
+	width: 16px; height: 16px; background-image: url(../../../../jquery-ui/css/custom-theme/images/ui-icons_cd0a0a_256x240.png);  /* ui-icon "red" */
+	background-color: whitesmoke;
+}
+/* color edit-menu-item add-row hovered/active */
+span.edit-menu-item.add-row:hover,
+span.edit-menu-item.save-row:hover {
+	width: 16px; height: 16px; background-image: url(../../../../jquery-ui/css/custom-theme/images/ui-icons_green_256x240.png);  /* ui-icon "green" */
+	background-color: whitesmoke;
+}
+
+
+
+span.delete-row {
+	background-position: -176px -96px; /* ui-icon-trash */
+}
+span.save-row {
+	background-position: -64px -144px; /* ui-icon-check */
+}
+span.add-row {
+	background-position: -16px -128px; /* ui-icon-plus */
+}
+span.remove-row {
+	background-position: -48px -128px; /* ui-icon-minus */
+}
+span.edit-row {
+	background-position: -64px -112px; /* ui-icon-pencil */
+}
+span.revert-row {
+	background-position: -0 -64px; /* ui-icon-arrowreturnthick-1-w */
+}
+
+
+
+/* add-row-state */
+tr.add-row-state span.delete-row {
+	display: none;
+}
+tr.add-row-state span.save-row {
+	display: block;
+}
+tr.add-row-state span.add-row {
+	display: none;
+}
+tr.add-row-state span.remove-row {
+	display: none;
+}
+tr.add-row-state span.edit-row {
+	display: none;
+}
+tr.add-row-state span.revert-row {
+	display: block;
+}
+
+
+
+/* save-add-row-state */
+tr.save-add-row-state span.delete-row {
+	display: none;
+}
+tr.save-add-row-state span.save-row {
+	display: none;
+}
+tr.save-add-row-state span.add-row {
+	display: none;
+}
+tr.save-add-row-state span.remove-row {
+	display: none;
+}
+tr.save-add-row-state span.edit-row {
+	display: block;
+}
+tr.save-add-row-state span.revert-row {
+	display: block;
+}
+
+
+
+/* remove-row-state */
+tr.remove-row-state span.delete-row {
+	display: none;
+}
+tr.remove-row-state span.save-row {
+	display: none;
+}
+tr.remove-row-state span.add-row {
+	display: none;
+}
+tr.remove-row-state span.remove-row {
+	display: none;
+}
+tr.remove-row-state span.edit-row {
+	display: none;
+}
+tr.remove-row-state span.revert-row {
+	display: block;
+}
+
+
+
+/* edit-row-state */
+tr.edit-row-state span.delete-row {
+	display: none;
+}
+tr.edit-row-state span.save-row {
+	display: block;
+}
+tr.edit-row-state span.add-row {
+	display: none;
+}
+tr.edit-row-state span.remove-row {
+	display: none;
+}
+tr.edit-row-state span.edit-row {
+	display: none;
+}
+tr.edit-row-state span.revert-row {
+	display: block;
+}
+
+
+
+/* save-edit-row-state */
+tr.save-edit-row-state span.delete-row {
+	display: none;
+}
+tr.save-edit-row-state span.save-row {
+	display: none;
+}
+tr.save-edit-row-state span.add-row {
+	display: none;
+}
+tr.save-edit-row-state span.remove-row {
+	display: none;
+}
+tr.save-edit-row-state span.edit-row {
+	display: block;
+}
+tr.save-edit-row-state span.revert-row {
+	display: block;
+}
+
+
+
+/* read-row-state */
+tr.read-row-state span.delete-row {
+	display: none;
+}
+tr.read-row-state span.save-row {
+	display: none;
+}
+tr.read-row-state span.add-row {
+	display: block;
+}
+tr.read-row-state span.remove-row {
+	display: block;
+}
+tr.read-row-state span.edit-row {
+	display: block;
+}
+tr.read-row-state span.revert-row {
+	display: none;
+}
+
+
+
+/* common state */
+tr span.delete-row {
+	
+}
+tr span.save-row {
+	float: right;	 
+}
+tr span.add-row {
+	
+}
+tr span.remove-row {
+	
+}
+tr span.edit-row {
+	float: right;
+}
+tr span.revert-row {
+	
+}
+
+
+
+
+
+
+
+
+
+
+/* DataTables Row
+----------------------------------*/
+
+table.display tr.odd.add-row-state,
+table.display tr.odd.save-add-row-state {
+    background-color: #ddffdd;
+}
+
+table.display tr.even.add-row-state,
+table.display tr.even.save-add-row-state {
+    background-color: #eeffee;
+}
+
+
+
+
+table.display tr.odd.add-row-state,
+table.display tr.odd.save-add-row-state {
+    background-color: #ddffdd;
+}
+
+table.display tr.even.add-row-state,
+table.display tr.even.save-add-row-state {
+    background-color: #eeffee;
+}
+
+table.display tr.odd.update-row-state {
+    background-color: #ddddff;
+}
+
+table.display tr.even.update-row-state {
+    background-color: #eeeeff;
+}
+
+table.display tr.odd.remove-row-state {
+    background-color: #ffdddd;
+}
+
+table.display tr.even.remove-row-state {
+    background-color: #ffeeee;
+}
+
+table.display tr.odd.disabled-row {
+    background-color: #ddd;
+}
+
+table.display tr.even.disabled-row {
+    background-color: #eee;
+}
+
+
+tr.odd {
+    background-color: #E2E4FF;
+}
+
+tr.even {
+    background-color: white;
+}
+
+
+
+
+/* For the Conditional-CSS grading rows */
+/*
+    Colour calculations (based off the main row colours)
+  Level 1:
+        dd > c4
+        ee > d5
+    Level 2:
+      dd > d1
+      ee > e2
+ */
+tr.odd.add-row-state td.sorting_1 {
+    background-color: #c4ffc4;
+}
+
+tr.odd.add-row-state td.sorting_2 {
+    background-color: #d1ffd1;
+}
+
+tr.odd.add-row-state td.sorting_3 {
+    background-color: #d1ffd1;
+}
+
+tr.even.add-row-state td.sorting_1 {
+    background-color: #d5ffd5;
+}
+
+tr.even.add-row-state td.sorting_2 {
+    background-color: #e2ffe2;
+}
+
+tr.even.add-row-state td.sorting_3 {
+    background-color: #e2ffe2;
+}
+
+tr.odd.update-row-state td.sorting_1 {
+    background-color: #c4c4ff;
+}
+
+tr.odd.update-row-state td.sorting_2 {
+    background-color: #d1d1ff;
+}
+
+tr.odd.update-row-state td.sorting_3 {
+    background-color: #d1d1ff;
+}
+
+tr.even.update-row-state td.sorting_1 {
+    background-color: #d5d5ff;
+}
+
+tr.even.update-row-state td.sorting_2 {
+    background-color: #e2e2ff;
+}
+
+tr.even.update-row-state td.sorting_3 {
+    background-color: #e2e2ff;
+}
+
+tr.odd.remove-row-state td.sorting_1 {
+    background-color: #ffc4c4;
+}
+
+tr.odd.remove-row-state td.sorting_2 {
+    background-color: #ffd1d1;
+}
+
+tr.odd.remove-row-state td.sorting_3 {
+    background-color: #ffd1d1;
+}
+
+tr.even.remove-row-state td.sorting_1 {
+    background-color: #ffd5d5;
+}
+
+tr.even.remove-row-state td.sorting_2 {
+    background-color: #ffe2e2;
+}
+
+tr.even.remove-row-state td.sorting_3 {
+    background-color: #ffe2e2;
+}
+
+tr.odd.disabled-row td.sorting_1 {
+    background-color: #c4c4c4;
+}
+
+tr.odd.disabled-row td.sorting_2 {
+    background-color: #d1d1d1;
+}
+
+tr.odd.disabled-row td.sorting_3 {
+    background-color: #d1d1d1;
+}
+
+tr.even.disabled-row td.sorting_1 {
+    background-color: #d5d5d5;
+}
+
+tr.even.disabled-row td.sorting_2 {
+    background-color: #e2e2e2;
+}
+
+tr.even.disabled-row td.sorting_3 {
+    background-color: #e2e2e2;
+}
+
+
+
+
+
+
+
+
+
+
+/* DataTables Row highlighting ???USED OR ???
+----------------------------------*/
+.table-simple.view-state tr {
+    cursor: auto;
+}
+.table-simple.edit-state tr {
+    cursor: pointer;
+}
+.table-simple.edit-state tr.edit-row-state {
+    cursor: auto;
+}
+.table-simple.edit-state tr.edit-row-state td.edit-menu span.edit-menu-item {
+    cursor: pointer;
+}
+.table-simple.edit-state tr.add-row-state {
+    cursor: auto;
+}
+.table-simple.edit-state tr.add-row-state  td.edit-menu span.edit-menu-item {
+    cursor: pointer;
+}
+.table-simple.edit-state tr.remove-row-state {
+    cursor: pointer;
+}
+.table-simple.edit-state tr.remove-row-state  td.edit-menu {
+    cursor: pointer;
+}
+tbody tr {
+	border: 1px solid transparent;
+} 
+/*
+tbody tr.even:hover, 
+tbody tr.even:hover td.sorting_1, 
+tbody tr.even:hover td.sorting_2, 
+tbody tr.even:hover td.sorting_3 {
+
+    background-color: #666666;
+    color: #ffffff;
+
+	border: 1px solid black;
+	margin: -1px 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+tbody tr.odd:hover, 
+tbody tr.odd:hover td.sorting_1, 
+tbody tr.odd:hover td.sorting_2, 
+tbody tr.odd:hover td.sorting_3 {
+
+    background-color: #666666;
+    color: #ffffff;
+
+	border: 1px solid black;
+	margin: -1px 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+*/

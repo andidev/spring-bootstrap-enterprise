@@ -1,0 +1,31 @@
+/* Area 51
+--------------------------------------------------------------*/  
+
+
+/* Content Positioning
+--------------------------------------------------------------*/  
+.top-container {
+}
+
+.right-container {
+    float: right;
+    clear: right;
+}
+
+.bottom-container {
+    position: absolute;
+    bottom: 0px;
+}
+
+.left-container {
+    float: left;
+    clear: left;
+}
+
+.center-container { 
+    margin-left: auto;  
+    margin-right: auto; 
+}
+
+.middle-container {
+}

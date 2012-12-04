@@ -1,0 +1,33 @@
+/* Area 51
+----------------------------------*/
+
+
+
+
+
+/* Common Button Classes
+----------------------------------*/
+
+/* button */
+.button {
+	width: 110px;
+}
+.button.ui-button span {
+	text-align: left;
+}
+
+
+
+/* buttonset */
+div.buttonset.unlocked-locked {
+	display: inline;
+}
+
+
+
+/* buttonset unlocked-locked */
+.buttonset.unlocked-locked .ui-button {
+
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

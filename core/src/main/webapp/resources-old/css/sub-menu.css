@@ -1,0 +1,102 @@
+/* Area 51
+----------------------------------*/
+
+
+
+
+/* Transitions
+----------------------------------*/
+
+/* main color effect */
+.sub-menu * {
+	-webkit-transition: background-color 200ms ease;
+	-moz-transition: background-color 200ms ease;
+	-o-transition: background-color 200ms ease;
+	transition: background-color 200ms ease;
+}
+
+
+
+
+/* Sub Menu, see http://jamesowers.co.uk/css-tutorials/50/horizontal-css-list-menu/
+----------------------------------*/
+
+.sub-menu {
+    color: #333;
+    background-color: lightgrey;
+    border-right: darkgrey solid 1px;
+    left: 0px;
+    padding-top: 60px;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    z-index: 2;
+}
+.sub-menu-content {
+    z-index: 1;
+}
+
+.sub-menu ul {    
+    float: left;
+    clear: both;
+    margin-right: -1px;
+}
+
+.sub-menu ul li {
+    float: left;
+    clear: both;
+    border-top: lightgrey solid 1px;
+    border-right: darkgrey solid 1px;
+    border-bottom: lightgrey solid 1px;
+}
+
+.sub-menu ul li:hover, 
+.sub-menu ul li.selected,
+.sub-menu ul:hover li.selected:hover {
+    color: #333;
+    background-color: white;
+    border-top: darkgrey solid 1px;
+    border-right: white solid 1px;
+    border-bottom: darkgrey solid 1px;
+}
+
+.sub-menu ul:hover li.selected {
+    color: #333;
+    background-color: lightgrey;
+    border-top: lightgrey solid 1px;
+    border-right: darkgrey solid 1px;
+    border-bottom: lightgrey solid 1px;
+}
+
+
+.sub-menu ul li a {
+    float: left;
+    clear: both;
+    text-decoration: none;
+    color: #333;
+    padding: 10.5px 11px;
+    width: 100px;
+}
+
+.sub-menu p {
+    float: left;
+    clear: both;
+    color: #999;
+    padding: 10.5px 11px;
+}
+
+
+
+.sub-menu .reference-menu span.arrow {
+    float: right;
+    visibility: hidden;
+}
+.sub-menu .reference-menu li:hover span.arrow {
+    visibility: visible;
+}
+
+
+.sub-menu-content {
+    margin-top: 35px;
+    margin-left: 123px;
+}
