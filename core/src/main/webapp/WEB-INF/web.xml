@@ -8,6 +8,7 @@
     
     <display-name>Template Spring Jpa</display-name>
 
+
     <!-- ContextLoaderListener -->
     <context-param>
         <param-name>contextClass</param-name>
@@ -82,6 +83,7 @@
         <servlet-name>spring</servlet-name>
     </filter-mapping>
     
+
     <!--  ***** ****************************************** ***** -->
     <!--  *****               Logback                      ***** -->
     <!--  ***** ****************************************** ***** -->
@@ -99,12 +101,11 @@
         <listener-class>uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener</listener-class>
     </listener>
     
-    <!-- Enable user agent data in logging with logback
-    http://logback.qos.ch/manual/mdc.html#mis -->
+    <!-- Add data to Logback MDC -->
     <filter>
         <filter-name>MDCInsertingServletFilter</filter-name>
         <filter-class>
-            ch.qos.logback.classic.helpers.MDCInsertingServletFilter
+            org.andidev.servlet.MDCInsertingServletFilter
         </filter-class>
     </filter>
     <filter-mapping>
@@ -131,4 +132,7 @@
         <servlet-name>ViewStatusMessages</servlet-name>
         <url-pattern>/logback</url-pattern>
     </servlet-mapping>
+    
+    
+    
 </web-app>

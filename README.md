@@ -31,9 +31,9 @@ Spring webapp template
 
 # Logging
 
--- Colorful logs with logback. Have you ever dreamt about a place called heaven where the logs are colored like the rainbow? You can stop dreaming, there is such a place!
+-- Colorful logs with logback.
 
--- Username included in logs
+-- Username included in logs through Logback MDC
 
 -- Logs Rolled around every day
 
@@ -91,6 +91,8 @@ Spring webapp template
 
 # TODO
 
+-- All that is missing from above mentioned features
+
 - JMX support
 
 -- Add Logback JMX
@@ -98,3 +100,15 @@ Spring webapp template
 -- Add Spring JMX
 
 -- Add Secured Builtin JMX Web Interface supprot with JMiniX
+
+- Web Interface to see logs www.appname.org/logs
+
+- Add Coding Conventions, Design Conventions and Design Guides
+
+- Using JSR 303 Validation
+
+- Usning Spring Conversion Service with language translations
+
+- Login example provided
+
+- Start using JavaMelody for Preformance Web Interface
