@@ -1,13 +1,13 @@
 <configuration scan="true">
     <!-- Console Appender -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console-application-tests" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
         </encoder>  
     </appender>
 
     <!-- File Appender, Time Based -->
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="file-application-tests" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>target/logs/application-test.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>target/logs/application-test-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
@@ -52,8 +52,8 @@
     
     <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">
-        <appender-ref ref="console"/>        
-        <appender-ref ref="file"/>
+        <appender-ref ref="console-application-tests"/>        
+        <appender-ref ref="file-application-tests"/>
 <!--        <appender-ref ref="html-file"/>-->
     </root>
     
