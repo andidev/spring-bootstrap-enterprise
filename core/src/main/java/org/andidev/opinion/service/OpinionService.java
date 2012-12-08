@@ -2,6 +2,7 @@ package org.andidev.opinion.service;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import net.bull.javamelody.MonitoredWithSpring;
 import org.andidev.opinion.domain.Opinion;
 import org.andidev.opinion.repository.OpinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @NoArgsConstructor
 @AllArgsConstructor
+@MonitoredWithSpring
 public class OpinionService {
 
     @Autowired

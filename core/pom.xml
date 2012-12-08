@@ -322,6 +322,13 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- Java Melody Monitoring -->
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-core</artifactId>
+            <version>1.41.0</version>
+        </dependency>
     </dependencies>
 
     <build>

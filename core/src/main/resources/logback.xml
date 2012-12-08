@@ -1,60 +1,35 @@
-<!-- For assistance related to logback-translator or configuration  -->
-<!-- files in general, please contact the logback user mailing list -->
-<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
-<!--                                                                -->
-<!-- For professional support please see                            -->
-<!--    http://www.qos.ch/shop/products/professionalSupport         -->
-<!--                                                                -->
-<configuration scan="true">
+<configuration scan="true" debug="false">
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
-     
-    <!-- Console Appender -->
+    
+    <!-- Enable JMX Management -->
+    <jmxConfigurator />
+          
+    <!-- Console Application -->
     <appender name="console-application" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%X{username} %X{session} %cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
         </encoder>  
     </appender>
 
-    <!-- File Appender, Time Based -->
+    <!-- File Application -->
     <appender name="file-application" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>target/logs/application.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>target/logs/application-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>target/logs/history/application-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <maxHistory>356</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
+            <pattern>%d{"HH:mm ss"}   %-5level   %-130message   %c{0}:%line %n</pattern>
         </encoder>
     </appender>
-
-
-    <!-- File Appender, User Based and Size Based -->
-    <appender name="file-users-application" class="ch.qos.logback.classic.sift.SiftingAppender">
-        <discriminator>
-            <key>username</key>
-            <defaultValue>_nouser</defaultValue>
-        </discriminator>
-        <sift>
-            <appender name="file-users-application-${username}" class="ch.qos.logback.core.rolling.RollingFileAppender">
-                <file>target/logs/users/application-${username}.log</file>
-                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                    <fileNamePattern>target/logs/application-${username}-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
-                    <maxHistory>356</maxHistory>
-                </rollingPolicy>
-                <encoder>
-                    <pattern>%cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
-                </encoder>
-            </appender>            
-        </sift>
-    </appender>
    
-    <!-- Html File Appender, Time Based -->
-    <appender name="file-html-application" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>target/logs/application.log.html</file>
+    <!-- Html Application -->
+    <appender name="html-application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/html/application.log.html</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>target/logs/application-%d{yyyy-MM-dd}.html.gz</fileNamePattern>
+            <fileNamePattern>target/logs/html/application-%d{yyyy-MM-dd}.html.gz</fileNamePattern>
             <maxHistory>356</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -62,6 +37,26 @@
                 <pattern>%d{"HH:mm ss"}%mdc%thread%logger%level%message</pattern>                
             </layout>
         </encoder>             
+    </appender>
+
+    <!-- File Users -->
+    <appender name="file-users" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>username</key>
+            <defaultValue>_nouser</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="file-users-${username}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>target/logs/users/${username}.log</file>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>target/logs/users/history/${username}-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                    <maxHistory>356</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>%d{"HH:mm ss"}   %-5level   %-130message   %c{0}:%line %n</pattern>
+                </encoder>
+            </appender>            
+        </sift>
     </appender>
     
     <!-- Spring -->
@@ -85,8 +80,8 @@
     <root level="WARN">
         <appender-ref ref="console-application"/>        
         <appender-ref ref="file-application"/>
-        <appender-ref ref="file-users-application"/>
-        <appender-ref ref="file-html-application"/>
+        <appender-ref ref="html-application"/>
+        <appender-ref ref="file-users"/>
     </root>
     
     <!-- log4jdbc logging

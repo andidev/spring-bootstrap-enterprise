@@ -1351,6 +1351,7 @@
                         <scanIntervalSeconds>5</scanIntervalSeconds>
                         <requestLog implementation="ch.qos.logback.access.jetty.RequestLogImpl">
                             <fileName>src/main/resources/logback-access.xml</fileName>
+                            <quiet>true</quiet>
                         </requestLog>
                         <systemProperties>
                             <systemProperty>

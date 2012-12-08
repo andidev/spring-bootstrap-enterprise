@@ -1,22 +1,20 @@
-<configuration scan="true">
-    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
-
+<configuration scan="true" debug="false">
     <filter class="ch.qos.logback.access.filter.CountingFilter">
         <name>countingFilter</name>
     </filter>
 
-    <!-- Console Request-Response Appender-->
+    <!-- Console Request-Response-->
     <appender name="console-request-response" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%n%n%fullRequest%n%n%fullResponse%n%n</pattern>
         </encoder>
     </appender>
 
-    <!-- File Request-Response Appender, Time Based -->
-    <appender name="file-application-request-response" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>target/logs/application-request-response.log</file>
+    <!-- File Request-Response -->
+    <appender name="file-request-response" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/request-response.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${user.dir}/logs/application-request-response.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>${user.dir}/logs/history/request-response.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <maxHistory>356</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -24,19 +22,20 @@
         </encoder>
     </appender>
 
-    <!-- File Access Appender, Time Based -->
-    <appender name="file-application-access" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>target/logs/application-access.log</file>
+    <!-- File Access -->
+    <appender name="file-access" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/access.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>target/logs/application-access.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>target/logs/history/access.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <maxHistory>356</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>combined</pattern>
         </encoder>
     </appender>
-    
+
+    <!-- Appenders Refs -->
     <!--<appender-ref ref="console-request-response" />-->
-    <appender-ref ref="file-application-request-response"/>
-    <appender-ref ref="file-application-access"/>
+    <appender-ref ref="file-request-response"/>
+    <appender-ref ref="file-access"/>
 </configuration>

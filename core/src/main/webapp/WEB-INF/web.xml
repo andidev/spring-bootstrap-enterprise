@@ -88,19 +88,11 @@
     <!--  *****               Logback                      ***** -->
     <!--  ***** ****************************************** ***** -->
 
-    <!-- Enable SecurityContextHolder and RequestContextHolder in logback logging Converters 
-    e.g. UserConverter.java and SessionConverter.java
-    http://www.codelord.net/2010/08/27/logging-with-a-context-users-in-logback-and-spring-security/ 
-    http://stackoverflow.com/questions/3542026/retrieving-session-id-with-spring-security -->
+    <!-- Enable RequestContextHolder in MDCInsertingServletFilter  -->
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-    
-    <!-- Handling System.out and System.err -->
-    <listener>
-        <listener-class>uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener</listener-class>
-    </listener>
-    
+
     <!-- Add data to Logback MDC -->
     <filter>
         <filter-name>MDCInsertingServletFilter</filter-name>
@@ -112,8 +104,8 @@
         <filter-name>MDCInsertingServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
-    <!-- Handling HttpRequest and HttpResponse w Logback-Access -->
+        
+    <!-- Enable Logback Access Request-Response -->
     <filter>
         <filter-name>TeeFilter</filter-name>
         <filter-class>ch.qos.logback.access.servlet.TeeFilter</filter-class>
@@ -122,6 +114,11 @@
         <filter-name>TeeFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <!-- Handling System.out and System.err -->
+    <listener>
+        <listener-class>uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener</listener-class>
+    </listener>
     
     <!-- Providing URL for Logback Status with OnStatusConsoleListener -->
     <servlet>
@@ -132,7 +129,4 @@
         <servlet-name>ViewStatusMessages</servlet-name>
         <url-pattern>/logback</url-pattern>
     </servlet-mapping>
-    
-    
-    
 </web-app>

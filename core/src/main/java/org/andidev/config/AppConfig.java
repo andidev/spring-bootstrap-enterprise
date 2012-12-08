@@ -3,10 +3,10 @@ package org.andidev.config;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.andidev.config.appconfig.HsqlDatabaseConfig;
-import org.andidev.config.appconfig.TraceLoggingConfig;
+import org.andidev.config.appconfig.JavaMelodyConfig;
 import org.andidev.config.appconfig.SpringMvcConfig;
+import org.andidev.config.appconfig.TraceLoggingConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev")
 @PropertySource({"application_${spring.profiles.active}.properties"})
-@ImportResource({"/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml"})
+@ImportResource({"/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml"})//, "classpath:net/bull/javamelody/monitoring-spring-aspectj.xml"})
 @Import({SpringMvcConfig.class, TraceLoggingConfig.class, HsqlDatabaseConfig.class})
 public class AppConfig {
 

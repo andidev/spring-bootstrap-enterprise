@@ -109,6 +109,8 @@ Spring webapp template
 
 - Usning Spring Conversion Service with language translations
 
-- Login example provided
+- Provide Login example
 
-- Start using JavaMelody for Preformance Web Interface
+- Provide User Management example
+
+-enable sass/compass maven
