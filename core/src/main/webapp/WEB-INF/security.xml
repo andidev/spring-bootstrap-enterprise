@@ -17,6 +17,9 @@
         <security:intercept-url pattern="/" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/development" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/monitoring" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/logback" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/jmx/*" access="hasRole('ROLE_ADMIN')"/>
 		
         <security:form-login login-page="/login" 
                              authentication-failure-url="/login/failure" 

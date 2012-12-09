@@ -14,7 +14,7 @@
     <appender name="file-request-response" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>target/logs/request-response.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${user.dir}/logs/history/request-response.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>target/logs/history/request-response.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <maxHistory>356</maxHistory>
         </rollingPolicy>
         <encoder>

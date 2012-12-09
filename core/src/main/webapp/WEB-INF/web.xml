@@ -25,13 +25,13 @@
 <!-- http://stackoverflow.com/questions/8587489/how-to-set-active-spring-3-1-environment-profile-via-a-properites-file-and-not-v
     class SpringInitializer extends WebApplicationInitializer {
 
-    void onStartup(ServletContext container) {
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.getEnvironment().setActiveProfiles("profileName");
-        rootContext.register(SpringConfiguration.class);
-        container.addListener(new ContextLoaderListener(rootContext));
-    }
-}          -->
+        void onStartup(ServletContext container) {
+            AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+            rootContext.getEnvironment().setActiveProfiles("profileName");
+            rootContext.register(SpringConfiguration.class);
+            container.addListener(new ContextLoaderListener(rootContext));
+        }
+    }          -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -40,6 +40,10 @@
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>       
+        <init-param>  
+            <param-name>contextConfigLocation</param-name>  
+            <param-value>WEB-INF/webmvc.xml</param-value>  
+        </init-param>  
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -83,6 +87,14 @@
         <servlet-name>spring</servlet-name>
     </filter-mapping>
     
+    <servlet>
+        <servlet-name>jmxMiniConsoleServlet</servlet-name>
+        <servlet-class>org.jminix.console.servlet.MiniConsoleServlet</servlet-class>
+    </servlet>   
+    <servlet-mapping>
+        <servlet-name>jmxMiniConsoleServlet</servlet-name>
+        <url-pattern>/jmx/*</url-pattern>
+    </servlet-mapping> 
 
     <!--  ***** ****************************************** ***** -->
     <!--  *****               Logback                      ***** -->

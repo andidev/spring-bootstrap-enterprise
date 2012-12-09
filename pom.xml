@@ -1348,7 +1348,7 @@
                         </webAppConfig>
                         <stopPort>18080</stopPort>
                         <stopKey>stop-jetty</stopKey>
-                        <scanIntervalSeconds>5</scanIntervalSeconds>
+                        <scanIntervalSeconds>0</scanIntervalSeconds>
                         <requestLog implementation="ch.qos.logback.access.jetty.RequestLogImpl">
                             <fileName>src/main/resources/logback-access.xml</fileName>
                             <quiet>true</quiet>
@@ -1361,7 +1361,7 @@
 
                             <systemProperty>
                                 <name>logback.configurationFile</name>
-                                <value>./src/main/resources/logback.xml</value>
+                                <value>src/main/resources/logback.xml</value>
                             </systemProperty>
                         </systemProperties>
                     </configuration>
@@ -1544,6 +1544,13 @@
             <name>Spring Maven Snapshot Repository</name>
             <url>http://maven.springframework.org/snapshot</url>
         </repository>
+
+        <!-- JMiniX -->
+        <repository>  
+            <id>maven-restlet</id>  
+            <name>Public online Restlet repository</name>  
+            <url>http://maven.restlet.org</url>  
+        </repository>          
     </repositories>
 
     <pluginRepositories>

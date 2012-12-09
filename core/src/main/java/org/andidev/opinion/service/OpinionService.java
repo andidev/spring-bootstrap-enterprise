@@ -6,6 +6,11 @@ import net.bull.javamelody.MonitoredWithSpring;
 import org.andidev.opinion.domain.Opinion;
 import org.andidev.opinion.repository.OpinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedOperationParameters;
+import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +23,28 @@ import org.springframework.transaction.annotation.Transactional;
 @NoArgsConstructor
 @AllArgsConstructor
 @MonitoredWithSpring
+@ManagedResource
 public class OpinionService {
 
+    String age;
+
+    @ManagedAttribute(description = "The Age Attribute", currencyTimeLimit = 15)
+    public String getAge() {
+        return age;
+    }
+
+    @ManagedAttribute(description = "The Age Attribute", currencyTimeLimit = 15)
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    @ManagedOperation(description = "Add two numbers")
+    @ManagedOperationParameters({
+        @ManagedOperationParameter(name = "x", description = "The first number"),
+        @ManagedOperationParameter(name = "y", description = "The second number")})
+    public int add(int x, int y) {
+        return x + y;
+    }
     @Autowired
     private OpinionRepository opinionRepository;
 

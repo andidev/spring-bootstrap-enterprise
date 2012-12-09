@@ -52,7 +52,7 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
                 .setCachePeriod(31556926); // 31556926 equals one year
         // Versioned resource url
         registry.addResourceHandler("/resources-" + environment.getProperty("application.version") + "/**")
-                .addResourceLocations("/public-resources/")
+                .addResourceLocations("/resources/")
                 .setCachePeriod(31556926); // 31556926 equals one year
     }
 

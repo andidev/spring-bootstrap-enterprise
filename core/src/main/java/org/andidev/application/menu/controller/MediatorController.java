@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.andidev.controller.AbstractApplicationController;
 import org.andidev.opinion.domain.Opinion;
 import org.andidev.opinion.service.OpinionService;
+import org.andidev.system.domain.User;
+import org.andidev.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class MediatorController extends AbstractApplicationController {
     // usage validator.validate(person)
     @Autowired
     OpinionService opinionService;
+    @Autowired
+    UserService userService;
     //@Autowired
     //OpinionRepository opinionRepository;
 

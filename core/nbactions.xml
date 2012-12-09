@@ -11,7 +11,7 @@
         <actionName>run</actionName>
         <goals>
             <goal>jetty:stop</goal>
-            <goal>clean</goal>
+            <!--<goal>clean</goal>-->
             <goal>jetty:run</goal>
         </goals>
     </action>
@@ -19,7 +19,7 @@
         <actionName>debug</actionName>
         <goals>
             <goal>jetty:stop</goal>
-            <goal>clean</goal>
+            <!--<goal>clean</goal>-->
             <goal>jetty:run</goal>
         </goals>
         <properties>
