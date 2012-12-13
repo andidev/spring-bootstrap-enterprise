@@ -2,7 +2,6 @@ package org.andidev.opinion.service;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import net.bull.javamelody.MonitoredWithSpring;
 import org.andidev.opinion.domain.Opinion;
 import org.andidev.opinion.repository.OpinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +21,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @NoArgsConstructor
 @AllArgsConstructor
-@MonitoredWithSpring
 @ManagedResource
 public class OpinionService {
 
     String age;
 
     @ManagedAttribute(description = "The Age Attribute", currencyTimeLimit = 15)
-    public String getAge() {
+    private String getAge() {
         return age;
     }
 
     @ManagedAttribute(description = "The Age Attribute", currencyTimeLimit = 15)
     public void setAge(String age) {
+        this.age = age;
+    }
+
+    public void setAge2(String age) {
         this.age = age;
     }
 
@@ -49,6 +51,9 @@ public class OpinionService {
     private OpinionRepository opinionRepository;
 
     public Boolean create(Opinion opinion) {
+        getAge();
+        setAge("12");
+        setAge2("12");
         // create entity
         Opinion saved = opinionRepository.save(opinion);
         if (saved == null) {
@@ -59,6 +64,9 @@ public class OpinionService {
     }
 
     public Boolean update(Opinion opinion) {
+        getAge();
+        setAge("12");
+        setAge2("12");
         // find entity
         Opinion existingOpinion = opinionRepository.findById(opinion.getId());
         if (existingOpinion == null) {
@@ -80,6 +88,9 @@ public class OpinionService {
     }
 
     public Boolean delete(Opinion opinion) {
+        getAge();
+        setAge("12");
+        setAge2("12");
         // find entity
         Opinion existingOpinion = opinionRepository.findById(opinion.getId());
         if (existingOpinion == null) {

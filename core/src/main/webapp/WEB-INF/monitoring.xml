@@ -19,18 +19,22 @@
     <bean id="monitoringPointcut" class="net.bull.javamelody.MonitoredWithAnnotationPointcut" />
 
     <bean id="springDataSourceBeanPostProcessor" class="net.bull.javamelody.SpringDataSourceBeanPostProcessor">
-        <!-- Commented by default
-        <property name="excludedDatasources">
-            <set>
-                <value>excludedDataSourceName</value>
-            </set>
+    </bean>
+    <bean id="requestMonitoringAdvisor" class="net.bull.javamelody.MonitoringSpringAdvisor">
+        <property name="pointcut">
+            <bean class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+                <property name="expression" value="execution(* org.andidev..*.*(..)) and @annotation(org.springframework.web.bind.annotation.RequestMapping)" />
+            </bean>
         </property>
-        -->
     </bean>
-
-    <!-- Commented by default
-    <bean id="wrappedDataSource" class="net.bull.javamelody.SpringDataSourceFactoryBean">
-        <property name="targetName" value="targetDataSource" />
+    <bean id="serviceMonitoringAdvisor" class="net.bull.javamelody.MonitoringSpringAdvisor">
+        <property name="pointcut">
+            <bean class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+                <property name="expression" value="execution(public * org.andidev..*.*(..)) and within(@org.springframework.stereotype.Service *)" />
+                <!--<property name="expression" value="execution(public * org.andidev..*Service.*(..))" />-->
+                <!--<property name="expression" value="execution(* org.andidev..*.*(..)) and @annotation(org.springframework.stereotype.Service)" />-->
+            </bean>
+        </property>
     </bean>
-    -->
+    
 </beans>

@@ -1348,7 +1348,7 @@
                         </webAppConfig>
                         <stopPort>18080</stopPort>
                         <stopKey>stop-jetty</stopKey>
-                        <scanIntervalSeconds>0</scanIntervalSeconds>
+                        <scanIntervalSeconds>1</scanIntervalSeconds>
                         <requestLog implementation="ch.qos.logback.access.jetty.RequestLogImpl">
                             <fileName>src/main/resources/logback-access.xml</fileName>
                             <quiet>true</quiet>
@@ -1362,7 +1362,7 @@
                             <systemProperty>
                                 <name>logback.configurationFile</name>
                                 <value>src/main/resources/logback.xml</value>
-                            </systemProperty>
+                            </systemProperty>                            
                         </systemProperties>
                     </configuration>
                     <dependencies>

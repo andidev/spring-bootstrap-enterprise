@@ -7,14 +7,29 @@
             http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     
     <display-name>Template Spring Jpa</display-name>
-
-
+    
+    <!-- Java Melody Monitoring Settings -->
+    <context-param>
+        <param-name>javamelody.monitoring-path</param-name>
+        <param-value>/admin/javamelody</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javamelody.storage-directory</param-name>
+        <param-value>logs/javamelody</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javamelody.resolution-seconds</param-name>
+        <param-value>60</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javamelody.disabled</param-name>
+        <param-value>false</param-value>
+    </context-param>
+        
     <!-- ContextLoaderListener -->
     <context-param>
         <param-name>contextClass</param-name>
-        <param-value>
-            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-        </param-value>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -86,14 +101,14 @@
         <filter-name>httpMethodFilter</filter-name>
         <servlet-name>spring</servlet-name>
     </filter-mapping>
-    
+
     <servlet>
         <servlet-name>jmxMiniConsoleServlet</servlet-name>
         <servlet-class>org.jminix.console.servlet.MiniConsoleServlet</servlet-class>
     </servlet>   
     <servlet-mapping>
         <servlet-name>jmxMiniConsoleServlet</servlet-name>
-        <url-pattern>/jmx/*</url-pattern>
+        <url-pattern>/admin/jminix/*</url-pattern>
     </servlet-mapping> 
 
     <!--  ***** ****************************************** ***** -->
@@ -116,7 +131,7 @@
         <filter-name>MDCInsertingServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-        
+
     <!-- Enable Logback Access Request-Response -->
     <filter>
         <filter-name>TeeFilter</filter-name>
@@ -126,12 +141,12 @@
         <filter-name>TeeFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
     <!-- Handling System.out and System.err -->
     <listener>
         <listener-class>uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener</listener-class>
     </listener>
-    
+
     <!-- Providing URL for Logback Status with OnStatusConsoleListener -->
     <servlet>
         <servlet-name>ViewStatusMessages</servlet-name>
@@ -139,6 +154,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewStatusMessages</servlet-name>
-        <url-pattern>/logback</url-pattern>
+        <url-pattern>/admin/logback</url-pattern>
     </servlet-mapping>
 </web-app>

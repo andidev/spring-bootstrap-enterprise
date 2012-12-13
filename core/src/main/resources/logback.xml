@@ -68,13 +68,17 @@
     <!-- Sql -->
     <logger name="jdbc.sqlonly" level="INHERITED"/>
     <logger name="jdbc.sqltiming" level="INHERITED"/>
-    <logger name="jdbc.audit" level="ERROR"/>
-    <logger name="jdbc.resultset" level="ERROR"/>
-    <logger name="jdbc.connection" level="ERROR"/>
-    <logger name="log4jdbc.debug" level="ERROR"/>
+    <logger name="jdbc.audit" level="INHERITED"/>
+    <logger name="jdbc.resultset" level="INHERITED"/>
+    <logger name="jdbc.connection" level="INHERITED"/>
+    <logger name="log4jdbc.debug" level="INHERITED"/>
     
+    <!-- Java Melody -->
+    <logger name="javamelody" level="TRACE"/>
+    <logger name="net.bull.javamelody" level="TRACE"/>
+                    
     <!-- AndiDev -->
-    <logger name="org.andidev" level="TRACE"/>
+    <logger name="org.andidev" level="INFO"/>
     
     <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">
