@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.andidev.common.entity;
 
 import javax.persistence.*;
@@ -11,13 +7,9 @@ import lombok.Setter;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-/**
- *
- * @author anders
- */
 @Data
 @MappedSuperclass
-public class ApplicationEntity {
+public class AppEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.PROTECTED)
