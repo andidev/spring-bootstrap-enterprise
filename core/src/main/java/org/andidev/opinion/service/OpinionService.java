@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor // TODO: Needed for service?
+@AllArgsConstructor // TODO: Needed for service?
 @ManagedResource
 public class OpinionService {
 

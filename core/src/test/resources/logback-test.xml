@@ -5,7 +5,31 @@
             <pattern>%cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
         </encoder>  
     </appender>
-    
+
+    <!-- File ... -->
+<!--    <appender name="RootSiftAppender" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>testname</key>
+            <defaultValue>testrun</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${testname}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <File>${testname}.log</File>
+                <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                    <FileNamePattern>${testname}.%i.log</FileNamePattern>
+                    <MinIndex>1</MinIndex>
+                    <MaxIndex>100</MaxIndex>
+                </rollingPolicy>
+                <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                    <MaxFileSize>5MB</MaxFileSize>
+                </triggeringPolicy>
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <Pattern>%d{ISO8601} %-5level %C{1} [%M:%L] [%thread] - %msg%n</Pattern>
+                </layout>
+            </appender>
+        </sift>
+    </appender>    -->
+            
     <!-- Spring -->
     <logger name="org.springframework" level="INHERITED"/>
     

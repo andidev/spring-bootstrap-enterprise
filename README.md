@@ -19,7 +19,7 @@ Spring webapp template
 
 -- Profile		Environment				Server		Setup
 ------------------------------------------------
--- local		Local Development		Jetty		HSQLDB
+-- local		Local Development                       Jetty		HSQLDB
 -- dev			Development				Jetty		MySQL
 -- test			Test					Jetty		MySQL
 -- int 			Integration				Jetty		MySQL
@@ -31,13 +31,36 @@ Spring webapp template
 
 # Logging
 
--- Colorful logs with logback.
+-- Userfriendly Colored Console Logs
+The console logs are colored and printed in a userfriendly way.
 
--- Username included in logs through Logback MDC
+-- Sifting User Logs
+User specific logs are logged in separate files per user with logbacks sifting appenders.
 
--- Logs Rolled around every day
+-- Daily Rolling Logs
+All logs for a day are stored in one file and rolled around every day.
 
--- Environment Specific loggings
+-- TODO: Environment Specific Logging
+...
+
+-- TODO: Task Specific Logging
+
+
+
+# Maintainance
+
+- JMiniX as MBeans Manager
+Manage JMX MBeans through application with JMiniX html interface
+
+- JMX for Logback Enabled
+Change log-levels with JMX ...
+
+- JMX for Spring Enabled
+Annotate Spring Beans with ... to enable ...
+
+- Java Melody for Prefeormance Monitoring
+Java Melody is included to trace responce times, memory leaks...
+
 
 
 # Security
@@ -61,43 +84,36 @@ Spring webapp template
 
 # Front End
 
--- Wicket
-
 -- Spring MVC
 
---- Thymeleaf Templates (with Apache Tiles)
+--- TODO: Thymeleaf Templates (with Apache Tiles)
 
---- JSP 3.0 (with Apache Tiles)
+--- TODO: JSP 3.0 (with Apache Tiles)
 
 -- Versioned css
 
--- Uses Compass/Sass css preprocessor configured with Maven
+-- TODO: Uses Compass/Sass css preprocessor configured with Maven
 
--- Style Guides based on Twitter Bootstrap/jQuery UI/JQuery Plugins
+-- TODO: Style Guides based on Twitter Bootstrap/jQuery UI/JQuery Plugins
 
--- (Yeoman ???)
+-- TOINVESTIGATE: Yeoman
 
--- JavaScript Libraries Included by default
+-- TODO: Most commonly used JavaScript Libraries Included by default
 
---- Twitter Bootstrap as Primary Framework
+--- TODO: Twitter Bootstrap as Primary Framework
 
---- jQuery UI as Secondary Framework
+--- TODO: jQuery UI as Secondary Framework
 
---- jQuery
+--- TODO: jQuery
 
---- Underscore.js
+--- TODO: jQuery++
 
+--- TODO: Underscore.js
+
+--- TODO: mustasche.js
 
 
 # TODO
-
--- All that is missing from above mentioned features
-
-- JMX support
-
--- Add Logback JMX
-
--- Add Spring JMX
 
 -- Add Secured Builtin JMX Web Interface supprot with JMiniX
 
@@ -114,3 +130,19 @@ Spring webapp template
 - Provide User Management example
 
 -enable sass/compass maven
+
+- Investigate if ‹ dependency is needed
+
+## License
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this work except in compliance with the License.
+You may obtain a copy of the License in the LICENSE file, or at:
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
