@@ -1,137 +1,56 @@
-webapp-template-spring
+Spring Bootstrap Enterprise
 ======================
 
-Spring webapp template
+Maven project that can be used to bootstrap a Spring WebApp with Twitter Bootstrap and Thymeleaf. The project will use Spring and Servlet 3.0 Java Configuration.
 
-# Back End
+### Under Heavy Development
 
-- Spring Java Configuration
+This project is still under heavy development and is therefore not recomended to use. A lot of refactoring is still needed and a lot of old garbage code is included. So at the moment it is totaly unusable.
 
-- Servlet 3.0 Java Configuration
 
-- Utf-8 encoding enabled
 
-- Environemnt Profile specific setups
+## TODOs
 
-# Environment Support
+* Refactor Maven Module structure
+* Add environment specific logging
+* Add trace specific logging
+* Add debug specific logging
+* Cleanup Java Configuration
+* Refactor Web.xml to Java Configuration
+* Configure to use Thymeleaf
+* Configure to use Compass/Sass through maven if possible
+* Configure JSR 303 Validation
+* Configure Spring Conversion Service with language translations
+* Include jQuery
+* Include Twitter Bootstrap
+* Include Underscore.js
+* Investigate if Animate.css should be included
+* Investigate if jQuery++ should be included
+* Investigate if mustasche.js should be included
+* Investigate if other javascript/css libraries should be included
+* Create Style Guides based on Twitter Bootstrap and jQuery Plugins
+* Make available with maven archetype:generate
+* Remove old css code
+* Remove old javascript code
+* Refactor/Replace top navbar to use Bootstrap
+* Provide Login page
+* Provide User Management page
+* Include webdriver/selenium 2
 
 
 
--- Profile		Environment				Server		Setup
-------------------------------------------------
--- local		Local Development                       Jetty		HSQLDB
--- dev			Development				Jetty		MySQL
--- test			Test					Jetty		MySQL
--- int 			Integration				Jetty		MySQL
--- demo 		Demo					Jetty		MySQL
--- stage 		Staging					Jetty		MySQL
--- prod 		Production				Jetty		MySQL
+## TODOmaybes
+* Configure JSP 3.0 (with Apache Tiles) as secondary view resolver
+* Include JqueryUI as secondary framework
+* Include Twitter Bootstrap JqueryUI Theme
+* Investigate if Yeaman is possible to use
+* Add Coding Conventions, Design Conventions and Design Guides
+* Web Interface to see/configure logs www.appname.org/logs
 
 
 
-# Logging
+## DONES
 
--- Userfriendly Colored Console Logs
-The console logs are colored and printed in a userfriendly way.
-
--- Sifting User Logs
-User specific logs are logged in separate files per user with logbacks sifting appenders.
-
--- Daily Rolling Logs
-All logs for a day are stored in one file and rolled around every day.
-
--- TODO: Environment Specific Logging
-...
-
--- TODO: Task Specific Logging
-
-
-
-# Maintainance
-
-- JMiniX as MBeans Manager
-Manage JMX MBeans through application with JMiniX html interface
-
-- JMX for Logback Enabled
-Change log-levels with JMX ...
-
-- JMX for Spring Enabled
-Annotate Spring Beans with ... to enable ...
-
-- Java Melody for Prefeormance Monitoring
-Java Melody is included to trace responce times, memory leaks...
-
-
-
-# Security
-
-- Spring Sequrity with Remember Me functionality
-
-
-
-# Testing
-
-- JUnit 4.11 with Hamcrest 1.3 and FEST ?.? asserts to enchase test readability
-
-- Selenium 2/WebDriver Testing Framework
-
--- Page Object Pattern Test Structure
-
--- Bot Style Test to enchase test readability
-
-
-
-
-# Front End
-
--- Spring MVC
-
---- TODO: Thymeleaf Templates (with Apache Tiles)
-
---- TODO: JSP 3.0 (with Apache Tiles)
-
--- Versioned css
-
--- TODO: Uses Compass/Sass css preprocessor configured with Maven
-
--- TODO: Style Guides based on Twitter Bootstrap/jQuery UI/JQuery Plugins
-
--- TOINVESTIGATE: Yeoman
-
--- TODO: Most commonly used JavaScript Libraries Included by default
-
---- TODO: Twitter Bootstrap as Primary Framework
-
---- TODO: jQuery UI as Secondary Framework
-
---- TODO: jQuery
-
---- TODO: jQuery++
-
---- TODO: Underscore.js
-
---- TODO: mustasche.js
-
-
-# TODO
-
--- Add Secured Builtin JMX Web Interface supprot with JMiniX
-
-- Web Interface to see logs www.appname.org/logs
-
-- Add Coding Conventions, Design Conventions and Design Guides
-
-- Using JSR 303 Validation
-
-- Usning Spring Conversion Service with language translations
-
-- Provide Login example
-
-- Provide User Management example
-
--enable sass/compass maven
-
-- Investigate if ‹ dependency is needed
 
 ## License
 
