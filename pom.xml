@@ -807,7 +807,6 @@
                 </plugin>
 
                 <!-- Use Servlet Java Config -->
-                <!--
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -816,8 +815,7 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
-                -->
-
+                
                 <!-- Analyze Code Quality -->
                 <!-- see http://mojo.codehaus.org/sonar-maven-plugin/ -->
                 <!-- Enable if it will be used
@@ -1280,7 +1278,7 @@
                 </plugin>
                 -->
                 
-                <!-- Embed Tomcat Server -->
+                <!-- Embedded Tomcat Server -->
                 <!-- see http://tomcat.apache.org/maven-plugin-2.0/ -->
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
@@ -1336,7 +1334,7 @@
                     </dependencies>
                 </plugin>
 
-                <!-- Embed Jetty Server -->
+                <!-- Embedded Jetty Server -->
                 <!-- see http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin -->
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>

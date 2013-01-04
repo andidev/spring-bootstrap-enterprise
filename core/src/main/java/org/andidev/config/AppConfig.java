@@ -31,7 +31,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev")
 @PropertySource({"application_${spring.profiles.active}.properties"})
-@ImportResource({"/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml", "/WEB-INF/jmx.xml", "/WEB-INF/monitoring.xml"})
+@ImportResource({"/WEB-INF/webmvc.xml", "/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml", "/WEB-INF/jmx.xml", "/WEB-INF/monitoring.xml"})
 @Import({SpringMvcConfig.class, TraceLoggingConfig.class, HsqlDatabaseConfig.class})
 public class AppConfig {
 
