@@ -1,5 +1,6 @@
 package org.andidev.config.appconfig;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring3.SpringTemplateEngine;
@@ -9,6 +10,9 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @Configuration 
 public class ThymeleafConfig {
 
+        @Value("${application.environment}")
+        private String environment;
+    
 	@Bean 
 	public ServletContextTemplateResolver templateResolver() {
 		ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
@@ -16,7 +20,9 @@ public class ThymeleafConfig {
 		resolver.setSuffix(".html");
 		resolver.setTemplateMode("HTML5");
 		resolver.setOrder(1);
-                resolver.setCacheable(false);
+                if ("dev".equals(environment)) {
+                    resolver.setCacheable(false);
+                }
 		return resolver;
 	}
 
