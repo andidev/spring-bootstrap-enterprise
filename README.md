@@ -17,7 +17,6 @@ This project is still under heavy development and is therefore not recomended to
 * Add debug specific logging
 * Refactor webmvc.xml to Java Configuration
 * Cleanup Java Configuration
-* Configure to use Thymeleaf
 * Configure to use Compass/Sass through maven if possible
 * Configure JSR 303 Validation
 * Configure Spring Conversion Service with language translations
@@ -50,6 +49,7 @@ This project is still under heavy development and is therefore not recomended to
 
 
 ## DONES
+* 2013-01-04 Configure to use Thymeleaf
 * 2013-01-04 Refactor Web.xml to Java Configuration
 
 

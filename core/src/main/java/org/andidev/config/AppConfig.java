@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -31,7 +32,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev")
 @PropertySource({"application_${spring.profiles.active}.properties"})
-@ImportResource({"/WEB-INF/webmvc.xml", "/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml", "/WEB-INF/jmx.xml", "/WEB-INF/monitoring.xml"})
+@ImportResource({"/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml", "/WEB-INF/jmx.xml", "/WEB-INF/monitoring.xml"})
 @Import({SpringMvcConfig.class, TraceLoggingConfig.class, HsqlDatabaseConfig.class})
 public class AppConfig {
 
@@ -96,4 +97,12 @@ public class AppConfig {
     public LocalValidatorFactoryBean validator() {
         return new LocalValidatorFactoryBean();
     }
+    
+    // Internationalization, see http://krams915.blogspot.se/2012/12/spring-and-thymeleaf-with-javaconfig_8540.html
+//    @Bean
+//    public ResourceBundleMessageSource messageSource() {
+//            ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+//            source.setBasename("messages");
+//            return source;
+//    }    
 }

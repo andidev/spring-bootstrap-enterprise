@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title th:text="${title}">Title</title>
+    </head>
+
+    <body class="body" id="loginPage">
+        <div class="body-content" style="margin: 0 50%; padding: 20px 200px 0px 0px;"> 
+
+            <!-- Single Group -->
+            <form class="group login-form" action="j_spring_security_check" method="post" >
+                <h3 class="group-header">Login</h3>  
+                <div class="group-content">   
+
+                    <!-- Column -->
+                    <div class="column">
+                        <div class="labeled-content"> 
+                            <div class="label">
+                                <label for="j_username">Username</label>
+                            </div>              
+                            <div class="content">
+                                <input class="data text username" id="j_username" name="j_username" />                    
+                            </div>              
+                        </div> 
+
+                        <div class="labeled-content"> 
+                            <div class="label">
+                                <label for="j_password">Password</label>
+                            </div>              
+                            <div class="content"> 
+                                <input class="data text password" id="j_password" name="j_password"  type="password"/>                    
+                            </div>              
+                        </div>    
+
+                        <div class="labeled-content"> 
+                            <div class="label">
+                                <label></label> 
+                            </div>              
+                            <div class="content">
+                                <ul class="data checkbox">
+                                    <li>
+                                        <input class="data checkbox" id="rememberMe" name="rememberMe" type="checkbox" checked="checked" />
+                                        <label for="CHECKBOX_ID-VALUE_1">Remember Me</label>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>   
+
+                        <div class="content"> 
+                            <button class="button login" id="loginButton" type="submit">Login</button>
+                        </div>  
+
+                        <div th:text="${message}" class="content information" id="message"> 
+                            Login message...
+                        </div>  
+
+                    </div><!-- Column -->  
+
+                </div>
+            </form><!-- Single Group -->
+
+        </div>
+    </body>
+</html>

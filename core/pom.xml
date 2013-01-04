@@ -245,24 +245,6 @@
             <artifactId>selenium-server</artifactId>
         </dependency>  -->
 
-        <!-- JSTL -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-        </dependency>
-
-        <!-- Solves the "package javax.servlet.jsp does not exist netbeans" error when imprting in jsp-pages -->
-        <!-- see  http://netbeans.org/bugzilla/show_bug.cgi?id=191023 -->
-        <!-- USED??? -->
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-        </dependency>
-
         <!-- Thymeleaf -->
         <dependency>
             <groupId>org.thymeleaf</groupId>

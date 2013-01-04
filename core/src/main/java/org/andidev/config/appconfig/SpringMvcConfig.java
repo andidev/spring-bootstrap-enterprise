@@ -3,6 +3,7 @@ package org.andidev.config.appconfig;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -13,11 +14,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
+@Import({ThymeleafConfig.class})
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     @Inject
     Environment environment;
-
+    
     @Override
     public void addFormatters(FormatterRegistry registry) {
         // Add formatters and/or converters
