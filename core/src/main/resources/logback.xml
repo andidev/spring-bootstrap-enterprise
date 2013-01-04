@@ -61,6 +61,7 @@
     
     <!-- Spring -->
     <logger name="org.springframework" level="INHERITED"/>
+    <logger name="org.springframework.web" level="INHERITED"/>
     
     <!-- Hibernate -->
     <logger name="org.hibernate" level="INHERITED"/>
@@ -74,8 +75,8 @@
     <logger name="log4jdbc.debug" level="INHERITED"/>
     
     <!-- Java Melody -->
-    <logger name="javamelody" level="TRACE"/>
-    <logger name="net.bull.javamelody" level="TRACE"/>
+    <logger name="javamelody" level="INHERITED"/>
+    <logger name="net.bull.javamelody" level="INHERITED"/>
                     
     <!-- AndiDev -->
     <logger name="org.andidev" level="INFO"/>
