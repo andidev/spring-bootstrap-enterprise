@@ -9,9 +9,7 @@ javascripts_dir = "javascripts"
 fonts_dir = "fonts"
 
 # Sets the location of the extensions directory
-#extensions_dir = "../compass-extensions/"
 extensions_path = "/Users/anders/Dropbox/Development/compass/compass-extensions/"
-# extensions_dir = "/Users/anders/Dropbox/Development/html/compass-extensions/"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed

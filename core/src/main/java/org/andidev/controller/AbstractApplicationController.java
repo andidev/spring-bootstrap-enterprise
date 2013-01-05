@@ -14,6 +14,8 @@ public abstract class AbstractApplicationController {
     private String applicationName;
     @Value("${application.version}")
     private String applicationVersion;
+    @Value("${application.environment}")
+    private String applicationEnvironment;
 
     @ModelAttribute("applicationName")
     public String getApplicationName() {
@@ -23,6 +25,11 @@ public abstract class AbstractApplicationController {
     @ModelAttribute("applicationVersion")
     public String getApplicationVersion() {
         return applicationVersion;
+    }
+
+    @ModelAttribute("applicationEnvironment")
+    public String getApplicationEnvironment() {
+        return applicationEnvironment;
     }
     
     @ModelAttribute("resourceUrl")
