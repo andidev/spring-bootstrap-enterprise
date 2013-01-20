@@ -11,7 +11,7 @@
 
     <name>Application Core Name</name>
     <description>Application core description...</description>
-    <url>https://github.com/mrjamesbrown/webapp-template-spring/core</url>
+    <url>https://github.com/andidev/webapp-template-spring/core</url>
 
     <parent>
         <groupId>org.organization-name</groupId>

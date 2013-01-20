@@ -11,7 +11,7 @@
 
     <name>Application User Interface Name</name>
     <description>Application user interface description...</description>
-    <url>https://github.com/mrjamesbrown/webapp-template-spring/ui</url>
+    <url>https://github.com/andidev/webapp-template-spring/ui</url>
 
     <parent>
         <groupId>org.organization-name</groupId>

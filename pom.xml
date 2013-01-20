@@ -11,7 +11,7 @@
 
     <name>Application Name</name>
     <description>Application description...</description>
-    <url>https://github.com/mrjamesbrown/webapp-template-spring</url>
+    <url>https://github.com/andidev/webapp-template-spring</url>
 
     <modules>
         <module>core</module>
@@ -27,14 +27,14 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/mrjamesbrown/webapp-template-spring</url>
-        <connection>scm:git:git://github.com/mrjamesbrown/webapp-template-spring.git</connection>
-        <developerConnection>scm:git:git@github.com:mrjamesbrown/webapp-template-spring.git</developerConnection>
+        <url>https://github.com/andidev/webapp-template-spring</url>
+        <connection>scm:git:git://github.com/andidev/webapp-template-spring.git</connection>
+        <developerConnection>scm:git:git@github.com:andidev/webapp-template-spring.git</developerConnection>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/mrjamesbrown/webapp-template-spring/issues</url>
+        <url>https://github.com/andidev/webapp-template-spring/issues</url>
     </issueManagement>
 
    <organization>
