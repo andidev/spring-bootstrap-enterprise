@@ -656,6 +656,31 @@
                 <version>3.0.20100224</version>
                 <scope>provided</scope>
             </dependency>
+        
+            <!-- Java Melody Monitoring -->
+            <!-- see http://code.google.com/p/javamelody/ -->
+            <dependency>
+                <groupId>net.bull.javamelody</groupId>
+                <artifactId>javamelody-core</artifactId>
+                <version>1.42.0</version>
+            </dependency>
+        
+            <!-- JMiniX -->
+            <!-- see http://code.google.com/p/jminix/ -->
+            <dependency>
+                <groupId>org.jminix</groupId>
+                <artifactId>jminix</artifactId>
+                <version>1.0.0</version>
+            </dependency>  
+            
+            <!-- Compass Ruby Gem -->
+            <!-- see http://stackoverflow.com/questions/11952672/best-way-to-auto-compile-compass-style-sass-via-maven -->
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>compass</artifactId>
+                <version>0.12.2</version>
+                <type>gem</type>
+            </dependency>            
         </dependencies>
     </dependencyManagement>
 
@@ -718,6 +743,27 @@
                 </plugin>
                 -->
                 
+                <!-- Compile Compass/Sass files -->
+                <!-- see http://stackoverflow.com/questions/11952672/best-way-to-auto-compile-compass-style-sass-via-maven -->
+                <plugin>
+                    <groupId>de.saumya.mojo</groupId>
+                    <artifactId>gem-maven-plugin</artifactId>
+                    <version>0.29.1</version>
+                    <extensions>true</extensions>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <phase>compile</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <!--jrubyVersion>1.6.4</jrubyVersion-->
+                        <execArgs>${project.build.directory}/rubygems/bin/compass compile ${basedir}/src/main/webapp/resources</execArgs>
+                    </configuration>
+                </plugin>
+    
                 <!-- Generate QueryDSL Help Classes -->
                 <!-- see http://www.querydsl.com/static/querydsl/2.1.0/reference/html/ch03s02.html -->
                 <plugin>
@@ -1306,7 +1352,6 @@
                             <version>${logback.version}</version>
                             <scope>runtime</scope>
                         </dependency>
-                        
                     </dependencies>
                 </plugin>
 
@@ -1474,6 +1519,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
             </plugin>-->
+
+            <plugin>
+                <groupId>de.saumya.mojo</groupId>
+                <artifactId>gem-maven-plugin</artifactId>            
+            </plugin>
         </plugins>
     </build>
 
@@ -1524,7 +1574,13 @@
             <id>maven-restlet</id>  
             <name>Public online Restlet repository</name>  
             <url>http://maven.restlet.org</url>  
-        </repository>          
+        </repository>     
+
+        <!-- Ruby Gems -->
+        <repository>
+            <id>rubygems-releases</id>
+            <url>http://rubygems-proxy.torquebox.org/releases</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>

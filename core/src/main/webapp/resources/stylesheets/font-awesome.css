@@ -81,7 +81,7 @@ li .icon-large:before {
 ul.icons {
   list-style-type: none;
   margin-left: 2em;
-  text-indent: -0.8em;
+  text-indent: -.8em;
 }
 /* line 90, ../sass/font-awesome.scss */
 ul.icons li [class^="icon-"],

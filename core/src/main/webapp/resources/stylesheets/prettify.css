@@ -2,68 +2,68 @@
 /* SPAN elements with the classes below are added by prettyprint. */
 /* line 4, ../sass/prettify.scss */
 .pln {
-  color: #000;
+  color: black;
 }
 
 /* plain text */
 @media screen {
   /* line 7, ../sass/prettify.scss */
   .str {
-    color: #080;
+    color: #008800;
   }
 
   /* string content */
   /* line 8, ../sass/prettify.scss */
   .kwd {
-    color: #008;
+    color: #000088;
   }
 
   /* a keyword */
   /* line 9, ../sass/prettify.scss */
   .com {
-    color: #800;
+    color: #880000;
   }
 
   /* a comment */
   /* line 10, ../sass/prettify.scss */
   .typ {
-    color: #606;
+    color: #660066;
   }
 
   /* a type name */
   /* line 11, ../sass/prettify.scss */
   .lit {
-    color: #066;
+    color: #006666;
   }
 
   /* a literal value */
   /* punctuation, lisp open bracket, lisp close bracket */
   /* line 13, ../sass/prettify.scss */
   .pun, .opn, .clo {
-    color: #660;
+    color: #666600;
   }
 
   /* line 14, ../sass/prettify.scss */
   .tag {
-    color: #008;
+    color: #000088;
   }
 
   /* a markup tag name */
   /* line 15, ../sass/prettify.scss */
   .atn {
-    color: #606;
+    color: #660066;
   }
 
   /* a markup attribute name */
   /* line 16, ../sass/prettify.scss */
   .atv {
-    color: #080;
+    color: #008800;
   }
 
   /* a markup attribute value */
   /* line 17, ../sass/prettify.scss */
   .dec, .var {
-    color: #606;
+    color: #660066;
   }
 
   /* a declaration; a variable name */
@@ -78,7 +78,7 @@
 @media print, projection {
   /* line 23, ../sass/prettify.scss */
   .str {
-    color: #060;
+    color: #006600;
   }
 
   /* line 24, ../sass/prettify.scss */
@@ -101,12 +101,12 @@
 
   /* line 27, ../sass/prettify.scss */
   .lit {
-    color: #044;
+    color: #004444;
   }
 
   /* line 28, ../sass/prettify.scss */
   .pun, .opn, .clo {
-    color: #440;
+    color: #444400;
   }
 
   /* line 29, ../sass/prettify.scss */
@@ -117,19 +117,19 @@
 
   /* line 30, ../sass/prettify.scss */
   .atn {
-    color: #404;
+    color: #440044;
   }
 
   /* line 31, ../sass/prettify.scss */
   .atv {
-    color: #060;
+    color: #006600;
   }
 }
 /* Put a border around prettyprinted code snippets. */
 /* line 35, ../sass/prettify.scss */
 pre.prettyprint {
   padding: 2px;
-  border: 1px solid #888;
+  border: 1px solid #888888;
 }
 
 /* Specify class=linenums on a pre to get line numbering */
@@ -159,5 +159,5 @@ li.L3,
 li.L5,
 li.L7,
 li.L9 {
-  background: #eee;
+  background: #eeeeee;
 }
