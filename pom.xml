@@ -13,11 +13,6 @@
     <description>Application description...</description>
     <url>https://github.com/andidev/webapp-template-spring</url>
 
-    <modules>
-        <module>core</module>
-        <module>ui</module>
-    </modules>
-
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -31,6 +26,11 @@
         <connection>scm:git:git://github.com/andidev/webapp-template-spring.git</connection>
         <developerConnection>scm:git:git@github.com:andidev/webapp-template-spring.git</developerConnection>
     </scm>
+
+    <modules>
+        <module>core</module>
+        <module>ui</module>
+    </modules>
 
     <issueManagement>
         <system>GitHub</system>
@@ -624,7 +624,7 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.1</version>
             </dependency>
-            
+
             <!-- Lambdaj -->
             <!-- see http://code.google.com/p/lambdaj/ -->
             <dependency>
@@ -656,7 +656,7 @@
                 <version>3.0.20100224</version>
                 <scope>provided</scope>
             </dependency>
-        
+
             <!-- Java Melody Monitoring -->
             <!-- see http://code.google.com/p/javamelody/ -->
             <dependency>
@@ -664,15 +664,15 @@
                 <artifactId>javamelody-core</artifactId>
                 <version>1.42.0</version>
             </dependency>
-        
+
             <!-- JMiniX -->
             <!-- see http://code.google.com/p/jminix/ -->
             <dependency>
                 <groupId>org.jminix</groupId>
                 <artifactId>jminix</artifactId>
                 <version>1.0.0</version>
-            </dependency>  
-            
+            </dependency>
+
             <!-- Compass Ruby Gem -->
             <!-- see http://stackoverflow.com/questions/11952672/best-way-to-auto-compile-compass-style-sass-via-maven -->
             <dependency>
@@ -680,7 +680,7 @@
                 <artifactId>compass</artifactId>
                 <version>0.12.2</version>
                 <type>gem</type>
-            </dependency>            
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -742,7 +742,7 @@
                     </executions>
                 </plugin>
                 -->
-                
+
                 <!-- Compile Compass/Sass files -->
                 <!-- see http://stackoverflow.com/questions/11952672/best-way-to-auto-compile-compass-style-sass-via-maven -->
                 <plugin>
@@ -763,7 +763,7 @@
                         <execArgs>${project.build.directory}/rubygems/bin/compass compile ${basedir}/src/main/webapp/resources</execArgs>
                     </configuration>
                 </plugin>
-    
+
                 <!-- Generate QueryDSL Help Classes -->
                 <!-- see http://www.querydsl.com/static/querydsl/2.1.0/reference/html/ch03s02.html -->
                 <plugin>
@@ -791,7 +791,7 @@
                             </configuration>
                         </execution>
                     </executions>
-                </plugin> 
+                </plugin>
 
                 <!-- Run Unit Tests -->
                 <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/ -->
@@ -837,7 +837,7 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
-                
+
                 <!-- Analyze Code Quality -->
                 <!-- see http://mojo.codehaus.org/sonar-maven-plugin/ -->
                 <!-- Enable if it will be used
@@ -1299,7 +1299,7 @@
                     <version>${maven.plugin.plugin}</version>
                 </plugin>
                 -->
-                
+
                 <!-- Embedded Tomcat Server -->
                 <!-- see http://tomcat.apache.org/maven-plugin-2.0/ -->
                 <plugin>
@@ -1381,7 +1381,7 @@
                             <systemProperty>
                                 <name>logback.configurationFile</name>
                                 <value>src/main/resources/logback.xml</value>
-                            </systemProperty>                            
+                            </systemProperty>
                         </systemProperties>
                     </configuration>
                     <dependencies>
@@ -1420,8 +1420,8 @@
                             <scope>runtime</scope>
                         </dependency>
                     </dependencies>
-                </plugin> 
-            </plugins>           
+                </plugin>
+            </plugins>
         </pluginManagement>
 
         <plugins>
@@ -1433,7 +1433,7 @@
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
-            </plugin> 
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1522,7 +1522,7 @@
 
             <plugin>
                 <groupId>de.saumya.mojo</groupId>
-                <artifactId>gem-maven-plugin</artifactId>            
+                <artifactId>gem-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -1570,11 +1570,11 @@
         </repository>
 
         <!-- JMiniX -->
-        <repository>  
-            <id>maven-restlet</id>  
-            <name>Public online Restlet repository</name>  
-            <url>http://maven.restlet.org</url>  
-        </repository>     
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.org</url>
+        </repository>
 
         <!-- Ruby Gems -->
         <repository>
