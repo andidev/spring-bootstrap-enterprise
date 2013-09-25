@@ -7,7 +7,7 @@
     <groupId>org.organization-name</groupId>
     <artifactId>application-name</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <name>Application Name</name>
     <description>Application description...</description>
@@ -27,20 +27,15 @@
         <developerConnection>scm:git:git@github.com:andidev/webapp-template-spring.git</developerConnection>
     </scm>
 
-    <modules>
-        <module>core</module>
-        <module>ui</module>
-    </modules>
-
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/andidev/webapp-template-spring/issues</url>
     </issueManagement>
 
-   <organization>
-      <name>Organization Name</name>
-      <url>http://www.organization-url.org</url>
-   </organization>
+    <organization>
+        <name>Organization Name</name>
+        <url>http://www.organization-url.org</url>
+    </organization>
 
     <developers>
         <developer>
@@ -58,7 +53,7 @@
 
     <profiles>
         <profile>
-            <id>env-default</id>
+            <id>default</id>
             <activation>
                 <property>
                     <name>!env</name>
@@ -69,7 +64,7 @@
             </properties>
         </profile>
         <profile>
-            <id>env-local</id>
+            <id>local</id>
             <activation>
                 <property>
                     <name>env</name>
@@ -81,7 +76,7 @@
             </properties>
         </profile>
         <profile>
-            <id>env-dev</id>
+            <id>dev</id>
             <activation>
                 <property>
                     <name>env</name>
@@ -93,7 +88,7 @@
             </properties>
         </profile>
         <profile>
-            <id>env-test</id>
+            <id>test</id>
             <activation>
                 <property>
                     <name>env</name>
@@ -105,43 +100,7 @@
             </properties>
         </profile>
         <profile>
-            <id>env-int</id>
-            <activation>
-                <property>
-                    <name>env</name>
-                    <value>int</value>
-                </property>
-            </activation>
-            <properties>
-                <application.environment>int</application.environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>demo</id>
-            <activation>
-                <property>
-                    <name>env</name>
-                    <value>demo</value>
-                </property>
-            </activation>
-            <properties>
-                <application.environment>demo</application.environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>env-stage</id>
-            <activation>
-                <property>
-                    <name>env</name>
-                    <value>stage</value>
-                </property>
-            </activation>
-            <properties>
-                <application.environment>stage</application.environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>env-prod</id>
+            <id>prod</id>
             <activation>
                 <property>
                     <name>env</name>
@@ -221,1308 +180,1128 @@
     </properties>
 
     <dependencies>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring Aspects -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <!-- Spring Data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.2.0.RELEASE</version>
+        </dependency>
+
+        <!-- Spring Batch -->
+        <dependency>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-core</artifactId>
+            <version>2.1.8.RELEASE</version>
+        </dependency>
+
+        <!-- Spring Webflow -->
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-webflow</artifactId>
+            <version>2.3.0.RELEASE</version>
+        </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Cglib -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
+        <!-- Jackson Jaxrs -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+
+        <!-- MySQL Java Driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.9</version>
+        </dependency>
+
+        <!-- HSQL DB Driver -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
+        </dependency>
+
+        <!-- Commons Database Connection Pool -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- Hibernate Envers -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- Hibernate Validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+
+        <!-- Hibernate Search -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search</artifactId>
+            <version>4.0.0.Final</version>
+        </dependency>
+
+        <!-- Logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>${logback.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>uk.org.lidalia</groupId>
+            <artifactId>sysout-over-slf4j</artifactId>
+            <version>${sysout.slf4j.version}</version>
+        </dependency>
+
+        <!-- Slf4j -->
+        <!-- Enable when everything is running
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        -->
+
+        <!-- QueryDSL -->
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <!-- Log4jdbc -->
+        <!--
+        <dependency>
+            <groupId>log4jdbc</groupId>
+            <artifactId>log4jdbc</artifactId>
+            <version>4-1.2</version>
+        </dependency>
+        -->
+
+        <!-- Log4jdbc-remix -->
+        <!--
+        <dependency>
+            <groupId>org.lazyluke</groupId>
+            <artifactId>log4jdbc-remix</artifactId>
+            <version>0.2.7</version>
+        </dependency>
+        -->
+
+        <!-- Joda Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.spi</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <!--        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-jsptags</artifactId>
+            <version>1.1.1</version>
+            <scope>runtime</scope>
+        </dependency>-->
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Exclude old version -->
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <!--        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${selenium.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>servlet-api-2.5</artifactId>
+                    <groupId>org.mortbay.jetty</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>  -->
+
+        <!-- Thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>0.11.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+
+        <!-- Hamcrest -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+        </dependency>
+
+        <!-- Fest -->
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert-core</artifactId>
+            <version>2.0M8</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Apache Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+        <!-- Lambdaj -->
+        <dependency>
+            <groupId>com.googlecode.lambdaj</groupId>
+            <artifactId>lambdaj</artifactId>
+            <version>2.3.3</version>
+            <exclusions>
+                <!-- Exclude old version -->
+                <exclusion>
+                    <artifactId>hamcrest-all</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Javax Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jetty Javax Servlet -->
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>3.0.20100224</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Java Melody Monitoring -->
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-core</artifactId>
+            <version>1.42.0</version>
+        </dependency>
+
+        <!-- JMiniX -->
+        <dependency>
+            <groupId>org.jminix</groupId>
+            <artifactId>jminix</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- Compass Ruby Gem -->
+        <dependency>
+            <groupId>rubygems</groupId>
+            <artifactId>compass</artifactId>
+            <version>0.12.2</version>
+            <type>gem</type>
+        </dependency>
     </dependencies>
-
-    <!-- Centrally manage all versions & transitive dependency versions -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- Spring -->
-            <!-- see http://www.springsource.org/spring-framework -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-tx</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-orm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <!-- Spring Aspects -->
-            <!-- see http://static.springsource.org/spring/docs/current/spring-framework-reference/html/aop.html -->
-            <!-- see http://www.eclipse.org/aspectj/ -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
-                <version>${spring.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjrt</artifactId>
-                <version>${aspectj.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
-            </dependency>
-
-            <!-- Spring Data -->
-            <!-- see http://www.springsource.org/spring-data -->
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
-                <version>1.2.0.RELEASE</version>
-            </dependency>
-
-            <!-- Spring Batch -->
-            <!-- see http://www.springsource.org/spring-batch -->
-            <dependency>
-                <groupId>org.springframework.batch</groupId>
-                <artifactId>spring-batch-core</artifactId>
-                <version>2.1.8.RELEASE</version>
-            </dependency>
-
-            <!-- Spring Webflow -->
-            <!-- see http://www.springsource.org/spring-web-flow -->
-            <dependency>
-                <groupId>org.springframework.webflow</groupId>
-                <artifactId>spring-webflow</artifactId>
-                <version>2.3.0.RELEASE</version>
-            </dependency>
-
-            <!-- Spring Security -->
-            <!-- see http://www.springsource.org/spring-security -->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-core</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-web</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-config</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-taglibs</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-
-            <!-- Cglib -->
-            <!-- see http://stackoverflow.com/questions/2253263/why-spring-3-needs-explicit-cglib-dependency-declaration-when-using-maven -->
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-                <version>2.2.2</version>
-            </dependency>
-
-            <!-- Jackson Jaxrs -->
-            <!-- see http://wiki.fasterxml.com/JacksonHome -->
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-jaxrs</artifactId>
-                <version>1.6.3</version>
-            </dependency>
-
-            <!-- MySQL Java Driver -->
-            <!-- see http://dev.mysql.com/usingmysql/java/ -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.9</version>
-            </dependency>
-
-            <!-- HSQL DB Driver -->
-            <!-- see http://hsqldb.org/ -->
-            <dependency>
-                <groupId>org.hsqldb</groupId>
-                <artifactId>hsqldb</artifactId>
-                <version>${hsqldb.version}</version>
-            </dependency>
-
-            <!-- Commons Database Connection Pool -->
-            <!-- see http://commons.apache.org/dbcp/ -->
-            <dependency>
-                <groupId>commons-dbcp</groupId>
-                <artifactId>commons-dbcp</artifactId>
-                <version>1.4</version>
-            </dependency>
-
-            <!-- Hibernate -->
-            <!-- see http://docs.jboss.org/hibernate/orm/4.1/manual/en-US/html_single/ -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-
-            <!-- Hibernate Envers -->
-            <!-- see http://docs.jboss.org/hibernate/envers/3.6/reference/en-US/html_single/ -->
-            <!-- see http://marakana.com/s/easy_auditing_versioning_for_your_hibernate_entities_with_envers,115/index.html -->
-            <!-- see http://blog.octo.com/en/audit-with-jpa-creation-and-update-date/ -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-envers</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-
-            <!-- Hibernate Validator -->
-            <!-- see http://docs.jboss.org/hibernate/validator/4.2/reference/en-US/html_single/ -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>4.2.0.Final</version>
-            </dependency>
-
-            <!-- Hibernate Search -->
-            <!-- see http://docs.jboss.org/hibernate/search/4.0/reference/en-US/html_single/ -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-search</artifactId>
-                <version>4.0.0.Final</version>
-            </dependency>
-
-            <!-- Logback -->
-            <!-- see http://logback.qos.ch/ -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jcl-over-slf4j</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jul-to-slf4j</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-access</artifactId>
-                <version>${logback.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>uk.org.lidalia</groupId>
-                <artifactId>sysout-over-slf4j</artifactId>
-                <version>${sysout.slf4j.version}</version>
-            </dependency>
-
-            <!-- Slf4j -->
-            <!-- see http://www.slf4j.org/ -->
-            <!-- Enable when everything is running
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.6.1</version>
-            </dependency>
-            -->
-
-            <!-- QueryDSL -->
-            <!-- see http://www.querydsl.com/ -->
-            <!-- see http://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-five-querydsl/ -->
-            <!-- see http://blog.mysema.com/2010/07/querying-hibernate-with-querydsl.html -->
-            <dependency>
-                <groupId>com.mysema.querydsl</groupId>
-                <artifactId>querydsl-apt</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mysema.querydsl</groupId>
-                <artifactId>querydsl-jpa</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-
-            <!-- Log4jdbc -->
-            <!-- see http://code.google.com/p/log4jdbc/ -->
-            <!--
-            <dependency>
-                <groupId>log4jdbc</groupId>
-                <artifactId>log4jdbc</artifactId>
-                <version>4-1.2</version>
-            </dependency>
-            -->
-
-            <!-- Log4jdbc-remix -->
-            <!-- see http://code.google.com/p/log4jdbc-remix/ -->
-            <!--
-            <dependency>
-                <groupId>org.lazyluke</groupId>
-                <artifactId>log4jdbc-remix</artifactId>
-                <version>0.2.7</version>
-            </dependency>
-            -->
-
-            <!-- Joda Time -->
-            <!-- see http://joda-time.sourceforge.net/ -->
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>2.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jadira.usertype</groupId>
-                <artifactId>usertype.spi</artifactId>
-                <version>2.0.1</version>
-            </dependency>
-            <!--        <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time-jsptags</artifactId>
-                <version>1.1.1</version>
-                <scope>runtime</scope>
-            </dependency>-->
-
-            <!-- JUnit -->
-            <!-- see  -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.11</version>
-                <scope>test</scope>
-                <exclusions>
-                    <!-- Exclude old version -->
-                    <exclusion>
-                        <artifactId>hamcrest-core</artifactId>
-                        <groupId>org.hamcrest</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- Mockito -->
-            <!-- see http://code.google.com/p/mockito/ -->
-            <!-- see http://docs.mockito.googlecode.com/hg/org/mockito/Mockito.html -->
-            <!-- see http://www.rapaul.com/2009/08/09/bddmockito-eclipse/ -->
-            <!-- see http://gojko.net/2009/10/23/mockito-in-six-easy-examples/ -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.9.0</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Spring Test -->
-            <!-- see http://static.springsource.org/spring/docs/current/spring-framework-reference/html/testing.html -->
-            <!-- see http://stackoverflow.com/questions/7723951/how-to-access-spring-service-object-from-junit-test -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Selenium -->
-            <!-- see http://seleniumhq.org/download/maven.html -->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-support</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <!--        <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-server</artifactId>
-                <version>${selenium.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>servlet-api-2.5</artifactId>
-                        <groupId>org.mortbay.jetty</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>  -->
-
-            <!-- Thymeleaf -->
-            <dependency>
-                <groupId>org.thymeleaf</groupId>
-                <artifactId>thymeleaf</artifactId>
-                <version>${thymeleaf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.thymeleaf</groupId>
-                <artifactId>thymeleaf-spring3</artifactId>
-                <version>${thymeleaf.version}</version>
-            </dependency>
-
-            <!-- Lombok -->
-            <!-- see http://projectlombok.org/slideshow.html -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>0.11.0</version>
-                <type>jar</type>
-            </dependency>
-
-            <!-- Guava -->
-            <!-- see http://code.google.com/p/guava-libraries/wiki/GuavaExplained  -->
-            <!-- see http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/CaseFormat.html -->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>11.0.2</version>
-            </dependency>
-
-            <!-- Hamcrest -->
-            <!-- see http://code.google.com/p/hamcrest/wiki/Tutorial -->
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <version>1.3</version>
-            </dependency>
-
-            <!-- Fest -->
-            <!-- see https://github.com/alexruiz/fest-assert-2.x/wiki/One-minute-starting-guide -->
-            <dependency>
-                <groupId>org.easytesting</groupId>
-                <artifactId>fest-assert-core</artifactId>
-                <version>2.0M8</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Apache Commons Lang -->
-            <!-- see http://commons.apache.org/lang/userguide.html -->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.1</version>
-            </dependency>
-
-            <!-- Lambdaj -->
-            <!-- see http://code.google.com/p/lambdaj/ -->
-            <dependency>
-                <groupId>com.googlecode.lambdaj</groupId>
-                <artifactId>lambdaj</artifactId>
-                <version>2.3.3</version>
-                <exclusions>
-                    <!-- Exclude old version -->
-                    <exclusion>
-                        <artifactId>hamcrest-all</artifactId>
-                        <groupId>org.hamcrest</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- Javax Servlet -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- Jetty Javax Servlet -->
-            <!-- see http://www.eclipse.org/jetty/ -->
-            <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>3.0.20100224</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- Java Melody Monitoring -->
-            <!-- see http://code.google.com/p/javamelody/ -->
-            <dependency>
-                <groupId>net.bull.javamelody</groupId>
-                <artifactId>javamelody-core</artifactId>
-                <version>1.42.0</version>
-            </dependency>
-
-            <!-- JMiniX -->
-            <!-- see http://code.google.com/p/jminix/ -->
-            <dependency>
-                <groupId>org.jminix</groupId>
-                <artifactId>jminix</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-
-            <!-- Compass Ruby Gem -->
-            <!-- see http://stackoverflow.com/questions/11952672/best-way-to-auto-compile-compass-style-sass-via-maven -->
-            <dependency>
-                <groupId>rubygems</groupId>
-                <artifactId>compass</artifactId>
-                <version>0.12.2</version>
-                <type>gem</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 
     <build>
-        <pluginManagement>
-            <plugins>
-
-                <!-- Set Java Version -->
-                <!-- see http://maven.apache.org/plugins/maven-compiler-plugin/ -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.0</version>
-                    <configuration>
-                        <source>${project.build.sourceJavaVersion}</source>
-                        <target>${project.build.targetJavaVersion}</target>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                        <showDeprecation>true</showDeprecation>
-                        <optimize>true</optimize>
-                    </configuration>
-                </plugin>
-
-                <!-- Save Application Build Information -->
-                <!-- Enable if it will be used
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>false</filtering>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                        <includes>
-                            <include>application_build.properties</include>
-                        </includes>
-                    </resource>
-                </resources>
-                -->
-
-                <!-- Import Application Properties -->
-                <!-- Enable if it will be used
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>properties-maven-plugin</artifactId>
-                    <version>1.0-alpha-2</version>
-                    <executions>
-                        <execution>
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>read-project-properties</goal>
-                            </goals>
-                            <configuration>
-                                <files>
-                                    <file>${basedir}/src/main/resources/application_dev.properties</file>
-                                </files>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                -->
-
-                <!-- Compile Compass/Sass files -->
-                <!-- see http://stackoverflow.com/questions/11952672/best-way-to-auto-compile-compass-style-sass-via-maven -->
-                <plugin>
-                    <groupId>de.saumya.mojo</groupId>
-                    <artifactId>gem-maven-plugin</artifactId>
-                    <version>0.29.1</version>
-                    <extensions>true</extensions>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>exec</goal>
-                            </goals>
-                            <phase>compile</phase>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <!--jrubyVersion>1.6.4</jrubyVersion-->
-                        <execArgs>${project.build.directory}/rubygems/bin/compass compile ${basedir}/src/main/webapp/resources</execArgs>
-                    </configuration>
-                </plugin>
-
-                <!-- Generate QueryDSL Help Classes -->
-                <!-- see http://www.querydsl.com/static/querydsl/2.1.0/reference/html/ch03s02.html -->
-                <plugin>
-                    <groupId>com.mysema.maven</groupId>
-                    <artifactId>apt-maven-plugin</artifactId>
-                    <version>1.0.7</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.mysema.querydsl</groupId>
-                            <artifactId>querydsl-apt</artifactId>
-                            <version>${querydsl.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>process</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>target/generated-sources/java</outputDirectory>
-                                <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                                <options>
-                                    <querydsl.excludedPackages>org.andidev.audit</querydsl.excludedPackages>
-                                </options>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- Run Unit Tests -->
-                <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/ -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven.surefire.plugin}</version>
-                    <configuration>
-                        <parallel>methods</parallel>
-                        <threadCount>10</threadCount>
-                        <!-- Skip Tests -->
-                        <skipTests>true</skipTests>
-                        <systemProperties>
-                            <property>
-                                <name>net.sf.ehcache.disabled</name>
-                                <value>true</value>
-                                <!-- USED???, see http://ehcache.org/documentation/faq#is-there-a-simple-way-to-disable-ehcache-when-testing -->
-                            </property>
-                        </systemProperties>
-                        <includes>
-                            <include>**/*Test.java</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/Abstract*.java</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-
-                <!-- Run Integration Tests -->
-                <!-- see http://maven.apache.org/surefire/maven-failsafe-plugin/ -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${maven.failsafe.plugin}</version>
-                </plugin>
-
-                <!-- Use Servlet Java Config -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.1.1</version>
-                    <configuration>
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                    </configuration>
-                </plugin>
-
-                <!-- Analyze Code Quality -->
-                <!-- see http://mojo.codehaus.org/sonar-maven-plugin/ -->
-                <!-- Enable if it will be used
-                <plugin>
-                    <groupId>org.codehaus.sonar</groupId>
-                    <artifactId>sonar-maven3-plugin</artifactId>
-                    <version>${maven.sonar.plugin}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>commons-io</groupId>
-                            <artifactId>commons-io</artifactId>
-                            <version>${commons.io.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                -->
-
-                <!-- Generate Reports/Site -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven.site.plugin}</version>
-                    <configuration>
-                        <reportPlugins>
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-surefire-report-plugin</artifactId>
-                                <version>${maven.surefire.plugin}</version>
-                                <configuration>
-                                    <outputDirectory>${project.basedir}/target/site/testresults</outputDirectory>
-                                </configuration>
-                            </plugin>
-
-                            <!-- Generate Javadoc -->
-                            <!-- see http://maven.apache.org/plugins/maven-javadoc-plugin/ -->
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-javadoc-plugin</artifactId>
-                                <version>${maven.javadoc.plugin}</version>
-                                <configuration>
-                                    <aggregate>true</aggregate>
-                                </configuration>
-                            </plugin>
-
-                            <!-- Create Checkstyle Report -->
-                            <!-- see http://maven.apache.org/plugins/maven-checkstyle-plugin/ -->
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-checkstyle-plugin</artifactId>
-                                <version>${maven.checkstyle.plugin}</version>
-                                <configuration>
-                                    <aggregate>true</aggregate>
-                                </configuration>
-                            </plugin>
-
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-project-info-reports-plugin</artifactId>
-                                <version>${maven.project.info.reports.plugin}</version>
-                                <configuration>
-                                    <aggregate>true</aggregate>
-                                </configuration>
-                            </plugin>
-
-                            <!-- Produce cross-references of the project's sources -->
-                            <!-- see http://maven.apache.org/plugins/maven-jxr-plugin/ -->
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-jxr-plugin</artifactId>
-                                <version>${maven.jxr.plugin}</version>
-                                <configuration>
-                                    <aggregate>true</aggregate>
-                                </configuration>
-                            </plugin>
-
-                            <!-- Create Cobertura Report -->
-                            <!-- see http://mojo.codehaus.org/cobertura-maven-plugin/ -->
-                            <plugin>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>cobertura-maven-plugin</artifactId>
-                                <version>${maven.cobertura.plugin}</version>
-                                <configuration>
-                                    <aggregate>true</aggregate>
-                                </configuration>
-                            </plugin>
-
-                            <!-- Create PMD Report -->
-                            <!-- see http://maven.apache.org/plugins/maven-pmd-plugin/ -->
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-pmd-plugin</artifactId>
-                                <version>${maven.pmd.plugin}</version>
-                                <inherited>true</inherited>
-                                <configuration>
-                                    <rulesets>
-                                        <ruleset>/rulesets/basic.xml</ruleset>
-                                        <ruleset>/rulesets/controversial.xml</ruleset>
-                                    </rulesets>
-                                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                                    <minimumTokens>100</minimumTokens>
-                                    <targetJdk>${java.version}</targetJdk>
-                                </configuration>
-                            </plugin>
-
-                            <!-- Create FindBugs Report -->
-                            <!-- see http://mojo.codehaus.org/findbugs-maven-plugin/ -->
-                            <plugin>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>findbugs-maven-plugin</artifactId>
-                                <version>${maven.findbugs.plugin}</version>
-                                <inherited>true</inherited>
-                            </plugin>
-
-                            <plugin>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>taglist-maven-plugin</artifactId>
-                                <version>${maven.taglist.plugin}</version>
-                                <inherited>true</inherited>
-                            </plugin>
-
-                            <!-- Add GitHub Changelog -->
-                            <!-- see http://maven.apache.org/plugins/maven-changes-plugin/usage.html -->
-                            <!-- USED IN MAVEN 2 REPORTS TAG, NEVER USED IN SITE PLUGIN, WORKS???
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-changes-plugin</artifactId>
-                                <version>2.8</version>
-                                <reportSets>
-                                    <reportSet>
-                                        <reports>
-                                            <report>github-report</report>
-                                        </reports>
-                                    </reportSet>
-                                </reportSets>
-                            </plugin>
-                            -->
-
-                            <!-- Add Licence -->
-                            <!-- see http://mojo.codehaus.org/license-maven-plugin/examples/update-file-header-config.html -->
-                            <!-- USED IN MAVEN 2 REPORTS TAG, NEVER USED IN SITE PLUGIN, WORKS???
-                            <plugin>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>license-maven-plugin</artifactId>
-                                <version>1.3</version>
-                                <configuration>
-                                    <verbose>false</verbose>
-                                    <addSvnKeyWords>false</addSvnKeyWords>
-                                </configuration>
-                                <executions>
-                                    <execution>
-                                        <id>first</id>
-                                        <goals>
-                                            <goal>update-file-header</goal>
-                                        </goals>
-                                        <phase>process-sources</phase>
-                                        <configuration>
-                                            <licenseName>mit</licenseName>
-                                            <excludes>
-                                                <exclude>*.png</exclude>
-                                                <exclude>*.txt</exclude>
-                                            </excludes>
-                                        </configuration>
-                                    </execution>
-                                </executions>
-                            </plugin>
-                            -->
-                            </reportPlugins>
-                        <locales>en</locales>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.doxia</groupId>
-                            <artifactId>doxia-module-markdown</artifactId>
-                            <version>${doxia.module.markdown.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <!-- Deploy Plugin -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${maven.deploy.plugin}</version>
-                </plugin>
-                -->
-
-                <!-- Jar Plugin -->
-                <!-- Enable when it will be supported
-                <plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${maven.jar.plugin}</version>
-                </plugin>
-                -->
-
-                <!-- Install Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-install-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>${maven.install.plugin}</version>
-                </plugin>
-                -->
-
-
-                <!-- Release Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-release-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven.release.plugin}</version>
-                </plugin>
-                -->
-
-                <!-- Assembly Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-assembly-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>${maven.assembly.plugin}</version>
-                    <configuration>
-                        <descriptorRefs>
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                        </descriptorRefs>
-                    </configuration>
-                </plugin>
-                -->
-
-                <!-- Source Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-source-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${maven.source.plugin}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                -->
-
-                <!-- Clean Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-clean-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>${maven.clean.plugin}</version>
-                    <configuration>
-                        <filesets>
-                            <fileset>
-                                <directory>${project.basedir}</directory>
-                                <includes>
-                                    <include>target</include>
-                                    <include>activemq-data</include>
-                                    <include>derby-home</include>
-                                    <include>amqstore</include>
-                                    <include>.clover</include>
-                                    <include>surefire*</include>
-                                    <include>derby.log</include>
-                                </includes>
-                                <followSymlinks>false</followSymlinks>
-                            </fileset>
-                        </filesets>
-                    </configuration>
-                </plugin>
-                -->
-
-                <!-- Maven Eclipse Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-eclipse-plugin</artifactId>
-                    <version>${maven.eclipse.plugin}</version>
-                    <configuration>
-                        <downloadSources>true</downloadSources>
-                        <downloadJavadocs>false</downloadJavadocs>
-                        <wtpversion>${wtp.version}</wtpversion>
-                        <additionalBuildcommands>
-                            <buildCommand>
-                                <name>org.springframework.ide.eclipse.core.springbuilder</name>
-                                <name>org.eclipse.m2e.core.maven2Builder</name>
-                            </buildCommand>
-                            <buildCommand>
-                                <name>org.eclipse.ajdt.core.ajbuilder</name>
-                                <arguments>
-                                    <aspectPath>org.springframework.aspects</aspectPath>
-                                </arguments>
-                            </buildCommand>
-                        </additionalBuildcommands>
-                        <additionalProjectnatures>
-                            <projectnature>org.eclipse.jdt.core.javanature</projectnature>
-                            <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                            <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
-                            <projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
-                        </additionalProjectnatures>
-                    </configuration>
-                </plugin>
-                -->
-
-
-                <!-- Dependency Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-dependency-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>${maven.dependency.plugin}</version>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>sources</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <verbose>true</verbose>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>junit</groupId>
-                            <artifactId>junit</artifactId>
-                            <version>${junit.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>commons-io</groupId>
-                            <artifactId>commons-io</artifactId>
-                            <version>${commons.io.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                -->
-
-                <!-- Resources Plugin -->
-                <!-- see http://maven.apache.org/plugins/maven-resources-plugin/ -->
-                <!-- Enable when it will be supported
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>${maven.resources.plugin}</version>
-                    <configuration>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
-                -->
-                <!--
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>${maven.enforcer.plugin}</version>
-                    <executions>
-                        <execution>
-                            <id>enforce-banned-dependencies</id>
-                            <goals>
-                                <goal>enforce</goal>
-                            </goals>
-                            <configuration>
-                                <rules>
-                                    <bannedDependencies>
-                                        <searchTransitive>true</searchTransitive>
-                                        <excludes>
-                                            <exclude>javassist:javassist</exclude>-->
-                                            <!--<exclude>commons-lang</exclude>-->
-                                            <!--<exclude>commons-digester</exclude>-->
-                                            <!--
-                                            <exclude>commons-logging</exclude>
-                                            <exclude>aspectj:aspectj*</exclude>
-                                            <exclude>hsqldb:hsqldb</exclude>
-                                            <exclude>log4j:log4j</exclude>
-                                            <exclude>org.slf4j:1.5*</exclude>
-                                            <exclude>org.springframework:2.*</exclude>
-                                            <exclude>org.springframework:3.0.*</exclude>
-                                        </excludes>
-                                    </bannedDependencies>
-                                    <requireMavenVersion>
-                                        <version>${maven.version.range}</version>
-                                    </requireMavenVersion>
-                                    <requireJavaVersion>
-                                        <version>${java.version}</version>
-                                    </requireJavaVersion>
-                                </rules>
-                                <fail>true</fail>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>versions-maven-plugin</artifactId>
-                    <version>${maven.versions.plugin}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>junit</groupId>
-                            <artifactId>junit</artifactId>
-                            <version>${junit.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-help-plugin</artifactId>
-                    <version>${maven.help.plugin}</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>aspectj-maven-plugin</artifactId>
-                    <version>${maven.aspectj.plugin}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjrt</artifactId>
-                            <version>${aspectj.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjtools</artifactId>
-                            <version>${aspectj.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>compile</goal>
-                                <goal>test-compile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <outxml>true</outxml>
-                        <aspectLibraries>
-                            <aspectLibrary>
-                                <groupId>org.springframework</groupId>
-                                <artifactId>spring-aspects</artifactId>
-                            </aspectLibrary>
-                        </aspectLibraries>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>${maven.plugin.plugin}</version>
-                </plugin>
-                -->
-
-                <!-- Embedded Tomcat Server -->
-                <!-- see http://tomcat.apache.org/maven-plugin-2.0/ -->
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>${maven.tomcat.plugin}</version>
-                    <configuration>
-                        <systemProperties>
-                            <spring.profiles.active>${application.environment}</spring.profiles.active>
-                            <java.util.logging.manager>org.apache.juli.ClassLoaderLogManager</java.util.logging.manager>
-                            <logback.ContextSelector>JNDI</logback.ContextSelector>
-                        </systemProperties>
-                        <port>8080</port>
-                        <path>/</path>
-                        <charset>UTF-8</charset>
-                        <uriEncoding>UTF-8</uriEncoding>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>jcl-over-slf4j</artifactId>
-                            <version>${slf4j.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                            <version>${slf4j.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>jul-to-slf4j</artifactId>
-                            <version>${slf4j.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>ch.qos.logback</groupId>
-                            <artifactId>logback-classic</artifactId>
-                            <version>${logback.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>ch.qos.logback</groupId>
-                            <artifactId>logback-access</artifactId>
-                            <version>${logback.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <!-- Embedded Jetty Server -->
-                <!-- see http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin -->
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>${maven.jetty.plugin}</version>
-                    <configuration>
-                        <webAppConfig>
-                            <contextPath>/</contextPath>
-                        </webAppConfig>
-                        <stopPort>18080</stopPort>
-                        <stopKey>stop-jetty</stopKey>
-                        <scanIntervalSeconds>1</scanIntervalSeconds>
-                        <requestLog implementation="ch.qos.logback.access.jetty.RequestLogImpl">
-                            <fileName>src/main/resources/logback-access.xml</fileName>
-                            <quiet>true</quiet>
-                        </requestLog>
-                        <systemProperties>
-                            <systemProperty>
-                                <name>spring.profiles.active</name>
-                                <value>${application.environment}</value>
-                            </systemProperty>
-
-                            <systemProperty>
-                                <name>logback.configurationFile</name>
-                                <value>src/main/resources/logback.xml</value>
-                            </systemProperty>
-                        </systemProperties>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>jcl-over-slf4j</artifactId>
-                            <version>${slf4j.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-api</artifactId>
-                            <version>${slf4j.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>jul-to-slf4j</artifactId>
-                            <version>${slf4j.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>ch.qos.logback</groupId>
-                            <artifactId>logback-classic</artifactId>
-                            <version>${logback.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>ch.qos.logback</groupId>
-                            <artifactId>logback-access</artifactId>
-                            <version>${logback.version}</version>
-                            <scope>runtime</scope>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>-->
-
-            <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>apt-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-            </plugin>
-
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-            </plugin>-->
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-            </plugin>
-
+            <!-- Set Java Version -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>${project.build.sourceJavaVersion}</source>
+                    <target>${project.build.targetJavaVersion}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showDeprecation>true</showDeprecation>
+                    <optimize>true</optimize>
+                </configuration>
             </plugin>
 
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>-->
+            <!-- Save Application Build Information -->
+            <!-- Enable if it will be used
+            <resources>
+                <resource>
+                    <directory>src/main/resources</directory>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/main/resources</directory>
+                    <filtering>true</filtering>
+                    <includes>
+                        <include>application_build.properties</include>
+                    </includes>
+                </resource>
+            </resources>
+            -->
 
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-            </plugin>-->
-
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-            </plugin>-->
-
+            <!-- Import Application Properties -->
+            <!-- Enable if it will be used
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${basedir}/src/main/resources/application_dev.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+
+            <!-- Compile Compass/Sass files -->
+<!--                <plugin>
+                <groupId>de.saumya.mojo</groupId>
+                <artifactId>gem-maven-plugin</artifactId>
+                <version>0.29.1</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    jrubyVersion>1.6.4</jrubyVersion
+                    <execArgs>${project.build.directory}/rubygems/bin/compass compile ${basedir}/src/main/webapp/resources</execArgs>
+                </configuration>
+            </plugin>-->
+
+            <!-- Generate QueryDSL Help Classes -->
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.0.7</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysema.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>${querydsl.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                            <options>
+                                <querydsl.excludedPackages>org.andidev.applicationname.audit</querydsl.excludedPackages>
+                            </options>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
+            <!-- Run Unit Tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin}</version>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>10</threadCount>
+                    <!-- Skip Tests -->
+                    <skipTests>true</skipTests>
+                    <systemProperties>
+                        <property>
+                            <name>net.sf.ehcache.disabled</name>
+                            <value>true</value>
+                            <!-- USED???, see http://ehcache.org/documentation/faq#is-there-a-simple-way-to-disable-ehcache-when-testing -->
+                        </property>
+                    </systemProperties>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/Abstract*.java</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
+            <!-- Run Integration Tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin}</version>
+            </plugin>
+
+            <!-- Use Servlet Java Config -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <!-- Analyze Code Quality -->
+            <!-- Enable if it will be used
+            <plugin>
+                <groupId>org.codehaus.sonar</groupId>
+                <artifactId>sonar-maven3-plugin</artifactId>
+                <version>${maven.sonar.plugin}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                        <version>${commons.io.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            -->
+
+            <!-- Generate Reports/Site -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven.site.plugin}</version>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-report-plugin</artifactId>
+                            <version>${maven.surefire.plugin}</version>
+                            <configuration>
+                                <outputDirectory>${project.basedir}/target/site/testresults</outputDirectory>
+                            </configuration>
+                        </plugin>
+
+                        <!-- Generate Javadoc -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <version>${maven.javadoc.plugin}</version>
+                            <configuration>
+                                <aggregate>true</aggregate>
+                            </configuration>
+                        </plugin>
+
+                        <!-- Create Checkstyle Report -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <version>${maven.checkstyle.plugin}</version>
+                            <configuration>
+                                <aggregate>true</aggregate>
+                            </configuration>
+                        </plugin>
+
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-project-info-reports-plugin</artifactId>
+                            <version>${maven.project.info.reports.plugin}</version>
+                            <configuration>
+                                <aggregate>true</aggregate>
+                            </configuration>
+                        </plugin>
+
+                        <!-- Produce cross-references of the project's sources -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-jxr-plugin</artifactId>
+                            <version>${maven.jxr.plugin}</version>
+                            <configuration>
+                                <aggregate>true</aggregate>
+                            </configuration>
+                        </plugin>
+
+                        <!-- Create Cobertura Report -->
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>cobertura-maven-plugin</artifactId>
+                            <version>${maven.cobertura.plugin}</version>
+                            <configuration>
+                                <aggregate>true</aggregate>
+                            </configuration>
+                        </plugin>
+
+                        <!-- Create PMD Report -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-pmd-plugin</artifactId>
+                            <version>${maven.pmd.plugin}</version>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <rulesets>
+                                    <ruleset>/rulesets/basic.xml</ruleset>
+                                    <ruleset>/rulesets/controversial.xml</ruleset>
+                                </rulesets>
+                                <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                                <minimumTokens>100</minimumTokens>
+                                <targetJdk>${java.version}</targetJdk>
+                            </configuration>
+                        </plugin>
+
+                        <!-- Create FindBugs Report -->
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>findbugs-maven-plugin</artifactId>
+                            <version>${maven.findbugs.plugin}</version>
+                            <inherited>true</inherited>
+                        </plugin>
+
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>taglist-maven-plugin</artifactId>
+                            <version>${maven.taglist.plugin}</version>
+                            <inherited>true</inherited>
+                        </plugin>
+
+                        <!-- Add GitHub Changelog -->
+                        <!-- USED IN MAVEN 2 REPORTS TAG, NEVER USED IN SITE PLUGIN, WORKS???
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-changes-plugin</artifactId>
+                            <version>2.8</version>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>github-report</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
+                        </plugin>
+                        -->
+
+                        <!-- Add Licence -->
+                        <!-- USED IN MAVEN 2 REPORTS TAG, NEVER USED IN SITE PLUGIN, WORKS???
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>license-maven-plugin</artifactId>
+                            <version>1.3</version>
+                            <configuration>
+                                <verbose>false</verbose>
+                                <addSvnKeyWords>false</addSvnKeyWords>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>first</id>
+                                    <goals>
+                                        <goal>update-file-header</goal>
+                                    </goals>
+                                    <phase>process-sources</phase>
+                                    <configuration>
+                                        <licenseName>mit</licenseName>
+                                        <excludes>
+                                            <exclude>*.png</exclude>
+                                            <exclude>*.txt</exclude>
+                                        </excludes>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        -->
+                        </reportPlugins>
+                    <locales>en</locales>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>${doxia.module.markdown.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Deploy Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven.deploy.plugin}</version>
+            </plugin>
+            -->
+
+            <!-- Jar Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.plugin}</version>
+            </plugin>
+            -->
+
+            <!-- Install Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven.install.plugin}</version>
+            </plugin>
+            -->
+
+
+            <!-- Release Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven.release.plugin}</version>
+            </plugin>
+            -->
+
+            <!-- Assembly Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven.assembly.plugin}</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+            -->
+
+            <!-- Source Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+
+            <!-- Clean Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven.clean.plugin}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>target</include>
+                                <include>activemq-data</include>
+                                <include>derby-home</include>
+                                <include>amqstore</include>
+                                <include>.clover</include>
+                                <include>surefire*</include>
+                                <include>derby.log</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            -->
+
+            <!-- Maven Eclipse Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>${maven.eclipse.plugin}</version>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>false</downloadJavadocs>
+                    <wtpversion>${wtp.version}</wtpversion>
+                    <additionalBuildcommands>
+                        <buildCommand>
+                            <name>org.springframework.ide.eclipse.core.springbuilder</name>
+                            <name>org.eclipse.m2e.core.maven2Builder</name>
+                        </buildCommand>
+                        <buildCommand>
+                            <name>org.eclipse.ajdt.core.ajbuilder</name>
+                            <arguments>
+                                <aspectPath>org.springframework.aspects</aspectPath>
+                            </arguments>
+                        </buildCommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                        <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+                        <projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
+                    </additionalProjectnatures>
+                </configuration>
+            </plugin>
+            -->
+
+
+            <!-- Dependency Plugin -->
+            <!-- Enable when it will be supported
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven.dependency.plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <version>${junit.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                        <version>${commons.io.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
+            -->
 
-<!--            <plugin>
+            <!-- Resources Plugin -->
+            <!-- Enable when it will be supported
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resources.plugin}</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
             </plugin>
-
+            -->
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-banned-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <searchTransitive>true</searchTransitive>
+                                    <excludes>
+                                        <exclude>javassist:javassist</exclude>-->
+                                        <!--<exclude>commons-lang</exclude>-->
+                                        <!--<exclude>commons-digester</exclude>-->
+                                        <!--
+                                        <exclude>commons-logging</exclude>
+                                        <exclude>aspectj:aspectj*</exclude>
+                                        <exclude>hsqldb:hsqldb</exclude>
+                                        <exclude>log4j:log4j</exclude>
+                                        <exclude>org.slf4j:1.5*</exclude>
+                                        <exclude>org.springframework:2.*</exclude>
+                                        <exclude>org.springframework:3.0.*</exclude>
+                                    </excludes>
+                                </bannedDependencies>
+                                <requireMavenVersion>
+                                    <version>${maven.version.range}</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
+                <version>${maven.versions.plugin}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <version>${junit.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-help-plugin</artifactId>
+                <version>${maven.help.plugin}</version>
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.sonar</groupId>
-                <artifactId>sonar-maven3-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>${maven.aspectj.plugin}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outxml>true</outxml>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-            </plugin>-->
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>${maven.plugin.plugin}</version>
+            </plugin>
+            -->
 
+            <!-- Embedded Tomcat Server -->
             <plugin>
-                <groupId>de.saumya.mojo</groupId>
-                <artifactId>gem-maven-plugin</artifactId>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${maven.tomcat.plugin}</version>
+                <configuration>
+                    <systemProperties>
+                        <spring.profiles.active>${application.environment}</spring.profiles.active>
+                        <java.util.logging.manager>org.apache.juli.ClassLoaderLogManager</java.util.logging.manager>
+                        <logback.ContextSelector>JNDI</logback.ContextSelector>
+                    </systemProperties>
+                    <port>8080</port>
+                    <path>/</path>
+                    <charset>UTF-8</charset>
+                    <uriEncoding>UTF-8</uriEncoding>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                        <version>${slf4j.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                        <version>${slf4j.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jul-to-slf4j</artifactId>
+                        <version>${slf4j.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                        <version>${logback.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-access</artifactId>
+                        <version>${logback.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Embedded Jetty Server -->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${maven.jetty.plugin}</version>
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <stopPort>18080</stopPort>
+                    <stopKey>stop-jetty</stopKey>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <requestLog implementation="ch.qos.logback.access.jetty.RequestLogImpl">
+                        <fileName>src/main/resources/logback-access.xml</fileName>
+                        <quiet>true</quiet>
+                    </requestLog>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>spring.profiles.active</name>
+                            <value>${application.environment}</value>
+                        </systemProperty>
+
+                        <systemProperty>
+                            <name>logback.configurationFile</name>
+                            <value>src/main/resources/logback.xml</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                        <version>${slf4j.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                        <version>${slf4j.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jul-to-slf4j</artifactId>
+                        <version>${slf4j.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                        <version>${logback.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-access</artifactId>
+                        <version>${logback.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
