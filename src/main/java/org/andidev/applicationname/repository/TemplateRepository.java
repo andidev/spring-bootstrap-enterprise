@@ -1,6 +1,6 @@
 package org.andidev.applicationname.repository;
 
-import org.andidev.applicationname.domain.Template;
+import org.andidev.applicationname.entity.Template;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

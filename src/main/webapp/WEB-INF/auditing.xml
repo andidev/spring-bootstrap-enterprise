@@ -10,6 +10,6 @@
 
     <!-- Spring Audit, java config not supported see https://jira.springsource.org/browse/DATAJPA-265 -->
     <jpa:auditing auditor-aware-ref="auditorAware" />
-    <bean id="auditorAware" class="org.andidev.applicationname.audit.AuditorAwareImpl" />
+    <bean id="auditorAware" class="org.andidev.applicationname.config.audit.AuditorAwareImpl" />
 
 </beans>

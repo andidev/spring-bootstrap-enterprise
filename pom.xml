@@ -689,7 +689,7 @@
                             <outputDirectory>target/generated-sources/java</outputDirectory>
                             <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
                             <options>
-                                <querydsl.excludedPackages>org.andidev.applicationname.audit</querydsl.excludedPackages>
+                                <querydsl.excludedPackages>org.andidev.applicationname.config.audit</querydsl.excludedPackages>
                             </options>
                         </configuration>
                     </execution>

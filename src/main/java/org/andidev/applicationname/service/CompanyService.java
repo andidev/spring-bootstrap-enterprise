@@ -2,7 +2,7 @@ package org.andidev.applicationname.service;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.andidev.applicationname.domain.Company;
+import org.andidev.applicationname.entity.Company;
 import org.andidev.applicationname.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

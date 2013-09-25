@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             log.info("Logging in with username = " + username);
-            org.andidev.applicationname.domain.User domainUser = userRepository.findByUsername(username);
+            org.andidev.applicationname.entity.User domainUser = userRepository.findByUsername(username);
 
             boolean enabled = true;
             boolean accountNonExpired = true;

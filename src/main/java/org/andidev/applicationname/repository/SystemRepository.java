@@ -1,6 +1,6 @@
 package org.andidev.applicationname.repository;
 
-import org.andidev.applicationname.domain.System;
+import org.andidev.applicationname.entity.System;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
