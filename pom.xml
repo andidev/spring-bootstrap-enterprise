@@ -60,7 +60,7 @@
                 </property>
             </activation>
             <properties>
-                <application.environment>dev</application.environment>
+                <application.environment>prod</application.environment>
             </properties>
         </profile>
         <profile>
