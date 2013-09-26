@@ -22,14 +22,14 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/andidev/webapp-template-spring</url>
-        <connection>scm:git:git://github.com/andidev/webapp-template-spring.git</connection>
-        <developerConnection>scm:git:git@github.com:andidev/webapp-template-spring.git</developerConnection>
+        <url>https://github.com/andidev/spring-bootstrap-enterprise</url>
+        <connection>scm:git:git://github.com/andidev/spring-bootstrap-enterprise.git</connection>
+        <developerConnection>scm:git:git@github.com:andidev/spring-bootstrap-enterprise.git</developerConnection>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/andidev/webapp-template-spring/issues</url>
+        <url>https://github.com/andidev/spring-bootstrap-enterprise/issues</url>
     </issueManagement>
 
     <organization>
@@ -237,20 +237,6 @@
             <version>1.2.0.RELEASE</version>
         </dependency>
 
-        <!-- Spring Batch -->
-        <dependency>
-            <groupId>org.springframework.batch</groupId>
-            <artifactId>spring-batch-core</artifactId>
-            <version>2.1.8.RELEASE</version>
-        </dependency>
-
-        <!-- Spring Webflow -->
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-webflow</artifactId>
-            <version>2.3.0.RELEASE</version>
-        </dependency>
-
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -287,14 +273,14 @@
             <version>1.6.3</version>
         </dependency>
 
-        <!-- MySQL Java Driver -->
+        <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.9</version>
         </dependency>
 
-        <!-- HSQL DB Driver -->
+        <!-- HSQL DB -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
@@ -332,13 +318,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>4.2.0.Final</version>
-        </dependency>
-
-        <!-- Hibernate Search -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search</artifactId>
-            <version>4.0.0.Final</version>
         </dependency>
 
         <!-- Logback -->
@@ -400,23 +379,12 @@
             <version>${querydsl.version}</version>
         </dependency>
 
-        <!-- Log4jdbc -->
-        <!--
-        <dependency>
-            <groupId>log4jdbc</groupId>
-            <artifactId>log4jdbc</artifactId>
-            <version>4-1.2</version>
-        </dependency>
-        -->
-
-        <!-- Log4jdbc-remix -->
-        <!--
-        <dependency>
-            <groupId>org.lazyluke</groupId>
-            <artifactId>log4jdbc-remix</artifactId>
-            <version>0.2.7</version>
-        </dependency>
-        -->
+        <!-- Log4jdbc-log4j2 -->
+        <!--        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+            <version>1.15</version>
+        </dependency>-->
 
         <!-- Joda Time -->
         <dependency>
@@ -429,12 +397,6 @@
             <artifactId>usertype.spi</artifactId>
             <version>2.0.1</version>
         </dependency>
-        <!--        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time-jsptags</artifactId>
-            <version>1.1.1</version>
-            <scope>runtime</scope>
-        </dependency>-->
 
         <!-- JUnit -->
         <dependency>
@@ -689,7 +651,7 @@
                             <outputDirectory>target/generated-sources/java</outputDirectory>
                             <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
                             <options>
-                                <querydsl.excludedPackages>org.andidev.applicationname.config.audit</querydsl.excludedPackages>
+                                <querydsl.excludedPackages>org.andidev.applicationname.config</querydsl.excludedPackages>
                             </options>
                         </configuration>
                     </execution>
