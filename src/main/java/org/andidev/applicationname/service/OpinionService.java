@@ -1,10 +1,10 @@
 package org.andidev.applicationname.service;
 
+import javax.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.andidev.applicationname.entity.Opinion;
 import org.andidev.applicationname.repository.OpinionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
@@ -47,7 +47,7 @@ public class OpinionService {
     public int add(int x, int y) {
         return x + y;
     }
-    @Autowired
+    @Inject
     private OpinionRepository opinionRepository;
 
     public Boolean create(Opinion opinion) {

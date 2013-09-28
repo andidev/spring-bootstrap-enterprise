@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
-@Profile("dev")
+@Profile("local")
 public class HsqlDatabaseConfig {
 
     @Value("${database.url}")
@@ -40,4 +40,22 @@ public class HsqlDatabaseConfig {
         jpaVendorAdapter.setGenerateDdl(false);
         return jpaVendorAdapter;
     }
+    
+//  @Bean
+//  public DatabasePopulator databasePopulator(DataSource dataSource) {
+//    ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+//    populator.setContinueOnError(true);
+//    populator.setIgnoreFailedDrops(true);
+//    // populator.addScript(new ClassPathResource("/sql/mydata-dml.sql"));
+//    try {
+//      populator.populate(dataSource.getConnection());
+//    } catch (SQLException ignored) {}
+//    return populator;
+//  }  
+  
+//    http://stackoverflow.com/questions/9680286/spring-web-application-doing-something-on-startup-initialization
+//    @PostConstruct
+//public void init() {
+//     //startup logic here
+//}
 }

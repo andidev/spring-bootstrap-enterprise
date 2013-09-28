@@ -2,10 +2,11 @@ package org.andidev.applicationname.controller;
 
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import org.andidev.applicationname.controller.AbstractApplicationController;
 import org.andidev.applicationname.entity.Opinion;
+import org.andidev.applicationname.entity.enums.UserRole;
 import org.andidev.applicationname.repository.OpinionRepository;
 import org.andidev.applicationname.service.OpinionService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -15,13 +16,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping
 @Slf4j
-public class LoginController extends AbstractApplicationController  {
-    
+public class LoginController extends AbstractApplicationController {
+
     @Inject
     OpinionService opinionService;
     @Inject
     OpinionRepository opinionRepository;
-    
+
+    @RequestMapping("/onlyadmin")
+    @Secured("ROLE_ADMIN")
+    public String testing(Model model, @RequestParam(required = false) String message) {
+        log.info("Testing!!!");
+        log.info("Testing!!!");
+        log.info("Testing!!!");
+        log.info("Testing!!!");
+        log.info("Testing!!!");
+        log.info("Testing!!!");
+        return "application/onlyadmin";
+    }
+
     @RequestMapping("/login")
     @Transactional
     public String login(Model model, @RequestParam(required = false) String message) {
@@ -33,7 +46,7 @@ public class LoginController extends AbstractApplicationController  {
         log.info("count = " + opinionRepository.count());
         opinionRepository.findAll();
         log.info("count = " + opinionRepository.findAll().toString());
-        
+
         model.addAttribute("message", message);
         return "login/login";
     }

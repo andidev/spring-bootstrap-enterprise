@@ -1,17 +1,13 @@
 package org.andidev.applicationname.config.audit;
 
+import javax.inject.Inject;
 import lombok.NoArgsConstructor;
 import org.andidev.applicationname.entity.User;
+import org.andidev.applicationname.entity.enums.UserRole;
+import org.andidev.applicationname.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
-/**
- *
- * @author anders
- *
- * @link http://stackoverflow.com/questions/360520/unit-testing-with-spring-security
- */
 @NoArgsConstructor
 public class UserHolder {
 
@@ -20,9 +16,12 @@ public class UserHolder {
         // get user
         User user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = auth.getPrincipal();
+        if (auth == null) {
+            return null;
+        }
 
         // check instance type
+        Object principal = auth.getPrincipal();
         if (principal instanceof User) {
             user = (User) principal;
         } else {
@@ -33,7 +32,7 @@ public class UserHolder {
         if (user.getId() == null) {
             return null;
         }
-    
+
         return user;
 
     }
@@ -43,9 +42,12 @@ public class UserHolder {
         // get user
         org.springframework.security.core.userdetails.User user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = auth.getPrincipal();
+        if (auth == null) {
+            return null;
+        }
 
         // check instance type
+        Object principal = auth.getPrincipal();
         if (principal instanceof org.springframework.security.core.userdetails.User) {
             user = (org.springframework.security.core.userdetails.User) principal;
         } else {
@@ -56,9 +58,8 @@ public class UserHolder {
         if (user.getUsername() == null) {
             return null;
         }
-    
+
         return user.getUsername();
 
     }
-
 }

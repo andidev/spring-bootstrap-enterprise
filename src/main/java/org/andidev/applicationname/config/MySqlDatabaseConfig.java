@@ -1,6 +1,10 @@
 package org.andidev.applicationname.config;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.sql.DataSource;
+import org.andidev.applicationname.entity.Opinion;
+import org.andidev.applicationname.service.OpinionService;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +15,7 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
-@Profile("prod")
+@Profile("!local")
 public class MySqlDatabaseConfig {
 
     @Value("${database.url}")

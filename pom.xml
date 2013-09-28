@@ -60,7 +60,7 @@
                 </property>
             </activation>
             <properties>
-                <application.environment>prod</application.environment>
+                <application.environment>dev</application.environment>
             </properties>
         </profile>
         <profile>
@@ -131,10 +131,10 @@
         <querydsl.version>2.8.2</querydsl.version>
         <selenium.version>2.25.0</selenium.version>
         <slf4j.version>1.7.2</slf4j.version>
-        <spring.version>3.1.3.RELEASE</spring.version>
-        <spring.security.version>3.1.3.RELEASE</spring.security.version>
+        <spring.version>3.2.3.RELEASE</spring.version>
+        <spring.security.version>3.1.4.RELEASE</spring.security.version>
         <sysout.slf4j.version>1.0.2</sysout.slf4j.version>
-        <thymeleaf.version>2.0.14</thymeleaf.version>
+        <thymeleaf.version>2.0.18</thymeleaf.version>
 
         <!-- Plugin Versions -->
         <maven.ant.plugin>1.7</maven.ant.plugin>

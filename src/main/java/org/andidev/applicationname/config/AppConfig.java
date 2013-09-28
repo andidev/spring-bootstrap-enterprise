@@ -1,8 +1,8 @@
 package org.andidev.applicationname.config;
 
 import java.util.Properties;
+import javax.inject.Inject;
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -33,9 +32,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @Import({SpringMvcConfig.class, TraceLoggingConfig.class, HsqlDatabaseConfig.class})
 public class AppConfig {
 
-    @Autowired
+    @Inject
     private JpaVendorAdapter jpaVendorAdapter;
-    @Autowired
+    @Inject
     private DataSource dataSource;
 
     // Properties, nedded for @PropertySource annotation, see https://jira.springsource.org/browse/SPR-8539

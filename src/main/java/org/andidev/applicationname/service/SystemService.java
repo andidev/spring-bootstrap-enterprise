@@ -1,10 +1,10 @@
 package org.andidev.applicationname.service;
 
+import javax.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.andidev.applicationname.entity.System;
 import org.andidev.applicationname.repository.SystemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class SystemService {
 
-    @Autowired
+    @Inject
     private SystemRepository systemRepository;
 
     public Boolean create(System system) {

@@ -3,13 +3,13 @@ package org.andidev.applicationname.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.controller.AbstractApplicationController;
 import org.andidev.applicationname.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,9 +24,9 @@ public class MediatorController extends AbstractApplicationController {
     private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     //
     // usage validator.validate(person)
-    @Autowired
+    @Inject
     UserService userService;
-    //@Autowired
+    //@Inject
     //OpinionRepository opinionRepository;
 
     @RequestMapping(value = "/")

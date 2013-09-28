@@ -1,10 +1,10 @@
 package org.andidev.applicationname.service;
 
+import javax.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.andidev.applicationname.entity.Template;
 import org.andidev.applicationname.repository.TemplateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class TemplateService {
 
-    @Autowired
+    @Inject
     private TemplateRepository templateRepository;
 
     public Boolean create(Template template) {

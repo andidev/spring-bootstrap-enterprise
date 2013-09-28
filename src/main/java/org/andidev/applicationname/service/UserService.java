@@ -1,29 +1,32 @@
 package org.andidev.applicationname.service;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import javax.inject.Inject;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author anders
  */
 @Service
 @Transactional
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserService {
 
-    @Autowired
+    @Inject
+    private PasswordEncoder passwordEncoder;
+    
+    @Inject
     private UserRepository userRepository;
 
     public Boolean create(User user) {
+
+        // Encode password
+        user.setPassword(encryptPassword(user.getPassword()));
+
         // create entity
-        user.getUserRole().setUser(user);
         User saved = userRepository.save(user);
         if (saved == null) {
             return false;
@@ -39,10 +42,10 @@ public class UserService {
             return false;
         }
 
-        // change entity
+        // update entity
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
-        existingUser.getUserRole().setRole(user.getUserRole().getRole());
+        existingUser.setUserRole(user.getUserRole());
 
         // save entity
         User saved = userRepository.save(existingUser);
@@ -68,5 +71,9 @@ public class UserService {
         }
 
         return true;
+    }
+
+    private String encryptPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 }

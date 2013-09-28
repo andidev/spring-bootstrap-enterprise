@@ -1,5 +1,6 @@
 package org.andidev.applicationname.entity;
 
+import org.andidev.applicationname.entity.enums.UserRole;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,10 +26,12 @@ public class User implements Serializable {
     private String lastName;
     @Column(unique = true)
     @NonNull
-    private String username; // used with Company.companyname and User.password to login
-    private String password; // used with Company.companyname and User.username to login
+    private String username;
+    @NonNull
+    private String password;
     private String email;
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
+    @NonNull
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
     @OneToMany(mappedBy = "user")
     private Set<UserPreference> preferences = new HashSet();
