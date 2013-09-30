@@ -50,19 +50,19 @@ public class SecurityController extends AbstractApplicationController {
     @RequestMapping(value = "/login/success")
     public String loginSuccess() {
         String message = "Login Success!";
-        return "redirect:/?message=" + message;
+        return "forward:/main?message=" + message;
     }
 
     @RequestMapping(value = "/login/failure")
     public String loginFailure() {
         String message = "Login Failure!";
-        return "redirect:/?showLogin=true&message=" + message;
+        return "redirect:/main?showLogin=true&message=" + message;
     }
 
     @RequestMapping(value = "/logout/success")
     public String logoutSuccess() {
         String message = "Logout Success!";
-        return "redirect:/?message=" + message;
+        return "redirect:/main?message=" + message;
     }
 
     @RequestMapping(value = "/accessdenied")
