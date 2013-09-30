@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping
 @Slf4j
-public class LoginController extends AbstractApplicationController {
+public class SecurityController extends AbstractApplicationController {
 
     @Inject
     private MessageSource messageSource;
@@ -25,15 +25,6 @@ public class LoginController extends AbstractApplicationController {
     private OpinionService opinionService;
     @Inject
     private OpinionRepository opinionRepository;
-
-    @RequestMapping("/")
-    public String main(Model model,
-            @RequestParam(required = false) String showLogin,
-            @RequestParam(required = false) String message) {
-        model.addAttribute("showLogin", showLogin);
-        model.addAttribute("message", message);
-        return "pages/main";
-    }
 
     @RequestMapping("/admin")
     @Secured("ROLE_ADMIN")

@@ -41,17 +41,8 @@
 
     <body>
         <div class="container">
-            <form class="form-login" action="j_spring_security_check" method="post" th:if="${showLogin}">
-                <h2 class="form-login-heading">Please Login</h2>
-                <input name="j_username" type="text" class="input-block-level" placeholder="Email address"/>
-                <input name="j_password" type="password" class="input-block-level" placeholder="Password"/>
-                <label class="checkbox">
-                    <input type="checkbox" value="remember-me"/> Remember me
-                </label>
-                <button class="btn btn-large btn-primary input-block-level" type="submit">Login</button>
-                <div th:text="${message}" id="message"/>  
-            </form>
-            <span th:if="not ${showLogin}">LOGGED IN!!!</span>
+            <form th:substituteby="fragments/login"/>
+            <span th:if="not ${showLogin}">Welcome to the Main Page!!!</span>
         </div>
     </body>
 </html>
