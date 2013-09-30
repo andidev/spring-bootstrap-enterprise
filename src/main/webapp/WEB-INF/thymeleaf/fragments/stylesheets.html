@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <body>
 
-        <div th:fragment="links">
+        <div th:fragment="stylesheets">
             <div th:switch="${applicationEnvironment}">
-                <div th:case="'dev'">
+                <div th:case="'local'">
                     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css"/>
                     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css"/>    
                 </div>
@@ -13,16 +13,6 @@
                 </div>
             </div>            
         </div>
-        <div th:fragment="scripts">
-            <div th:switch="${applicationEnvironment}">
-                <div th:case="'dev'">
-                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-                    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
-                </div>
-                <div th:case="*">
-                    <!--<script th:src="${resourceUrl}/application.js" src="relative/path/to/application.js"></script>-->
-                </div>
-            </div>            
-        </div>
+        
     </body>
 </html>

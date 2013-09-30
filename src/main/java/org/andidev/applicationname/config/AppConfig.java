@@ -3,13 +3,17 @@ package org.andidev.applicationname.config;
 import java.util.Properties;
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -28,9 +32,12 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev")
 @PropertySource({"application_${spring.profiles.active}.properties"})
-@ImportResource({"/WEB-INF/security.xml", "/WEB-INF/auditing.xml", "/WEB-INF/logging.xml", "/WEB-INF/jmx.xml", "/WEB-INF/monitoring.xml"})
+@ImportResource({"/WEB-INF/config/security.xml", "/WEB-INF/config/auditing.xml", "/WEB-INF/config/logging.xml", "/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
 @Import({SpringMvcConfig.class, TraceLoggingConfig.class, HsqlDatabaseConfig.class})
 public class AppConfig {
+
+    @Value("${application.environment}")
+    private String environment;
 
     @Inject
     private JpaVendorAdapter jpaVendorAdapter;
@@ -94,11 +101,13 @@ public class AppConfig {
         return new LocalValidatorFactoryBean();
     }
 
-    // Internationalization, see http://krams915.blogspot.se/2012/12/spring-and-thymeleaf-with-javaconfig_8540.html
-//    @Bean
-//    public ResourceBundleMessageSource messageSource() {
-//            ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-//            source.setBasename("messages");
-//            return source;
-//    }
+    @Bean(name = "messageSource")
+    public ReloadableResourceBundleMessageSource reloadableMessageSource() {
+            ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+            messageSource.setBasename("/WEB-INF/messages/messages");
+            if ("local".equals(environment)) {
+                messageSource.setCacheSeconds(1);
+            }
+            return messageSource;
+    }
 }

@@ -11,23 +11,23 @@
     <security:http pattern="/resources" security="none" />
     	
     <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/" access="permitAll"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
         <security:intercept-url pattern="/logout" access="permitAll"/>
-        <security:intercept-url pattern="/denied" access="hasAnyRole('ROLE_ADMIN, ROLE_USER')"/>
-        <security:intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN, ROLE_USER')"/>
+        <security:intercept-url pattern="/accessdenied" access="hasAnyRole('ROLE_ADMIN, ROLE_USER')"/>
         <security:intercept-url pattern="/development" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/logback" access="hasRole('ROLE_ADMIN')"/>
-		
+
         <security:form-login login-page="/login" 
-                             authentication-failure-url="/login/failure" 
-                             default-target-url="/"/>
-		
-        <security:access-denied-handler error-page="/denied"/>
-		
-        <security:logout invalidate-session="true" 
+                             default-target-url="/login/success"
+                             authentication-failure-url="/login/failure"/>
+        
+        <security:logout logout-url="/logout"
                          logout-success-url="/logout/success" 
-                         logout-url="/logout"/>
+                         invalidate-session="true"/>		
+        
+        <security:access-denied-handler error-page="/accessdenied"/>
     </security:http>
 	
     <security:authentication-manager>

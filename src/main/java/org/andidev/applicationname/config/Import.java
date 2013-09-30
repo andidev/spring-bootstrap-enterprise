@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class Bootstraper {
+public class Import {
 
     @Inject
     UserService userService;
@@ -27,7 +27,7 @@ public class Bootstraper {
     UserDetailsServiceImpl userDetailService;
 
     @PostConstruct
-    public void bootstrap() {
+    public void importData() {
         log.info("Creating Test Data: Users");
         User anonymousUser = new User("system","", UserRole.ROLE_SYSTEM);
         User adminUser = new User("admin","admin",  UserRole.ROLE_ADMIN);

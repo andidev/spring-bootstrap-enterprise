@@ -6,6 +6,7 @@ import org.andidev.applicationname.entity.Opinion;
 import org.andidev.applicationname.entity.enums.UserRole;
 import org.andidev.applicationname.repository.OpinionRepository;
 import org.andidev.applicationname.service.OpinionService;
+import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,25 +20,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController extends AbstractApplicationController {
 
     @Inject
-    OpinionService opinionService;
+    private MessageSource messageSource;
     @Inject
-    OpinionRepository opinionRepository;
+    private OpinionService opinionService;
+    @Inject
+    private OpinionRepository opinionRepository;
 
-    @RequestMapping("/onlyadmin")
+    @RequestMapping("/")
+    public String main(Model model,
+            @RequestParam(required = false) String showLogin,
+            @RequestParam(required = false) String message) {
+        model.addAttribute("showLogin", showLogin);
+        model.addAttribute("message", message);
+        return "pages/main";
+    }
+
+    @RequestMapping("/admin")
     @Secured("ROLE_ADMIN")
     public String testing(Model model, @RequestParam(required = false) String message) {
-        log.info("Testing!!!");
-        log.info("Testing!!!");
-        log.info("Testing!!!");
-        log.info("Testing!!!");
-        log.info("Testing!!!");
-        log.info("Testing!!!");
-        return "application/onlyadmin";
+        return "pages/admin";
     }
 
     @RequestMapping("/login")
     @Transactional
-    public String login(Model model, @RequestParam(required = false) String message) {
+    public String login(Model model) {
         log.info("Testing!!!");
         Opinion opinion = new Opinion("Test", "Lalala");
         log.info(opinion.toString());
@@ -46,25 +52,30 @@ public class LoginController extends AbstractApplicationController {
         log.info("count = " + opinionRepository.count());
         opinionRepository.findAll();
         log.info("count = " + opinionRepository.findAll().toString());
-
-        model.addAttribute("message", message);
-        return "login/login";
+        String message = "Please Login!";
+        return "redirect:/?showLogin=true&message=" + message;
     }
 
-    @RequestMapping(value = "/denied")
-    public String denied() {
-        return "login/denied";
+    @RequestMapping(value = "/login/success")
+    public String loginSuccess() {
+        String message = "Login Success!";
+        return "redirect:/?message=" + message;
     }
 
     @RequestMapping(value = "/login/failure")
     public String loginFailure() {
         String message = "Login Failure!";
-        return "redirect:/login?message=" + message;
+        return "redirect:/?showLogin=true&message=" + message;
     }
 
     @RequestMapping(value = "/logout/success")
     public String logoutSuccess() {
         String message = "Logout Success!";
-        return "redirect:/login?message=" + message;
+        return "redirect:/?message=" + message;
+    }
+
+    @RequestMapping(value = "/accessdenied")
+    public String accessDenied() {
+        return "pages/accessdenied";
     }
 }

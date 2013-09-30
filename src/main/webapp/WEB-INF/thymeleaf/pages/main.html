@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title th:text="${applicationName}">Application Name | Sign in</title>
-        <link th:substituteby="/common :: links" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css"/>
+        <link th:substituteby="fragments/stylesheets" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css"/>
         <link th:remove="all" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css"/>
         <style type="text/css">
             body {
@@ -41,7 +41,17 @@
 
     <body>
         <div class="container">
-            LOGGED IN!!!
+            <form class="form-login" action="j_spring_security_check" method="post" th:if="${showLogin}">
+                <h2 class="form-login-heading">Please Login</h2>
+                <input name="j_username" type="text" class="input-block-level" placeholder="Email address"/>
+                <input name="j_password" type="password" class="input-block-level" placeholder="Password"/>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"/> Remember me
+                </label>
+                <button class="btn btn-large btn-primary input-block-level" type="submit">Login</button>
+                <div th:text="${message}" id="message"/>  
+            </form>
+            <span th:if="not ${showLogin}">LOGGED IN!!!</span>
         </div>
     </body>
 </html>
