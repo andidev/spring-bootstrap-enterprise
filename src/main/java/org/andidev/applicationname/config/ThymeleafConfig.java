@@ -26,7 +26,7 @@ public class ThymeleafConfig {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
-//        templateEngine.addDialect(new TilesDialect()); 
+//        templateEngine.addDialect(new TilesDialect());
         return templateEngine;
     }
 
@@ -37,7 +37,7 @@ public class ThymeleafConfig {
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
         templateResolver.setOrder(1);
-        if ("dev".equals(environment)) {
+        if ("local".equals(environment)) {
             templateResolver.setCacheable(false);
         }
         return templateResolver;
