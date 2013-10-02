@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <body>
 
-        <div th:fragment="login" class="menu">
+        <div th:fragment="login">
             <form class="form-login" action="j_spring_security_check" method="post" th:if="${showLogin}">
                 <h2 class="form-login-heading">Please Login</h2>
                 <input name="j_username" type="text" class="input-block-level" placeholder="Email address"/>
@@ -11,8 +11,8 @@
                     <input type="checkbox" value="remember-me"/> Remember me
                 </label>
                 <button class="btn btn-large btn-primary input-block-level" type="submit">Login</button>
-                <div th:text="${message}" id="message"/>  
-            </form>            
+                <div th:text="${message}" id="message"/>
+            </form>
         </div>
 
     </body>

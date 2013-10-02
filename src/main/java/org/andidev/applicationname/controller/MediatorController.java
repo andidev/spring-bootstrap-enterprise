@@ -29,20 +29,20 @@ public class MediatorController extends AbstractApplicationController {
     //@Inject
     //OpinionRepository opinionRepository;
 
-    @RequestMapping(value = "/")
-    public String getHomePage(ModelMap model) throws Exception {
+//    @RequestMapping(value = "/")
+//    public String getHomePage(ModelMap model) throws Exception {
 //        String menu = getDefaultMenu();
 //        String subMenu = getDefaultSideMenu(menu);
 //        String title = getTitle(menu, subMenu);
 //        String username = getUsername();
-
+//
 //        model.addAttribute("menu", menu);
 //        model.addAttribute("subMenu", subMenu);
 //        model.addAttribute("title", title);
 //        model.addAttribute("username", username);
-//
-        return "application/application";
-    }
+////
+//        return "application/application";
+//    }
 //
 //    @RequestMapping(value = "/{menu}")
 //    public String getMenuPage(@PathVariable String menu, ModelMap model) throws Exception {
@@ -112,12 +112,12 @@ public class MediatorController extends AbstractApplicationController {
 //        throw new Exception("Default Sub Menu is not setup in MediatorController for menu = " + menu);
 //
 //    }
-
-    private String getTitle(String menu, String subMenu) {
-        return menu + " | " + subMenu;
-    }
-
-    private String getUsername() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
+//
+//    private String getTitle(String menu, String subMenu) {
+//        return menu + " | " + subMenu;
+//    }
+//
+//    private String getUsername() {
+//        return SecurityContextHolder.getContext().getAuthentication().getName();
+//    }
 }

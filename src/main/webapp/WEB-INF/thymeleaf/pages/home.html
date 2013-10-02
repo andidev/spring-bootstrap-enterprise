@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title th:text="${applicationName}">Application Name | Sign in</title>
+        <title th:text="${applicationName} + ' | Home'">Application Name | Home</title>
         <link th:substituteby="fragments/stylesheets" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css"/>
         <link th:remove="all" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css"/>
         <style type="text/css">
@@ -41,10 +41,7 @@
 
     <body>
         <div class="container">
-            <form th:substituteby="fragments/login"/>
-            <span th:if="not ${showLogin}">Welcome to the Main Page!!!</span>
+            Home <a href="/login" th:href="@{/login}">Login</a>
         </div>
-        <script th:substituteby="fragments/javascripts" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script th:remove="all" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
     </body>
 </html>

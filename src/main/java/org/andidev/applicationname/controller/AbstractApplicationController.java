@@ -1,7 +1,9 @@
 package org.andidev.applicationname.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -9,6 +11,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Controller
 public abstract class AbstractApplicationController {
+
+    @Inject
+    private MessageSource messageSource;
 
     @Value("${application.name}")
     private String applicationName;
@@ -31,7 +36,7 @@ public abstract class AbstractApplicationController {
     public String getApplicationEnvironment() {
         return applicationEnvironment;
     }
-    
+
     @ModelAttribute("resourceUrl")
     public String getResourceUrl() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

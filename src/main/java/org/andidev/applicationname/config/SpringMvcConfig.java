@@ -12,14 +12,16 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @Configuration
 @EnableWebMvc
 @Import({ThymeleafConfig.class})
-public class SpringMvcConfig extends WebMvcConfigurerAdapter {
+public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Inject
     Environment environment;
@@ -37,10 +39,17 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Override
+    @Bean
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+        RequestMappingHandlerAdapter adapter = super.requestMappingHandlerAdapter();
+        adapter.setIgnoreDefaultModelOnRedirect(true);
+        return adapter;
+    }
+
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
-
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -56,6 +65,6 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        // Configure the list of HttpMessageConverters to use 
+        // Configure the list of HttpMessageConverters to use
     }
 }
