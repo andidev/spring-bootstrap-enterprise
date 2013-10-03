@@ -31,7 +31,7 @@ public class SecurityController extends AbstractApplicationController {
 
     @RequestMapping(value = "/logout/success")
     public String logoutSuccess() {
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/accessdenied")

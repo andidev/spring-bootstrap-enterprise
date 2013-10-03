@@ -1,5 +1,6 @@
 package org.andidev.applicationname.config;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class ThymeleafConfig {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
-//        templateEngine.addDialect(new TilesDialect());
+        templateEngine.addDialect(new LayoutDialect());
         return templateEngine;
     }
 

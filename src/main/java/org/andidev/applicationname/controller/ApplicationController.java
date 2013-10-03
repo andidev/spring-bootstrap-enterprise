@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class ApplicationController extends AbstractApplicationController {
 
-    @RequestMapping({"/", "/home"})
+    @RequestMapping({"/"})
+    public String root(Model model) {
+        return "redirect:/home";
+    }
+
+    @RequestMapping({"/home"})
     public String home(Model model) {
         return "pages/home";
     }
