@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="navbar" >
 
-        <div th:fragment="navbar" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,8 +32,18 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/logout" th:href="@{/logout}">Logout</a></li>
-                        <li><a href="/login" th:href="@{/login}">Login</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Admin</li>
+                                <li><a href="#groups">Groups</a></li>
+                                <li><a href="#users">Users</a></li>
+                            </ul>
+                        </li>
+                        <li sec:authorize="isAuthenticated()"><a>Logged in as <span sec:authentication="name">Username</span></a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/logout" th:href="@{/logout}">Logout</a></li>
+                        <li sec:authorize="not isAuthenticated()"><a href="/login" th:href="@{/login}">Login</a></li>
                         <li><a href="#search" >Search</a></li>
                     </ul>
                 </div><!-- /navbar-collapse -->

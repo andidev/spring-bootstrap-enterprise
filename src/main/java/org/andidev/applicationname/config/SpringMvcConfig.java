@@ -26,6 +26,8 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     @Inject
     Environment environment;
 
+
+
     @Bean
     public LocaleResolver localeResolver() {
         return new CookieLocaleResolver();

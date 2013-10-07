@@ -33,22 +33,23 @@ public class WebXmlConfig implements WebApplicationInitializer {
         //appContext.scan("org.andidev.applicationname.config");
         appContext.setDisplayName("Application Name");
 //        appContext.setDisplayName(appContext.getEnvironment().getProperty("application.name"));// TODO: Investigate if possible
-        appContext.getEnvironment().setDefaultProfiles("dev");
-        
+        appContext.getEnvironment().setDefaultProfiles("dev"); // TODO: Investigate
+
         // Enable Application Context with Context Loader Listner
         servletContext.addListener(new ContextLoaderListener(appContext));
 
         // Register Dispatcher Servlet
-        ServletRegistration.Dynamic dispatcherServlet = 
+        ServletRegistration.Dynamic dispatcherServlet =
                 servletContext.addServlet("dispatcherServlet", new DispatcherServlet(appContext));
         dispatcherServlet.setLoadOnStartup(1);
         dispatcherServlet.addMapping("/");
+
 
         // Register Spring Security Filter
         FilterRegistration.Dynamic springSecurityFilterChain =
                 servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
         springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
-    
+
         // Register UTF-8 Encoding Filter, see http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter
         FilterRegistration.Dynamic encodingFilter =
                 servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
@@ -60,16 +61,16 @@ public class WebXmlConfig implements WebApplicationInitializer {
         FilterRegistration.Dynamic httpMethodFilter =
                 servletContext.addFilter("httpMethodFilter", HiddenHttpMethodFilter.class);
         httpMethodFilter.addMappingForUrlPatterns(null, false, "/*");
-        
+
         // Register jMiniX Console Servlet
-        ServletRegistration.Dynamic jminixConsoleServlet = 
+        ServletRegistration.Dynamic jminixConsoleServlet =
                 servletContext.addServlet("jMiniXConsoleServlet", new MiniConsoleServlet());
         jminixConsoleServlet.addMapping("/admin/jminix/*");
 
-        
-        
+
+
         /* Logback */
-        
+
         // Enable RequestContextHolder in MDCInsertingServletFilter
         servletContext.addListener(new RequestContextListener());
 
@@ -85,11 +86,11 @@ public class WebXmlConfig implements WebApplicationInitializer {
 
         // Handling System.out and System.err
         servletContext.addListener(new SysOutOverSLF4JServletContextListener());
-        
+
         // Providing URL for Logback Status with OnStatusConsoleListener
-        ServletRegistration.Dynamic viewStatusMessages = 
+        ServletRegistration.Dynamic viewStatusMessages =
                 servletContext.addServlet("viewStatusMessages", new ViewStatusMessagesServlet());
         viewStatusMessages.addMapping("/admin/logback");
-        
+
     }
 }

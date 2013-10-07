@@ -4,14 +4,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/layout">
     <head>
-        <title th:text="${applicationName} + ' | Access Denied!'">Application Name | Access Denied!</title>
+        <title th:text="${applicationName} + ' | Manage Users'">Application Name | Manage Users</title>
         <style type="text/css">
         </style>
     </head>
     <body>
 
-        <section layout:fragment="content">
-            Access Denied! <a href="/login" th:href="@{/login}">Please login.</a>
+        <section layout:fragment="content" >
+            Manage Users
         </section>
 
     </body>

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/layout">
     <head>
-        <title th:text="${applicationName} + ' | Login'">Application Name | Login</title>
+        <title th:text="${applicationName} + ' | User Home'">Application Name | User Home</title>
         <style type="text/css">
         </style>
     </head>
     <body>
-        <section layout:fragment="content">
+
+        <section layout:fragment="content" >
             User Home
         </section>
+
     </body>
 </html>

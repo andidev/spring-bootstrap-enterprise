@@ -2,15 +2,15 @@
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
-    
+
     <!-- Enable JMX Management -->
     <jmxConfigurator />
-          
+
     <!-- Console Application -->
     <appender name="console-application" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%X{username} %X{session} %cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
-        </encoder>  
+        </encoder>
     </appender>
 
     <!-- File Application -->
@@ -24,7 +24,7 @@
             <pattern>%d{"HH:mm ss"}   %-5level   %-130message   %c{0}:%line %n</pattern>
         </encoder>
     </appender>
-   
+
     <!-- Html Application -->
     <appender name="html-application" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>target/logs/html/application.log.html</file>
@@ -34,9 +34,9 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.html.HTMLLayout">
-                <pattern>%d{"HH:mm ss"}%mdc%thread%logger%level%message</pattern>                
+                <pattern>%d{"HH:mm ss"}%mdc%thread%logger%level%message</pattern>
             </layout>
-        </encoder>             
+        </encoder>
     </appender>
 
     <!-- File Users -->
@@ -55,17 +55,17 @@
                 <encoder>
                     <pattern>%d{"HH:mm ss"}   %-5level   %-130message   %c{0}:%line %n</pattern>
                 </encoder>
-            </appender>            
+            </appender>
         </sift>
     </appender>
-    
+
     <!-- Spring -->
     <logger name="org.springframework" level="INHERITED"/>
     <logger name="org.springframework.web" level="INHERITED"/>
-    
+
     <!-- Hibernate -->
     <logger name="org.hibernate" level="INHERITED"/>
-    
+
     <!-- Sql -->
     <logger name="jdbc.sqlonly" level="INHERITED"/>
     <logger name="jdbc.sqltiming" level="INHERITED"/>
@@ -73,25 +73,25 @@
     <logger name="jdbc.resultset" level="INHERITED"/>
     <logger name="jdbc.connection" level="INHERITED"/>
     <logger name="log4jdbc.debug" level="INHERITED"/>
-    
+
     <!-- Java Melody -->
     <logger name="javamelody" level="INHERITED"/>
     <logger name="net.bull.javamelody" level="INHERITED"/>
-                    
+
     <!-- AndiDev -->
     <logger name="org.andidev" level="INFO"/>
-    
+
     <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">
-        <appender-ref ref="console-application"/>        
+        <appender-ref ref="console-application"/>
         <appender-ref ref="file-application"/>
         <appender-ref ref="html-application"/>
         <appender-ref ref="file-users"/>
     </root>
-    
+
     <!-- log4jdbc logging
         Logger           Function
-        
+
         jdbc.sqlonly	 Log all SQL DML statements as they are executed with all JDBC parameters
         jdbc.sqltiming	 Log all SQL post-execution info, including timing statistics on how long the SQL took to execute.
         jdbc.audit	 Log all JDBC method-calls except for ResultSets. This is a very voluminous output, and is not normally needed unless tracking down a specific JDBC problem.
@@ -105,7 +105,7 @@
         INFO   includes the SQL (or other information as applicable.)
         ERROR  will show the stack traces in the log output when SQLExceptions occur.
     -->
-    
+
     <!-- Hibernate logging
         Logger                      Function
 
@@ -118,7 +118,7 @@
         org.hibernate.jdbc          Log all JDBC resource acquisition
         org.hibernate.hql.ast.AST   Log HQL and SQL ASTs during query parsing
         org.hibernate.secure        Log all JAAS authorization requests
-        org.hibernate               Log everything (a lot of information, but very useful for troubleshooting)     
+        org.hibernate               Log everything (a lot of information, but very useful for troubleshooting)
     -->
-    
+
 </configuration>

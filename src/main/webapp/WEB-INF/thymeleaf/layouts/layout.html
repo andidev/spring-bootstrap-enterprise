@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -16,7 +19,7 @@
             </div>
             <div th:case="*" th:remove="tag">
                 <!-- Bootstrap -->
-                <link rel="stylesheet" href="../../../resources/stylesheets/bootstrap.css" th:href="@{/resources-${applicationVersion}/stylesheets/bootstrap.css}" />
+                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/bootstrap.css'}" href="../../../resources/stylesheets/bootstrap.css"/>
             </div>
         </div>
 
@@ -36,17 +39,21 @@
     </head>
 
     <body>
-        <div th:replace="fragments/navbar :: navbar"/>
+        <!-- Navbar -->
+        <div th:include="fragments/navbar :: navbar" th:remove="tag"/>
+
         <div class="container">
-            <div layout:fragment="content">
-            </div>
-            <footer th:replace="fragments/footer :: footer">
-            </footer>
+            <!-- Content -->
+            <div layout:fragment="content" th:remove='tag'/>
         </div>
+
+        <!-- Footer -->
+        <footer th:include="fragments/footer :: footer" th:remove="tag"/>
 
         <!-- JavaScripts -->
         <div th:switch="${applicationEnvironment}" th:remove="tag">
             <div th:case="'local'" th:remove="tag">
+                <!-- Local -->
                 <!-- jQuery -->
                 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
                 <!-- Bootstrap -->
@@ -54,11 +61,9 @@
             </div>
             <div th:case="*" th:remove="tag">
                 <!-- jQuery -->
-                <script  src="../../../resources/javascripts/jquery.js"
-                th:src="@{/resources-${applicationVersion}/javascripts/jquery.js"></script>
+                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/jquery.js'}" src="../../../resources/javascripts/jquery.js"></script>
                 <!-- Bootstrap -->
-                <script src="../../../resources/javascripts/bootstrap.js"
-                th:src="@{/resources-${applicationVersion}/javascripts/bootstrap.js"></script>
+                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/bootstrap.js'}" src="../../../resources/javascripts/bootstrap.js"></script>
             </div>
         </div>
     </body>
