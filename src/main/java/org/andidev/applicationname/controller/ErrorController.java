@@ -14,22 +14,22 @@ public class ErrorController extends AbstractApplicationController {
 
     @RequestMapping(value = "/pagenotfound")
     public String pagenotfound(Model model, HttpServletRequest request) {
-        model.addAttribute("errorCode", request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
+        model.addAttribute("errorStatusCode", request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
         model.addAttribute("errorMessage", request.getAttribute(RequestDispatcher.ERROR_MESSAGE));
+        model.addAttribute("errorRequestUri", request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI));
+        model.addAttribute("errorServletName", request.getAttribute(RequestDispatcher.ERROR_SERVLET_NAME));
 
         return "pages/pagenotfound";
     }
 
     @RequestMapping(value = "/error")
     public String error(Model model, HttpServletRequest request) {
-        model.addAttribute("errorCode", request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
+        model.addAttribute("errorStatusCode", request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
         model.addAttribute("errorMessage", request.getAttribute(RequestDispatcher.ERROR_MESSAGE));
-        model.addAttribute("errorException", ((Class) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE)).getName());
-//        model.addAttribute("errorExceptionStackTrace", ExceptionUtils.getStackTrace((Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE)));
-//        Throwable throwable = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
-//        if (throwable != null) {
-////            model.addAttribute("errorExceptionStackTrace", throwable.getMessage());
-//        }
+        if (exceptionWasThrown(request)) {
+            model.addAttribute("errorExceptionType", ((Class) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE)).getName());
+            model.addAttribute("errorExceptionStackTrace", ExceptionUtils.getStackTrace((Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION)));
+        }
 
         return "pages/error";
     }
@@ -37,5 +37,13 @@ public class ErrorController extends AbstractApplicationController {
     @RequestMapping("/throw")
     public String throwss(Model model, HttpServletRequest request) {
         throw new RuntimeException();
+    }
+
+    private static boolean exceptionWasThrown(HttpServletRequest request) {
+        if (request.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE) != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

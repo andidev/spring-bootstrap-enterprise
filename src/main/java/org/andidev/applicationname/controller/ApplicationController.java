@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/")
 public class ApplicationController extends AbstractApplicationController {
 
     @RequestMapping({"/"})

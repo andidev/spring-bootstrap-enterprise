@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <title th:text="${applicationName} + ' | Error!'">Application Name | Error!</title>
         <style type="text/css">
-        </style>
-    </head>
+            body {
+                padding: 10px 50px;
+                font-family: arial;
+                background-color: #f5f5f5;
+                margin: 0 auto;
+            }
+            .container {
+                width: 800px;
+            }
+            h1 {
+                font-size: 50px;
+            }
+            .error-status-code {
+                color: red;
+            }
+        </style>    </head>
     <body>
 
-        <section layout:fragment="content">
-            <h1>404</h1>
-            <p>Page Not Found!</p>
+        <section>
+            <h1><span class="error-message" th:text="${errorMessage}">Not Found</span> <span class="error-status-code" th:text="${errorStatusCode}">404</span></h1>
         </section>
 
     </body>
