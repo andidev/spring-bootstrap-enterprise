@@ -1,11 +1,13 @@
 package org.andidev.applicationname.service;
 
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
-import org.andidev.applicationname.entity.enums.UserRole;
+import org.andidev.applicationname.entity.enums.Role;
 import org.andidev.applicationname.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,15 +34,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return new org.springframework.security.core.userdetails.User(
                     user.getUsername(),
                     user.getPassword(),
-                    convertToGrantedAuthorities(user.getUserRole()));
+                    convertToGrantedAuthorities(user.getUserRoles()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static List<GrantedAuthority> convertToGrantedAuthorities(UserRole role) {
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.name());
-        return Lists.newArrayList(grantedAuthority);
-    }   
+    private Collection<? extends GrantedAuthority> convertToGrantedAuthorities(Set<Role> userRoles) {
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        for (Role userRole : userRoles) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(userRole.name()));
+        }
+        return grantedAuthorities;
+    }
 }

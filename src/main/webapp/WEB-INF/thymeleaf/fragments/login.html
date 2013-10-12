@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <body th:fragment="login">
-        
+
             <form class="form-login" action="j_spring_security_check" method="post" th:if="${showLogin}">
                 <h2 class="form-login-heading">Please login</h2>
                 <input name="j_username" type="text" class="form-control" placeholder="Email address" autofocus="autofocus"/>

@@ -15,14 +15,14 @@ import lombok.Setter;
 //@Table(schema="system")
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SystemPreference implements Serializable {
+public class PreferenceValue implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.PROTECTED)
     private Long id;
     @ManyToOne
-    private System system;
+    private Group group;
     @ManyToOne
     private Preference preference;
     private String value;

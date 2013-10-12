@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
+    <head>
+        <title th:text="${applicationName} + ' | Java Melody'">Application Name | Java Melody</title>
+        <style type="text/css">
+            html {
+                height: 100%;
+            }
+            body {
+                height: 100%;
+            }
+            .container {
+                height: 100%;
+            }
+            iframe {
+                overflow:hidden;
+                min-height:100%;
+                width:100%
+            }
+        </style>
+    </head>
+    <body>
+
+        <section layout:fragment="content" >
+            <iframe th:src="@{/monitoring}" frameborder="0" height="100%" width="100%"></iframe>
+
+        </section>
+
+    </body>
+</html>

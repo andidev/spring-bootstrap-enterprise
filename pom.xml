@@ -60,7 +60,7 @@
                 </property>
             </activation>
             <properties>
-                <application.environment>local</application.environment>
+                <application.environment>dev</application.environment>
             </properties>
         </profile>
         <profile>
@@ -547,7 +547,7 @@
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-core</artifactId>
-            <version>1.42.0</version>
+            <version>1.46.0</version>
         </dependency>
 
         <!-- JMiniX -->

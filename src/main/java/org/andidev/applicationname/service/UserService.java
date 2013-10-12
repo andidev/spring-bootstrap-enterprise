@@ -17,7 +17,7 @@ public class UserService {
 
     @Inject
     private PasswordEncoder passwordEncoder;
-    
+
     @Inject
     private UserRepository userRepository;
 
@@ -45,7 +45,7 @@ public class UserService {
         // update entity
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
-        existingUser.setUserRole(user.getUserRole());
+        existingUser.setUserRoles(user.getUserRoles());
 
         // save entity
         User saved = userRepository.save(existingUser);

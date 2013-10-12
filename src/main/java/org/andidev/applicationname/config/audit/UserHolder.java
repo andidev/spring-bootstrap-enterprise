@@ -3,7 +3,7 @@ package org.andidev.applicationname.config.audit;
 import javax.inject.Inject;
 import lombok.NoArgsConstructor;
 import org.andidev.applicationname.entity.User;
-import org.andidev.applicationname.entity.enums.UserRole;
+import org.andidev.applicationname.entity.enums.Role;
 import org.andidev.applicationname.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

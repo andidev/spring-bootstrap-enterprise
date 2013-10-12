@@ -15,7 +15,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a th:href="@{/home}" href="#">Home</a></li>
+                        <li class="active"><a th:href="@{/home}" href="#"><span class="glyphicon glyphicon-home"/> Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
@@ -32,19 +32,26 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
+                        <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOPER')" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Admin</li>
-                                <li><a href="#groups">Groups</a></li>
-                                <li><a href="#users">Users</a></li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-header">Admin</li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#groups">Groups</a></li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#users">Users</a></li>
+                                <li sec:authorize="hasRole('ROLE_DEVELOPER')" class="dropdown-header">Developer</li>
+                                <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/javamelody}" href="#javamelody">Java Melody</a></li>
+                                <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a href="#errors">Errors</a></li>
                             </ul>
                         </li>
-                        <li sec:authorize="isAuthenticated()"><a>Logged in as <span sec:authentication="name">Username</span></a></li>
-                        <li sec:authorize="isAuthenticated()"><a href="/logout" th:href="@{/logout}">Logout</a></li>
-                        <li sec:authorize="not isAuthenticated()"><a href="/login" th:href="@{/login}">Login</a></li>
-                        <li><a href="#search" >Search</a></li>
+                        <li sec:authorize="isAuthenticated()" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"/> <span sec:authentication="name">Username</span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/settings}" href="/settings">Settings</a></li>
+                                <li><a th:href="@{/logout}" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li sec:authorize="not isAuthenticated()"><a th:href="@{/login}" href="/login">Login</a></li>
+                        <li><a href="#search" ><span class="glyphicon glyphicon-search"/></a></li>
                     </ul>
                 </div><!-- /navbar-collapse -->
             </div>

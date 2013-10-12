@@ -20,6 +20,11 @@ public class ApplicationController extends AbstractApplicationController {
         return "pages/home";
     }
 
+    @RequestMapping({"/system/javamelody"})
+    public String javamelody(Model model) {
+        return "pages/system/javamelody";
+    }
+
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping({"/userhome"})
     public String userhome(Model model) {

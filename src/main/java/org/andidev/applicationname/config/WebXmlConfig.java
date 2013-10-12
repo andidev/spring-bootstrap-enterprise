@@ -22,7 +22,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         // Set Java Melody settings
-        servletContext.setInitParameter("javamelody.monitoring-path", "/admin/javamelody");
+        servletContext.setInitParameter("javamelody.monitoring-path", "/monitoring");
         servletContext.setInitParameter("javamelody.storage-directory", "logs/javamelody");
         servletContext.setInitParameter("javamelody.resolution-seconds", "60");
         servletContext.setInitParameter("javamelody.disabled", "false");

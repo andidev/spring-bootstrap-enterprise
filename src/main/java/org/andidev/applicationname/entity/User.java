@@ -1,7 +1,8 @@
 package org.andidev.applicationname.entity;
 
-import org.andidev.applicationname.entity.enums.UserRole;
+import org.andidev.applicationname.entity.enums.Role;
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Setter(AccessLevel.PROTECTED) 
+    //@Setter(AccessLevel.PROTECTED)
     private Long id;
     private String firstName;
     private String lastName;
@@ -30,11 +31,12 @@ public class User implements Serializable {
     @NonNull
     private String password;
     private String email;
-    @NonNull
+    @ElementCollection(targetClass = Role.class)
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    private Set<Role> userRoles = EnumSet.noneOf(Role.class);
+    @ManyToMany(mappedBy = "users")
+    private Set<Group> groups;
+
     @OneToMany(mappedBy = "user")
-    private Set<UserPreference> preferences = new HashSet();
-    @ManyToOne
-    private Company company;
+    private Set<PreferenceValue> preferences = new HashSet();
 }

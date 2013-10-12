@@ -40,7 +40,7 @@ public class ThymeleafConfig {
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
         templateResolver.setOrder(1);
-        if ("local".equals(environment)) {
+        if ("local".equals(environment) || "dev".equals(environment)) {
             templateResolver.setCacheable(false);
         }
         return templateResolver;

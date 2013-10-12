@@ -1,8 +1,9 @@
 package org.andidev.applicationname.entity.enums;
 
-public enum UserRole {
+public enum Role {
 
-    ROLE_SYSTEM,
+    ROLE_ROOT,
+    ROLE_DEVELOPER,
     ROLE_ADMIN,
     ROLE_USER
 }

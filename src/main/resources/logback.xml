@@ -61,7 +61,7 @@
 
     <!-- Spring -->
     <logger name="org.springframework" level="INHERITED"/>
-    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.web" level="INHERITED"/>
 
     <!-- Hibernate -->
     <logger name="org.hibernate" level="INHERITED"/>
