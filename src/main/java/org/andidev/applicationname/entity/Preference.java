@@ -11,7 +11,7 @@ import lombok.*;
 @Entity
 //@Table(schema="system")
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 public class Preference implements Serializable {
 
@@ -20,10 +20,6 @@ public class Preference implements Serializable {
     @Setter(AccessLevel.PROTECTED)
     private Long id;
     private String name;
-    @ManyToOne
-    @NonNull
-    private Service service;
-    private Boolean isSystemPreference;
-    private Boolean isCompanyPreference;
-    private Boolean isUserPreference;
+//    private Boolean isGroupPreference;
+//    private Boolean isUserPreference;
 }

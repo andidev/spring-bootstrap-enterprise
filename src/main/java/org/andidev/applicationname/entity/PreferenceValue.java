@@ -22,8 +22,6 @@ public class PreferenceValue implements Serializable {
     @Setter(AccessLevel.PROTECTED)
     private Long id;
     @ManyToOne
-    private Group group;
-    @ManyToOne
     private Preference preference;
     private String value;
 }

@@ -30,29 +30,29 @@ public class Import {
     @PostConstruct
     public void importData() {
         log.info("Creating initial database data");
-        log.info("Creating Users");
+//        log.info("Creating Users");
 
         log.info("Creating root user");
         User systemUser = new User("root", "");
-        systemUser.getUserRoles().addAll(Arrays.asList(Role.values()));
+        systemUser.getRoles().addAll(Arrays.asList(Role.values()));
         userService.create(systemUser);
 
         log.info("Creating developer user");
         User developerUser = new User("developer", "");
-        developerUser.getUserRoles().add(Role.ROLE_DEVELOPER);
-        developerUser.getUserRoles().add(Role.ROLE_ADMIN);
-        developerUser.getUserRoles().add(Role.ROLE_USER);
+        developerUser.getRoles().add(Role.ROLE_DEVELOPER);
+        developerUser.getRoles().add(Role.ROLE_ADMIN);
+        developerUser.getRoles().add(Role.ROLE_USER);
         userService.create(developerUser);
 
         log.info("Creating admin user");
         User adminUser = new User("admin", "");
-        adminUser.getUserRoles().add(Role.ROLE_ADMIN);
-        adminUser.getUserRoles().add(Role.ROLE_USER);
+        adminUser.getRoles().add(Role.ROLE_ADMIN);
+        adminUser.getRoles().add(Role.ROLE_USER);
         userService.create(adminUser);
 
         log.info("Creating user");
         User user = new User("user", "");
-        adminUser.getUserRoles().add(Role.ROLE_USER);
+        adminUser.getRoles().add(Role.ROLE_USER);
         userService.create(user);
 
         log.info("Initial database data created!");

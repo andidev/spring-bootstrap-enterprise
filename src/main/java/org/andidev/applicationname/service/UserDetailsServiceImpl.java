@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return new org.springframework.security.core.userdetails.User(
                     user.getUsername(),
                     user.getPassword(),
-                    convertToGrantedAuthorities(user.getUserRoles()));
+                    convertToGrantedAuthorities(user.getRoles()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);

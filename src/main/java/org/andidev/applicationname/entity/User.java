@@ -33,10 +33,9 @@ public class User implements Serializable {
     private String email;
     @ElementCollection(targetClass = Role.class)
     @Enumerated(EnumType.STRING)
-    private Set<Role> userRoles = EnumSet.noneOf(Role.class);
+    private Set<Role> roles = EnumSet.noneOf(Role.class);
     @ManyToMany(mappedBy = "users")
     private Set<Group> groups;
-
-    @OneToMany(mappedBy = "user")
-    private Set<PreferenceValue> preferences = new HashSet();
+    @OneToMany
+    private Set<PreferenceValue> preferenceValues = new HashSet();
 }

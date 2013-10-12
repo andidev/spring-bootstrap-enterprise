@@ -45,7 +45,7 @@ public class UserService {
         // update entity
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
-        existingUser.setUserRoles(user.getUserRoles());
+        existingUser.setRoles(user.getRoles());
 
         // save entity
         User saved = userRepository.save(existingUser);
