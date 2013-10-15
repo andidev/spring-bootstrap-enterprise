@@ -1,5 +1,6 @@
 package org.andidev.applicationname.entity;
 
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -8,9 +9,13 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Data
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "uuid")
 @MappedSuperclass
-public class IdVersionEntity extends  AbstractPersistable<Long> {
+public class IdUuidVersionEntity extends  AbstractPersistable<Long> {
+
+    @Column(unique = true)
+    @Setter(AccessLevel.PROTECTED)
+    private String uuid = UUID.randomUUID().toString();
     @Version
     @Setter(AccessLevel.PROTECTED)
     private Long version;

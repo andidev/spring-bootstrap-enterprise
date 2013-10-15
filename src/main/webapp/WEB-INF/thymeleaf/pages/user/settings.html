@@ -4,14 +4,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/layout">
     <head>
-        <title th:text="${applicationName} + ' | Users'">Application Name | Users</title>
+        <title th:text="${applicationName} + ' | Settings'">Application Name | Settings</title>
         <style type="text/css">
         </style>
     </head>
     <body>
 
         <section layout:fragment="content" >
-            <div th:include="fragments/pageheader :: pageheader" th:with="header='Users', subtext=''" th:remove="tag"/>
+            <div th:include="fragments/pageheader :: pageheader" th:with="header='Settings', subtext=''" th:remove="tag"/>
         </section>
 
     </body>

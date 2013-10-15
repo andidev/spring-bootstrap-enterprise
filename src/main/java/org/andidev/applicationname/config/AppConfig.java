@@ -67,6 +67,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+        jpaProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
         jpaProperties.setProperty("org.hibernate.envers.auditTablePrefix", "");
         jpaProperties.setProperty("org.hibernate.envers.auditTableSuffix", "_AUD");
         jpaProperties.setProperty("org.hibernate.envers.storeDataAtDelete", "true");

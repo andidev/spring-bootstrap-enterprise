@@ -11,8 +11,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
-    Group findByName(String groupname);
+    Group findByGroupname(String groupname);
 
-    Page<Group> findByNameLike(String name, Pageable pageable);
+    Group findByIdNotAndGroupname(Long id, String groupname);
+
+    Page<Group> findByGroupnameLike(Long groupname, Pageable pageable);
 
 }

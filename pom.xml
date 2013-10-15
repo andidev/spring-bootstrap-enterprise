@@ -60,7 +60,7 @@
                 </property>
             </activation>
             <properties>
-                <application.environment>local</application.environment>
+                <application.environment>dev</application.environment>
             </properties>
         </profile>
         <profile>
@@ -238,6 +238,13 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring.data.jpa.version}</version>
         </dependency>
+
+        <!-- Spring Data Envers -->
+<!--        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-envers</artifactId>
+            <version>0.1.0.RELEASE</version>
+        </dependency>-->
 
         <!-- Spring Security -->
         <dependency>

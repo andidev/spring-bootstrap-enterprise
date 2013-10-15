@@ -16,37 +16,23 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a th:href="@{/home}" href="#"><span class="glyphicon glyphicon-home"/> Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOPER')" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-header">Admin</li>
-                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#groups">Groups</a></li>
-                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#users">Users</a></li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/system/groups}" href="/system/groups">Groups</a></li>
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/system/users}" href="/system/users">Users</a></li>
                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')" class="dropdown-header">Developer</li>
                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/javamelody}" href="#javamelody">Java Melody</a></li>
-                                <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a href="#errors">Errors</a></li>
+                                <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/errors}" href="/system/errors">Errors</a></li>
                             </ul>
                         </li>
                         <li sec:authorize="isAuthenticated()" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"/> <span sec:authentication="name">Username</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/settings}" href="/settings">Settings</a></li>
+                                <li><a th:href="@{/user/settings}" href="/user/settings">Settings</a></li>
                                 <li><a th:href="@{/logout}" href="/logout">Logout</a></li>
                             </ul>
                         </li>

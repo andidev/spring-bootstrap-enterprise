@@ -1,6 +1,7 @@
 package org.andidev.applicationname.service;
 
 import javax.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,64 +14,40 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@Slf4j
 public class UserService {
 
     @Inject
     private PasswordEncoder passwordEncoder;
-
     @Inject
     private UserRepository userRepository;
 
-    public Boolean create(User user) {
+    public User create(User user) {
+        log.info("Creating {} user", user.getUsername());
+
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            throw new RuntimeException("Cannot create user with username  \"" + user.getUsername() + "\" , the username is already in use by another user." );
+        }
 
         // Encode password
         user.setPassword(encryptPassword(user.getPassword()));
 
         // create entity
-        User saved = userRepository.save(user);
-        if (saved == null) {
-            return false;
-        }
-
-        return true;
+        return userRepository.save(user);
     }
 
-    public Boolean update(User user) {
-        // find entity
-        User existingUser = userRepository.findOne(user.getId());
-        if (existingUser == null) {
-            return false;
+    public User update(User user) {
+        if (userRepository.findByIdNotAndUsername(user.getId(), user.getUsername()) != null) {
+            throw new RuntimeException("Cannot update user with username  \"" + user.getUsername() + "\" , the username is already in use by another user." );
         }
-
-        // update entity
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setRoles(user.getRoles());
 
         // save entity
-        User saved = userRepository.save(existingUser);
-        if (saved == null) {
-            return false;
-        }
-
-        return true;
+        return userRepository.save(user);
     }
 
-    public Boolean delete(User user) {
-        // find entity
-        User existingUser = userRepository.findOne(user.getId());
-        if (existingUser == null) {
-            return false;
-        }
-
+    public void delete(User user) {
         // delete entity
-        userRepository.delete(existingUser);
-        User deletedUser = userRepository.findOne(user.getId());
-        if (deletedUser != null) {
-            return false;
-        }
-
-        return true;
+        userRepository.delete(user);
     }
 
     private String encryptPassword(String password) {

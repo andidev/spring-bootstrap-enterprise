@@ -4,41 +4,40 @@ import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.andidev.applicationname.entity.enums.Role;
 
 @Entity
-//@Table(schema="system")
+@Table(name = "Group")
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
-public class Group implements Serializable {
+@EqualsAndHashCode(of = {}, callSuper = true)
+public class Group extends IdUuidVersionEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Setter(AccessLevel.PROTECTED)
-    private Long id;
+    @Column(unique = true)
     @NonNull
-    private String name;
-    @ElementCollection(targetClass = Role.class)
+    private String groupname;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles = EnumSet.noneOf(Role.class);
-    @ManyToMany
+    private Set<Role> groupRoles = EnumSet.noneOf(Role.class);
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<User> users = new HashSet();
     @OneToMany
     private Set<PreferenceValue> preferenceValues = new HashSet();
-
 }

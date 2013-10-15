@@ -20,14 +20,35 @@ public class ApplicationController extends AbstractApplicationController {
         return "pages/home";
     }
 
-    @RequestMapping({"/system/javamelody"})
-    public String javamelody(Model model) {
-        return "pages/system/javamelody";
-    }
-
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping({"/userhome"})
     public String userhome(Model model) {
         return "pages/userhome";
     }
+
+    @RequestMapping({"/user/settings"})
+    public String settings(Model model) {
+        return "pages/user/settings";
+    }
+
+    @RequestMapping({"/system/groups"})
+    public String groups(Model model) {
+        return "pages/system/groups";
+    }
+
+    @RequestMapping({"/system/users"})
+    public String users(Model model) {
+        return "pages/system/users";
+    }
+
+    @RequestMapping({"/system/javamelody"})
+    public String javamelody(Model model) {
+        return "pages/system/javamelody";
+    }
+
+    @RequestMapping({"/system/errors"})
+    public String errors(Model model) {
+        return "pages/system/errors";
+    }
+
 }

@@ -9,7 +9,6 @@ import lombok.*;
  * @author anders
  */
 @Entity
-//@Table(schema="system")
 @Data
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor

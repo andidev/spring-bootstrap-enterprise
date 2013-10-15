@@ -11,7 +11,7 @@
     <body>
 
         <section layout:fragment="content" >
-            User Home
+            <div th:include="fragments/pageheader :: pageheader" th:with="header='User Home', subtext=''" th:remove="tag"/>
         </section>
 
     </body>

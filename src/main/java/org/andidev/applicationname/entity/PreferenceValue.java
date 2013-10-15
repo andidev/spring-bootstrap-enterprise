@@ -12,7 +12,6 @@ import lombok.Setter;
  * @author anders
  */
 @Entity
-//@Table(schema="system")
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PreferenceValue implements Serializable {

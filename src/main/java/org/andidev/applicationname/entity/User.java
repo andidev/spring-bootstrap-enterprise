@@ -2,6 +2,7 @@ package org.andidev.applicationname.entity;
 
 import org.andidev.applicationname.entity.enums.Role;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,16 +14,12 @@ import lombok.*;
  * @author anders
  */
 @Entity
-//@Table(schema="system")
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
-public class User implements Serializable {
+@EqualsAndHashCode(of = {}, callSuper = true)
+public class User extends IdUuidVersionEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Setter(AccessLevel.PROTECTED)
-    private Long id;
     private String firstName;
     private String lastName;
     @Column(unique = true)
@@ -31,11 +28,27 @@ public class User implements Serializable {
     @NonNull
     private String password;
     private String email;
-    @ElementCollection(targetClass = Role.class)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles = EnumSet.noneOf(Role.class);
-    @ManyToMany(mappedBy = "users")
-    private Set<Group> groups;
+    private Set<Role> userRoles = EnumSet.noneOf(Role.class);
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private Set<Group> groups = new HashSet();
     @OneToMany
     private Set<PreferenceValue> preferenceValues = new HashSet();
+
+    public Set<Role> getRoles() {
+        Set<Role> roles = EnumSet.noneOf(Role.class);
+        roles.addAll(getUserRoles());
+        roles.addAll(getGroupRoles());
+        return roles;
+    }
+
+    private Set<Role> getGroupRoles() {
+        Set<Role> roles = EnumSet.noneOf(Role.class);
+        for (Group group : getGroups()) {
+            roles.addAll(group.getGroupRoles());
+        }
+        return roles;
+    }
+
 }

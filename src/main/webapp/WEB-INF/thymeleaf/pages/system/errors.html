@@ -11,7 +11,7 @@
     <body>
 
         <section layout:fragment="content" >
-            Errors
+            <div th:include="fragments/pageheader :: pageheader" th:with="header='Errors', subtext=''" th:remove="tag"/>
         </section>
 
     </body>
