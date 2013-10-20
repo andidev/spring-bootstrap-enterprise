@@ -53,4 +53,8 @@ public class UserService {
     private String encryptPassword(String password) {
         return passwordEncoder.encode(password);
     }
+
+    public void text() {
+        log.info("testing!");
+    }
 }

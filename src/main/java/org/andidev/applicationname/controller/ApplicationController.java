@@ -1,6 +1,9 @@
 package org.andidev.applicationname.controller;
 
+import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import org.andidev.applicationname.config.audit.UserHolder;
+import org.andidev.applicationname.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class ApplicationController extends AbstractApplicationController {
     
+    @Inject
+    UserService userService;
+    
     @RequestMapping({"/"})
     public String root(Model model) {   
         return "redirect:/home";
@@ -17,6 +23,8 @@ public class ApplicationController extends AbstractApplicationController {
 
     @RequestMapping({"/home"})
     public String home(Model model) {
+        log.info(UserHolder.getUsername());
+        userService.text();
         return "pages/home";
     }
 

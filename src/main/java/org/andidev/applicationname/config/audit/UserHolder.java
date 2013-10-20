@@ -1,10 +1,7 @@
 package org.andidev.applicationname.config.audit;
 
-import javax.inject.Inject;
 import lombok.NoArgsConstructor;
 import org.andidev.applicationname.entity.User;
-import org.andidev.applicationname.entity.enums.Role;
-import org.andidev.applicationname.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -43,23 +40,26 @@ public class UserHolder {
         org.springframework.security.core.userdetails.User user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) {
-            return null;
+            return "noUser";
         }
 
         // check instance type
         Object principal = auth.getPrincipal();
         if (principal instanceof org.springframework.security.core.userdetails.User) {
             user = (org.springframework.security.core.userdetails.User) principal;
-        } else {
-            return null;
-        }
 
-        // check null
-        if (user.getUsername() == null) {
-            return null;
-        }
+            // check null
+            if (user.getUsername() == null) {
+                return "noUser";
+            }
 
-        return user.getUsername();
+            return user.getUsername();
+
+        } else if (principal instanceof String) {
+            return (String) principal;
+        }
+        
+        return null;
 
     }
 }

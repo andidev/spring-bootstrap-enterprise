@@ -7,9 +7,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import org.andidev.applicationname.config.audit.UserHolder;
 import org.slf4j.MDC;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -38,11 +37,7 @@ public class MDCInsertingServletFilter implements Filter {
     }
 
     private String getUsername() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            return auth.getName();
-        }
-        return "NO_USER";
+        return UserHolder.getUsername();
     }
 
     private String getSession() {
@@ -50,6 +45,6 @@ public class MDCInsertingServletFilter implements Filter {
         if (attrs != null) {
             return attrs.getSessionId();
         }
-        return "NO_SESSION";
+        return "noSession";
     }
 }

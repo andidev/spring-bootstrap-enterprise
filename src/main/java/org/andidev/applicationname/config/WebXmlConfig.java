@@ -21,6 +21,34 @@ public class WebXmlConfig implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+
+
+
+        /* Logback */
+
+        // Enable RequestContextHolder in MDCInsertingServletFilter
+        servletContext.addListener(new RequestContextListener());
+
+        // Add data to Logback MDC
+        FilterRegistration.Dynamic mdcInsertingServletFilter =
+                servletContext.addFilter("mdcInsertingServletFilter", MDCInsertingServletFilter.class);
+        mdcInsertingServletFilter.addMappingForUrlPatterns(null, false, "/*");
+        
+
+        // Enable Logback Access Request-Response
+        FilterRegistration.Dynamic teeFilter =
+                servletContext.addFilter("teeFilter", TeeFilter.class);
+        teeFilter.addMappingForUrlPatterns(null, false, "/*");
+
+        // Handling System.out and System.err
+        servletContext.addListener(new SysOutOverSLF4JServletContextListener());
+
+        // Providing URL for Logback Status with OnStatusConsoleListener
+        ServletRegistration.Dynamic viewStatusMessages =
+                servletContext.addServlet("viewStatusMessages", new ViewStatusMessagesServlet());
+        viewStatusMessages.addMapping("/admin/logback");
+
+        
         // Set Java Melody settings
         servletContext.setInitParameter("javamelody.monitoring-path", "/monitoring");
         servletContext.setInitParameter("javamelody.storage-directory", "logs/javamelody");
@@ -66,31 +94,6 @@ public class WebXmlConfig implements WebApplicationInitializer {
         ServletRegistration.Dynamic jminixConsoleServlet =
                 servletContext.addServlet("jMiniXConsoleServlet", new MiniConsoleServlet());
         jminixConsoleServlet.addMapping("/admin/jminix/*");
-
-
-
-        /* Logback */
-
-        // Enable RequestContextHolder in MDCInsertingServletFilter
-        servletContext.addListener(new RequestContextListener());
-
-        // Add data to Logback MDC
-        FilterRegistration.Dynamic mdcInsertingServletFilter =
-                servletContext.addFilter("mdcInsertingServletFilter", MDCInsertingServletFilter.class);
-        mdcInsertingServletFilter.addMappingForUrlPatterns(null, false, "/*");
-
-        // Enable Logback Access Request-Response
-        FilterRegistration.Dynamic teeFilter =
-                servletContext.addFilter("teeFilter", TeeFilter.class);
-        teeFilter.addMappingForUrlPatterns(null, false, "/*");
-
-        // Handling System.out and System.err
-        servletContext.addListener(new SysOutOverSLF4JServletContextListener());
-
-        // Providing URL for Logback Status with OnStatusConsoleListener
-        ServletRegistration.Dynamic viewStatusMessages =
-                servletContext.addServlet("viewStatusMessages", new ViewStatusMessagesServlet());
-        viewStatusMessages.addMapping("/admin/logback");
 
     }
 }
