@@ -19,7 +19,7 @@ public class SecurityController extends AbstractApplicationController {
 
     @RequestMapping(value = "/login/success")
     public String loginSuccess(Model model) {
-        return "redirect:/userhome";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/login/failure")

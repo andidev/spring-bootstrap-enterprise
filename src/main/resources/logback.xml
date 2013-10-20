@@ -9,6 +9,8 @@
     <!-- Console Application -->
     <appender name="console-application" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
+            <!-- TODO: Upgrade to logback 1.0.12 or higher and start using default MDC values -->
+            <!--<pattern>%X{username:-noUser} %X{session:-noSession} %cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>-->
             <pattern>%X{username} %X{session} %cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
         </encoder>
     </appender>
