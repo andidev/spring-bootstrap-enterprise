@@ -13,21 +13,19 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.andidev.applicationname.entity.enums.Role;
 
 @Entity
-@Table(name = "Group")
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
-@EqualsAndHashCode(of = {}, callSuper = true)
+@Setter
+@Getter
 public class Group extends IdUuidVersionEntity implements Serializable {
 
     @Column(unique = true)

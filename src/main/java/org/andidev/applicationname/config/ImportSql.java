@@ -1,7 +1,6 @@
 package org.andidev.applicationname.config;
 
 import java.util.Arrays;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.Group;
@@ -12,39 +11,37 @@ import org.andidev.applicationname.service.GroupService;
 import org.andidev.applicationname.service.OpinionService;
 import org.andidev.applicationname.service.UserDetailsServiceImpl;
 import org.andidev.applicationname.service.UserService;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
 @Slf4j
-public class Import {
-
+public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
+    
+    @Inject
+    private GroupService groupService;
     @Inject
     UserService userService;
     @Inject
-    OpinionService opinionService;
-    @Inject
     UserDetailsServiceImpl userDetailService;
     @Inject
-    private GroupService groupService;
-
-    @PostConstruct
+    OpinionService opinionService;
+    
+    @Override
     @Transactional
-    public void importData() {
-        log.info("Creating initial database data");
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+       log.info("Creating initial database data");
 
         // Create root user and group
         User rootUser = createRootUser();
         Group rootGroup = createRootGroup();
         rootGroup.getUsers().add(rootUser);
-        rootUser.getGroups().add(rootGroup);
-        userService.update(rootUser);
-//        groupService.update(rootGroup);
+
         // Create dev user and group
         User developerUser = createDeveloperUser();
         Group developerGroup = createDeveloperGroup();

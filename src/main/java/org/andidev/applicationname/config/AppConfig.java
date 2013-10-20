@@ -111,4 +111,9 @@ public class AppConfig {
             }
             return messageSource;
     }
+    
+    @Bean
+    public ImportSql importSql(){
+        return new ImportSql();
+    }
 }

@@ -2,22 +2,17 @@ package org.andidev.applicationname.entity;
 
 import org.andidev.applicationname.entity.enums.Role;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import lombok.*;
 
-/**
- *
- * @author anders
- */
 @Entity
-@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
-@EqualsAndHashCode(of = {}, callSuper = true)
+@Setter
+@Getter
 public class User extends IdUuidVersionEntity implements Serializable {
 
     private String firstName;
@@ -51,4 +46,10 @@ public class User extends IdUuidVersionEntity implements Serializable {
         return roles;
     }
 
+//    @Override
+//    public String toString() {
+//        return ""; //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    
 }
