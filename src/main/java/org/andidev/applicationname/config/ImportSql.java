@@ -73,7 +73,6 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private User createRootUser() {
         User user = new User("root", "");
-//        user.getUserRoles().addAll(Arrays.asList(Role.values()));
         return userService.create(user);
     }
 
@@ -85,9 +84,6 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private User createDeveloperUser() {
         User user = new User("developer", "");
-        user.getUserRoles().add(Role.ROLE_DEVELOPER);
-        user.getUserRoles().add(Role.ROLE_ADMIN);
-        user.getUserRoles().add(Role.ROLE_USER);
         return userService.create(user);
     }
 
@@ -101,8 +97,6 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private User createAdminUser() {
         User user = new User("admin", "");
-        user.getUserRoles().add(Role.ROLE_ADMIN);
-        user.getUserRoles().add(Role.ROLE_USER);
         return userService.create(user);
     }
 
@@ -115,7 +109,6 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private User createUser() {
         User user = new User("user", "");
-        user.getUserRoles().add(Role.ROLE_USER);
         return userService.create(user);
     }
 
