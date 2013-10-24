@@ -11,7 +11,6 @@ This project is still under heavy development and is therefore not recomended to
 
 ## TODOs
 
-* Refactor Maven Module structure
 * Add environment specific logging
 * Add trace specific logging
 * Add debug specific logging
@@ -19,9 +18,6 @@ This project is still under heavy development and is therefore not recomended to
 * Configure to use Compass/Sass through maven if possible
 * Configure JSR 303 Validation
 * Configure Spring Conversion Service with language translations
-* Include jQuery
-* Include Twitter Bootstrap
-* Include Underscore.js
 * Investigate if Animate.css should be included
 * Investigate if jQuery++ should be included
 * Investigate if mustasche.js should be included
@@ -30,9 +26,7 @@ This project is still under heavy development and is therefore not recomended to
 * Make available with maven archetype:generate
 * Remove old css code
 * Remove old javascript code
-* Refactor/Replace top navbar to use Bootstrap
-* Provide Login page
-* Provide User Management page
+* Provide User/Group Management page
 * Include webdriver/selenium 2
 
 
@@ -41,15 +35,9 @@ This project is still under heavy development and is therefore not recomended to
 * Configure JSP 3.0 (with Apache Tiles) as secondary view resolver
 * Include JqueryUI as secondary framework
 * Include Twitter Bootstrap JqueryUI Theme
-* Investigate if Yeaman is possible to use
+* Investigate if Yeaman should be used
 * Add Coding Conventions, Design Conventions and Design Guides
 * Web Interface to see/configure logs www.appname.org/logs
-
-
-
-## DONES
-* 2013-01-04 Configure to use Thymeleaf
-* 2013-01-04 Refactor Web.xml to Java Configuration
 
 
 
