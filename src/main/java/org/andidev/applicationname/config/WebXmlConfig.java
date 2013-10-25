@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import org.jminix.console.servlet.MiniConsoleServlet;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
@@ -21,9 +22,6 @@ public class WebXmlConfig implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-
-
-
         /* Logback */
 
         // Enable RequestContextHolder in MDCInsertingServletFilter

@@ -1,6 +1,8 @@
 package org.andidev.applicationname.controller;
 
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class SecurityController extends AbstractApplicationController {
 
+    public static final int MINUTES = 60;
+    @Autowired
+    private HttpSession session;
+    
     @RequestMapping("/login")
     @Transactional
     public String login(Model model) {
@@ -19,6 +25,7 @@ public class SecurityController extends AbstractApplicationController {
 
     @RequestMapping(value = "/login/success")
     public String loginSuccess(Model model) {
+        session.setMaxInactiveInterval(1);
         return "redirect:/home";
     }
 
@@ -32,6 +39,11 @@ public class SecurityController extends AbstractApplicationController {
     @RequestMapping(value = "/logout/success")
     public String logoutSuccess() {
         return "redirect:/home";
+    }
+ 
+    @RequestMapping(value = "/invalidsession")
+    public String invalidSettion() {
+        return "pages/invalidsession";
     }
 
     @RequestMapping(value = "/accessdenied")

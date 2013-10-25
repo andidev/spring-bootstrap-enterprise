@@ -15,19 +15,23 @@
         <security:intercept-url pattern="/monitoring" access="hasRole('ROLE_ADMIN')"/>
 
         <security:form-login login-page="/login"
-                             default-target-url="/login/success"
-                             authentication-failure-url="/login/failure"/>
+                             authentication-failure-url="/login/failure"
+                             authentication-success-handler-ref="loginSuccessHandler"/>
 
         <security:logout logout-url="/logout"
                          logout-success-url="/logout/success"
                          invalidate-session="true"/>
-
+        
+        <security:remember-me  />
+        
         <security:access-denied-handler error-page="/accessdenied"/>
     </security:http>
-
+    
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsServiceImpl">
             <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+        <security:authentication-provider >
         </security:authentication-provider>
     </security:authentication-manager>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
