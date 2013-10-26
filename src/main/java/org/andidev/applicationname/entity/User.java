@@ -45,11 +45,4 @@ public class User extends IdUuidVersionEntity implements Serializable {
         }
         return roles;
     }
-
-//    @Override
-//    public String toString() {
-//        return ""; //To change body of generated methods, choose Tools | Templates.
-//    }
-
-    
 }
