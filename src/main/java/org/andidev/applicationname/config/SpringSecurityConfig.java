@@ -10,16 +10,16 @@ import org.springframework.security.authentication.ProviderManager;
 
 public class SpringSecurityConfig {
 
-    @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
-        List<AuthenticationProvider> authenticationProviders = new ArrayList<AuthenticationProvider>();
-        authenticationProviders.add(null);
-        return new ProviderManager();
-    }
-
-    @Bean
-    public AuthenticationProvider anonymousAuthenticationProvider() throws Exception {
-        AnonymousAuthenticationProvider anonymousAuthenticationProvider = new AnonymousAuthenticationProvider();
-        return anonymousAuthenticationProvider;
-    }
+//    @Bean
+//    public AuthenticationManager authenticationManager() throws Exception {
+//        List<AuthenticationProvider> authenticationProviders = new ArrayList<AuthenticationProvider>();
+//        authenticationProviders.add(null);
+//        return new ProviderManager();
+//    }
+//
+//    @Bean
+//    public AuthenticationProvider anonymousAuthenticationProvider() throws Exception {
+//        AnonymousAuthenticationProvider anonymousAuthenticationProvider = new AnonymousAuthenticationProvider();
+//        return anonymousAuthenticationProvider;
+//    }
 }
