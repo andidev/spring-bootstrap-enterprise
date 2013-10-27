@@ -76,7 +76,6 @@ public class AppConfig {
         entityManagerFactory.setJpaProperties(jpaProperties);
         entityManagerFactory.setPackagesToScan("org.andidev");
 
-
         return entityManagerFactory;
     }
 
