@@ -1,5 +1,6 @@
 package org.andidev.applicationname.config;
 
+import org.andidev.applicationname.config.logging.MDCInsertingServletFilter;
 import java.util.Arrays;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +10,7 @@ import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.entity.enums.Role;
 import org.andidev.applicationname.service.GroupService;
 import org.andidev.applicationname.service.OpinionService;
-import org.andidev.applicationname.service.UserDetailsServiceImpl;
+import org.andidev.applicationname.config.springsecurity.UserDetailsServiceImpl;
 import org.andidev.applicationname.service.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -22,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
-    
+
     @Inject
     private GroupService groupService;
     @Inject
@@ -31,16 +32,22 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
     UserDetailsServiceImpl userDetailService;
     @Inject
     OpinionService opinionService;
-    
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-       log.info("Creating initial database data");
-
+        log.info("Creating initial database data");
         // Create root user and group
         User rootUser = createRootUser();
         Group rootGroup = createRootGroup();
         rootGroup.getUsers().add(rootUser);
+
+        // Create anonymous user and group
+        User anonymousUser = createAnonymousUser();
+
+        // Authenticate the root user
+        logInAsRoot();
+        MDCInsertingServletFilter.putUsernameAndSessionInMDC();
 
         // Create dev user and group
         User developerUser = createDeveloperUser();
@@ -56,19 +63,13 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         User user = createUser();
         Group userGroup = createUserGroup();
         userGroup.getUsers().add(user);
-
         log.info("Initial database data created!");
-
-
-
-        // Authenticate the root user
-        logInAsRoot();
-
-
 
         log.info("Creating test data");
         createOpinionTestData();
         log.info("Test data created!");
+
+        MDCInsertingServletFilter.removeUsernameAndSessionFromMDC();
     }
 
     private User createRootUser() {
@@ -80,6 +81,11 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         Group group = new Group("root");
         group.getGroupRoles().addAll(Arrays.asList(Role.values()));
         return groupService.create(group);
+    }
+
+    private User createAnonymousUser() {
+        User user = new User("anonymousUser", "");
+        return userService.create(user);
     }
 
     private User createDeveloperUser() {
@@ -128,7 +134,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private void logInAsRoot() throws UsernameNotFoundException {
         UserDetails userDetails = userDetailService.loadUserByUsername("root");
-        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }

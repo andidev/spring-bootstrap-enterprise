@@ -1,4 +1,4 @@
-package org.andidev.applicationname.config.audit;
+package org.andidev.applicationname.config.auditing;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

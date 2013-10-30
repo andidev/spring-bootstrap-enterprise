@@ -1,13 +1,12 @@
 package org.andidev.applicationname.config;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
+import org.andidev.applicationname.config.springsecurity.UserDetailsServiceAnonymousAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AnonymousAuthenticationProvider;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+@Configuration
 public class SpringSecurityConfig {
 
 //    @Bean
@@ -22,4 +21,12 @@ public class SpringSecurityConfig {
 //        AnonymousAuthenticationProvider anonymousAuthenticationProvider = new AnonymousAuthenticationProvider();
 //        return anonymousAuthenticationProvider;
 //    }
+    @Inject
+    UserDetailsService userDetailService;
+
+    @Bean
+    public UserDetailsServiceAnonymousAuthenticationFilter anonymousAuthenticationFilter() {
+        UserDetailsServiceAnonymousAuthenticationFilter anonymousAuthenticationFilter = new UserDetailsServiceAnonymousAuthenticationFilter(userDetailService);
+        return anonymousAuthenticationFilter;
+    }
 }

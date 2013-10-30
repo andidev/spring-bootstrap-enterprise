@@ -1,8 +1,7 @@
-package org.andidev.applicationname.service;
+package org.andidev.applicationname.config.springsecurity;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -27,25 +26,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
-            log.info("Logging in with username = " + username);
-            User user = userRepository.findByUsername(username);
-
-            return new org.springframework.security.core.userdetails.User(
-                    user.getUsername(),
-                    user.getPassword(),
-                    convertToGrantedAuthorities(user.getRoles()));
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        log.info("Logging in with username = " + username);
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User with username = \"" + username + "\" was not found");
         }
-    }
-
-    private Collection<? extends GrantedAuthority> convertToGrantedAuthorities(Set<Role> userRoles) {
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        for (Role userRole : userRoles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(userRole.name()));
-        }
-        return grantedAuthorities;
+        return user;
+//            User user = userRepository.findByUsername(username);
+//            return new org.springframework.security.core.userdetails.User(
+//                    user.getUsername(),
+//                    user.getPassword(),
+//                    user.isEnabled(),
+//                    user.isAccountNonExpired(),
+//                    user.isCredentialsNonExpired(),
+//                    user.isAccountNonLocked(),
+//                    user.getGrantedAuthorities());
     }
 }

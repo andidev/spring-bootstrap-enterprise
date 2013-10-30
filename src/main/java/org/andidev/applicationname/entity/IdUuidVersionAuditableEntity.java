@@ -1,20 +1,25 @@
 package org.andidev.applicationname.entity;
 
 import java.util.UUID;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EqualsAndHashCode(of = "uuid", callSuper = false)
 @Setter
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class IdUuidVersionEntity extends  AbstractPersistable<Long> {
+public class IdUuidVersionAuditableEntity extends AbstractAuditable<User, Long> {
 
     @Column(unique = true)
     @Setter(AccessLevel.PROTECTED)
@@ -24,8 +29,7 @@ public class IdUuidVersionEntity extends  AbstractPersistable<Long> {
     private Long version;
 
     @Override
-    public String toString(){
+    public String toString() {
         return ReflectionToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
 }

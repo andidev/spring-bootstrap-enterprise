@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.andidev.applicationname.config;
+package org.andidev.applicationname.config.springsecurity;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

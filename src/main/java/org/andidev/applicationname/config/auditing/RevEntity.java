@@ -1,4 +1,4 @@
-package org.andidev.applicationname.config.audit;
+package org.andidev.applicationname.config.auditing;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

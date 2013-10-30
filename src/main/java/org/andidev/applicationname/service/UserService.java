@@ -31,6 +31,10 @@ public class UserService {
 
         // Encode password
         user.setPassword(encryptPassword(user.getPassword()));
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
 
         // create entity
         return userRepository.save(user);

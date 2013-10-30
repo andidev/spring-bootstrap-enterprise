@@ -3,21 +3,17 @@ package org.andidev.applicationname.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.*;
+import static lombok.AccessLevel.PROTECTED;
+import org.hibernate.envers.Audited;
 
-/**
- *
- * @author anders
- */
 @Entity
-@Data
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor
-public class Preference implements Serializable {
+@Audited
+@NoArgsConstructor(access = PROTECTED)
+//@RequiredArgsConstructor
+@Setter
+@Getter
+public class Preference extends IdUuidVersionEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter(AccessLevel.PROTECTED)
-    private Long id;
     private String name;
 //    private Boolean isGroupPreference;
 //    private Boolean isUserPreference;

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -28,10 +27,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @Configuration
 @ComponentScan(basePackages = {"org.andidev"})
 @EnableTransactionManagement
-@EnableJpaRepositories("org.andidev")
+@EnableJpaRepositories("org.andidev.applicationname.repository")
 @PropertySource({"application_${spring.profiles.active}.properties"})
 @ImportResource({"/WEB-INF/config/security.xml", "/WEB-INF/config/auditing.xml", "/WEB-INF/config/logging.xml", "/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
-@Import({SpringMvcConfig.class, TraceLoggingConfig.class, HsqlDatabaseConfig.class})
 public class AppConfig {
 
     @Value("${application.environment}")
@@ -60,21 +58,34 @@ public class AppConfig {
         return jdbcTemplate;
     }
 
+    
+    // persistence.xml Properties
+    Properties persistenceXmlProperties() {
+      return new Properties() {
+         {  // Hibernate
+            setProperty("hibernate.hbm2ddl.auto", "create");
+            setProperty("hibernate.globally_quoted_identifiers", "true");
+            
+            // Hibernate Envers
+            setProperty("org.hibernate.envers.auditTablePrefix", "");
+            setProperty("org.hibernate.envers.auditTableSuffix", "_AUD");
+            setProperty("org.hibernate.envers.storeDataAtDelete", "true");
+            
+            // Use Joda Time
+            setProperty("jadira.usertype.autoRegisterUserTypes", "true");
+            setProperty("jadira.usertype.databaseZone", "jvm");
+         }
+      };
+   }    
+    
     // Entity Manager Factory
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
-        jpaProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
-        jpaProperties.setProperty("org.hibernate.envers.auditTablePrefix", "");
-        jpaProperties.setProperty("org.hibernate.envers.auditTableSuffix", "_AUD");
-        jpaProperties.setProperty("org.hibernate.envers.storeDataAtDelete", "true");
-
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
-        entityManagerFactory.setJpaProperties(jpaProperties);
-        entityManagerFactory.setPackagesToScan("org.andidev");
+        entityManagerFactory.setJpaProperties(persistenceXmlProperties());
+        entityManagerFactory.setPackagesToScan("org.andidev.applicationname.entity");
 
         return entityManagerFactory;
     }
@@ -113,4 +124,6 @@ public class AppConfig {
     public ImportSql importSql(){
         return new ImportSql();
     }
+
+    
 }

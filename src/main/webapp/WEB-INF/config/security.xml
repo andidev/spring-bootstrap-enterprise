@@ -25,13 +25,24 @@
         <security:remember-me  />
 
         <security:access-denied-handler error-page="/accessdenied"/>
+
+        <security:anonymous enabled = "false" />
+        <security:custom-filter ref = "anonymousAuthenticationFilter" position = "ANONYMOUS_FILTER" />
+
+<!--        <security:custom-filter position="SWITCH_USER_FILTER" ref="switchUserProcessingFilter" />
+        <intercept-url pattern="/j_spring_security_switch_user" access="hasRole('ROLE_ROOT')"/>-->
+
     </security:http>
+<!--    <bean id="switchUserProcessingFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
+            <property name="userDetailsService" ref="userDetailsServiceImpl"/>
+            <property name="targetUrl" value="/"/>
+    </bean>-->
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsServiceImpl">
             <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
-     </security:authentication-manager>
+    </security:authentication-manager>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled"  pre-post-annotations="enabled"/>

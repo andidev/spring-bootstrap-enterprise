@@ -6,17 +6,18 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import lombok.*;
+import static lombok.AccessLevel.PROTECTED;
 
 /**
  *
  * @author anders
  */
 @Entity
-//@Table(schema="opinion")
-@Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor
-public class OpinionTag extends IdEntity implements Serializable {
+@Setter
+@Getter
+public class OpinionTag extends IdUuidVersionEntity implements Serializable {
     @NonNull
     private String name;
     @ManyToMany(mappedBy = "opinionTags")

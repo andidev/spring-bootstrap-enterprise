@@ -1,25 +1,21 @@
 package org.andidev.applicationname.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import lombok.*;
+import static lombok.AccessLevel.PROTECTED;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
-/**
- *
- * @author anders
- */
 @Entity
-//@Table(schema="opinion")
-@Data
-@ToString(callSuper=true)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor
 @Audited
-public class Opinion extends AbstractPersistable<Long> implements java.io.Serializable {
+@NoArgsConstructor(access = PROTECTED)
+@RequiredArgsConstructor
+@Setter
+@Getter
+public class Opinion extends IdUuidVersionAuditableEntity implements Serializable {
 
     @Column(nullable = false, length = 20)
     @NonNull
@@ -28,17 +24,15 @@ public class Opinion extends AbstractPersistable<Long> implements java.io.Serial
     @NonNull
     private String text;
     @ManyToMany
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @Audited(targetAuditMode = NOT_AUDITED)
     private Set<OpinionTag> opinionTags = new HashSet();
-    @Version
-    private Long version;
     @ManyToOne
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @Audited(targetAuditMode = NOT_AUDITED)
     private User user;
     @ManyToOne
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @Audited(targetAuditMode = NOT_AUDITED)
     private Opinion parentOpinion;
     @OneToMany(mappedBy = "parentOpinion")
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @Audited(targetAuditMode = NOT_AUDITED)
     private Set<Opinion> childOpinions;
 }
