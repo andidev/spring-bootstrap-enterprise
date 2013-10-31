@@ -40,6 +40,5 @@ public class Group extends IdEntity implements Serializable {
     @ManyToMany(cascade = ALL, fetch = LAZY)
     private Set<User> users = new HashSet();
     @OneToMany
-    @Audited(targetAuditMode = NOT_AUDITED)
     private Set<PreferenceValue> preferenceValues = new HashSet();
 }
