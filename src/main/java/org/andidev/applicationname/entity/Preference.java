@@ -1,5 +1,6 @@
 package org.andidev.applicationname.entity;
 
+import org.andidev.applicationname.entity.abstracts.IdUuidVersionEntity;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.*;

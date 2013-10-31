@@ -1,5 +1,6 @@
 package org.andidev.applicationname.entity;
 
+import org.andidev.applicationname.entity.abstracts.IdUuidVersionAuditableEntity;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

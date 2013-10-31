@@ -1,5 +1,6 @@
 package org.andidev.applicationname.entity;
 
+import org.andidev.applicationname.entity.abstracts.IdUuidVersionEntity;
 import org.andidev.applicationname.entity.enums.Role;
 import java.io.Serializable;
 import java.util.Collection;

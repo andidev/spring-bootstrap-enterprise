@@ -12,7 +12,7 @@
 // */
 //@Entity
 //@Data
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 //@RequiredArgsConstructor
 //public class Service implements Serializable {
 //

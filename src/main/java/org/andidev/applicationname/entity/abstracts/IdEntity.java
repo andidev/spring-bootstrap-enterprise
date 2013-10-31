@@ -1,20 +1,12 @@
-package org.andidev.applicationname.entity;
+package org.andidev.applicationname.entity.abstracts;
 
 import javax.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-@Setter
-@Getter
 @MappedSuperclass
-public class IdVersionEntity extends  AbstractPersistable<Long> {
-    @Version
-    @Setter(AccessLevel.PROTECTED)
-    private Long version;
+public class IdEntity extends  AbstractPersistable<Long> {
     
     @Override
     public String toString(){
