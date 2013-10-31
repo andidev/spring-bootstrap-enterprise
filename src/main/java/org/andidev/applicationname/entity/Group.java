@@ -1,6 +1,5 @@
 package org.andidev.applicationname.entity;
 
-import org.andidev.applicationname.entity.abstracts.IdUuidVersionEntity;
 import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -8,7 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -23,15 +21,15 @@ import static javax.persistence.CascadeType.*;
 import static javax.persistence.EnumType.*;
 import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.*;
+import org.andidev.applicationname.entity.abstracts.IdEntity;
 import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @Entity
-@Audited
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor
 @Setter
 @Getter
-public class Group extends IdUuidVersionEntity implements Serializable {
+public class Group extends IdEntity implements Serializable {
 
     @Column(unique = true)
     @NonNull

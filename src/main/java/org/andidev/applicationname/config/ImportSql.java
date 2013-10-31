@@ -5,12 +5,11 @@ import java.util.Arrays;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.Group;
-import org.andidev.applicationname.entity.Opinion;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.entity.enums.Role;
 import org.andidev.applicationname.service.GroupService;
-import org.andidev.applicationname.service.OpinionService;
 import org.andidev.applicationname.config.springsecurity.UserDetailsServiceImpl;
+import org.andidev.applicationname.repository.UserRepository;
 import org.andidev.applicationname.service.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -29,9 +28,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
     @Inject
     UserService userService;
     @Inject
-    UserDetailsServiceImpl userDetailService;
-    @Inject
-    OpinionService opinionService;
+    UserRepository userRepository;
 
     @Override
     @Transactional
@@ -66,7 +63,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         log.info("Initial database data created!");
 
         log.info("Creating test data");
-        createOpinionTestData();
+        // Add create test data methods here
         log.info("Test data created!");
 
         MDCInsertingServletFilter.removeUsernameAndSessionFromMDC();
@@ -124,17 +121,9 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         return groupService.create(group);
     }
 
-    private void createOpinionTestData() {
-        log.info("Creating opinions");
-        Opinion opinion = new Opinion("Test", "Lalala");
-        Opinion opinion2 = new Opinion("Test", "Lalala");
-        opinionService.create(opinion);
-        opinionService.create(opinion2);
-    }
-
     private void logInAsRoot() throws UsernameNotFoundException {
-        UserDetails userDetails = userDetailService.loadUserByUsername("root");
-        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+        UserDetails user = userRepository.findByUsername("root");
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }

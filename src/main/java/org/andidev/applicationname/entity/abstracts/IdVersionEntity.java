@@ -5,8 +5,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import static org.apache.commons.lang3.builder.ToStringStyle.*;
+
 
 @Setter
 @Getter
@@ -18,6 +19,6 @@ public class IdVersionEntity extends  AbstractPersistable<Long> {
     
     @Override
     public String toString(){
-        return ReflectionToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
     }
 }

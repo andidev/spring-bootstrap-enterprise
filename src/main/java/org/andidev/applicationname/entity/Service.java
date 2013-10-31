@@ -4,27 +4,22 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.envers.Audited;
 import lombok.*;
 import static lombok.AccessLevel.*;
+import org.andidev.applicationname.entity.abstracts.IdEntity;
 
 @Entity
-@Audited
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor
 @Setter
 @Getter
-public class Service implements Serializable {
+public class Service extends IdEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter(AccessLevel.PROTECTED)
-    private Long id;
     @NonNull
     private String name;
-    @OneToMany(mappedBy = "service")
-    private Set<Preference> preferences = new HashSet();
     private Boolean isSystemService;
     private Boolean isCompanyService;
     private Boolean isUserService;
+    @OneToMany
+    private Set<Preference> preferences = new HashSet();
 }

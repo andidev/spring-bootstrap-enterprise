@@ -1,22 +1,20 @@
 package org.andidev.applicationname.entity;
 
-import org.andidev.applicationname.entity.abstracts.IdUuidVersionEntity;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.*;
 import static lombok.AccessLevel.PROTECTED;
-import org.hibernate.envers.Audited;
+import org.andidev.applicationname.entity.abstracts.IdEntity;
 
 @Entity
-@Audited
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor
 @Setter
 @Getter
-public class Preference extends IdUuidVersionEntity implements Serializable {
+public class Preference extends IdEntity implements Serializable {
 
     @NonNull
     private String name;
-//    private Boolean isGroupPreference;
-//    private Boolean isUserPreference;
+    private Boolean isGroupPreference;
+    private Boolean isUserPreference;
 }
