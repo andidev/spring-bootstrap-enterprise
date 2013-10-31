@@ -25,7 +25,7 @@ public class SecurityController extends AbstractApplicationController {
 
     @RequestMapping(value = "/login/success")
     public String loginSuccess(Model model) {
-        session.setMaxInactiveInterval(1);
+//        session.setMaxInactiveInterval(1);
         return "redirect:/home";
     }
 

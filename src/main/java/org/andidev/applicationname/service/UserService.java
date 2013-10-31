@@ -31,6 +31,9 @@ public class UserService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
+        if (user.getAutomaticLogoutTime() == null) {
+            user.setAutomaticLogoutTime(60);
+        }
 
         // create entity
         return userRepository.save(user);

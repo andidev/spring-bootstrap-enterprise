@@ -36,6 +36,7 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
+    private Integer automaticLogoutTime;
     @ElementCollection(targetClass = Role.class, fetch = EAGER)
     @Enumerated(STRING)
     private Set<Role> userRoles = EnumSet.noneOf(Role.class);

@@ -16,7 +16,7 @@
 
         <security:form-login login-page="/login"
                              authentication-failure-url="/login/failure"
-                             authentication-success-handler-ref="loginSuccessHandler"/>
+                             default-target-url="/"/>
 
         <security:logout logout-url="/logout"
                          logout-success-url="/logout/success"
