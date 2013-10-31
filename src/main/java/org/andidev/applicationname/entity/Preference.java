@@ -10,11 +10,12 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @NoArgsConstructor(access = PROTECTED)
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Setter
 @Getter
 public class Preference extends IdUuidVersionEntity implements Serializable {
 
+    @NonNull
     private String name;
 //    private Boolean isGroupPreference;
 //    private Boolean isUserPreference;
