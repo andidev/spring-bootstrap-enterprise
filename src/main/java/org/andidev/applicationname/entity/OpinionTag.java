@@ -9,10 +9,6 @@ import javax.persistence.ManyToMany;
 import lombok.*;
 import static lombok.AccessLevel.PROTECTED;
 
-/**
- *
- * @author anders
- */
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor

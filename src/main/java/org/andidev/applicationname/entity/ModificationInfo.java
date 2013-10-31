@@ -8,10 +8,6 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-/**
- *
- * @author anders
- */
 @Data
 @Embeddable
 public class ModificationInfo implements Serializable {

@@ -8,12 +8,6 @@ import org.andidev.applicationname.entity.User;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-/**
- *
- * @author anders
- *
- * @link http://www.javafreedom.org/?p=414
- */
 @Entity
 @RevisionEntity(RevListener.class)
 public class RevEntity extends DefaultRevisionEntity {

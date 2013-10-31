@@ -3,13 +3,6 @@ package org.andidev.applicationname.config.auditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-/**
- *
- * @author anders
- *
- * @link http://www.javafreedom.org/?p=414
- * @link http://stackoverflow.com/questions/360520/unit-testing-with-spring-security
- */
 public class MemberHolder {
 
     private MemberHolder() {

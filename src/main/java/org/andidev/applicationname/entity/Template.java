@@ -12,12 +12,7 @@ import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.*;
 import static org.hibernate.envers.RelationTargetAuditMode.*;
 
-/**
- *
- * @author anders
- */
 @Entity
-//@Table(schema="test")
 @Data
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor

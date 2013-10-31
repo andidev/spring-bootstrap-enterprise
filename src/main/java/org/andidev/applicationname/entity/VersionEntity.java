@@ -6,10 +6,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 
-/**
- *
- * @author anders
- */
 @Data
 @MappedSuperclass
 public class VersionEntity {

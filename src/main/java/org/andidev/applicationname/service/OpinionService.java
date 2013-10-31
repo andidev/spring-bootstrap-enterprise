@@ -13,10 +13,6 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author anders
- */
 @Service
 @Transactional
 @NoArgsConstructor // TODO: Needed for service?

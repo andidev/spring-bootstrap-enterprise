@@ -6,10 +6,6 @@
 //import javax.persistence.*;
 //import lombok.*;
 //
-///**
-// *
-// * @author anders
-// */
 //@Entity
 //@Data
 @NoArgsConstructor(access = PROTECTED)
