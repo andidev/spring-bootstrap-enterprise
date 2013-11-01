@@ -4,6 +4,8 @@ import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.repository.UserRepository;
+import org.joda.time.Period;
+import static org.joda.time.PeriodType.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +33,8 @@ public class UserService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        if (user.getAutomaticLogoutTime() == null) {
-            user.setAutomaticLogoutTime(60);
+        if (user.getAutomaticLogoutPeriod() == null) {
+            user.setAutomaticLogoutPeriod(Period.hours(1));
         }
 
         // create entity

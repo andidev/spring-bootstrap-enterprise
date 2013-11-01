@@ -23,6 +23,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.jadira.usertype.dateandtime.joda.PersistentPeriodAsString;
 
 @Configuration
 @ComponentScan(basePackages = {"org.andidev"})

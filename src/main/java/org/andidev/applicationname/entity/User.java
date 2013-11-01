@@ -16,6 +16,7 @@ import static javax.persistence.EnumType.*;
 import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.*;
 import org.andidev.applicationname.entity.abstracts.IdEntity;
+import org.joda.time.Period;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
@@ -36,7 +37,7 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
-    private Integer automaticLogoutTime;
+    private Period automaticLogoutPeriod;
     @ElementCollection(targetClass = Role.class, fetch = EAGER)
     @Enumerated(STRING)
     private Set<Role> userRoles = EnumSet.noneOf(Role.class);
