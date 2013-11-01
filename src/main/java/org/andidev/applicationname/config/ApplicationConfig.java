@@ -31,7 +31,7 @@ import org.jadira.usertype.dateandtime.joda.PersistentPeriodAsString;
 @EnableJpaRepositories("org.andidev.applicationname.repository")
 @PropertySource({"application_${spring.profiles.active}.properties"})
 @ImportResource({"/WEB-INF/config/security.xml", "/WEB-INF/config/auditing.xml", "/WEB-INF/config/logging.xml", "/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
-public class AppConfig {
+public class ApplicationConfig {
 
     @Value("${application.environment}")
     private String environment;

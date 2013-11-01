@@ -32,7 +32,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
 
         // Create Application Context
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
-        appContext.register(AppConfig.class);
+        appContext.register(ApplicationConfig.class);
         //appContext.scan("org.andidev.applicationname.config");
         appContext.setDisplayName("Application Name");
 //        appContext.setDisplayName(appContext.getEnvironment().getProperty("application.name"));// TODO: Investigate if possible
