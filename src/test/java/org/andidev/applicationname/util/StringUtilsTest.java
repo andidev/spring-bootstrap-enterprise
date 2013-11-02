@@ -34,4 +34,16 @@ public class StringUtilsTest {
         String result = StringUtils.parenthesize("any string");
         assertThat(result, is("(any string)"));
     }
+
+    @Test
+    public void parenthesize_Object_ReturnsParenthesizedObjectToString() {
+        String result = StringUtils.nullSafeToString(new Object(){
+            @Override
+            public String toString() {
+                return "object as string";
+            }
+        });
+        assertThat(result, is("object as string"));
+    }    
+    
 }
