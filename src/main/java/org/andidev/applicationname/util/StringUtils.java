@@ -12,4 +12,8 @@ public class StringUtils {
     public static String parenthesize(String text) {
         return "(" + text + ")";
     }
+
+    public static String parenthesize(Object object) {
+        return parenthesize(nullSafeToString(object));
+    }    
 }
