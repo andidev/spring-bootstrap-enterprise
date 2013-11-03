@@ -40,11 +40,6 @@ public class SecurityController extends AbstractApplicationController {
     public String logoutSuccess() {
         return "redirect:/home";
     }
- 
-    @RequestMapping(value = "/invalidsession")
-    public String invalidSettion() {
-        return "pages/invalidsession";
-    }
 
     @RequestMapping(value = "/accessdenied")
     public String accessDenied() {
