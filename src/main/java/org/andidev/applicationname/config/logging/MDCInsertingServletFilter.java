@@ -7,8 +7,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import org.andidev.applicationname.util.ApplicationUtils;
 import org.slf4j.MDC;
+import static org.andidev.applicationname.util.ApplicationUtils.*;
 
 public class MDCInsertingServletFilter implements Filter {
 
@@ -40,23 +40,5 @@ public class MDCInsertingServletFilter implements Filter {
     public static void removeUsernameAndSessionFromMDC() {
         MDC.remove("username");
         MDC.remove("session");
-    }
-
-    private static String getUsername() {
-        String username = ApplicationUtils.getCurrentUsername();
-        if (username == null) {
-            return "noUser";
-        }
-
-        return username;
-    }
-
-    private static String getSessionId() {
-        String sessionId = ApplicationUtils.getCurrentSessionId();
-        if (sessionId != null) {
-            return "noSession";
-        }
-
-        return sessionId;
     }
 }

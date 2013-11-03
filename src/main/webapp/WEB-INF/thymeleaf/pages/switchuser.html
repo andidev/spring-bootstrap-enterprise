@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
+    <head>
+        <title th:text="${applicationName} + ' | Switch User'">Application Name | Switch User</title>
+
+        <!-- Page Stylesheet -->
+        <style type="text/css">
+            .form-switchuser {
+                max-width: 330px;
+                padding: 15px;
+                margin: 0 auto;
+            }
+            .form-switchuser .form-switchuser-heading,
+            .form-switchuser .checkbox {
+                margin-bottom: 10px;
+            }
+            .form-switchuser .checkbox {
+                font-weight: normal;
+            }
+            .form-switchuser .form-control {
+                position: relative;
+                font-size: 16px;
+                height: auto;
+                padding: 10px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+            .form-switchuser .form-control:focus {
+                z-index: 2;
+            }
+            .form-switchuser input[type="text"] {
+                margin-bottom: -1px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            .form-switchuser input[type="password"] {
+                margin-bottom: 10px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        </style>
+    </head>
+    <body>
+
+        <section layout:fragment="content" >
+            <form class="form-switchuser" action="j_spring_security_switch_user" method="post">
+                <h2 class="form-switchuser-heading">Please switch user</h2>
+                <input name="j_username" type="text" class="form-control" placeholder="Email address" autofocus="autofocus" value="user"/>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Switch User</button>
+                <div th:text="${message}" id="message" th:if="${message}"/>
+            </form>
+        </section>
+
+    </body>
+</html>

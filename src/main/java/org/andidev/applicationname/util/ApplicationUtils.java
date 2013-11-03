@@ -9,16 +9,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 public class ApplicationUtils {
 
-    public static User getCurrentUser() {
-        User user;
-
-        // check authentication exists
+    public static User getUser() {
+        // Check authentication exists
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
             return null;
         }
 
-        // get user
+        // Get user
         Object principal = authentication.getPrincipal();
         if (principal instanceof User) {
             return (User) principal;
@@ -27,9 +25,8 @@ public class ApplicationUtils {
         throw new RuntimeException("Unknown user type found in SecurityContextHolder, principal = " + ReflectionToStringBuilder.toString(principal));
     }
 
-    public static String getCurrentUsername() {
-
-        User user = getCurrentUser();
+    public static String getUsername() {
+        User user = getUser();
         if (user == null) {
             return null;
         }
@@ -37,7 +34,7 @@ public class ApplicationUtils {
         return user.getUsername();
     }
 
-    private static String getCurrentSessionId() {
+    public static String getSessionId() {
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         if (attrs == null) {
             return null;
