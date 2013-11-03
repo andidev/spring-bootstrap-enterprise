@@ -11,9 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.andidev.applicationname.entity.User;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import org.hibernate.LazyInitializationException;
 
 @EqualsAndHashCode(of = "uuid", callSuper = false)
 @Setter
@@ -31,6 +33,14 @@ public class IdUuidVersionAuditableEntity extends AbstractAuditable<User, Long> 
 
     @Override
     public String toString() {
-        return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+        try {
+            return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
+        } catch (LazyInitializationException e) {
+            return new ToStringBuilder(this, SHORT_PREFIX_STYLE)
+                    .append("id", getId())
+                    .append("uuid", getUuid())
+                    .append("version", getVersion())
+                    .toString();
+        }
     }
 }
