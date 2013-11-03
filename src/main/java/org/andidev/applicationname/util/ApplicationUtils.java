@@ -1,11 +1,14 @@
 package org.andidev.applicationname.util;
 
+import javax.servlet.http.HttpServletRequest;
 import org.andidev.applicationname.entity.User;
+import org.andidev.applicationname.entity.enums.Role;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 public class ApplicationUtils {
 
@@ -32,6 +35,20 @@ public class ApplicationUtils {
         }
 
         return user.getUsername();
+    }
+
+    public static HttpServletRequest getRequest() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest();
+        return request;
+    }
+
+    public static boolean hasRole(String role) {
+        return getRequest().isUserInRole(role);
+    }
+
+    public static boolean hasRole(Role role) {
+        return getRequest().isUserInRole(role.name());
     }
 
     public static String getSessionId() {

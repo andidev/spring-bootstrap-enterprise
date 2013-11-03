@@ -6,6 +6,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import static org.andidev.applicationname.util.ApplicationUtils.*;
+import static org.andidev.applicationname.entity.enums.Role.*;
 
 @Controller
 @Slf4j
@@ -18,7 +20,7 @@ public class ApplicationController extends AbstractApplicationController {
 
     @RequestMapping({"/home"})
     public String home(Model model, HttpServletRequest request) {
-        if (request.isUserInRole("ROLE_USER")) {
+        if (hasRole(ROLE_USER)) {
             return "pages/userhome";
         } else {
             return "pages/home";
