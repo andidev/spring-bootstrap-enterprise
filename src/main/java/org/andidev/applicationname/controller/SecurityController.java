@@ -18,13 +18,12 @@ public class SecurityController extends AbstractApplicationController {
     private HttpSession session;
     
     @RequestMapping("/login")
-    public String login(Model model) {
+    public String login() {
         return "pages/login";
     }
 
     @RequestMapping(value = "/login/success")
-    public String loginSuccess(Model model) {
-//        session.setMaxInactiveInterval(1);
+    public String loginSuccess() {
         return "redirect:/home";
     }
 
