@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
-        <title th:text="${applicationName} + ' | Error!'">Application Name | Error!</title>
+        <title th:text="${applicationName} + ' | Page Not Found!'">Application Name | Page Not Found!</title>
         <style type="text/css">
             body {
                 padding: 10px 50px;
@@ -24,7 +24,7 @@
     <body>
 
         <section>
-            <h1><span class="error-message" th:text="${errorMessage}">Not Found</span> <span class="error-status-code" th:text="${errorStatusCode}">404</span></h1>
+            <h1><span class="error-message" th:text="${errorMessage}">Page Not Found</span> <span class="error-status-code" th:text="${errorStatusCode}">404</span></h1>
         </section>
 
     </body>
