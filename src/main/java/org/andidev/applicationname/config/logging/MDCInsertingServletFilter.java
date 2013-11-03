@@ -52,7 +52,7 @@ public class MDCInsertingServletFilter implements Filter {
     }
 
     private static String getSessionId() {
-        String sessionId = ApplicationUtils.getCurrentUsername();
+        String sessionId = ApplicationUtils.getCurrentSessionId();
         if (sessionId != null) {
             return "noSession";
         }
