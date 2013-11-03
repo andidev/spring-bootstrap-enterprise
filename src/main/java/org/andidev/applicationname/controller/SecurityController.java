@@ -18,7 +18,6 @@ public class SecurityController extends AbstractApplicationController {
     private HttpSession session;
     
     @RequestMapping("/login")
-    @Transactional
     public String login(Model model) {
         return "pages/login";
     }
@@ -40,7 +39,7 @@ public class SecurityController extends AbstractApplicationController {
     public String logoutSuccess() {
         return "redirect:/home";
     }
-
+    
     @RequestMapping(value = "/accessdenied")
     public String accessDenied() {
         return "pages/accessdenied";
