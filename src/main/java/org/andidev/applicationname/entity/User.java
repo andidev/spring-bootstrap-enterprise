@@ -25,13 +25,13 @@ import org.joda.time.Period;
 @Getter
 public class User extends IdEntity implements UserDetails, Serializable {
 
-    private String firstName;
-    private String lastName;
     @Column(unique = true)
     @NonNull
     private String username;
     @NonNull
     private String password;
+    private String firstName;
+    private String lastName;
     private String email;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
@@ -43,7 +43,7 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private Set<Role> userRoles = EnumSet.noneOf(Role.class);
     @ManyToMany(mappedBy = "users", fetch = EAGER)
     private Set<Group> groups = new HashSet();
-    @OneToMany
+    @OneToMany(fetch = EAGER)
     private Set<PreferenceValue> preferenceValues = new HashSet();
 
     public Set<Role> getRoles() {
