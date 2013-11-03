@@ -26,18 +26,19 @@
 
         <security:access-denied-handler error-page="/accessdenied"/>
 
+        <security:custom-filter ref = "anonymousAuthenticationFilter" position = "ANONYMOUS_FILTER"/>
         <security:anonymous enabled = "false" />
-        <security:custom-filter ref = "anonymousAuthenticationFilter" position = "ANONYMOUS_FILTER" />
 
-<!--        <security:custom-filter position="SWITCH_USER_FILTER" ref="switchUserProcessingFilter" />
-        <intercept-url pattern="/j_spring_security_switch_user" access="hasRole('ROLE_ROOT')"/>-->
-
+        <security:custom-filter ref = "switchUserFilter" position = "SWITCH_USER_FILTER"/>
+        <security:intercept-url pattern="/switchuser" access="hasRole('ROLE_ROOT')"/>
     </security:http>
-<!--    <bean id="switchUserProcessingFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
-            <property name="userDetailsService" ref="userDetailsServiceImpl"/>
-            <property name="targetUrl" value="/"/>
-    </bean>-->
-
+    <bean id="switchUserFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
+        <property name="userDetailsService" ref="userDetailsServiceImpl"/>
+        <property name="targetUrl" value="/"/>
+        <property name="switchUserUrl" value="/switchuser"/>
+        <property name="exitUserUrl" value="/logoutswitchuser"/>
+    </bean>
+    
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsServiceImpl">
             <security:password-encoder ref="passwordEncoder"/>
