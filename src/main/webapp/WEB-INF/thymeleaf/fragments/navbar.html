@@ -33,6 +33,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"/> <span sec:authentication="name">Username</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a th:href="@{/user/settings}" href="/user/settings">Settings</a></li>
+                                <li sec:authorize="hasRole('ROLE_ROOT')"><a th:href="@{/switchuser}" href="/switchuser">Switch User</a></li>
                                 <li><a th:href="@{/logout}" href="/logout">Logout</a></li>
                             </ul>
                         </li>

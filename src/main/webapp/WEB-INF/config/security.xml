@@ -18,8 +18,7 @@
                              authentication-failure-url="/login/failure"
                              default-target-url="/"/>
 
-        <security:logout logout-url="/logout"
-                         logout-success-url="/logout/success"
+        <security:logout logout-success-url="/logout/success"
                          invalidate-session="true"/>
 
         <security:remember-me  />
@@ -35,8 +34,6 @@
     <bean id="switchUserFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
         <property name="userDetailsService" ref="userDetailsServiceImpl"/>
         <property name="targetUrl" value="/"/>
-        <property name="switchUserUrl" value="/switchuser"/>
-        <property name="exitUserUrl" value="/logoutswitchuser"/>
     </bean>
     
     <security:authentication-manager>

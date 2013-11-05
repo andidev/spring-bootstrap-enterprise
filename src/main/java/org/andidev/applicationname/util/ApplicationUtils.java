@@ -51,6 +51,10 @@ public class ApplicationUtils {
         return getRequest().isUserInRole(role.name());
     }
 
+    public static boolean isSwitchedUser(){
+        return hasRole("ROLE_PREVIOUS_ADMINISTRATOR");
+    }
+    
     public static String getSessionId() {
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         if (attrs == null) {
@@ -59,4 +63,5 @@ public class ApplicationUtils {
 
         return attrs.getSessionId();
     }
+
 }
