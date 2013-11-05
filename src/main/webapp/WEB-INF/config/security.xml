@@ -43,5 +43,5 @@
     </security:authentication-manager>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-    <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled"  pre-post-annotations="enabled"/>
+    <security:global-method-security  pre-post-annotations="enabled"/>        
 </beans>

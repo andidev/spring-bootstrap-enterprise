@@ -2,12 +2,12 @@ package org.andidev.applicationname.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.andidev.applicationname.util.ApplicationUtils.*;
 import static org.andidev.applicationname.entity.enums.Role.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 @Slf4j
@@ -27,31 +27,31 @@ public class ApplicationController extends AbstractApplicationController {
         }
     }
 
-    @Secured({"ROLE_USER"})
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping({"/user/settings"})
     public String settings(Model model) {
         return "pages/user/settings";
     }
 
-    @Secured({"ROLE_ADMIN"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping({"/system/groups"})
     public String groups(Model model) {
         return "pages/system/groups";
     }
 
-    @Secured({"ROLE_ADMIN"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping({"/system/users"})
     public String users(Model model) {
         return "pages/system/users";
     }
 
-    @Secured({"ROLE_DEVELOPER"})
+    @PreAuthorize("hasRole('ROLE_DEVELOPER')")
     @RequestMapping({"/system/javamelody"})
     public String javamelody(Model model) {
         return "pages/system/javamelody";
     }
 
-    @Secured({"ROLE_DEVELOPER"})
+    @PreAuthorize("hasRole('ROLE_DEVELOPER')")
     @RequestMapping({"/system/errors"})
     public String errors(Model model) {
         return "pages/system/errors";
