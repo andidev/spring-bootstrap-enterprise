@@ -23,6 +23,10 @@
             <div th:case="*" th:remove="tag">
                 <!-- Bootstrap -->
                 <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/bootstrap.css'}" href="../../../bootstrap.css"/>
+                <!-- DataTables -->
+                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/datatables.css'}" href="../../../resources/stylesheets/datatables.css"/>
+                <!-- DataTables Bootstrap -->
+                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/datatables.css'}" href="../../../resources/stylesheets/datatables.css"/>
             </div>
         </div>
 
@@ -71,6 +75,10 @@
                 <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/underscore.string.js'}" src="../../../underscore.string.js"></script>
                 <!-- Bootstrap -->
                 <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/bootstrap.js'}" src="../../../bootstrap.js"></script>
+                <!-- DataTables -->
+                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/datatables.js'}" src="../../../resources/javascripts/datatables.js"></script>
+                <!-- DataTables Bootstrap -->
+                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/datatables-bootstrap.js'}" src="../../../resources/javascripts/datatables-bootstrap.js"></script>
             </div>
         </div>
     </body>
