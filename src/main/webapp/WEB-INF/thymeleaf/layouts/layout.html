@@ -67,6 +67,8 @@
             <div th:case="*" th:remove="tag">
                 <!-- jQuery -->
                 <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/jquery.js'}" src="../../../jquery.js"></script>
+                <!-- jQuery Pjax -->
+                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/jquery-pjax.js'}" src="../../../jquery-pjax.js"></script>
                 <!-- KnockoutJS -->
                 <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/knockout.js'}" src="../../../knockout-debug.js"></script>
                 <!-- UnderscoreJS -->
