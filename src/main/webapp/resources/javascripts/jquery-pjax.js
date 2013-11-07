@@ -1,4 +1,4 @@
-// jquery.pjax.js
+// jquery.pjax.js 1.4.0
 // copyright chris wanstrath
 // https://github.com/defunkt/jquery-pjax
 
