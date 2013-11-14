@@ -11,7 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 @Slf4j
-public class ApplicationController extends AbstractApplicationController {
+public class ApplicationController {
 
     @RequestMapping({"/"})
     public String root(Model model) {

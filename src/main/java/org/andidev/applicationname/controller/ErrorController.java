@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-public class ErrorController extends AbstractApplicationController {
+public class ErrorController {
 
     @RequestMapping(value = "/pagenotfound")
     public String pagenotfound(Model model, HttpServletRequest request) {

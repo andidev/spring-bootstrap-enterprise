@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
-import org.andidev.applicationname.controller.AbstractApplicationController;
 import org.andidev.applicationname.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("/")
-public class MediatorController extends AbstractApplicationController {
+public class MediatorController {
 
     private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     //

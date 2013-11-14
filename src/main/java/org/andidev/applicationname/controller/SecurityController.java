@@ -14,7 +14,7 @@ import static org.andidev.applicationname.util.ApplicationUtils.*;
 @Controller
 @RequestMapping
 @Slf4j
-public class SecurityController extends AbstractApplicationController {
+public class SecurityController {
 
     public static final int MINUTES = 60;
     @Autowired
