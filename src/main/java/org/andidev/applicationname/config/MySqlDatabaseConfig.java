@@ -1,5 +1,9 @@
 package org.andidev.applicationname.config;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +29,8 @@ public class MySqlDatabaseConfig {
 
     // Data Source
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource() throws SQLException {
+        createDatabaseIfItDoesNotExist();
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setUrl(url);
         dataSource.setDriverClassName(driver);
@@ -42,5 +47,11 @@ public class MySqlDatabaseConfig {
         jpaVendorAdapter.setShowSql(false);
         jpaVendorAdapter.setGenerateDdl(false);
         return jpaVendorAdapter;
+    }
+
+    private void createDatabaseIfItDoesNotExist() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", username, password);
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("CREATE DATABASE IF NOT EXISTS applicationname");
     }
 }

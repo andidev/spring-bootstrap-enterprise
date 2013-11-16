@@ -63,7 +63,7 @@ public class ApplicationConfig {
     Properties persistenceXmlProperties() {
       return new Properties() {
          {  // Hibernate
-            setProperty("hibernate.hbm2ddl.auto", "create");
+            setProperty("hibernate.hbm2ddl.auto", "create-drop");
             setProperty("hibernate.globally_quoted_identifiers", "true");
             
             // Hibernate Envers
