@@ -51,7 +51,7 @@ public class ApplicationUtils {
         return getRequest().isUserInRole(role.name());
     }
 
-    public static boolean isSwitchedUser(){
+    public static boolean isSwitchedUser() {
         return hasRole("ROLE_PREVIOUS_ADMINISTRATOR");
     }
     
