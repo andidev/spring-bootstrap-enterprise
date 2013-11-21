@@ -50,7 +50,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addFormatters(FormatterRegistry registry) {
-        registry.addFormatterForFieldAnnotation(new UserDateTimeFormatAnnotationFormatterFactory());
+        // Configure the list of formatters to use
     }
 
     @Override
