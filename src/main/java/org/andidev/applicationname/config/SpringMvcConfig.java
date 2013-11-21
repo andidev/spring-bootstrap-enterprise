@@ -3,23 +3,21 @@ package org.andidev.applicationname.config;
 import java.util.List;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import org.andidev.applicationname.config.format.UserDateTimeFormatAnnotationFormatterFactory;
+import org.andidev.applicationname.config.interceptor.LocaleInterceptor;
+import org.andidev.applicationname.config.interceptor.TimeZoneInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.HandlerMapping;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @Configuration
-@EnableWebMvc
 @Slf4j
 @Import({ThymeleafConfig.class})
 public class SpringMvcConfig extends WebMvcConfigurationSupport {
@@ -28,34 +26,22 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     Environment environment;
 
     @Bean
-    public LocaleResolver localeResolver() {
-        return new CookieLocaleResolver();
     }
-
+    
     @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("language");
-        return localeChangeInterceptor;
     }
-
-    @Bean
+    
     @Override
-    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-        RequestMappingHandlerAdapter adapter = super.requestMappingHandlerAdapter();
-        adapter.setIgnoreDefaultModelOnRedirect(true);
-        return adapter;
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        // Configure the list of HttpMessageConverters to use
     }
 
-    @Bean
     @Override
-    public HandlerMapping resourceHandlerMapping() {
-        return super.resourceHandlerMapping(); //To change body of generated methods, choose Tools | Templates.
+    protected void addFormatters(FormatterRegistry registry) {
+        registry.addFormatterForFieldAnnotation(new UserDateTimeFormatAnnotationFormatterFactory());
     }
 
     @Override
@@ -71,8 +57,11 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
         }
     }
 
+    @Bean
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        // Configure the list of HttpMessageConverters to use
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+        RequestMappingHandlerAdapter adapter = super.requestMappingHandlerAdapter();
+        adapter.setIgnoreDefaultModelOnRedirect(true); // Makes sure url parameters are removed on a redirect
+        return adapter;
     }
 }
