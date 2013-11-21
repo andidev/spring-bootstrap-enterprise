@@ -26,12 +26,21 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     Environment environment;
 
     @Bean
+    public LocaleInterceptor localeInterceptor() {
+        LocaleInterceptor localeInterceptor = new LocaleInterceptor();
+        return localeInterceptor;
     }
     
     @Bean
+    public TimeZoneInterceptor timeZoneInterceptor() {
+        TimeZoneInterceptor timeZoneInterceptor = new TimeZoneInterceptor();
+        return timeZoneInterceptor;
     }
     
     @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeInterceptor());
+        registry.addInterceptor(timeZoneInterceptor());
     }
 
     @Override
