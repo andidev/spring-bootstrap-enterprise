@@ -4,6 +4,8 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
+        <title layout:title-pattern="${applicationName} - $CONTENT_TITLE">Application Name | Page Title</title>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,30 +13,30 @@
         <meta name="author" content=""/><!-- TODO: Add author -->
 
         <!-- Favicon -->
-        <link rel="shortcut icon" th:href="@{'/resources-' + ${applicationVersion} + '/favicon.ico'}"/><!-- TODO: Add favicon -->
+        <link rel="shortcut icon" th:href="@{|/resources-${applicationVersion}/favicon.ico|}"/><!-- TODO: Add favicon -->
 
         <!-- Stylesheets -->
         <div th:switch="${applicationEnvironment}" th:remove="tag">
             <div th:case="'prod'" th:remove="tag">
                 <!-- Prod -->
                 <!-- Application -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/application.min.css'}" href="../../../resources/stylesheets/application.min.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/application.min.css|}" href="../../../resources/stylesheets/application.min.css"/>
             </div>
             <div th:case="*" th:remove="tag">
                 <!-- Bootstrap -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/bootstrap.css'}" href="../../../bootstrap.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/bootstrap.css|}" href="../../../bootstrap.css"/>
                 <!-- Bootstrap Editable -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/bootstrap-editable.css'}" href="../../../bootstrap-editable.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/bootstrap-editable.css|}" href="../../../bootstrap-editable.css"/>
                 <!-- Font Awesome -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/font-awesome.css'}" href="../../../font-awesome.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/font-awesome.css|}" href="../../../font-awesome.css"/>
                 <!-- Select2 -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/select2.css'}" href="../../../selec2.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/select2.css|}" href="../../../selec2.css"/>
                 <!-- Select2 Bootstrap -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/select2-bootstrap.css'}" href="../../../select2-bootstrap.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/select2-bootstrap.css|}" href="../../../select2-bootstrap.css"/>
                 <!-- DataTables -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/datatables.css'}" href="../../../resources/stylesheets/datatables.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/datatables.css|}" href="../../../resources/stylesheets/datatables.css"/>
                 <!-- DataTables Bootstrap -->
-                <link rel="stylesheet" th:href="@{'/resources-' + ${applicationVersion} + '/stylesheets/datatables-bootstrap.css'}" href="../../../resources/stylesheets/datatables-bootstrap.css"/>
+                <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/datatables-bootstrap.css|}" href="../../../resources/stylesheets/datatables-bootstrap.css"/>
             </div>
         </div>
 
@@ -59,7 +61,7 @@
 
         <div class="container">
             <!-- Content -->
-            <div layout:fragment="content" th:remove='tag'/>
+            <div layout:fragment="content" th:remove="tag"/>
         </div>
 
         <!-- Footer -->
@@ -70,37 +72,37 @@
             <div th:case="'prod'" th:remove="tag">
                 <!-- Prod -->
                 <!-- Application -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/application.min.js'}" src="../../../resources/javascripts/application.min.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/application.min.js|}" src="../../../resources/javascripts/application.min.js"></script>
             </div>
             <div th:case="*" th:remove="tag">
                 <!-- jQuery -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/jquery.js'}" src="../../../jquery.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/jquery.js|}" src="../../../jquery.js"></script>
                 <!-- jQuery Pjax -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/jquery-pjax.js'}" src="../../../jquery-pjax.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/jquery-pjax.js|}" src="../../../jquery-pjax.js"></script>
                 <!-- jQuery Textchange -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/jquery-textchange.js'}" src="../../../jquery-textchange.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/jquery-textchange.js|}" src="../../../jquery-textchange.js"></script>
                 <!-- KnockoutJS -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/knockout.js'}" src="../../../knockout.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/knockout.js|}" src="../../../knockout.js"></script>
                 <!-- KnockoutJS Editable -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/knockout-editable.js'}" src="../../../knockout-editable.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/knockout-editable.js|}" src="../../../knockout-editable.js"></script>
                 <!-- KnockoutJS Table  -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/knockout-table.js'}" src="../../../knockout-table.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/knockout-table.js|}" src="../../../knockout-table.js"></script>
                 <!-- KnockoutJS Validation  -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/knockout-validation.js'}" src="../../../knockout-validation.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/knockout-validation.js|}" src="../../../knockout-validation.js"></script>
                 <!-- UnderscoreJS -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/underscore.js'}" src="../../../underscore.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/underscore.js|}" src="../../../underscore.js"></script>
                 <!-- Underscore.stringJS -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/underscore.string.js'}" src="../../../underscore.string.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/underscore.string.js|}" src="../../../underscore.string.js"></script>
                 <!-- Bootstrap -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/bootstrap.js'}" src="../../../bootstrap.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/bootstrap.js|}" src="../../../bootstrap.js"></script>
                 <!-- Bootstrap Editable -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/bootstrap-editable.js'}" src="../../../bootstrap-editable.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/bootstrap-editable.js|}" src="../../../bootstrap-editable.js"></script>
                 <!-- Select2 -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/select2.js'}" src="../../../select2.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/select2.js|}" src="../../../select2.js"></script>
                 <!-- DataTables -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/datatables.js'}" src="../../../resources/javascripts/datatables.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/datatables.js|}" src="../../../resources/javascripts/datatables.js"></script>
                 <!-- DataTables Bootstrap -->
-                <script th:src="@{'/resources-' + ${applicationVersion} + '/javascripts/datatables-bootstrap.js'}" src="../../../resources/javascripts/datatables-bootstrap.js"></script>
+                <script th:src="@{|/resources-${applicationVersion}/javascripts/datatables-bootstrap.js|}" src="../../../resources/javascripts/datatables-bootstrap.js"></script>
             </div>
         </div>
     </body>
