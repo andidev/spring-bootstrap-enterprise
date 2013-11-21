@@ -30,8 +30,6 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
     @Setter
     private String cookieName = "timezone";
     @Setter
-    private String modelName = "timezone";
-    @Setter
     private DateTimeZone defaultTimeZone = DateTimeZone.forID("GMT");
 
     @PostConstruct
@@ -93,13 +91,6 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (modelAndView != null) {
-            modelAndView.addObject(modelName, JodaTimeContextHolder.getJodaTimeContext().getTimeZone());
-        }
-    }
-
-    @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         JodaTimeContextHolder.resetJodaTimeContext();
     }
@@ -112,7 +103,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
         try {
             return DateTimeZone.forID(paraneter);
         } catch (IllegalArgumentException e) {
-            throw new InvalidTimeZoneException("Provided timezone = " + quote(paraneter) + " is invalid, please use one of the following time zones: " + DateTimeZone.getAvailableIDs().toString().replaceFirst("\\[", "[\n\t\t").replaceAll(", ", ",\n\t\t").replaceFirst("\\]", "\n\t]"));
+            throw new InvalidTimeZoneException("Provided timezone = " + quote(paraneter) + " is invalid, please use one of the following time zones: ");
         }
     }
 

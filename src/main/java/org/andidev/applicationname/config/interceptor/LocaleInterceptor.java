@@ -31,8 +31,6 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
     @Setter
     private String cookieName = "locale";
     @Setter
-    private String modelName = "locale";
-    @Setter
     private Locale defaultLocale = Locale.ENGLISH;
 
     @PostConstruct
@@ -90,13 +88,6 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
             log.trace("Setting LocaleContextHolder locale to default value {}", locale);
             setLocaleInLocaleContextHolder(locale);
             return true;
-        }
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (modelAndView != null) {
-            modelAndView.addObject(modelName, LocaleContextHolder.getLocale());
         }
     }
 
