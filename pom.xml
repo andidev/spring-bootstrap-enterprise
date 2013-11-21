@@ -813,8 +813,7 @@
                             </executions>
                         </plugin>
                         -->
-                        </reportPlugins>
-                    <locales>en</locales>
+                    </reportPlugins>
                 </configuration>
                 <dependencies>
                     <dependency>
