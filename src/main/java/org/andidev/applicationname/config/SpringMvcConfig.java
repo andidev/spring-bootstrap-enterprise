@@ -1,15 +1,14 @@
 package org.andidev.applicationname.config;
 
 import java.util.List;
-import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.config.format.UserDateTimeFormatAnnotationFormatterFactory;
 import org.andidev.applicationname.config.interceptor.LocaleInterceptor;
 import org.andidev.applicationname.config.interceptor.TimeZoneInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -22,8 +21,10 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Import({ThymeleafConfig.class})
 public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
-    @Inject
-    Environment environment;
+    @Value("${application.environment}")
+    private String environment;
+    @Value("${application.version}")
+    private String version;
 
     @Bean
     public LocaleInterceptor localeInterceptor() {
@@ -55,12 +56,12 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if ("prod".equals(environment.getProperty("application.environment"))) {
-            registry.addResourceHandler("/resources-" + environment.getProperty("application.version") + "/**")
+        if ("prod".equals(environment)) {
+            registry.addResourceHandler("/resources-" + version + "/**")
                     .addResourceLocations("/resources/")
                     .setCachePeriod(365*24*60*60); // 365*24*60*60 equals one year
         } else {
-            registry.addResourceHandler("/resources-" + environment.getProperty("application.version") + "/**")
+            registry.addResourceHandler("/resources-" + version + "/**")
                     .addResourceLocations("/resources/")
                     .setCachePeriod(0); // Don't chache
         }
