@@ -55,7 +55,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if ("prod".equals(environment.getProperty("application.version"))) {
+        if ("prod".equals(environment.getProperty("application.environment"))) {
             registry.addResourceHandler("/resources-" + environment.getProperty("application.version") + "/**")
                     .addResourceLocations("/resources/")
                     .setCachePeriod(365*24*60*60); // 365*24*60*60 equals one year
