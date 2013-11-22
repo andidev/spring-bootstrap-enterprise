@@ -8,16 +8,15 @@ import javax.servlet.http.HttpSession;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
+import static org.andidev.applicationname.util.ApplicationUtils.getUser;
+import static org.andidev.applicationname.util.ApplicationUtils.isAuthenticatedUser;
+import static org.andidev.applicationname.util.StringUtils.quote;
 import org.joda.time.DateTimeZone;
 import org.springframework.format.datetime.joda.JodaTimeContext;
 import org.springframework.format.datetime.joda.JodaTimeContextHolder;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.WebUtils;
-import static org.andidev.applicationname.util.ApplicationUtils.isAuthenticatedUser;
-import static org.andidev.applicationname.util.ApplicationUtils.getUser;
-import static org.andidev.applicationname.util.StringUtils.quote;
 
 @Slf4j
 public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
@@ -41,50 +40,52 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         DateTimeZone timeZone;
         if (isAuthenticatedUser()) {
-            timeZone = getTimeZoneFromParameter(request);
+            timeZone = getTimeZoneFromParameter(request, response, request.getSession());
             if (timeZone != null) {
-                setTimeZoneInSession(request.getSession(), timeZone);
-                log.trace("Setting JodaTimeContextHolder time zone from parameter to {}", timeZone);
+                log.trace("Setting time zone to {} from parameter", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
+                log.trace("Setting time zone to {} in session", quote(timeZone));
+                setTimeZoneInSession(request.getSession(), timeZone);
                 return true;
             }
 
             timeZone = getTimeZoneFromSession(request.getSession());
             if (timeZone != null) {
-                log.trace("Setting JodaTimeContextHolder time zone from session to {}", timeZone);
+                log.trace("Setting time zone to {} from session", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 return true;
             }
 
             timeZone = getTimeZoneFromUserSettings(getUser());
             if (timeZone != null) {
-                log.trace("Setting JodaTimeContextHolder time zone from user settings to {}", timeZone);
+                log.trace("Setting time zone to {} from user settings", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 return true;
             }
 
             timeZone = defaultTimeZone;
-            log.trace("Setting JodaTimeContextHolder time zone to default value {}", timeZone);
+            log.trace("Setting time zone to {} from default value", quote(timeZone));
             setTimeZoneInJodaTimeContextHolder(timeZone);
             return true;
         } else {
-            timeZone = getTimeZoneFromParameter(request);
+            timeZone = getTimeZoneFromParameter(request, response, request.getSession());
             if (timeZone != null) {
-                setTimeZoneInCookie(response, timeZone);
-                log.trace("Setting JodaTimeContextHolder time zone from parameter to {}", timeZone);
+                log.trace("Setting time zone to {} from parameter", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
+                log.trace("Setting time zone to {} in cookie", quote(timeZone));
+                setTimeZoneInCookie(response, timeZone);
                 return true;
             }
 
             timeZone = getTimeZoneFromCookie(request);
             if (timeZone != null) {
-                log.trace("Setting JodaTimeContextHolder time zone from cookie to {}", timeZone);
+                log.trace("Setting time zone to {} from cookie", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 return true;
             }
 
             timeZone = defaultTimeZone;
-            log.trace("Setting JodaTimeContextHolder time zone to default value {}", timeZone);
+            log.trace("Setting time zone to {} from default value", quote(timeZone));
             setTimeZoneInJodaTimeContextHolder(timeZone);
             return true;
         }
@@ -95,7 +96,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
         JodaTimeContextHolder.resetJodaTimeContext();
     }
 
-    private DateTimeZone getTimeZoneFromParameter(HttpServletRequest request) {
+    private DateTimeZone getTimeZoneFromParameter(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         String paraneter = request.getParameter(parameterName);
         if (paraneter == null) {
             return null;
@@ -103,7 +104,8 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
         try {
             return DateTimeZone.forID(paraneter);
         } catch (IllegalArgumentException e) {
-            throw new InvalidTimeZoneException("Provided timezone = " + quote(paraneter) + " is invalid, please use one of the following time zones: ");
+            log.warn("Provided timezone = " + quote(paraneter) + " is invalid, please use one of the following time zones: " + DateTimeZone.getAvailableIDs());
+            return null;
         }
     }
 
@@ -116,7 +118,11 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
     }
 
     private void setTimeZoneInCookie(HttpServletResponse response, DateTimeZone timeZone) {
-        cookieGenerator.addCookie(response, timeZone.getID());
+        if (timeZone == null) {
+            cookieGenerator.removeCookie(response);
+        } else {
+            cookieGenerator.addCookie(response, timeZone.getID());
+        }
     }
 
     private DateTimeZone getTimeZoneFromSession(HttpSession session) {
