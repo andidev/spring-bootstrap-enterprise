@@ -40,7 +40,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         DateTimeZone timeZone;
         if (isAuthenticatedUser()) {
-            timeZone = getTimeZoneFromParameter(request, response, request.getSession());
+            timeZone = getTimeZoneFromParameter(request);
             if (timeZone != null) {
                 log.trace("Setting time zone to {} from parameter", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
@@ -68,7 +68,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
             setTimeZoneInJodaTimeContextHolder(timeZone);
             return true;
         } else {
-            timeZone = getTimeZoneFromParameter(request, response, request.getSession());
+            timeZone = getTimeZoneFromParameter(request);
             if (timeZone != null) {
                 log.trace("Setting time zone to {} from parameter", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
@@ -96,7 +96,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
         JodaTimeContextHolder.resetJodaTimeContext();
     }
 
-    private DateTimeZone getTimeZoneFromParameter(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    private DateTimeZone getTimeZoneFromParameter(HttpServletRequest request) {
         String paraneter = request.getParameter(parameterName);
         if (paraneter == null) {
             return null;
