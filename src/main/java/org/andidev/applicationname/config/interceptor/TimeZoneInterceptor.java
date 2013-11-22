@@ -40,8 +40,14 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         DateTimeZone timeZone;
         if (isAuthenticatedUser()) {
+            boolean timeZoneIsRemoved = isTimeZoneFromParameterEmptyString(request);
+            if (timeZoneIsRemoved) {
+                log.trace("Removing time zone from session");
+                setTimeZoneInSession(request.getSession(), null);
+            }
+
             timeZone = getTimeZoneFromParameter(request);
-            if (timeZone != null) {
+            if (timeZone != null && !timeZoneIsRemoved) {
                 log.trace("Setting time zone to {} from parameter", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 log.trace("Setting time zone to {} in session", quote(timeZone));
@@ -50,7 +56,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
             }
 
             timeZone = getTimeZoneFromSession(request.getSession());
-            if (timeZone != null) {
+            if (timeZone != null && !timeZoneIsRemoved) {
                 log.trace("Setting time zone to {} from session", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 return true;
@@ -68,8 +74,14 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
             setTimeZoneInJodaTimeContextHolder(timeZone);
             return true;
         } else {
+            boolean timeZoneIsRemoved = isTimeZoneFromParameterEmptyString(request);
+            if (timeZoneIsRemoved) {
+                log.trace("Removing time zone from cookie");
+                setTimeZoneInCookie(response, null);
+            }
+
             timeZone = getTimeZoneFromParameter(request);
-            if (timeZone != null) {
+            if (timeZone != null && !timeZoneIsRemoved) {
                 log.trace("Setting time zone to {} from parameter", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 log.trace("Setting time zone to {} in cookie", quote(timeZone));
@@ -78,7 +90,7 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
             }
 
             timeZone = getTimeZoneFromCookie(request);
-            if (timeZone != null) {
+            if (timeZone != null && !timeZoneIsRemoved) {
                 log.trace("Setting time zone to {} from cookie", quote(timeZone));
                 setTimeZoneInJodaTimeContextHolder(timeZone);
                 return true;
@@ -141,6 +153,10 @@ public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
         JodaTimeContext context = new JodaTimeContext();
         context.setTimeZone(timeZone);
         JodaTimeContextHolder.setJodaTimeContext(context);
+    }
+
+    private boolean isTimeZoneFromParameterEmptyString(HttpServletRequest request) {
+        return "".equals(request.getParameter(parameterName));
     }
 
     private static class InvalidTimeZoneException extends RuntimeException {

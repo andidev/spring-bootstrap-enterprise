@@ -42,8 +42,14 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Locale locale;
         if (isAuthenticatedUser()) {
+            boolean localeIsRemoved = isLocaleFromParameterEmptyString(request);
+            if (localeIsRemoved) {
+                log.trace("Removing locale from session");
+                setLocaleInSession(request.getSession(), null);
+            }
+
             locale = getLocaleFromParameter(request);
-            if (locale != null) {
+            if (locale != null && !localeIsRemoved) {
                 log.trace("Setting locale to {} from parameter", quote(locale));
                 setLocaleInLocaleContextHolder(locale);
                 log.trace("Setting locale to {} in session", quote(locale));
@@ -52,7 +58,7 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
             }
 
             locale = getLocaleFromSession(request.getSession());
-            if (locale != null) {
+            if (locale != null && !localeIsRemoved) {
                 log.trace("Setting locale to {} from session", quote(locale));
                 setLocaleInLocaleContextHolder(locale);
                 return true;
@@ -70,8 +76,14 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
             setLocaleInLocaleContextHolder(locale);
             return true;
         } else {
+            boolean localeIsRemoved = isLocaleFromParameterEmptyString(request);
+            if (localeIsRemoved) {
+                log.trace("Removing locale from cookie");
+                setLocaleInCookie(response, null);
+            }
+
             locale = getLocaleFromParameter(request);
-            if (locale != null) {
+            if (locale != null && !localeIsRemoved) {
                 log.trace("Setting locale to {} from parameter", quote(locale));
                 setLocaleInLocaleContextHolder(locale);
                 log.trace("Setting locale to {} in cookie", quote(locale));
@@ -80,7 +92,7 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
             }
 
             locale = getLocaleFromCookie(request);
-            if (locale != null) {
+            if (locale != null && !localeIsRemoved) {
                 log.trace("Setting locale to {} from cookie", quote(locale));
                 setLocaleInLocaleContextHolder(locale);
                 return true;
@@ -137,5 +149,9 @@ public class LocaleInterceptor extends HandlerInterceptorAdapter {
     private void setLocaleInLocaleContextHolder(Locale locale) {
         LocaleContext context = new SimpleLocaleContext(locale);
         LocaleContextHolder.setLocaleContext(context);
+    }
+
+    private boolean isLocaleFromParameterEmptyString(HttpServletRequest request) {
+        return "".equals(request.getParameter(parameterName));
     }
 }
