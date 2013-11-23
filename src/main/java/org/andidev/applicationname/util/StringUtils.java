@@ -15,5 +15,13 @@ public class StringUtils {
 
     public static String parenthesize(Object object) {
         return parenthesize(nullSafeToString(object));
-    }    
+    }
+
+    public static String quote(String text) {
+        return "\"" + text + "\"";
+    }
+
+    public static String quote(Object object) {
+        return quote(nullSafeToString(object));
+    }
 }
