@@ -34,7 +34,6 @@ public class ApplicationConfig {
 
     @Value("${application.environment}")
     private String environment;
-
     @Inject
     private JpaVendorAdapter jpaVendorAdapter;
     @Inject
@@ -58,26 +57,25 @@ public class ApplicationConfig {
         return jdbcTemplate;
     }
 
-    
     // persistence.xml Properties
     Properties persistenceXmlProperties() {
-      return new Properties() {
-         {  // Hibernate
-            setProperty("hibernate.hbm2ddl.auto", "create-drop");
-            setProperty("hibernate.globally_quoted_identifiers", "true");
-            
-            // Hibernate Envers
-            setProperty("org.hibernate.envers.auditTablePrefix", "");
-            setProperty("org.hibernate.envers.auditTableSuffix", "_AUD");
-            setProperty("org.hibernate.envers.storeDataAtDelete", "true");
-            
-            // Use Joda Time
-            setProperty("jadira.usertype.autoRegisterUserTypes", "true");
-            setProperty("jadira.usertype.databaseZone", "jvm");
-         }
-      };
-   }    
-    
+        return new Properties() {
+            {  // Hibernate
+                setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                setProperty("hibernate.globally_quoted_identifiers", "true");
+
+                // Hibernate Envers
+                setProperty("org.hibernate.envers.auditTablePrefix", "");
+                setProperty("org.hibernate.envers.auditTableSuffix", "_AUD");
+                setProperty("org.hibernate.envers.storeDataAtDelete", "true");
+
+                // Use Joda Time
+                setProperty("jadira.usertype.autoRegisterUserTypes", "true");
+                setProperty("jadira.usertype.databaseZone", "jvm");
+            }
+        };
+    }
+
     // Entity Manager Factory
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -112,18 +110,16 @@ public class ApplicationConfig {
 
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource reloadableMessageSource() {
-            ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-            messageSource.setBasename("/WEB-INF/messages/messages");
-            if ("local".equals(environment)) {
-                messageSource.setCacheSeconds(1);
-            }
-            return messageSource;
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("/WEB-INF/messages/messages");
+        if ("local".equals(environment)) {
+            messageSource.setCacheSeconds(1);
+        }
+        return messageSource;
     }
 
     @Bean
-    public ImportSql importSql(){
+    public ImportSql importSql() {
         return new ImportSql();
     }
-
-    
 }
