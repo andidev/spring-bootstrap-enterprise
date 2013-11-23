@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 import javax.persistence.*;
 import lombok.*;
@@ -16,6 +17,7 @@ import static javax.persistence.EnumType.*;
 import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.*;
 import org.andidev.applicationname.entity.abstracts.IdEntity;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Period;
 
 @Entity
@@ -38,6 +40,8 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private boolean credentialsNonExpired;
     private boolean enabled;
     private Period automaticLogoutPeriod;
+    private Locale locale;
+    private DateTimeZone timeZone;
     @ElementCollection(targetClass = Role.class, fetch = EAGER)
     @Enumerated(STRING)
     private Set<Role> userRoles = EnumSet.noneOf(Role.class);

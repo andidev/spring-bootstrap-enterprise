@@ -1,168 +1,53 @@
 package org.andidev.applicationname.config.interceptor;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
-import static org.andidev.applicationname.util.ApplicationUtils.getUser;
-import static org.andidev.applicationname.util.ApplicationUtils.isAuthenticatedUser;
 import static org.andidev.applicationname.util.StringUtils.quote;
 import org.joda.time.DateTimeZone;
 import org.springframework.format.datetime.joda.JodaTimeContext;
 import org.springframework.format.datetime.joda.JodaTimeContextHolder;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.util.CookieGenerator;
-import org.springframework.web.util.WebUtils;
 
 @Slf4j
-public class TimeZoneInterceptor extends HandlerInterceptorAdapter {
+public class TimeZoneInterceptor extends ParameterInterceptor<DateTimeZone> {
 
-    private CookieGenerator cookieGenerator = new CookieGenerator();
-    @Setter
-    private String parameterName = "timezone";
-    @Setter
-    private String sessionAttributeName = "timezone";
-    @Setter
-    private String cookieName = "timezone";
-    @Setter
-    private DateTimeZone defaultTimeZone = DateTimeZone.forID("GMT");
-
-    @PostConstruct
-    public void init() {
-        cookieGenerator.setCookieName(cookieName);
+    public TimeZoneInterceptor(String parameterName) {
+        super(parameterName);
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        DateTimeZone timeZone;
-        if (isAuthenticatedUser()) {
-            boolean timeZoneIsRemoved = isTimeZoneFromParameterEmptyString(request);
-            if (timeZoneIsRemoved) {
-                log.trace("Removing time zone from session");
-                setTimeZoneInSession(request.getSession(), null);
-            }
-
-            timeZone = getTimeZoneFromParameter(request);
-            if (timeZone != null && !timeZoneIsRemoved) {
-                log.trace("Setting time zone to {} from parameter", quote(timeZone));
-                setTimeZoneInJodaTimeContextHolder(timeZone);
-                log.trace("Setting time zone to {} in session", quote(timeZone));
-                setTimeZoneInSession(request.getSession(), timeZone);
-                return true;
-            }
-
-            timeZone = getTimeZoneFromSession(request.getSession());
-            if (timeZone != null && !timeZoneIsRemoved) {
-                log.trace("Setting time zone to {} from session", quote(timeZone));
-                setTimeZoneInJodaTimeContextHolder(timeZone);
-                return true;
-            }
-
-            timeZone = getTimeZoneFromUserSettings(getUser());
-            if (timeZone != null) {
-                log.trace("Setting time zone to {} from user settings", quote(timeZone));
-                setTimeZoneInJodaTimeContextHolder(timeZone);
-                return true;
-            }
-
-            timeZone = defaultTimeZone;
-            log.trace("Setting time zone to {} from default value", quote(timeZone));
-            setTimeZoneInJodaTimeContextHolder(timeZone);
-            return true;
-        } else {
-            boolean timeZoneIsRemoved = isTimeZoneFromParameterEmptyString(request);
-            if (timeZoneIsRemoved) {
-                log.trace("Removing time zone from cookie");
-                setTimeZoneInCookie(response, null);
-            }
-
-            timeZone = getTimeZoneFromParameter(request);
-            if (timeZone != null && !timeZoneIsRemoved) {
-                log.trace("Setting time zone to {} from parameter", quote(timeZone));
-                setTimeZoneInJodaTimeContextHolder(timeZone);
-                log.trace("Setting time zone to {} in cookie", quote(timeZone));
-                setTimeZoneInCookie(response, timeZone);
-                return true;
-            }
-
-            timeZone = getTimeZoneFromCookie(request);
-            if (timeZone != null && !timeZoneIsRemoved) {
-                log.trace("Setting time zone to {} from cookie", quote(timeZone));
-                setTimeZoneInJodaTimeContextHolder(timeZone);
-                return true;
-            }
-
-            timeZone = defaultTimeZone;
-            log.trace("Setting time zone to {} from default value", quote(timeZone));
-            setTimeZoneInJodaTimeContextHolder(timeZone);
-            return true;
-        }
+    protected String printParameter(DateTimeZone timeZone) {
+        return timeZone.getID();
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        JodaTimeContextHolder.resetJodaTimeContext();
-    }
-
-    private DateTimeZone getTimeZoneFromParameter(HttpServletRequest request) {
-        String paraneter = request.getParameter(parameterName);
-        if (paraneter == null) {
-            return null;
-        }
+    protected DateTimeZone parseParameter(String timeZone) {
         try {
-            return DateTimeZone.forID(paraneter);
+            return DateTimeZone.forID(timeZone);
         } catch (IllegalArgumentException e) {
-            log.warn("Provided timezone = " + quote(paraneter) + " is invalid, please use one of the following time zones: " + DateTimeZone.getAvailableIDs());
+            log.warn("Setting timezone to = " + quote(timeZone) + " by parameter failed, the timezone does not exist. Please use one of the following time zones: " + DateTimeZone.getAvailableIDs());
             return null;
         }
     }
 
-    private DateTimeZone getTimeZoneFromCookie(HttpServletRequest request) {
-        Cookie cookie = WebUtils.getCookie(request, cookieName);
-        if (cookie == null) {
-            return null;
-        }
-        return DateTimeZone.forID(cookie.getValue());
-    }
-
-    private void setTimeZoneInCookie(HttpServletResponse response, DateTimeZone timeZone) {
-        if (timeZone == null) {
-            cookieGenerator.removeCookie(response);
-        } else {
-            cookieGenerator.addCookie(response, timeZone.getID());
-        }
-    }
-
-    private DateTimeZone getTimeZoneFromSession(HttpSession session) {
-        return (DateTimeZone) session.getAttribute(sessionAttributeName);
-    }
-
-    private void setTimeZoneInSession(HttpSession session, DateTimeZone timeZone) {
-        session.setAttribute(sessionAttributeName, timeZone);
-    }
-
-    private DateTimeZone getTimeZoneFromUserSettings(User user) {
+    @Override
+    protected DateTimeZone getParameterFromUserSettings(User user) {
         return user.getTimeZone();
     }
 
-    private void setTimeZoneInJodaTimeContextHolder(DateTimeZone timeZone) {
+    @Override
+    protected void setParameterHolder(DateTimeZone timeZone) {
         JodaTimeContext context = new JodaTimeContext();
         context.setTimeZone(timeZone);
         JodaTimeContextHolder.setJodaTimeContext(context);
     }
 
-    private boolean isTimeZoneFromParameterEmptyString(HttpServletRequest request) {
-        return "".equals(request.getParameter(parameterName));
+    @Override
+    protected void resetParameterHolder() {
+        JodaTimeContextHolder.resetJodaTimeContext();
     }
 
-    private static class InvalidTimeZoneException extends RuntimeException {
-
-        public InvalidTimeZoneException(String message) {
-            super(message);
-        }
+    @Override
+    protected DateTimeZone getDefaultValue() {
+        return DateTimeZone.forID("GMT");
     }
 }
