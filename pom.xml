@@ -316,6 +316,13 @@
             <artifactId>jul-to-slf4j</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <!-- To use jul-to-slf4j change common-loggins scope to provided -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>uk.org.lidalia</groupId>
             <artifactId>sysout-over-slf4j</artifactId>
@@ -1202,7 +1209,7 @@
                     </requestLog>
                 </configuration>
                 <dependencies>
-                    <!-- Slf4j -->
+                    <!-- Slf4j TODO: look at http://www.eclipse.org/jetty/documentation/current/example-logging-logback-centralized.html -->
                     <dependency>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-api</artifactId>
