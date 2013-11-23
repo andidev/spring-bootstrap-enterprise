@@ -50,8 +50,12 @@ public class MySqlDatabaseConfig {
     }
 
     private void createDatabaseIfItDoesNotExist() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", username, password);
-        Statement statement = connection.createStatement();
-        statement.executeUpdate("CREATE DATABASE IF NOT EXISTS applicationname");
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", username, password);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS applicationname");
+        } catch (Exception e) {
+            // Ignore errors
+        }
     }
 }
