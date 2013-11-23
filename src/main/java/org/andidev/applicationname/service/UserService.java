@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.repository.UserRepository;
 import org.joda.time.Period;
-import static org.joda.time.PeriodType.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,7 @@ public class UserService {
         log.info("Creating {} user", user.getUsername());
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new RuntimeException("Cannot create user with username  \"" + user.getUsername() + "\" , the username is already in use by another user." );
+            throw new RuntimeException("Cannot create user with username  \"" + user.getUsername() + "\" , the username is already in use by another user.");
         }
 
         // Encode password
@@ -43,7 +42,7 @@ public class UserService {
 
     public User update(User user) {
         if (userRepository.findByIdNotAndUsername(user.getId(), user.getUsername()) != null) {
-            throw new RuntimeException("Cannot update user with username  \"" + user.getUsername() + "\" , the username is already in use by another user." );
+            throw new RuntimeException("Cannot update user with username  \"" + user.getUsername() + "\" , the username is already in use by another user.");
         }
 
         // save entity

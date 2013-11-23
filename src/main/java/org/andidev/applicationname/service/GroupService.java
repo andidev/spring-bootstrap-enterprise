@@ -23,7 +23,7 @@ public class GroupService {
         log.info("Creating {} group", group.getGroupname());
 
         if (groupRepository.findByGroupname(group.getGroupname()) != null) {
-            throw new RuntimeException("Cannot create group with groupname  \"" + group.getGroupname() + "\" , the groupname is already in use by another group." );
+            throw new RuntimeException("Cannot create group with groupname  \"" + group.getGroupname() + "\" , the groupname is already in use by another group.");
         }
 
         // create entity
@@ -32,7 +32,7 @@ public class GroupService {
 
     public Group update(Group group) {
         if (groupRepository.findByIdNotAndGroupname(group.getId(), group.getGroupname()) != null) {
-            throw new RuntimeException("Cannot update group with groupname  \"" + group.getGroupname() + "\" , the groupname is already in use by another group." );
+            throw new RuntimeException("Cannot update group with groupname  \"" + group.getGroupname() + "\" , the groupname is already in use by another group.");
         }
 
         // save entity
