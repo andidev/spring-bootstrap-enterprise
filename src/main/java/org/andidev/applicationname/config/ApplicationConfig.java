@@ -28,23 +28,21 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @ComponentScan(basePackages = {"org.andidev"})
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev.applicationname.repository")
-@PropertySource({"application_${spring.profiles.active}.properties"})
 @ImportResource({"/WEB-INF/config/security.xml", "/WEB-INF/config/auditing.xml", "/WEB-INF/config/logging.xml", "/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
 public class ApplicationConfig {
 
     @Value("${application.environment}")
-    private String environment;
+    private String applicationEnvironment;
     @Inject
     private JpaVendorAdapter jpaVendorAdapter;
     @Inject
     private DataSource dataSource;
 
-    // Properties, nedded for @PropertySource annotation, see https://jira.springsource.org/browse/SPR-8539
+    // Load environment specific application properties
     @Bean
     public static PropertySourcesPlaceholderConfigurer properties(Environment environment) {
-        PropertySourcesPlaceholderConfigurer pspc =
-                new PropertySourcesPlaceholderConfigurer();
-        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application_"+environment.getProperty("spring.profiles.active") +".properties")};
+        PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
+        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application_" + environment.getProperty("application.environment") + ".properties")};
         pspc.setLocations(resources);
         return pspc;
     }
@@ -113,7 +111,7 @@ public class ApplicationConfig {
     public ReloadableResourceBundleMessageSource reloadableMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("/WEB-INF/messages/messages");
-        if ("local".equals(environment)) {
+        if (applicationEnvironment.equals("localhost")) {
             messageSource.setCacheSeconds(1);
         }
         return messageSource;

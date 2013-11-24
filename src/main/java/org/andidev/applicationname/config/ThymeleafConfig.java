@@ -14,7 +14,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 public class ThymeleafConfig {
 
     @Value("${application.environment}")
-    private String environment;
+    private String applicationEnvironment;
 
     @Bean
     public ThymeleafViewResolver thymeleafViewResolver() {
@@ -42,7 +42,7 @@ public class ThymeleafConfig {
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
         templateResolver.setOrder(1);
-        if ("local".equals(environment) || "dev".equals(environment)) {
+        if (applicationEnvironment.equals("localhost") || applicationEnvironment.equals("development")) {
             templateResolver.setCacheable(false);
         }
         return templateResolver;

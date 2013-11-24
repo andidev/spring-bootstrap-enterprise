@@ -56,60 +56,48 @@
             <id>default</id>
             <activation>
                 <property>
-                    <name>!env</name>
+                    <name>!application.environment</name>
                 </property>
             </activation>
             <properties>
-                <application.environment>dev</application.environment>
+                <application.environment>localhost</application.environment>
             </properties>
         </profile>
         <profile>
-            <id>local</id>
+            <id>localhost</id>
             <activation>
                 <property>
-                    <name>env</name>
-                    <value>local</value>
+                    <name>application.environment</name>
+                    <value>localhost</value>
                 </property>
             </activation>
-            <properties>
-                <application.environment>local</application.environment>
-            </properties>
         </profile>
         <profile>
-            <id>dev</id>
+            <id>development</id>
             <activation>
                 <property>
-                    <name>env</name>
-                    <value>dev</value>
+                    <name>application.environment</name>
+                    <value>development</value>
                 </property>
             </activation>
-            <properties>
-                <application.environment>dev</application.environment>
-            </properties>
         </profile>
         <profile>
             <id>test</id>
             <activation>
                 <property>
-                    <name>env</name>
+                    <name>application.environment</name>
                     <value>test</value>
                 </property>
             </activation>
-            <properties>
-                <application.environment>test</application.environment>
-            </properties>
         </profile>
         <profile>
-            <id>prod</id>
+            <id>production</id>
             <activation>
                 <property>
-                    <name>env</name>
-                    <value>prod</value>
+                    <name>application.environment</name>
+                    <value>production</value>
                 </property>
             </activation>
-            <properties>
-                <application.environment>prod</application.environment>
-            </properties>
         </profile>
     </profiles>
 
@@ -1129,7 +1117,7 @@
                         <configuration>
                             <properties>
                                 <property>
-                                    <name>spring.profiles.active</name>
+                                    <name>application.environment</name>
                                     <value>${application.environment}</value>
                                 </property>
 

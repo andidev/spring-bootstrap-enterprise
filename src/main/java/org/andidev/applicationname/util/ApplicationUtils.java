@@ -1,9 +1,11 @@
 package org.andidev.applicationname.util;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.entity.enums.Role;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
@@ -25,7 +27,7 @@ public class ApplicationUtils {
             return (User) principal;
         }
 
-        throw new RuntimeException("Unknown user type found in SecurityContextHolder, principal = " + ReflectionToStringBuilder.toString(principal));
+        throw new RuntimeException("Unable to get user. Unknown user type found in SecurityContextHolder's principal = " + ReflectionToStringBuilder.toString(principal));
     }
 
     public static String getUsername() {
@@ -35,12 +37,6 @@ public class ApplicationUtils {
         }
 
         return user.getUsername();
-    }
-
-    public static HttpServletRequest getRequest() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-                .getRequest();
-        return request;
     }
 
     public static boolean hasRole(String role) {
@@ -54,7 +50,31 @@ public class ApplicationUtils {
     public static boolean isSwitchedUser() {
         return hasRole("ROLE_PREVIOUS_ADMINISTRATOR");
     }
-    
+
+    public static boolean isAuthenticatedUser() {
+        // Check authentication exists
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return false;
+        }
+
+        return !AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass());
+    }
+
+    public static boolean isUnAuthenticatedUser() {
+        return !isAuthenticatedUser();
+    }
+
+    public static HttpServletRequest getRequest() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
+        return request;
+    }
+
+    public static HttpSession getSession() {
+        return getRequest().getSession();
+    }
+
     public static String getSessionId() {
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         if (attrs == null) {
@@ -63,5 +83,4 @@ public class ApplicationUtils {
 
         return attrs.getSessionId();
     }
-
 }

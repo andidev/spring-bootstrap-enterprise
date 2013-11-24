@@ -17,8 +17,7 @@
 
         <!-- Stylesheets -->
         <div th:switch="${applicationEnvironment}" th:remove="tag">
-            <div th:case="'prod'" th:remove="tag">
-                <!-- Prod -->
+            <div th:case="'production'" th:remove="tag">
                 <!-- Application -->
                 <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/application.min.css|}" href="../../../resources/stylesheets/application.min.css"/>
             </div>
@@ -69,8 +68,7 @@
 
         <!-- JavaScripts -->
         <div th:switch="${applicationEnvironment}" th:remove="tag">
-            <div th:case="'prod'" th:remove="tag">
-                <!-- Prod -->
+            <div th:case="'production'" th:remove="tag">
                 <!-- Application -->
                 <script th:src="@{|/resources-${applicationVersion}/javascripts/application.min.js|}" src="../../../resources/javascripts/application.min.js"></script>
             </div>

@@ -3,12 +3,16 @@ package org.andidev.applicationname.config;
 import org.andidev.applicationname.config.logging.MDCInsertingServletFilter;
 import ch.qos.logback.access.servlet.TeeFilter;
 import ch.qos.logback.classic.ViewStatusMessagesServlet;
+import java.io.IOException;
+import java.util.Properties;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import lombok.extern.slf4j.Slf4j;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.join;
 import org.jminix.console.servlet.MiniConsoleServlet;
-import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
@@ -19,10 +23,14 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener;
 
+@Slf4j
 public class WebXmlConfig implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+        // Load Application Properties
+        String applicationEnvironment = getApplicationEnvironment();
+        Properties applicationProperties = loadApplicationProperties(applicationEnvironment);
 
         // Set Java Melody settings
         servletContext.setInitParameter("javamelody.monitoring-path", "/monitoring");
@@ -33,10 +41,9 @@ public class WebXmlConfig implements WebApplicationInitializer {
         // Create Application Context
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
         appContext.register(ApplicationConfig.class);
-        //appContext.scan("org.andidev.applicationname.config");
-        appContext.setDisplayName("Application Name");
-//        appContext.setDisplayName(appContext.getEnvironment().getProperty("application.name"));// TODO: Investigate if possible
-        appContext.getEnvironment().setDefaultProfiles("dev"); // TODO: Investigate
+        appContext.setDisplayName(applicationProperties.getProperty("application.name"));
+        appContext.getEnvironment().setActiveProfiles(applicationEnvironment);
+        log.info("Starting up Application with the following active profiles: " + join(appContext.getEnvironment().getActiveProfiles(), ", "));
 
         // Enable Application Context with Context Loader Listner
         servletContext.addListener(new ContextLoaderListener(appContext));
@@ -96,6 +103,28 @@ public class WebXmlConfig implements WebApplicationInitializer {
                 servletContext.addServlet("viewStatusMessages", new ViewStatusMessagesServlet());
         viewStatusMessages.addMapping("/admin/logback");
 
+    }
 
+    private String getApplicationEnvironment() {
+        String applicationEnvironment = System.getProperty("application.environment");
+        if (isBlank(applicationEnvironment)) {
+            // No application environment provided, use localhost as default
+            log.info("No application.environment set in System Properties, setting default application.environment = localhost");
+            System.setProperty("application.environment", "localhost");
+            return "localhost";
+        }
+        return applicationEnvironment;
+    }
+    private Properties loadApplicationProperties(String applicationEnvironment) {
+        Properties properties = new Properties();
+        String applicationPropertiesPath = "/application_" + applicationEnvironment + ".properties";
+        try {
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(applicationPropertiesPath));
+        } catch (NullPointerException ex) {
+            throw new RuntimeException("Did not find application_" + applicationEnvironment + ".properties file in src/main/resources folder for application.environment = " + applicationEnvironment, ex);
+        } catch (IOException ex) {
+            throw new RuntimeException("Could not read application_" + applicationEnvironment + ".properties file in src/main/resources folder", ex);
+        }
+        return properties;
     }
 }

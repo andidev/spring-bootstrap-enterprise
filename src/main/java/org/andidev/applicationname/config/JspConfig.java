@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 public class JspConfig {
 
     @Value("${application.environment}")
-    private String environment;
+    private String applicationEnvironment;
 
     @Bean
     public InternalResourceViewResolver jspViewResolver() {

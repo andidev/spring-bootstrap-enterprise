@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Value("${application.environment}")
-    private String environment;
+    private String applicationEnvironment;
     @Value("${application.version}")
     private String version;
 
@@ -54,7 +54,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if ("prod".equals(environment)) {
+        if (applicationEnvironment.equals("production")) {
             registry.addResourceHandler("/resources-" + version + "/**")
                     .addResourceLocations("/resources/")
                     .setCachePeriod(365*24*60*60); // 365*24*60*60 equals one year
