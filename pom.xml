@@ -367,10 +367,19 @@
             <artifactId>joda-time</artifactId>
             <version>2.3</version>
         </dependency>
+
+        <!-- Joda Money -->
+        <dependency>
+            <groupId>org.joda</groupId>
+            <artifactId>joda-money</artifactId>
+            <version>0.9</version>
+        </dependency>
+
+        <!-- Jadira Usertype (Integrates Joda Time and Joda Money with Hibernate) -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-            <version>3.0.0.GA</version>
+            <version>3.1.0.CR8</version>
         </dependency>
 
         <!-- JUnit -->
