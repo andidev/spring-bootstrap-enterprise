@@ -28,7 +28,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @ComponentScan(basePackages = {"org.andidev"})
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev.applicationname.repository")
-@PropertySource({"application_${spring.profiles.active}.properties"})
 @ImportResource({"/WEB-INF/config/security.xml", "/WEB-INF/config/auditing.xml", "/WEB-INF/config/logging.xml", "/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
 public class ApplicationConfig {
 
@@ -42,9 +41,8 @@ public class ApplicationConfig {
     // Properties, nedded for @PropertySource annotation, see https://jira.springsource.org/browse/SPR-8539
     @Bean
     public static PropertySourcesPlaceholderConfigurer properties(Environment environment) {
-        PropertySourcesPlaceholderConfigurer pspc =
-                new PropertySourcesPlaceholderConfigurer();
-        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application_"+environment.getProperty("spring.profiles.active") +".properties")};
+        PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
+        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application_" + environment.getProperty("application.environment") + ".properties")};
         pspc.setLocations(resources);
         return pspc;
     }

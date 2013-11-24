@@ -7,6 +7,8 @@ import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import lombok.extern.slf4j.Slf4j;
+import static org.apache.commons.lang3.StringUtils.join;
 import org.jminix.console.servlet.MiniConsoleServlet;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
@@ -19,6 +21,7 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener;
 
+@Slf4j
 public class WebXmlConfig implements WebApplicationInitializer {
 
     @Override
@@ -36,7 +39,14 @@ public class WebXmlConfig implements WebApplicationInitializer {
         //appContext.scan("org.andidev.applicationname.config");
         appContext.setDisplayName("Application Name");
 //        appContext.setDisplayName(appContext.getEnvironment().getProperty("application.name"));// TODO: Investigate if possible
-        appContext.getEnvironment().setDefaultProfiles("dev"); // TODO: Investigate
+
+        // Set the default application environment
+        if (System.getProperty("application.environment") == null) {
+            log.info("No application.environment set in System Properties, setting default application.environment = local");
+            System.setProperty("application.environment", "local");
+        }
+        appContext.getEnvironment().setActiveProfiles(System.getProperty("application.environment"));
+        log.info("Starting up Application with the following active profiles: " + join(appContext.getEnvironment().getActiveProfiles(), ", "));
 
         // Enable Application Context with Context Loader Listner
         servletContext.addListener(new ContextLoaderListener(appContext));
