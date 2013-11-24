@@ -48,6 +48,6 @@ public class TimeZoneInterceptor extends ParameterInterceptor<DateTimeZone> {
 
     @Override
     protected DateTimeZone getDefaultValue() {
-        return DateTimeZone.forID("GMT");
+        return DateTimeZone.getDefault();
     }
 }
