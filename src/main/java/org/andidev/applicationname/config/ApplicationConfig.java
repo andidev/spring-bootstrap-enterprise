@@ -71,6 +71,7 @@ public class ApplicationConfig {
 
                 // Use Joda Time
                 setProperty("jadira.usertype.autoRegisterUserTypes", "true");
+                setProperty("jadira.usertype.javaZone", "jvm");
                 setProperty("jadira.usertype.databaseZone", "jvm");
             }
         };
