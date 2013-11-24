@@ -38,6 +38,6 @@ public class LocaleInterceptor extends ParameterInterceptor<Locale> {
 
     @Override
     protected Locale getDefaultValue() {
-        return Locale.ENGLISH;
+        return Locale.getDefault();
     }
 }
