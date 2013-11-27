@@ -8,7 +8,7 @@
             <goal>jetty:run</goal>
         </goals>
         <properties>
-            <Env.MAVEN_OPTS>-Xmx512M -XX:MaxPermSize=512M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled</Env.MAVEN_OPTS>
+            <Env.MAVEN_OPTS>-Xmx512M -XX:MaxPermSize=512M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Duser.country=US -Duser.language=en -Duser.timezone=UTC</Env.MAVEN_OPTS>
         </properties>
     </action>
     <action>
@@ -21,7 +21,7 @@
         <properties>
             <jpda.listen>maven</jpda.listen>
             <netbeans.deploy.debugmode>true</netbeans.deploy.debugmode>
-            <Env.MAVEN_OPTS>-Xmx512M -XX:MaxPermSize=512M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled</Env.MAVEN_OPTS>
+            <Env.MAVEN_OPTS>-Xmx512M -XX:MaxPermSize=512M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Duser.country=US -Duser.language=en -Duser.timezone=UTC</Env.MAVEN_OPTS>
         </properties>
     </action>
 </actions>
