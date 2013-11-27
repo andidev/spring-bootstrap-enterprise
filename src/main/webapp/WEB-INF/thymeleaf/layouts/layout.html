@@ -47,11 +47,41 @@
             }
         </style>
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+        <!--[if lt IE 8]>
+            <script type="text/javascript">
+                window.location.replace("/browsernotsupported");
+            </script>
         <![endif]-->
+
+        <!--[if lt IE 9]>
+            <div th:switch="${applicationEnvironment}" th:remove="tag">
+                <div th:case="'production'" th:remove="tag">
+                    <script th:src="@{|/resources-${applicationVersion}/javascripts/application-ie8.min.js|}" src="../../../resources/javascripts/application-ie8.min.js"></script>
+                </div>
+                <div th:case="*" th:remove="tag">
+                    <script th:src="@{|/resources-${applicationVersion}/javascripts/html5shiv.js|}" src="../../../resources/javascripts/html5shiv.js"></script>
+                    <script th:src="@{|/resources-${applicationVersion}/javascripts/respond.js|}" src="../../../resources/javascripts/respond.js"></script>
+                </div>
+            </div>
+        <![endif]-->
+
+        <!--[if lt IE 10]>
+            <script th:src="@{|/resources-${applicationVersion}/javascripts/cookies.js|}" src="../../../resources/javascripts/cookies.js"></script>
+            <script type="text/javascript">
+                var browserUpdateHintIsDisabled = Cookies.get("browserUpdateHintIsDisabled");
+                if(browserUpdateHintIsDisabled !== "true") {
+                    window.location.replace("/browserupdatehint");
+                }
+            </script>
+        <![endif]-->
+
+        <script th:src="@{|/resources-${applicationVersion}/javascripts/cookies.js|}" src="../../../resources/javascripts/cookies.js"></script>
+        <script type="text/javascript">
+                var browserUpdateHintIsDisabled = Cookies.get("browserUpdateHintIsDisabled");
+                if(browserUpdateHintIsDisabled !== "true") {
+                    window.location.replace("/browsernotsupported");
+                }
+        </script>
     </head>
 
     <body>

@@ -1,10 +1,12 @@
 package org.andidev.applicationname.controller;
 
+import org.andidev.applicationname.util.CookieUtils;
 import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.TimeZone;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -79,6 +81,18 @@ public class ApplicationController {
     public String errors(Model model) {
         return "pages/system/errors";
     }
+
+    @RequestMapping({"/browsernotsupported"})
+    public String browsernotsupported() {
+        return "pages/browsernotsupported";
+    }
+
+    @RequestMapping({"/browserupdatehint"})
+    public String browserupdatehint(Model model, HttpServletResponse response) {
+        CookieUtils.setCookie("browserUpdateHintIsDisabled", true, response);
+        return "pages/browserupdatehint";
+    }
+
     @Getter
     @Setter
     public class Test {

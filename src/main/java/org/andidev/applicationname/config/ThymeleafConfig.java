@@ -9,6 +9,7 @@ import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
 
 @Configuration
 public class ThymeleafConfig {
@@ -31,6 +32,7 @@ public class ThymeleafConfig {
         templateEngine.addDialect(new LayoutDialect());
         templateEngine.addDialect(new SpringSecurityDialect());
         templateEngine.addDialect(new DataTablesDialect());
+        templateEngine.addDialect(new ConditionalCommentsDialect());
         return templateEngine;
     }
 

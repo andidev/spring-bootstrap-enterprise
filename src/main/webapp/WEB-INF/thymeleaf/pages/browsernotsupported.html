@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
+    <head>
+        <title>Browser Not Supported</title>
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+
+        <section layout:fragment="content" >
+            <div th:include="fragments/pageheader :: pageheader" th:with="header='Browser Not Supported', subtext=''" th:remove="tag"/>
+        </section>
+
+    </body>
+</html>
