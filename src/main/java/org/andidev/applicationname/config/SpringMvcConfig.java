@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.repository.support.DomainClassConverter;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.SortHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -70,5 +75,20 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
         RequestMappingHandlerAdapter adapter = super.requestMappingHandlerAdapter();
         adapter.setIgnoreDefaultModelOnRedirect(true); // Makes sure url parameters are removed on a redirect
         return adapter;
+    }
+
+    // TODO: Start using @PathVariable in Controllers or remove from configuration
+    // for an example see http://refcardz.dzone.com/refcardz/core-spring-data#refcard-download-social-buttons-display
+    @Bean
+    public DomainClassConverter<?> domainClassConverter() {
+        return new DomainClassConverter<FormattingConversionService>(mvcConversionService());
+    }
+
+    // TODO: Start using Pageable objects in Controllers or remove from configuration
+    // for an example see http://refcardz.dzone.com/refcardz/core-spring-data#refcard-download-social-buttons-display
+    @Override
+    protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new SortHandlerMethodArgumentResolver());
+        argumentResolvers.add(new PageableHandlerMethodArgumentResolver());
     }
 }
