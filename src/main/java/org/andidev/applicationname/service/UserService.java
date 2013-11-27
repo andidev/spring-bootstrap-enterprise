@@ -1,5 +1,6 @@
 package org.andidev.applicationname.service;
 
+import java.util.List;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
@@ -56,5 +57,9 @@ public class UserService {
 
     private String encryptPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

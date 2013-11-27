@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:dt="http://github.com/dandelion/datatables"
       layout:decorator="layouts/layout">
     <head>
         <title>Users</title>
@@ -12,6 +13,27 @@
 
         <section layout:fragment="content" >
             <div th:include="fragments/pageheader :: pageheader" th:with="header='Users', subtext=''" th:remove="tag"/>
+
+            <table id="users" dt:table="true" dt:sort="true" dt:filter="false" dt:lengthChange="false">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}">1</td>
+                        <td th:text="${user.firstName}">Lucy</td>
+                        <td th:text="${user.lastName}">Sky</td>
+                        <td th:text="${user.username}">lucysky</td>
+                        <td th:text="${user.email}">john@doe.com</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
     </body>

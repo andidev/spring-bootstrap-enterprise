@@ -12,6 +12,54 @@
 
         <section layout:fragment="content" >
             <div th:include="fragments/pageheader :: pageheader" th:with="header='Settings', subtext=''" th:remove="tag"/>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Datum</label>
+                    <div class="col-sm-10">
+                        JVM Locale = <span th:text="${{test.jvmLocale}}"></span><br/>
+                        Locale = <span th:text="${{test.locale}}"></span><br/>
+                        <br/>
+                        JVM Time Zone = <span th:text="${{test.jvmTimeZone}}"></span><br/>
+                        JodaTime Time Zone = <span th:text="${{test.jodaTimeTimeZone}}"></span><br/>
+                        Time Zone = <span th:text="${{test.timeZone}}"></span><br/>
+                        <br/>
+                        Date = <span th:text="${{test.currentDate}}"></span><br/>
+                        Time = <span th:text="${{test.currentTime}}"></span><br/>
+                        DateTime = <span th:text="${{test.currentDateTime}}"></span><br/>
+                        <br/>
+                        Currency = <span th:text="${{test.currency}}"></span><br/>
+                        Number = <span th:text="${{test.number}}"></span><br/>
+                        Percent = <span th:text="${{test.percent}}"></span><br/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"/> Remember me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+            </form>
         </section>
 
     </body>

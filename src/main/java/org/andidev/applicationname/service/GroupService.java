@@ -1,5 +1,6 @@
 package org.andidev.applicationname.service;
 
+import java.util.List;
 import javax.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -41,5 +42,9 @@ public class GroupService {
 
     public void delete(Group group) {
         groupRepository.delete(group);
+    }
+
+    public List<Group> findAll() {
+        return groupRepository.findAll();
     }
 }
