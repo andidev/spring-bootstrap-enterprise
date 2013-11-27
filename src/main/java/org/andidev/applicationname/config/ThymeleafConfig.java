@@ -21,7 +21,6 @@ public class ThymeleafConfig {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
         thymeleafViewResolver.setOrder(1);
-//        thymeleafViewResolver.setViewClass(ThymeleafTilesView.class) ;
         return thymeleafViewResolver;
     }
 

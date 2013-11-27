@@ -57,7 +57,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
         if (applicationEnvironment.equals("production")) {
             registry.addResourceHandler("/resources-" + version + "/**")
                     .addResourceLocations("/resources/")
-                    .setCachePeriod(365*24*60*60); // 365*24*60*60 equals one year
+                    .setCachePeriod(365 * 24 * 60 * 60); // 365*24*60*60 equals one year
         } else {
             registry.addResourceHandler("/resources-" + version + "/**")
                     .addResourceLocations("/resources/")
