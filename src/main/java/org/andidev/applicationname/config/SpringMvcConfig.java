@@ -2,7 +2,6 @@ package org.andidev.applicationname.config;
 
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.andidev.applicationname.config.format.UserDateTimeFormatAnnotationFormatterFactory;
 import org.andidev.applicationname.config.interceptor.LocaleInterceptor;
 import org.andidev.applicationname.config.interceptor.TimeZoneInterceptor;
 import org.springframework.beans.factory.annotation.Value;

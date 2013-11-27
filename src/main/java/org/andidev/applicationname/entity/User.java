@@ -42,6 +42,8 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private Period automaticLogoutPeriod;
     private Locale locale;
     private DateTimeZone timeZone;
+    private String dateFormat = "yyyy/MM/dd";
+    private String timeFormat = "HH.mm";
     @ElementCollection(targetClass = Role.class, fetch = EAGER)
     @Enumerated(STRING)
     private Set<Role> userRoles = EnumSet.noneOf(Role.class);
