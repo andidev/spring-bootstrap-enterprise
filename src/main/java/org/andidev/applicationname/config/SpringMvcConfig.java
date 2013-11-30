@@ -1,6 +1,8 @@
 package org.andidev.applicationname.config;
 
 import java.util.List;
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.config.interceptor.LocaleInterceptor;
 import org.andidev.applicationname.config.interceptor.TimeZoneInterceptor;
@@ -14,6 +16,7 @@ import org.springframework.data.web.SortHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -29,6 +32,8 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     private String applicationEnvironment;
     @Value("${application.version}")
     private String version;
+    @Inject
+    EntityManagerFactory entityManagerFactory;
 
     @Bean
     public LocaleInterceptor localeInterceptor() {
@@ -40,10 +45,18 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
         return new TimeZoneInterceptor("timezone");
     }
 
+    @Bean
+    public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
+        OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor = new OpenEntityManagerInViewInterceptor();
+        openEntityManagerInViewInterceptor.setEntityManagerFactory(entityManagerFactory);
+        return openEntityManagerInViewInterceptor;
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeInterceptor());
         registry.addInterceptor(timeZoneInterceptor());
+        registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
     }
 
     @Override
