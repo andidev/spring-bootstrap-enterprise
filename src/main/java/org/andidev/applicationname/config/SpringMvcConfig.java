@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.config.interceptor.LocaleInterceptor;
 import org.andidev.applicationname.config.interceptor.TimeZoneInterceptor;
+import org.andidev.applicationname.format.custom.CustomFormatAnnotationFormatterFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addFormatters(FormatterRegistry registry) {
         // Configure the list of formatters to use
+        registry.addFormatterForFieldAnnotation(new CustomFormatAnnotationFormatterFactory(registry));
     }
 
     @Override
