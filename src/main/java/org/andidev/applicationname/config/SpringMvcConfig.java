@@ -69,7 +69,6 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addFormatters(FormatterRegistry registry) {
-        // Configure the list of formatters to use
         registry.addFormatterForFieldAnnotation(new JsonFormatAnnotationFormatterFactory());
         registry.addFormatterForFieldAnnotation(new ListFormatAnnotationFormatterFactory());
         registry.addFormatterForFieldAnnotation(new CustomFormatAnnotationFormatterFactory(registry));
