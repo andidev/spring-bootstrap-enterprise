@@ -59,6 +59,27 @@
         <div th:include="fragments/navbar :: navbar" th:remove="tag"/>
 
         <div class="container">
+            <!-- Application Success Message -->
+            <div layout:fragment="success" class="alert alert-success hidden">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Success!</strong> <span>Message</span>
+            </div>
+            <!-- Application Info Message -->
+            <div class="alert alert-info hidden">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Info!</strong> <span>Message</span>
+            </div>
+            <!-- Application Warning Message -->
+            <div class="alert alert-warning hidden">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Warning!</strong> <span>Message</span>
+            </div>
+            <!-- Application Errors Message -->
+            <div class="alert alert-danger hidden">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Error!</strong> <span>Message</span>
+            </div>
+
             <!-- Content -->
             <div layout:fragment="content" th:remove="tag"/>
         </div>
