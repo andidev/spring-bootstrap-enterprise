@@ -1,7 +1,7 @@
 Spring Bootstrap Enterprise
 ======================
 
-Maven project that can be used to bootstrap a Spring WebApp with Twitter Bootstrap and Thymeleaf. The project will use Spring and Servlet 3.0 Java Configuration.
+Maven project that can be used to bootstrap a Spring WebApp with Twitter Bootstrap and Thymeleaf. The project will use Spring and Servlet Java Configuration.
 
 ### Under Heavy Development
 
