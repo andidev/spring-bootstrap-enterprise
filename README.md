@@ -5,39 +5,7 @@ Maven project that can be used to bootstrap a Spring WebApp with Twitter Bootstr
 
 ### Under Heavy Development
 
-This project is still under heavy development and is therefore not recomended to use. A lot of refactoring is still needed and a lot of old garbage code is included. So at the moment it is totaly unusable.
-
-
-
-## TODOs
-
-* Add environment specific logging
-* Add trace specific logging
-* Add debug specific logging
-* Cleanup Java Configuration
-* Configure to use Compass/Sass through maven if possible
-* Configure JSR 303 Validation
-* Configure Spring Conversion Service with language translations
-* Investigate if Animate.css should be included
-* Investigate if jQuery++ should be included
-* Investigate if mustasche.js should be included
-* Investigate if other javascript/css libraries should be included
-* Create Style Guides based on Twitter Bootstrap and jQuery Plugins
-* Make available with maven archetype:generate
-* Remove old css code
-* Remove old javascript code
-* Provide User/Group Management page
-* Include webdriver/selenium 2
-
-
-
-## TODOmaybes
-* Configure JSP 3.0 (with Apache Tiles) as secondary view resolver
-* Include JqueryUI as secondary framework
-* Include Twitter Bootstrap JqueryUI Theme
-* Investigate if Yeaman should be used
-* Add Coding Conventions, Design Conventions and Design Guides
-* Web Interface to see/configure logs www.appname.org/logs
+This project is still under heavy development and is therefore not recomended to clone. A lot of refactoring is still needed and a lot of old legacy code is still included.
 
 
 
