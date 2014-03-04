@@ -34,10 +34,10 @@ public class SecurityController {
     public String logoutSwitchedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (isSwitchedUser()) {
-            return "redirect:/j_spring_security_exit_user";
+            return "redirect:/switchuserlogout";
         }
 
-        return "redirect:/j_spring_security_logout";
+        return "redirect:/normallogout";
     }
     
     @RequestMapping(value = "/login/failure")
@@ -59,7 +59,7 @@ public class SecurityController {
     
     @RequestMapping("/switchuserto{username}")
     public String switchUserUsername(@PathVariable String username) {
-        return "redirect:/j_spring_security_switch_user?j_username=" + username;
+        return "redirect:/switchuserto?username=" + username;
     }
     
     @RequestMapping(value = "/accessdenied")
