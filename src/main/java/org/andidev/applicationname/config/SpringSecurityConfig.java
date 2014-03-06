@@ -1,10 +1,13 @@
 package org.andidev.applicationname.config;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
+import org.andidev.applicationname.config.springsecurity.SpringDataTokenRepositoryImpl;
 import org.andidev.applicationname.config.springsecurity.UserDetailsServiceAnonymousAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +24,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
 
     @Inject
     UserDetailsService userDetailService;
@@ -59,6 +64,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .and()
             .rememberMe()
+                .userDetailsService(userDetailService)
+                .tokenRepository(springDataTokenRepository())
                 .and()
             .exceptionHandling()
                 .accessDeniedPage("/accessdenied")
@@ -94,5 +101,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         switchUserFilter.setUsernameParameter("username");
         switchUserFilter.setExitUserUrl("/switchuserlogout");
         return switchUserFilter;
+    }
+
+    @Bean
+    public SpringDataTokenRepositoryImpl springDataTokenRepository() {
+        SpringDataTokenRepositoryImpl springDataTokenRepository = new SpringDataTokenRepositoryImpl();
+        return springDataTokenRepository;
+    }
+
+    @Bean
+    public RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
+        RememberMeAuthenticationProvider rememberMeAuthenticationProvider = new RememberMeAuthenticationProvider(REMEMBER_ME_KEY);
+        return rememberMeAuthenticationProvider;
     }
 }
