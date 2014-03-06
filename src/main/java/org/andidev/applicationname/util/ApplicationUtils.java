@@ -7,6 +7,7 @@ import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.entity.enums.Role;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
@@ -48,6 +49,26 @@ public class ApplicationUtils {
         return getRequest().isUserInRole(role.name());
     }
 
+    public static boolean isAnonymousUser() {
+        // Check authentication exists
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return false;
+        }
+
+        return AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass());
+    }
+
+    public static boolean isRememberMeUser() {
+        // Check authentication exists
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return false;
+        }
+
+        return RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass());
+    }
+
     public static boolean isSwitchedUser() {
         return hasRole("ROLE_PREVIOUS_ADMINISTRATOR");
     }
@@ -59,11 +80,17 @@ public class ApplicationUtils {
             return false;
         }
 
-        return !AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass());
+        return !isAnonymousUser();
     }
 
-    public static boolean isUnAuthenticatedUser() {
-        return !isAuthenticatedUser();
+    public static boolean isFullyAuthenticatedUser() {
+        // Check authentication exists
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return false;
+        }
+
+        return !isAnonymousUser() && !isRememberMeUser();
     }
 
     public static HttpServletRequest getRequest() {
