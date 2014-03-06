@@ -1,5 +1,6 @@
 package org.andidev.applicationname.util;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.andidev.applicationname.entity.User;
@@ -83,4 +84,13 @@ public class ApplicationUtils {
 
         return attrs.getSessionId();
     }
+
+    public static void login(String username, String password) throws ServletException {
+        getRequest().login(username, password);
+    }
+
+    public static void logout() throws ServletException {
+        getRequest().logout();
+    }
+
 }
