@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.entity.User;
-import static org.andidev.applicationname.util.ApplicationUtils.getUser;
-import static org.andidev.applicationname.util.ApplicationUtils.isAuthenticatedUser;
+import static org.andidev.applicationname.util.ApplicationUtils.*;
+import static org.andidev.applicationname.util.SecurityUtils.*;
 import static org.andidev.applicationname.util.StringUtils.quote;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.CookieGenerator;
@@ -34,7 +34,7 @@ public abstract class ParameterInterceptor<T> extends HandlerInterceptorAdapter 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         T paramter;
-        if (isAuthenticatedUser()) {
+        if (isAuthenticated()) {
             boolean parameterIsRemoved = isParameterFromRequestEmptyString(request);
             if (parameterIsRemoved) {
                 log.trace("Removing {} from session", parameterName);
