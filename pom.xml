@@ -1229,6 +1229,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.1.2.v20140210</version>
                 <configuration>
+                    <jettyXml>src/test/resources/jetty.xml,src/test/resources/jetty-http.xml,src/test/resources/jetty-ssl.xml,src/test/resources/jetty-https.xml</jettyXml>
                     <webAppConfig>
                         <contextPath>/</contextPath>
                     </webAppConfig>
