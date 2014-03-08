@@ -117,13 +117,13 @@
         <!-- Dependency Versions -->
         <aspectj.version>1.7.3</aspectj.version>
         <doxia.module.markdown.version>1.5</doxia.module.markdown.version>
-        <hibernate.version>4.3.1.Final</hibernate.version>
+        <hibernate.version>4.3.4.Final</hibernate.version>
         <hsqldb.version>2.3.2</hsqldb.version>
         <logback.version>1.1.1</logback.version>
         <querydsl.version>3.3.1</querydsl.version>
         <slf4j.version>1.7.6</slf4j.version>
         <spring.version>4.0.2.RELEASE</spring.version>
-        <spring.data.jpa.version>1.4.4.RELEASE</spring.data.jpa.version>
+        <spring.data.jpa.version>1.5.0.RELEASE</spring.data.jpa.version>
         <spring.security.version>3.2.1.RELEASE</spring.security.version>
         <sysout.slf4j.version>1.0.2</sysout.slf4j.version>
         <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
@@ -296,7 +296,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.0.1.Final</version>
+            <version>5.1.0.Final</version>
         </dependency>
 
         <!-- Slf4j -->
@@ -371,14 +371,14 @@
         <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-money</artifactId>
-            <version>0.9</version>
+            <version>0.9.1</version>
         </dependency>
 
         <!-- Jadira Usertype (Integrates Joda Time and Joda Money with Hibernate) -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-            <version>3.1.0.CR10</version>
+            <version>3.1.0.CR11</version>
         </dependency>
 
         <!-- JUnit -->
@@ -446,7 +446,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.12.4</version>
+            <version>1.12.6</version>
             <type>jar</type>
         </dependency>
 
@@ -476,7 +476,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.2.1</version>
+            <version>3.3</version>
         </dependency>
 
         <!-- Lambdaj -->
@@ -519,7 +519,7 @@
         <dependency>
             <groupId>rubygems</groupId>
             <artifactId>compass</artifactId>
-            <version>0.12.2</version>
+            <version>0.12.3</version>
             <type>gem</type>
         </dependency>
     </dependencies>
