@@ -68,6 +68,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .rememberMe()
                 .userDetailsService(userDetailService)
                 .tokenRepository(springDataTokenRepository())
+                .useSecureCookie(true)
                 .and()
             .exceptionHandling()
                 .accessDeniedPage("/accessdenied")
