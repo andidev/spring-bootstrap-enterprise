@@ -1,7 +1,6 @@
 package org.andidev.applicationname.config;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 import org.andidev.applicationname.config.springsecurity.SpringDataTokenRepositoryImpl;
 import org.andidev.applicationname.config.springsecurity.UserDetailsServiceAnonymousAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
