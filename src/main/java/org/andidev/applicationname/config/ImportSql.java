@@ -8,7 +8,6 @@ import org.andidev.applicationname.entity.Group;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.entity.enums.Role;
 import org.andidev.applicationname.service.GroupService;
-import org.andidev.applicationname.config.springsecurity.UserDetailsServiceImpl;
 import org.andidev.applicationname.repository.UserRepository;
 import org.andidev.applicationname.service.UserService;
 import org.springframework.context.ApplicationListener;
