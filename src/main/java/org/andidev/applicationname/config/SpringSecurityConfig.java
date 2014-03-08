@@ -24,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
+    static final String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
 
     @Inject
     UserDetailsService userDetailService;
