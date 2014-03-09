@@ -21,7 +21,6 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
-import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JServletContextListener;
 
 @Slf4j
 public class WebXmlConfig implements WebApplicationInitializer {
@@ -94,9 +93,6 @@ public class WebXmlConfig implements WebApplicationInitializer {
         FilterRegistration.Dynamic teeFilter =
                 servletContext.addFilter("teeFilter", TeeFilter.class);
         teeFilter.addMappingForUrlPatterns(null, false, "/*");
-
-        // Handling System.out and System.err
-        servletContext.addListener(new SysOutOverSLF4JServletContextListener());
 
         // Providing URL for Logback Status with OnStatusConsoleListener
         ServletRegistration.Dynamic viewStatusMessages =
