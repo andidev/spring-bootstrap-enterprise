@@ -47,7 +47,7 @@
     <body>
 
         <section layout:fragment="content" >
-            <form class="form-login" action="/login" method="post">
+            <form class="form-login" th:action="@{/login}" action="/login" method="post">
                 <h2 class="form-login-heading">Please login</h2>
                 <input name="username" type="text" class="form-control" placeholder="Email address" autofocus="autofocus" value="root"/>
                 <input name="password" type="password" class="form-control" placeholder="Password"/>
