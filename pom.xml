@@ -1176,6 +1176,9 @@
                     <port>8080</port>
                     <charset>UTF-8</charset>
                     <uriEncoding>UTF-8</uriEncoding>
+                    <httpsPort>8443</httpsPort>
+                    <keystoreFile>${basedir}/src/test/resources/keystore</keystoreFile>
+                    <keystorePass>changeme</keystorePass>
                 </configuration>
                 <dependencies>
                     <!-- Logback Access -->
