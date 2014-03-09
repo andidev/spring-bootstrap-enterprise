@@ -117,7 +117,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
     }
     private Properties loadApplicationProperties(String applicationEnvironment) {
         Properties properties = new Properties();
-        String applicationPropertiesPath = "/application_" + applicationEnvironment + ".properties";
+        String applicationPropertiesPath = "application_" + applicationEnvironment + ".properties";
         try {
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(applicationPropertiesPath));
         } catch (NullPointerException ex) {
