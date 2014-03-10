@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 import org.hibernate.LazyInitializationException;
 
-@EqualsAndHashCode(of = "uuid", callSuper = false)
+//@EqualsAndHashCode(of = "uuid", callSuper = false) commented because for MySql it causes java.lang.ClassCastException: com.fasterxml.classmate.types.ResolvedRecursiveType cannot be cast to com.fasterxml.classmate.types.ResolvedObjectType
 @Setter
 @Getter
 @EntityListeners(AuditingEntityListener.class)
