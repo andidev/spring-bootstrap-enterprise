@@ -4,11 +4,10 @@ import org.andidev.applicationname.entity.User;
 import org.springframework.data.domain.AuditorAware;
 import static org.andidev.applicationname.util.ApplicationUtils.getUser;
 
-public class AuditorAwareImpl implements AuditorAware<User> {
+public class AuditorProvider implements AuditorAware<User> {
 
     @Override
     public User getCurrentAuditor() {
-
         return getUser();
     }
 }

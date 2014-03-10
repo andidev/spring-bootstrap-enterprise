@@ -27,7 +27,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @ComponentScan(basePackages = {"org.andidev"})
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev.applicationname.repository")
-@ImportResource({"/WEB-INF/config/auditing.xml", "/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
+@ImportResource({"/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
 public class ApplicationConfig {
 
     @Value("${application.environment}")
