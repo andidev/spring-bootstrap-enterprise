@@ -13,7 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @Slf4j
 @Aspect
-public class TraceLoggingConfig {
+public class AopLoggingConfig {
 
     @Before(
     value = "execution(public * org.andidev.applicationname..controller..*.*(..))",
