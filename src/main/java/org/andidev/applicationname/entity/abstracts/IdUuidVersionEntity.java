@@ -16,7 +16,7 @@ import org.hibernate.LazyInitializationException;
 @Setter
 @Getter
 @MappedSuperclass
-public class IdUuidVersionEntity extends  AbstractPersistable<Long> {
+public class IdUuidVersionEntity extends AbstractPersistable<Long> {
 
     @Column(unique = true)
     @Setter(AccessLevel.PROTECTED)
@@ -26,7 +26,7 @@ public class IdUuidVersionEntity extends  AbstractPersistable<Long> {
     private Long version;
 
     @Override
-    public String toString(){
+    public String toString() {
         try {
             return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
         } catch (LazyInitializationException e) {

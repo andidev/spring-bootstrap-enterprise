@@ -10,17 +10,17 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 import org.hibernate.LazyInitializationException;
 
-
 @Setter
 @Getter
 @MappedSuperclass
-public class IdVersionEntity extends  AbstractPersistable<Long> {
+public class IdVersionEntity extends AbstractPersistable<Long> {
+
     @Version
     @Setter(AccessLevel.PROTECTED)
     private Long version;
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         try {
             return ReflectionToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
         } catch (LazyInitializationException e) {
