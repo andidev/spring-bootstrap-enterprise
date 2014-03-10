@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -27,7 +28,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @ComponentScan(basePackages = {"org.andidev"})
 @EnableTransactionManagement
 @EnableJpaRepositories("org.andidev.applicationname.repository")
-@ImportResource({"/WEB-INF/config/jmx.xml", "/WEB-INF/config/monitoring.xml"})
+@EnableMBeanExport
+@ImportResource({"/WEB-INF/config/monitoring.xml"})
 public class ApplicationConfig {
 
     @Value("${application.environment}")
