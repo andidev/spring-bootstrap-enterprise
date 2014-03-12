@@ -70,7 +70,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .and()
             .rememberMe()
-                .userDetailsService(userDetailService)
                 .tokenRepository(springDataTokenRepository())
                 .useSecureCookie(true)
                 .and()
