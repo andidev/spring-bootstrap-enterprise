@@ -31,7 +31,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @EnableJpaRepositories("org.andidev.applicationname.repository")
 @EnableMBeanExport
 @EnableAspectJAutoProxy
-@ImportResource({"/WEB-INF/config/monitoring.xml"})
 public class ApplicationConfig {
 
     @Value("${application.environment}")
