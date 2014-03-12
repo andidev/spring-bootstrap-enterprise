@@ -1229,21 +1229,22 @@
         <repository>
             <id>spring.release</id>
             <name>Spring Release Repository</name>
-            <url>http://maven.springframework.org/release</url>
+            <url>http://repo.spring.io/release</url>
         </repository>
 
         <!-- Spring Milestones -->
         <repository>
             <id>spring.milestone</id>
             <name>Spring Milestone Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
+            <url>http://repo.spring.io/milestone</url>
         </repository>
 
         <!-- Spring Snapshots -->
         <repository>
             <id>spring.snapshot</id>
             <name>Spring Snapshot Repository</name>
-            <url>http://maven.springframework.org/snapshot</url>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots><enabled>true</enabled></snapshots>
         </repository>
 
         <!-- Nexus Snapshots -->
