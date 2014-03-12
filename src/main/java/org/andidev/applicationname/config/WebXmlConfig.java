@@ -24,6 +24,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 @Slf4j
 public class WebXmlConfig implements WebApplicationInitializer {
+    
+    final String TARGET_FOLDER = getClass().getClassLoader().getResource(".").getPath().replaceAll("/classes/$", "");
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -33,7 +35,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
 
         // Set Java Melody settings
         servletContext.setInitParameter("javamelody.monitoring-path", "/monitoring");
-        servletContext.setInitParameter("javamelody.storage-directory", "logs/javamelody");
+        servletContext.setInitParameter("javamelody.storage-directory", TARGET_FOLDER + "/logs/javamelody");
         servletContext.setInitParameter("javamelody.resolution-seconds", "60");
         servletContext.setInitParameter("javamelody.disabled", "false");
 
