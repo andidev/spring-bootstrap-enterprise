@@ -123,8 +123,8 @@
         <querydsl.version>3.3.1</querydsl.version>
         <slf4j.version>1.7.6</slf4j.version>
         <spring.version>4.0.2.RELEASE</spring.version>
-        <spring.data.jpa.version>1.5.0.RELEASE</spring.data.jpa.version>
-        <spring.security.version>3.2.1.RELEASE</spring.security.version>
+        <spring.data.jpa.version>1.5.1.RELEASE</spring.data.jpa.version>
+        <spring.security.version>3.2.2.RELEASE</spring.security.version>
         <sysout.slf4j.version>1.0.2</sysout.slf4j.version>
         <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
 
@@ -133,7 +133,7 @@
         <maven-apt-plugin.version>1.0.4</maven-apt-plugin.version>
         <maven.aspectj.plugin>1.4</maven.aspectj.plugin>
         <maven.assembly.plugin>2.3</maven.assembly.plugin>
-        <maven.checkstyle.plugin>2.11</maven.checkstyle.plugin>
+        <maven.checkstyle.plugin>2.12</maven.checkstyle.plugin>
         <maven.clean.plugin>2.5</maven.clean.plugin>
         <maven.cobertura.plugin>2.5.2</maven.cobertura.plugin>
         <maven.dependency.plugin>2.5.1</maven.dependency.plugin>
@@ -316,7 +316,7 @@
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-            <version>3.1.0.CR11</version>
+            <version>3.1.0.GA</version>
         </dependency>
 
         <!-- JUnit -->
