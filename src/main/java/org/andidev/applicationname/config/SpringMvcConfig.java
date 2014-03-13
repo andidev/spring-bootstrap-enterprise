@@ -12,7 +12,6 @@ import org.andidev.applicationname.format.json.JsonFormatAnnotationFormatterFact
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.SortHandlerMethodArgumentResolver;
@@ -28,7 +27,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 @Configuration
 @Slf4j
-@Import({ThymeleafConfig.class})
 public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Value("${application.environment}")
