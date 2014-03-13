@@ -80,7 +80,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterBefore(anonymousAuthenticationFilter(), AnonymousAuthenticationFilter.class)
             .addFilter(switchUserFilter())
             .authorizeRequests()
-                .antMatchers("/switchuser").hasRole("ROOT")
+                .antMatchers("/switchuserto").hasRole("ROOT")
                 .and()
             .csrf().disable()
             .httpBasic();
