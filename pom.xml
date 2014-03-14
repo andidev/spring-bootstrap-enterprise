@@ -1139,12 +1139,15 @@
 
             <!-- Embedded Tomcat Server -->
             <!-- Start command: mvn tomcat7:run -->
-            <!-- Available at:  http://localhost:8080/spring-bootstrap-enterprise -->
+            <!-- Available at:  http://localhost:8080/application-name -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>${maven.tomcat.plugin}</version>
                 <configuration>
+                    <configuration>
+                        <path>/${project.artifactId}</path>
+                    </configuration>
                     <port>8080</port>
                     <charset>UTF-8</charset>
                     <uriEncoding>UTF-8</uriEncoding>
@@ -1165,7 +1168,7 @@
 
             <!-- Embedded Jetty Server -->
             <!-- Start command: mvn jetty:run -->
-            <!-- Available at:  http://localhost:8080 -->
+            <!-- Available at:  http://localhost:8080/application-name -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -1173,7 +1176,7 @@
                 <configuration>
                     <jettyXml>src/test/resources/jetty.xml,src/test/resources/jetty-http.xml,src/test/resources/jetty-ssl.xml,src/test/resources/jetty-https.xml</jettyXml>
                     <webAppConfig>
-                        <contextPath>/</contextPath>
+                        <contextPath>/${project.artifactId}</contextPath>
                     </webAppConfig>
                     <stopPort>18080</stopPort>
                     <stopKey>stop-jetty</stopKey>
