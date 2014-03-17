@@ -134,6 +134,7 @@
         <joda.money.version>0.9.1</joda.money.version>
         <junit.version>4.11</junit.version>
         <lambdaj.version>2.3.3</lambdaj.version>
+        <log4jdbc.log4j2.jdbc4.1.version>1.16</log4jdbc.log4j2.jdbc4.1.version>
         <logback.version>1.1.1</logback.version>
         <lombok.version>1.12.6</lombok.version>
         <mockito.core.version>1.9.5</mockito.core.version>
@@ -288,6 +289,14 @@
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
             <version>${querydsl.version}</version>
+        </dependency>
+
+        <!-- Log4jdbc-log4j2 -->
+        <!-- TODO: Use the log4jdbc-log4j2 driver -->
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+            <version>${log4jdbc.log4j2.jdbc4.1.version}</version>
         </dependency>
 
         <!-- Joda Time -->
