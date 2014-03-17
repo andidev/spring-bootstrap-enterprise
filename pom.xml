@@ -139,6 +139,7 @@
         <mockito.core.version>1.9.5</mockito.core.version>
         <mysql.connector.java.version>5.1.29</mysql.connector.java.version>
         <querydsl.version>3.3.1</querydsl.version>
+        <selenium.version>2.40.0</selenium.version>
         <slf4j.version>1.7.6</slf4j.version>
         <spring.version>4.0.2.RELEASE</spring.version>
         <spring.data.jpa.version>1.5.1.RELEASE</spring.data.jpa.version>
@@ -332,6 +333,14 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
 
