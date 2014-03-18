@@ -1,5 +1,6 @@
 package org.andidev.applicationname.config;
 
+import com.google.common.collect.Lists;
 import java.util.Properties;
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -43,7 +44,9 @@ public class ApplicationConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer properties(Environment environment) {
         PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
-        Resource[] resources = new ClassPathResource[]{new ClassPathResource("application_" + environment.getProperty("application.environment") + ".properties")};
+        ClassPathResource[] resources = {
+            new ClassPathResource("application_" + environment.getProperty("application.environment") + ".properties")
+        };
         pspc.setLocations(resources);
         return pspc;
     }
@@ -111,7 +114,7 @@ public class ApplicationConfig {
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource reloadableMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/messages/messages");
+        messageSource.setBasenames("/WEB-INF/messages/messages");
         if (applicationEnvironment.equals("localhost")) {
             messageSource.setCacheSeconds(1);
         }

@@ -112,8 +112,6 @@
         <project.build.sourceJavaVersion>1.7</project.build.sourceJavaVersion>
         <project.build.targetJavaVersion>1.7</project.build.targetJavaVersion>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-        <application.build.version>${project.version}</application.build.version>
-        <application.build.timestamp>${maven.build.timestamp}</application.build.timestamp>
 
         <!-- Dependency Versions (run "mvn versions:display-property-updates" to check for updates) -->
         <common.dbcp.version>1.4</common.dbcp.version>
@@ -174,7 +172,7 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        
+
         <!-- Spring Aspects -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -452,6 +450,21 @@
     </dependencyManagement>
 
     <build>
+        <!-- Save Application Build Information -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>application_*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- Set Java Version -->
             <plugin>
