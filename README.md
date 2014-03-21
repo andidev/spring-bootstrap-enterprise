@@ -6,7 +6,7 @@ A Spring Web Application using Hibernate, Thymeleaf and Twitter Bootstrap built 
 ### Some Features
 * 100% Java Config
 * Spring Profiles for Environments (localhost, development, test, production)
-* HSQLDB when running application in localhost environment
+* H2 Database when running application in localhost environment
 * MySQL when running application in development, test, production
 * Hibernate JPA
 * Hibernate Envars for entity revision auditing

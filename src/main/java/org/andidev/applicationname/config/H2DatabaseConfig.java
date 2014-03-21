@@ -12,10 +12,12 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 @Profile("localhost")
-public class HsqlDatabaseConfig {
+public class H2DatabaseConfig {
 
     @Value("${database.url}")
     private String url;
+    @Value("${database.driver}")
+    private String driver;
     @Value("${database.username}")
     private String username;
     @Value("${database.password}")
@@ -26,6 +28,7 @@ public class HsqlDatabaseConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(url);
+        dataSource.setDriverClassName(driver);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;
@@ -35,7 +38,7 @@ public class HsqlDatabaseConfig {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setDatabase(Database.HSQL);
+        jpaVendorAdapter.setDatabase(Database.H2);
         jpaVendorAdapter.setShowSql(false);
         jpaVendorAdapter.setGenerateDdl(false);
         return jpaVendorAdapter;
