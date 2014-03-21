@@ -1,5 +1,5 @@
-DROP SCHEMA `applicationname` ;
-CREATE SCHEMA `applicationname` ;
+DROP SCHEMA `application-name` ;
+CREATE SCHEMA `application-name` ;
 
 SELECT * FROM applicationname.RevEntity;
 SELECT * FROM applicationname.Opinion_AUD;

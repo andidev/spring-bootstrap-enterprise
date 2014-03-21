@@ -50,12 +50,18 @@ public class MySqlDatabaseConfig {
     }
 
     private void createDatabaseIfItDoesNotExist() throws SQLException {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", username, password);
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS applicationname");
-        } catch (Exception e) {
-            // Ignore errors
-        }
+        String databaseServerUrl = removeDatabaseName(url);
+        String databaseName = parseDatabaseName(url);
+        Connection connection = DriverManager.getConnection(databaseServerUrl, username, password);
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("CREATE DATABASE IF NOT EXISTS `" + databaseName + "`");
+    }
+
+    private String removeDatabaseName(String url) {
+        return url.replaceAll("/[^/]*$", "");
+    }
+
+    private String parseDatabaseName(String url) {
+        return url.replaceAll(".*/", "");
     }
 }
