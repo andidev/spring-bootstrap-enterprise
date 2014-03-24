@@ -1,5 +1,4 @@
 src/main/webapp/resources*old*
 src/main/webapp/resources/.sass-cache
 target/
-mem.h2.db
-mem.trace.db
+mem.*.db

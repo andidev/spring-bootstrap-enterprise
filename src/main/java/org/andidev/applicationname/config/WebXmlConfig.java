@@ -12,6 +12,7 @@ import javax.servlet.ServletRegistration;
 import lombok.extern.slf4j.Slf4j;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.join;
+import org.h2.server.web.WebServlet;
 import org.jminix.console.servlet.MiniConsoleServlet;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -79,6 +80,12 @@ public class WebXmlConfig implements WebApplicationInitializer {
         jminixConsoleServlet.addMapping("/admin/jminix/*");
 
 
+        // Register Database Manager Web Servlet
+        ServletRegistration.Dynamic databaseManagerWebServlet =
+                servletContext.addServlet("databaseManagerWebServlet", new WebServlet());
+        databaseManagerWebServlet.setInitParameter("webAllowOthers", "");
+        databaseManagerWebServlet.setLoadOnStartup(1);
+        databaseManagerWebServlet.addMapping("/system/database/*");
 
         /* Logback */
 
