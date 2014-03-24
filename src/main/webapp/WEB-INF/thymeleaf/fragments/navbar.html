@@ -26,7 +26,7 @@
                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/system/users}" href="/system/users">Users</a></li>
                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')" class="dropdown-header">Developer</li>
                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/database}" href="/system/database" class="open-in-new-tab">Database</a></li>
-                                <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/javamelody}" href="#javamelody">Java Melody</a></li>
+                                <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/javamelody}" href="/system/javamelody">Java Melody</a></li>
                                 <li sec:authorize="hasRole('ROLE_DEVELOPER')"><a th:href="@{/system/errors}" href="/system/errors">Errors</a></li>
                             </ul>
                         </li>

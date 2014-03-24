@@ -35,7 +35,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
         Properties applicationProperties = loadApplicationProperties(applicationEnvironment);
 
         // Set Java Melody settings
-        servletContext.setInitParameter("javamelody.monitoring-path", "/monitoring");
+        servletContext.setInitParameter("javamelody.monitoring-path", "/javamelody");
         servletContext.setInitParameter("javamelody.storage-directory", TARGET_FOLDER + "/logs/javamelody");
         servletContext.setInitParameter("javamelody.resolution-seconds", "60");
         servletContext.setInitParameter("javamelody.disabled", "false");

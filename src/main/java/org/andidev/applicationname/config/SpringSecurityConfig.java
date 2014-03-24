@@ -55,7 +55,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().requiresSecure()
                 .and()
             .authorizeRequests()
-                .antMatchers("/monitoring").hasRole("ADMIN")
+                .antMatchers("/javamelody/**").hasRole("ADMIN")
                 .antMatchers("/system/database/**").hasRole("DEVELOPER")
                 .and()
             .formLogin()
