@@ -1,6 +1,5 @@
 package org.andidev.applicationname.config;
 
-import com.google.common.collect.Lists;
 import java.util.Properties;
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -14,7 +13,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
