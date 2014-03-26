@@ -37,10 +37,10 @@
                 <!-- DataTables Bootstrap -->
                 <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/datatables-bootstrap.css|}" href="../../../resources/stylesheets/datatables-bootstrap.css"/>
             </th:block>
-
-            <!-- Layout -->
-            <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/layouts/layout.css|}" href="../../../../resources/stylesheets/layouts/layout.css"/>
         </th:block>
+
+        <!-- Layout -->
+        <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/layouts/layout.css|}" href="../../../../resources/stylesheets/layouts/layout.css"/>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -102,9 +102,10 @@
                 <!-- Navbar -->
                 <script th:src="@{|/resources-${applicationVersion}/javascripts/fragments/navbar.js|}" src="../../../resources/javascripts/fragments/navbar.js"></script>
             </th:block>
-
-            <!-- Page JavaScripts -->
-            <th:block layout:fragment="javascripts"/>
         </th:block>
+
+        <!-- Page JavaScripts -->
+        <th:block layout:fragment="javascripts"/>
+
     </body>
 </html>
