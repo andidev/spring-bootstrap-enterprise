@@ -16,12 +16,12 @@
         <link rel="shortcut icon" th:href="@{|/resources-${applicationVersion}/favicon.ico|}"/><!-- TODO: Add favicon -->
 
         <!-- Stylesheets -->
-        <div th:switch="${applicationEnvironment}" th:remove="tag">
-            <div th:case="'production'" th:remove="tag">
+        <th:block th:switch="${applicationEnvironment}">
+            <th:block th:case="'production'">
                 <!-- Application -->
                 <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/application.min.css|}" href="../../../resources/stylesheets/application.min.css"/>
-            </div>
-            <div th:case="*" th:remove="tag">
+            </th:block>
+            <th:block th:case="*">
                 <!-- Bootstrap -->
                 <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/bootstrap.css|}" href="../../../bootstrap.css"/>
                 <!-- Bootstrap Editable -->
@@ -36,11 +36,11 @@
                 <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/datatables.css|}" href="../../../resources/stylesheets/datatables.css"/>
                 <!-- DataTables Bootstrap -->
                 <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/datatables-bootstrap.css|}" href="../../../resources/stylesheets/datatables-bootstrap.css"/>
-            </div>
+            </th:block>
 
             <!-- Layout -->
             <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/layouts/layout.css|}" href="../../../../resources/stylesheets/layouts/layout.css"/>
-        </div>
+        </th:block>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -51,23 +51,23 @@
 
     <body>
         <!-- Navbar -->
-        <div th:include="fragments/navbar :: navbar" th:remove="tag"/>
+        <th:block th:include="fragments/navbar :: navbar"/>
 
         <div class="container">
             <!-- Content -->
-            <div layout:fragment="content" th:remove="tag"/>
+            <th:block layout:fragment="content"/>
         </div>
 
         <!-- Footer -->
-        <footer th:include="fragments/footer :: footer" th:remove="tag"/>
+        <th:block th:include="fragments/footer :: footer"/>
 
         <!-- JavaScripts -->
-        <div th:switch="${applicationEnvironment}" th:remove="tag">
-            <div th:case="'production'" th:remove="tag">
+        <th:block th:switch="${applicationEnvironment}">
+            <th:block th:case="'production'">
                 <!-- Application -->
                 <script th:src="@{|/resources-${applicationVersion}/javascripts/application.min.js|}" src="../../../resources/javascripts/application.min.js"></script>
-            </div>
-            <div th:case="*" th:remove="tag">
+            </th:block>
+            <th:block th:case="*">
                 <!-- jQuery -->
                 <script th:src="@{|/resources-${applicationVersion}/javascripts/jquery.js|}" src="../../../jquery.js"></script>
                 <!-- jQuery Pjax -->
@@ -101,7 +101,7 @@
 
                 <!-- Navbar -->
                 <script th:src="@{|/resources-${applicationVersion}/javascripts/fragments/navbar.js|}" src="../../../resources/javascripts/fragments/navbar.js"></script>
-            </div>
-        </div>
+            </th:block>
+        </th:block>
     </body>
 </html>

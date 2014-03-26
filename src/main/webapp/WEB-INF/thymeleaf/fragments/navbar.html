@@ -45,18 +45,18 @@
             </div>
 
             <div th:switch="${applicationEnvironment}">
-                <div th:case="'production'" th:remove="tag">
+                <th:block th:case="'production'">
                     <div sec:authorize="hasRole('ROLE_DEVELOPER')" style="position: absolute; right: 2px; top: 0; color: #dc322f; font-size: 10px;">
                         <small th:text="${applicationEnvironment}">production</small>
                         <small th:text="${applicationVersion}">0.0.1</small>
                     </div>
-                </div>
-                <div th:case="*" th:remove="tag">
+                </th:block>
+                <th:block th:case="*">
                     <div style="position: absolute; right: 2px; top: 0; color: #999999; font-size: 10px;">
                         <small th:text="${applicationEnvironment}">localhost</small>
                         <small th:text="${applicationVersion}">0.0.1</small>
                     </div>
-                </div>
+                </th:block>
             </div>
         </div>
 

@@ -12,7 +12,7 @@
     <body>
 
         <section layout:fragment="content" >
-            <div th:include="fragments/pageheader :: pageheader" th:with="header='Users', subtext=''" th:remove="tag"/>
+            <th:block th:include="fragments/pageheader :: pageheader" th:with="header='Users', subtext=''"/>
 
             <table id="users" class="table table-striped" dt:table="true" dt:sort="true" dt:filter="false" dt:lengthChange="false">
                 <thead>
