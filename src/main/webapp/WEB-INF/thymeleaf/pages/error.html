@@ -24,7 +24,7 @@
     </head>
     <body>
 
-        <section class="container">
+        <div class="container">
             <h1><span class="error-message" th:text="${errorMessage}">Server Error</span> <span class="error-status-code" th:text="${errorStatusCode}">500</span></h1>
             <pre class="error-exception-stack-trace" th:text="${errorExceptionStackTrace}">
 java.lang.RuntimeException
@@ -126,7 +126,7 @@ java.lang.RuntimeException
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
 	at java.lang.Thread.run(Thread.java:680)
             </pre>
-        </section>
+        </div>
 
     </body>
 </html>
