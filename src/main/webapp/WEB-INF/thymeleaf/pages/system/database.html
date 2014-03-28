@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
+    <head>
+        <title>Database</title>
+        <!-- Page Stylesheet -->
+        <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/pages/system/database.css|}" href="../../../../resources/stylesheets/pages/system/database.css"/>
+    </head>
+    <body>
+
+        <th:block layout:fragment="content">
+            <iframe th:src="@{/database}" frameborder="0" height="100%" width="100%" seamless="seamless" style="display: none;"></iframe>
+        </th:block>
+
+        <th:block layout:fragment="javascripts">
+            <!-- Page Model Data -->
+            <script th:inline="javascript">
+            /*<![CDATA[*/
+                var DATABASE_DRIVER = /*[[${databaseDriver}]]*/ 'org.h2.Driver';
+                var DATABASE_URL = /*[[${databaseUrl}]]*/ 'jdbc:h2:mem';
+                var DATABASE_USERNAME = /*[[${databaseUsername}]]*/ 'sa';
+                var DATABASE_PASSWORD = /*[[${databasePassword}]]*/ '';
+            /*]]>*/
+            </script>
+            <!-- Page JavaScript -->
+            <script th:src="@{|/resources-${applicationVersion}/javascripts/pages/system/database.js|}" src="../../../resources/javascripts/pages/system/database.js"></script>
+        </th:block>
+
+    </body>
+</html>

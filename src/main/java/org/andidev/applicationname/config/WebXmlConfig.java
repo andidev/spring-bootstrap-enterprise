@@ -85,7 +85,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
                 servletContext.addServlet("databaseManagerWebServlet", new WebServlet());
         databaseManagerWebServlet.setInitParameter("webAllowOthers", "");
         databaseManagerWebServlet.setLoadOnStartup(1);
-        databaseManagerWebServlet.addMapping("/system/database/*");
+        databaseManagerWebServlet.addMapping("/database/*");
 
         /* Logback */
 

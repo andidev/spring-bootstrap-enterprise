@@ -17,6 +17,7 @@ import org.andidev.applicationname.service.UserService;
 import static org.andidev.applicationname.util.SecurityUtils.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -26,6 +27,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @Controller
 @Slf4j
 public class ApplicationController {
+
+    @Value("${database.url}")
+    private String databaseUrl;
+    @Value("${database.driver}")
+    private String databaseDriver;
+    @Value("${database.username}")
+    private String databaseUsername;
+    @Value("${database.password}")
+    private String databasePassword;
 
     @Inject
     private GroupService groupService;
@@ -66,6 +76,16 @@ public class ApplicationController {
     public String users(Model model) {
         model.addAttribute("users", userService.findAll());
         return "pages/system/users";
+    }
+
+    @PreAuthorize("hasRole('ROLE_DEVELOPER')")
+    @RequestMapping({"/system/database"})
+    public String database(Model model) {
+        model.addAttribute("databaseUrl", databaseUrl);
+        model.addAttribute("databaseDriver", databaseDriver);
+        model.addAttribute("databaseUsername", databaseUsername);
+        model.addAttribute("databasePassword", databasePassword);
+        return "pages/system/database";
     }
 
     @PreAuthorize("hasRole('ROLE_DEVELOPER')")
