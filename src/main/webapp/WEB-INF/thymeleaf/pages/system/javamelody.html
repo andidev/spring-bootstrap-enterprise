@@ -10,8 +10,12 @@
     <body>
 
         <section layout:fragment="content" >
-            <iframe th:src="@{/javamelody}" frameborder="0" height="100%" width="100%" seamless="seamless"></iframe>
+            <iframe th:src="@{/javamelody}" frameborder="0" height="100%" width="100%" seamless="seamless" style="display: none;"></iframe>
         </section>
 
+        <th:block layout:fragment="javascripts">
+            <!-- Page JavaScript -->
+            <script th:src="@{|/resources-${applicationVersion}/javascripts/pages/system/javamelody.js|}" src="../../../resources/javascripts/pages/system/javamelody.js"></script>
+        </th:block>
     </body>
 </html>
