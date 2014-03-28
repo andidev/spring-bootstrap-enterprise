@@ -4,23 +4,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <title th:text="|${applicationName} - Error!|">Error!</title>
-        <style type="text/css">
-            body {
-                padding: 10px 50px;
-                font-family: arial;
-                background-color: #f5f5f5;
-                margin: 0 auto;
-            }
-            .container {
-                width: 800px;
-            }
-            h1 {
-                font-size: 50px;
-            }
-            .error-status-code {
-                color: red;
-            }
-        </style>
+        <!-- Page Stylesheet -->
+        <link rel="stylesheet" th:href="@{|/resources-${applicationVersion}/stylesheets/pages/error.css|}" href="../../../../resources/stylesheets/pages/error.css"/>
     </head>
     <body>
 
