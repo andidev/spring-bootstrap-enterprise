@@ -11,7 +11,7 @@
     </head>
     <body>
 
-        <section layout:fragment="content" >
+        <th:block layout:fragment="content">
             <th:block th:include="fragments/pageheader :: pageheader" th:with="header='Groups', subtext=''"/>
 
             <table id="groups" class="table table-striped" dt:table="true" dt:sort="true" dt:filter="false" dt:lengthChange="false">
@@ -30,7 +30,7 @@
                     </tr>
                 </tbody>
             </table>
-        </section>
+        </th:block>
 
     </body>
 </html>

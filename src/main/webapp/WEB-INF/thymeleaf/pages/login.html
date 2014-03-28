@@ -46,7 +46,7 @@
     </head>
     <body>
 
-        <section layout:fragment="content" >
+        <th:block layout:fragment="content">
             <form class="form-login" th:action="@{/login}" action="/login" method="post">
                 <h2 class="form-login-heading">Please login</h2>
                 <input name="username" type="text" class="form-control" placeholder="Email address" autofocus="autofocus" value="root"/>
@@ -57,7 +57,7 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                 <div th:text="${message}" id="message" th:if="${message}"/>
             </form>
-        </section>
+        </th:block>
 
     </body>
 </html>

@@ -9,7 +9,7 @@
     </head>
     <body>
 
-        <section layout:fragment="content" >
+        <th:block layout:fragment="content">
             <th:block th:include="fragments/pageheader :: pageheader" th:with="header='Settings', subtext=''"/>
             <form class="form-horizontal" role="form">
                 <div class="form-group">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </form>
-        </section>
+        </th:block>
 
     </body>
 </html>

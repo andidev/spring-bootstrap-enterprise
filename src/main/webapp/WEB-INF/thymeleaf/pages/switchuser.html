@@ -46,14 +46,14 @@
     </head>
     <body>
 
-        <section layout:fragment="content" >
+        <th:block layout:fragment="content">
             <form class="form-switchuser" th:action="@{/switchuserto}" action="/switchuserto" method="post">
                 <h2 class="form-switchuser-heading">Please switch user</h2>
                 <input name="username" type="text" class="form-control" placeholder="Email address" autofocus="autofocus" value="user"/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Switch User</button>
                 <div th:text="${message}" id="message" th:if="${message}"/>
             </form>
-        </section>
+        </th:block>
 
     </body>
 </html>
