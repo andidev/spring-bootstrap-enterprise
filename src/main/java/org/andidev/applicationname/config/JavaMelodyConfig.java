@@ -3,13 +3,11 @@ package org.andidev.applicationname.config;
 import net.bull.javamelody.MonitoredWithAnnotationPointcut;
 import net.bull.javamelody.MonitoringSpringAdvisor;
 import net.bull.javamelody.SpringDataSourceBeanPostProcessor;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@Aspect
 public class JavaMelodyConfig {
 
     @Bean
