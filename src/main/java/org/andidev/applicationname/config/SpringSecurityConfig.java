@@ -1,6 +1,7 @@
 package org.andidev.applicationname.config;
 
 import javax.inject.Inject;
+import org.andidev.applicationname.config.springsecurity.CustomWebSecurityExpressionHandler;
 import org.andidev.applicationname.config.springsecurity.SpringDataTokenRepositoryImpl;
 import org.andidev.applicationname.config.springsecurity.UserDetailsServiceAnonymousAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,7 +22,6 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     static final String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
@@ -55,6 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().requiresSecure()
                 .and()
             .authorizeRequests()
+                .expressionHandler(new CustomWebSecurityExpressionHandler())
                 .antMatchers("/javamelody/**").hasRole("DEVELOPER")
                 .antMatchers("/database/**").hasRole("DEVELOPER")
                 .and()
