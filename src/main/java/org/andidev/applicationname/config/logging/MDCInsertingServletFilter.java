@@ -7,19 +7,28 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import org.slf4j.MDC;
 import static org.andidev.applicationname.util.ApplicationUtils.*;
 
 public class MDCInsertingServletFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        putUsernameAndSessionInMDC();
+        putDataInMDC(request);
         try {
             chain.doFilter(request, response);
         } finally {
-            removeUsernameAndSessionFromMDC();
+            removeDataFromMDC();
         }
+    }
+
+    public static void putDataInMDC(ServletRequest request) {
+        MDC.putSession(getSessionId());
+        MDC.putUsername(getUsername());
+    }
+
+    public static void removeDataFromMDC() {
+        MDC.removeSession();
+        MDC.removeUsername();
     }
 
     @Override
@@ -32,13 +41,4 @@ public class MDCInsertingServletFilter implements Filter {
         // Do nothing
     }
 
-    public static void putUsernameAndSessionInMDC() {
-        MDC.put("username", getUsername());
-        MDC.put("session", getSessionId());
-    }
-
-    public static void removeUsernameAndSessionFromMDC() {
-        MDC.remove("username");
-        MDC.remove("session");
-    }
 }
