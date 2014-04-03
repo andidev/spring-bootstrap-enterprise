@@ -78,7 +78,7 @@ public class ApplicationController {
         return "pages/system/users";
     }
 
-    @PreAuthorize("hasRole('ROLE_DEVELOPER')")
+    @PreAuthorize("hasRole('ROLE_DEVELOPER') and !isProductionEnvironment()")
     @RequestMapping({"/system/database"})
     public String database(Model model) {
         model.addAttribute("databaseUrl", databaseUrl);
