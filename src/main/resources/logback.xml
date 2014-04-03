@@ -63,6 +63,7 @@
     <logger name="org.springframework" level="INHERITED"/>
     <logger name="org.springframework.web" level="INHERITED"/>
     <logger name="org.springframework.security" level="INHERITED"/>
+    <logger name="org.springframework.aop" level="INHERITED"/>
 
     <!-- Hibernate -->
     <logger name="org.hibernate" level="INHERITED"/>
