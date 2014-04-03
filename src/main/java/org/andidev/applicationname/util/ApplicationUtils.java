@@ -39,8 +39,12 @@ public class ApplicationUtils {
     }
 
     public static HttpServletRequest getRequest() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-                .getRequest();
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (requestAttributes == null) {
+            return null;
+        }
+
+        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
         return request;
     }
 
@@ -49,12 +53,19 @@ public class ApplicationUtils {
     }
 
     public static String getSessionId() {
-        RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
-        if (attrs == null) {
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (requestAttributes == null) {
             return null;
         }
 
-        return attrs.getSessionId();
+        return requestAttributes.getSessionId();
+    }
+
+    public static String getIpAddress() {
+        if (getRequest() == null) {
+            return null;
+        }
+        return getRequest().getRemoteAddr();
     }
 
     public static void login(String username, String password) throws ServletException {
