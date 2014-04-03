@@ -1,15 +1,13 @@
 package org.andidev.applicationname.config.springsecurity;
 
 import lombok.extern.slf4j.Slf4j;
+import org.andidev.applicationname.util.ApplicationEnvironmentUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
 
 @Slf4j
 public class CustomWebAndMethodSecurityExpressionRoot extends WebAndMethodSecurityExpressionRoot {
-
-    @Value("${application.environment}")
-    private String applicationEnvironment;
 
     public CustomWebAndMethodSecurityExpressionRoot(Authentication a) {
         super(a);
@@ -20,18 +18,18 @@ public class CustomWebAndMethodSecurityExpressionRoot extends WebAndMethodSecuri
     }
 
     public boolean isLocalhostEnvironment() {
-        return "localhost".equals(applicationEnvironment);
+        return ApplicationEnvironmentUtils.isLocalhostEnvironment();
     }
 
     public boolean isDevelopmentEnvironment() {
-        return "development".equals(applicationEnvironment);
+        return ApplicationEnvironmentUtils.isDevelopmentEnvironment();
     }
 
     public boolean isTestEnvironment() {
-        return "test".equals(applicationEnvironment);
+        return ApplicationEnvironmentUtils.isTestEnvironment();
     }
 
     public boolean isProductionEnvironment() {
-        return "production".equals(applicationEnvironment);
+        return ApplicationEnvironmentUtils.isProductionEnvironment();
     }
 }
