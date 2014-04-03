@@ -39,7 +39,7 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
-    private Period automaticLogoutPeriod;
+    private Period automaticLogoutTime;
     private Locale locale;
     private DateTimeZone timeZone;
     private String dateFormat = "yyyy/MM/dd";

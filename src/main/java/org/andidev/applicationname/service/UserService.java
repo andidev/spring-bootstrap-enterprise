@@ -33,8 +33,8 @@ public class UserService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        if (user.getAutomaticLogoutPeriod() == null) {
-            user.setAutomaticLogoutPeriod(Period.hours(1));
+        if (user.getAutomaticLogoutTime() == null) {
+            user.setAutomaticLogoutTime(Period.hours(1));
         }
 
         // create entity

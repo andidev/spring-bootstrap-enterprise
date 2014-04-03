@@ -20,8 +20,8 @@ public class LoginListener implements ApplicationListener<InteractiveAuthenticat
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
         User user = getUser();
-        log.info("Setting the automatic logout time for user {} to {}", user.getUsername(), PeriodFormat.getDefault().print(user.getAutomaticLogoutPeriod()));
-        int automaticLogoutPeriodInSeconds = user.getAutomaticLogoutPeriod().toStandardSeconds().getSeconds() ;
-        session.setMaxInactiveInterval(automaticLogoutPeriodInSeconds);        
+        log.info("Setting the automatic logout time for user {} to {}", user.getUsername(), PeriodFormat.getDefault().print(user.getAutomaticLogoutTime()));
+        int automaticLogoutTimeInSeconds = user.getAutomaticLogoutTime().toStandardSeconds().getSeconds() ;
+        session.setMaxInactiveInterval(automaticLogoutTimeInSeconds);
     }
 }
