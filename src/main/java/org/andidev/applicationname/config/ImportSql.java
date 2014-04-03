@@ -1,21 +1,24 @@
 package org.andidev.applicationname.config;
 
-import org.andidev.applicationname.config.logging.MDCInsertingServletFilter;
 import java.util.Arrays;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import org.andidev.applicationname.config.logging.MDC;
 import org.andidev.applicationname.entity.Group;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.entity.enums.Role;
 import org.andidev.applicationname.service.GroupService;
-import org.andidev.applicationname.repository.UserRepository;
 import org.andidev.applicationname.service.UserService;
+import static org.andidev.applicationname.util.ApplicationUtils.getUsername;
+import static org.andidev.applicationname.util.StringUtils.quote;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +30,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
     @Inject
     UserService userService;
     @Inject
-    UserRepository userRepository;
+    UserDetailsService userDetailsService;
 
     @Override
     @Transactional
@@ -41,9 +44,8 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         // Create anonymous user and group
         User anonymousUser = createAnonymousUser();
 
-        // Authenticate the root user
-        logInAsRoot();
-        MDCInsertingServletFilter.putUsernameAndSessionInMDC();
+        // Login as root user
+        login("root");
 
         // Create dev user and group
         User developerUser = createDeveloperUser();
@@ -59,13 +61,16 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         User user = createUser();
         Group userGroup = createUserGroup();
         userGroup.getUsers().add(user);
+
+        // Logout root user
+        logout();
+
         log.info("Initial database data created!");
+
 
         log.info("Creating test data");
         // Add create test data methods here
         log.info("Test data created!");
-
-        MDCInsertingServletFilter.removeUsernameAndSessionFromMDC();
     }
 
     private User createRootUser() {
@@ -120,9 +125,17 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         return groupService.create(group);
     }
 
-    private void logInAsRoot() throws UsernameNotFoundException {
-        UserDetails user = userRepository.findByUsername("root");
+    private void login(String username) throws UsernameNotFoundException {
+        UserDetails user = userDetailsService.loadUserByUsername(username);
         Authentication auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
+    }
+
+    private void logout() {
+        log.info("Logging out {} user", quote(getUsername()));
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(null);
+        SecurityContextHolder.clearContext();
+        MDC.removeUsername();
     }
 }
