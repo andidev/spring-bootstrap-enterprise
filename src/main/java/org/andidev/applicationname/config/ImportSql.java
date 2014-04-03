@@ -129,6 +129,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
         UserDetails user = userDetailsService.loadUserByUsername(username);
         Authentication auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
+        MDC.putUsername(username);
     }
 
     private void logout() {
