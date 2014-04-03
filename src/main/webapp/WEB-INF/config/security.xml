@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <security:http pattern="/resources/**" security="none" />
+    <security:http pattern="/resources-*/**" security="none" />
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/monitoring" access="hasRole('ROLE_ADMIN')"/>
+
+        <security:form-login login-page="/login"
+                             authentication-failure-url="/login/failure"
+                             default-target-url="/"/>
+
+        <security:logout logout-success-url="/logout/success"
+                         invalidate-session="true"/>
+
+        <security:remember-me  />
+
+        <security:access-denied-handler error-page="/accessdenied"/>
+
+        <security:custom-filter ref = "anonymousAuthenticationFilter" position = "ANONYMOUS_FILTER"/>
+        <security:anonymous enabled = "false" />
+
+        <security:custom-filter ref = "switchUserFilter" position = "SWITCH_USER_FILTER"/>
+        <security:intercept-url pattern="/switchuser" access="hasRole('ROLE_ROOT')"/>
+    </security:http>
+    <bean id="switchUserFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
+        <property name="userDetailsService" ref="userDetailsServiceImpl"/>
+        <property name="targetUrl" value="/"/>
+    </bean>
+    
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userDetailsServiceImpl">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <security:global-method-security  pre-post-annotations="enabled"/>        
+<!--        <security:expression-handler ref="expressionHandler"/>
+    </security:global-method-security>-->
+<!--    <bean id="expressionHandler" class="org.andidev.applicationname.config.springsecurity.CustomMethodSecurityExpressionHandler">
+        <property name="permissionEvaluator" ref="permissionEvaluator"/>
+    </bean>
+    <bean id="permissionEvaluator" class="org.andidev.applicationname.config.springsecurity.CustomPermissionEvaluator"/>-->
+
+<!--<http
+        access-decision-manager-ref="accessDecisionManager"
+        use-expressions="true">
+
+<beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+    <beans:property name="decisionVoters">
+        <beans:list>
+            <beans:bean class="org.springframework.security.web.access.expression.WebExpressionVoter"/>
+            <beans:bean class="org.springframework.security.access.vote.RoleVoter">
+                <beans:property name="rolePrefix" value=""/>
+            </beans:bean>
+            <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+        </beans:list>
+    </beans:property>
+</beans:bean>-->
+</beans>
