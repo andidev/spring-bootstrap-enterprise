@@ -1,9 +1,11 @@
 package org.andidev.applicationname.util;
 
+import java.util.Set;
 import org.andidev.applicationname.entity.enums.Role;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityUtils {
@@ -17,16 +19,17 @@ public class SecurityUtils {
     }
 
     public static boolean hasRole(String role) {
-        return ApplicationUtils.getRequest().isUserInRole(role);
+        return getAuthorities().contains(role);
     }
 
     public static boolean hasRole(Role role) {
-        return ApplicationUtils.getRequest().isUserInRole(role.name());
+        return getAuthorities().contains(role.toString());
     }
 
     public static boolean hasAnyRole(String... roles) {
+        Set<String> authorities = getAuthorities();
         for (String role : roles) {
-            if (hasRole(role)) {
+            if (authorities.contains(role)) {
                 return true;
             }
         }
@@ -35,8 +38,9 @@ public class SecurityUtils {
     }
 
     public static boolean hasAnyRole(Role... roles) {
+        Set<String> authorities = getAuthorities();
         for (Role role : roles) {
-            if (hasRole(role)) {
+            if (authorities.contains(role.toString())) {
                 return true;
             }
         }
@@ -78,6 +82,10 @@ public class SecurityUtils {
 
     public static boolean isSwitchedUser() {
         return hasRole("ROLE_PREVIOUS_ADMINISTRATOR");
+    }
+
+    private static Set<String> getAuthorities() {
+        return AuthorityUtils.authorityListToSet(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     }
 
 }
