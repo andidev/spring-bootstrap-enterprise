@@ -78,7 +78,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/accessdenied")
                 .and()
             .anonymous().disable()
-            .addFilterBefore(anonymousAuthenticationFilter(), AnonymousAuthenticationFilter.class)
+            .addFilterBefore(anonymousAuthenticationFilter())
             .addFilter(switchUserFilter())
             .authorizeRequests()
                 .antMatchers("/switchuserto").hasRole("ROOT")
@@ -94,7 +94,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UserDetailsServiceAnonymousAuthenticationFilter anonymousAuthenticationFilter() {
+    public AnonymousAuthenticationFilter anonymousAuthenticationFilter() {
         UserDetailsServiceAnonymousAuthenticationFilter anonymousAuthenticationFilter = new UserDetailsServiceAnonymousAuthenticationFilter(userDetailService);
         return anonymousAuthenticationFilter;
     }
