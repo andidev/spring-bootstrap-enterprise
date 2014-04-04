@@ -8,11 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityUtils {
 
-    public final boolean hasAuthority(String authority) {
+    public static boolean hasAuthority(String authority) {
         return hasRole(authority);
     }
 
-    public final boolean hasAnyAuthority(String... authorities) {
+    public static boolean hasAnyAuthority(String... authorities) {
         return hasAnyRole(authorities);
     }
 
@@ -24,7 +24,7 @@ public class SecurityUtils {
         return ApplicationUtils.getRequest().isUserInRole(role.name());
     }
 
-    public final boolean hasAnyRole(String... roles) {
+    public static boolean hasAnyRole(String... roles) {
         for (String role : roles) {
             if (hasRole(role)) {
                 return true;
@@ -34,7 +34,7 @@ public class SecurityUtils {
         return false;
     }
 
-    public final boolean hasAnyRole(Role... roles) {
+    public static boolean hasAnyRole(Role... roles) {
         for (Role role : roles) {
             if (hasRole(role)) {
                 return true;
