@@ -86,6 +86,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private User createAnonymousUser() {
         User user = new User("anonymousUser", "");
+        user.getUserRoles().add(Role.ROLE_ANONYMOUS);
         return userService.create(user);
     }
 

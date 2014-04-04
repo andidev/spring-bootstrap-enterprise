@@ -1,6 +1,7 @@
 package org.andidev.applicationname.config.springsecurity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -12,8 +13,8 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,14 +39,9 @@ public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilt
     }
 
     public UserDetailsServiceAnonymousAuthenticationFilter(UserDetailsService userDetailsService, String key, String username) {
-        this(userDetailsService, key, username, AuthorityUtils.createAuthorityList("ROLE_ANONYMOUS"));
-    }
-
-    public UserDetailsServiceAnonymousAuthenticationFilter(UserDetailsService userDetailsService, String key, String username, List<GrantedAuthority> authorities) {
         this.userDetailsService = userDetailsService;
         this.key = key;
         this.username = username;
-        this.authorities = authorities;
     }
 
     @Override
@@ -53,7 +49,6 @@ public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilt
         Assert.notNull(userDetailsService, "userDetailsService must be specified");
         Assert.hasLength(key);
         Assert.notNull(username, "Anonymous username must be set");
-        Assert.notNull(authorities, "Anonymous authorities must be set");
     }
 
     @Override
@@ -79,9 +74,11 @@ public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilt
 
     @Transactional(readOnly = true)
     protected Authentication createAuthentication(HttpServletRequest request) {
-        // Get principal from UserDetailSertvice
+        // Get principal and authorities from UserDetailSertvice
         if (principal == null) {
-            principal = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            principal = userDetails;
+            authorities = new ArrayList(userDetails.getAuthorities());
         }
 
         AnonymousAuthenticationToken auth = new AnonymousAuthenticationToken(key, principal, authorities);
