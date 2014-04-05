@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.config.logging.MDC;
 import org.andidev.applicationname.entity.User;
 import static org.andidev.applicationname.util.ApplicationUtils.*;
-import org.joda.time.format.PeriodFormat;
+import static org.andidev.applicationname.util.TimeUtils.format;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class LoginListener implements ApplicationListener<InteractiveAuthenticat
     }
 
     private void setAutomaticLogoutTime(HttpSession session, User user) {
-        log.info("Setting the automatic logout time for user {} to {}", user.getUsername(), PeriodFormat.getDefault().print(user.getAutomaticLogoutTime()));
+        log.info("Setting the automatic logout time for user {} to {}", user.getUsername(), format(user.getAutomaticLogoutTime()));
         int automaticLogoutTimeInSeconds = user.getAutomaticLogoutTime().toStandardSeconds().getSeconds() ;
         session.setMaxInactiveInterval(automaticLogoutTimeInSeconds);
     }
