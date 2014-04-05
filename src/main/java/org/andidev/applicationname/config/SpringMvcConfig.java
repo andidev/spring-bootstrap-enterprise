@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.config.interceptor.LocaleInterceptor;
 import org.andidev.applicationname.config.interceptor.TimeZoneInterceptor;
+import org.andidev.applicationname.config.logging.ExecutionTimeInterceptor;
 import org.andidev.applicationname.format.list.ListFormatAnnotationFormatterFactory;
 import org.andidev.applicationname.format.custom.CustomFormatAnnotationFormatterFactory;
 import org.andidev.applicationname.format.json.JsonFormatAnnotationFormatterFactory;
@@ -37,6 +38,11 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     EntityManagerFactory entityManagerFactory;
 
     @Bean
+    public ExecutionTimeInterceptor executionTimeInterceptor() {
+        return new ExecutionTimeInterceptor();
+    }
+
+    @Bean
     public LocaleInterceptor localeInterceptor() {
         return new LocaleInterceptor("locale");
     }
@@ -55,6 +61,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(executionTimeInterceptor());
         registry.addInterceptor(localeInterceptor());
         registry.addInterceptor(timeZoneInterceptor());
         registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
