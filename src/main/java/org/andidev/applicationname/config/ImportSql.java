@@ -1,6 +1,5 @@
 package org.andidev.applicationname.config;
 
-import java.util.Arrays;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.applicationname.config.logging.MDC;
@@ -80,7 +79,7 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
 
     private Group createRootGroup() {
         Group group = new Group("root");
-        group.getGroupRoles().addAll(Arrays.asList(Role.values()));
+        group.getGroupRoles().addAll(Role.getAllRolesExceptAnonymous());
         return groupService.create(group);
     }
 
