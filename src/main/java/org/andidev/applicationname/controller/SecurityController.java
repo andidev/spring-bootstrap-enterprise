@@ -1,8 +1,6 @@
 package org.andidev.applicationname.controller;
 
-import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,8 +15,6 @@ import static org.andidev.applicationname.util.SecurityUtils.*;
 public class SecurityController {
 
     public static final int MINUTES = 60;
-    @Autowired
-    private HttpSession session;
     
     @RequestMapping("/login")
     public String login() {
