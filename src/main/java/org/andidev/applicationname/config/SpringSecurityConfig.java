@@ -1,6 +1,7 @@
 package org.andidev.applicationname.config;
 
 import javax.inject.Inject;
+import org.andidev.applicationname.config.logging.MDCUsernameInsertingFilter;
 import org.andidev.applicationname.config.springsecurity.CustomWebSecurityExpressionHandler;
 import org.andidev.applicationname.config.springsecurity.SpringDataTokenRepositoryImpl;
 import org.andidev.applicationname.config.springsecurity.UserDetailsServiceAnonymousAuthenticationFilter;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 @Configuration
@@ -80,6 +82,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .anonymous().disable()
             .addFilterBefore(anonymousAuthenticationFilter(), AnonymousAuthenticationFilter.class)
             .addFilter(switchUserFilter())
+            .addFilterAfter(mdcUsernameInsertingFilter(), SecurityContextPersistenceFilter.class)
             .authorizeRequests()
                 .antMatchers("/switchuserto").hasRole("ROOT")
                 .and()
@@ -108,6 +111,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         switchUserFilter.setUsernameParameter("username");
         switchUserFilter.setExitUserUrl("/switchuserlogout");
         return switchUserFilter;
+    }
+
+    @Bean
+    public MDCUsernameInsertingFilter mdcUsernameInsertingFilter() {
+        MDCUsernameInsertingFilter mdcUsernameInsertingFilter = new MDCUsernameInsertingFilter();
+        return mdcUsernameInsertingFilter;
     }
 
     @Bean

@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import org.andidev.applicationname.config.logging.MDC;
+import static org.andidev.applicationname.util.ApplicationUtils.getSession;
+import static org.andidev.applicationname.util.ApplicationUtils.getUsername;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
@@ -57,6 +60,9 @@ public class UserDetailsServiceAnonymousAuthenticationFilter extends GenericFilt
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             SecurityContextHolder.getContext().setAuthentication(createAuthentication((HttpServletRequest) req));
+
+            MDC.putUsername(getUsername());
+            getSession().setAttribute("username", getUsername());
 
             if (logger.isDebugEnabled()) {
                 logger.debug("Populated SecurityContextHolder with anonymous token: '"

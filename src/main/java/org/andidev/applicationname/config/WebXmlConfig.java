@@ -14,6 +14,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.join;
 import org.h2.server.web.WebServlet;
 import org.jminix.console.servlet.MiniConsoleServlet;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
@@ -56,11 +57,21 @@ public class WebXmlConfig implements WebApplicationInitializer {
         dispatcherServlet.setLoadOnStartup(1);
         dispatcherServlet.addMapping("/");
 
+        // Add data to Logback MDC
+        FilterRegistration.Dynamic mdcInsertingServletFilter =
+                servletContext.addFilter("mdcInsertingServletFilter", MDCInsertingServletFilter.class);
+        mdcInsertingServletFilter.addMappingForUrlPatterns(null, false, "/*");
 
         // Register Spring Security Filter
         FilterRegistration.Dynamic springSecurityFilterChain =
                 servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
         springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
+
+        // Enable SessionDestroyedEvent for the LogOutListener
+        servletContext.addListener(new HttpSessionEventPublisher());
+
+        // Make RequestContextHolder available in filters
+        servletContext.addListener(new RequestContextListener());
 
         // Register UTF-8 Encoding Filter, see http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter
         FilterRegistration.Dynamic encodingFilter =
@@ -86,17 +97,6 @@ public class WebXmlConfig implements WebApplicationInitializer {
         databaseManagerWebServlet.setInitParameter("webAllowOthers", "");
         databaseManagerWebServlet.setLoadOnStartup(1);
         databaseManagerWebServlet.addMapping("/database/*");
-
-        /* Logback */
-
-        // Enable RequestContextHolder in MDCInsertingServletFilter
-        servletContext.addListener(new RequestContextListener());
-
-        // Add data to Logback MDC
-        FilterRegistration.Dynamic mdcInsertingServletFilter =
-                servletContext.addFilter("mdcInsertingServletFilter", MDCInsertingServletFilter.class);
-        mdcInsertingServletFilter.addMappingForUrlPatterns(null, false, "/*");
-
 
         // Enable Logback Access Request-Response
         FilterRegistration.Dynamic teeFilter =

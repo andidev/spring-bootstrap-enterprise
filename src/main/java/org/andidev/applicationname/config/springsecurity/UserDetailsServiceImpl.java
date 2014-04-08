@@ -2,11 +2,8 @@ package org.andidev.applicationname.config.springsecurity;
 
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import org.andidev.applicationname.config.logging.MDC;
 import org.andidev.applicationname.entity.User;
 import org.andidev.applicationname.repository.UserRepository;
-import org.andidev.applicationname.util.ApplicationUtils;
-import static org.andidev.applicationname.util.StringUtils.quote;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,8 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User with username = \"" + username + "\" was not found");
         }
-        log.info("Logging in {} user", quote(username));
-        MDC.putUsername(user.getUsername());
         return user;
     }
 }

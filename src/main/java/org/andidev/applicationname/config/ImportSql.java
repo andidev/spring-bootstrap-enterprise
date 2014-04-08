@@ -126,16 +126,19 @@ public class ImportSql implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private void login(String username) throws UsernameNotFoundException {
+        MDC.putUsername(username);
         UserDetails user = userDetailsService.loadUserByUsername(username);
         Authentication auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
+        log.info("Logged in as {}", quote(username));
     }
 
     private void logout() {
-        log.info("Logging out {} user", quote(getUsername()));
+        String username = getUsername();
         SecurityContext securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication(null);
         SecurityContextHolder.clearContext();
+        log.info("Logged out as {}", quote(username));
         MDC.removeUsername();
     }
 }

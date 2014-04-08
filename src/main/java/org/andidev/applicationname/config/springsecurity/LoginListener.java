@@ -7,6 +7,7 @@ import org.andidev.applicationname.entity.User;
 import static org.andidev.applicationname.util.ApplicationUtils.getSession;
 import static org.andidev.applicationname.util.ApplicationUtils.getUser;
 import static org.andidev.applicationname.util.ApplicationUtils.getUsername;
+import static org.andidev.applicationname.util.StringUtils.quote;
 import static org.andidev.applicationname.util.TimeUtils.format;
 import org.joda.time.Period;
 import org.springframework.context.ApplicationListener;
@@ -26,6 +27,10 @@ public class LoginListener {
 
         @Override
         public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
+            MDC.putSession(getSession().getId());
+            MDC.putUsername(getUsername());
+            getSession().setAttribute("username", getUsername());
+            log.info("Logged in as {}", quote(getUsername()));
             listener.onLogin(getUser());
         }
     }
@@ -38,12 +43,19 @@ public class LoginListener {
 
         @Override
         public void onApplicationEvent(AuthenticationSwitchUserEvent event) {
-            listener.onLogin((User) event.getTargetUser());
+            User fromUser = (User) event.getAuthentication().getPrincipal();
+            User toUser = (User) event.getTargetUser();
+
+            log.info("Logged out as {} (switching to {})", quote(fromUser.getUsername()), quote(toUser.getUsername()));
+            MDC.putSession(getSession().getId());
+            MDC.putUsername(toUser.getUsername());
+            getSession().setAttribute("username", toUser.getUsername());
+            log.info("Logged in as {} (switched from {})", quote(toUser.getUsername()), quote(fromUser.getUsername()));
+            listener.onLogin(toUser);
         }
     }
 
     private void onLogin(User user) {
-        MDC.putUsername(user.getUsername());
         setAutomaticLogoutTime(user.getAutomaticLogoutTime());
     }
 
