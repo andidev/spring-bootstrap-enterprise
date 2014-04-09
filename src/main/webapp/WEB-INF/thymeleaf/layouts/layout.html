@@ -64,6 +64,10 @@
         <!-- Footer -->
         <th:block th:include="fragments/footer :: footer"/>
 
+        <div class="bottom-left-container">
+            <th:block th:include="fragments/debuginfo :: debuginfo"/>
+        </div>
+
         <!-- JavaScripts -->
         <th:block th:switch="${applicationEnvironment}">
             <th:block th:case="'production'">

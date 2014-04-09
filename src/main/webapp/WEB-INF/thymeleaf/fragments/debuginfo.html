@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="debuginfo" >
+
+        <div class="debuginfo" sec:authorize="hasRole('ROLE_DEVELOPER') or !isProductionEnvironment()" th:classappend="${isProductionEnvironment} ? 'bg-danger text-danger' : 'bg-warning text-warning'">
+            <small>Environment: </small><small th:text="${applicationEnvironment}">production</small>&nbsp;&nbsp;&nbsp;
+            <small>Version: </small><small th:text="${applicationVersion}">0.0.1</small>&nbsp;&nbsp;&nbsp;
+            <small>Execution Time: </small><small th:text="${executionTime}">10 milliseconds</small>
+        </div>
+
+    </body>
+</html>
