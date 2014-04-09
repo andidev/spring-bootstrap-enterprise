@@ -41,6 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
+            .expressionHandler(webSecurityExpressionHandler())
             .ignoring()
                 .antMatchers("/resources/**")
                 .antMatchers("/resources-*/**");
@@ -56,7 +57,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().requiresSecure()
                 .and()
             .authorizeRequests()
-                .expressionHandler(new CustomWebSecurityExpressionHandler())
+                .expressionHandler(webSecurityExpressionHandler())
                 .antMatchers("/database/**").access("hasRole('ROLE_DEVELOPER') and !isProductionEnvironment()")
                 .antMatchers("/javamelody/**").access("hasRole('ROLE_DEVELOPER')")
                 .and()
@@ -84,6 +85,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilter(switchUserFilter())
             .addFilterAfter(mdcUsernameInsertingFilter(), SecurityContextPersistenceFilter.class)
             .authorizeRequests()
+                .expressionHandler(webSecurityExpressionHandler())
                 .antMatchers("/switchuserto").hasRole("ROOT")
                 .and()
             .csrf().disable()
@@ -129,5 +131,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
         RememberMeAuthenticationProvider rememberMeAuthenticationProvider = new RememberMeAuthenticationProvider(REMEMBER_ME_KEY);
         return rememberMeAuthenticationProvider;
+    }
+
+    @Bean
+    public CustomWebSecurityExpressionHandler webSecurityExpressionHandler() {
+        CustomWebSecurityExpressionHandler customWebSecurityExpressionHandler = new CustomWebSecurityExpressionHandler();
+        return customWebSecurityExpressionHandler;
     }
 }
