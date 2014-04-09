@@ -44,7 +44,7 @@
                 </div><!-- /navbar-collapse -->
             </div>
 
-            <div th:switch="${applicationEnvironment}">
+            <th:block th:switch="${applicationEnvironment}">
                 <th:block th:case="'production'">
                     <div sec:authorize="hasRole('ROLE_DEVELOPER')" style="position: absolute; right: 2px; top: 0; color: #dc322f; font-size: 10px;">
                         <small th:text="${executionTime}">10 milliseconds</small>
@@ -59,7 +59,7 @@
                         <small th:text="${applicationVersion}">0.0.1</small>
                     </div>
                 </th:block>
-            </div>
+            </th:block>
         </div>
 
     </body>
