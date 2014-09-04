@@ -19,7 +19,7 @@
             <script th:inline="javascript">
             /*<![CDATA[*/
                 var DATABASE_DRIVER = /*[[${databaseDriver}]]*/ 'org.h2.Driver';
-                var DATABASE_URL = /*[[${databaseUrl}]]*/ 'jdbc:h2:mem';
+                var DATABASE_URL = /*[[${databaseUrl}]]*/ 'jdbc:h2:./database/h2';
                 var DATABASE_USERNAME = /*[[${databaseUsername}]]*/ 'sa';
                 var DATABASE_PASSWORD = /*[[${databasePassword}]]*/ '';
             /*]]>*/

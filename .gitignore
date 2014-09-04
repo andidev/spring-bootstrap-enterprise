@@ -1,4 +1,4 @@
 src/main/webapp/resources*old*
 src/main/webapp/resources/.sass-cache
 target/
-mem.*.db
+database/

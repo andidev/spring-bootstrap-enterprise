@@ -116,51 +116,51 @@
 
         <!-- Dependency Versions (run "mvn versions:display-property-updates" to check for updates) -->
         <common.dbcp.version>1.4</common.dbcp.version>
-        <commons.lang3.version>3.3.1</commons.lang3.version>
+        <commons.lang3.version>3.3.2</commons.lang3.version>
         <datatables.thymeleaf.version>0.9.3</datatables.thymeleaf.version>
         <fest.version>2.0M10</fest.version>
-        <gson.version>2.2.4</gson.version>
-        <guava.version>16.0.1</guava.version>
-        <h2.version>1.3.176</h2.version>
+        <gson.version>2.3</gson.version>
+        <guava.version>18.0</guava.version>
+        <h2.version>1.4.181</h2.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <hibernate.validator.version>5.1.0.Final</hibernate.validator.version>
-        <hibernate.version>4.3.5.Final</hibernate.version>
+        <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+        <hibernate.version>4.3.6.Final</hibernate.version>
         <jackson.jaxrs.version>1.9.13</jackson.jaxrs.version>
-        <javamelody.version>1.50.0</javamelody.version>
+        <javamelody.version>1.52.0</javamelody.version>
         <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
         <jminix.version>1.1.0</jminix.version>
-        <joda.time.version>2.3</joda.time.version>
+        <joda.time.version>2.4</joda.time.version>
         <joda.money.version>0.9.1</joda.money.version>
         <junit.version>4.11</junit.version>
         <lambdaj.version>2.3.3</lambdaj.version>
         <logback.version>1.1.2</logback.version>
-        <lombok.version>1.12.6</lombok.version>
+        <lombok.version>1.14.6</lombok.version>
         <mockito.core.version>1.9.5</mockito.core.version>
-        <mysql.connector.java.version>5.1.30</mysql.connector.java.version>
-        <querydsl.version>3.3.2</querydsl.version>
+        <mysql.connector.java.version>5.1.32</mysql.connector.java.version>
+        <querydsl.version>3.4.3</querydsl.version>
         <slf4j.version>1.7.7</slf4j.version>
-        <spring.version>4.0.3.RELEASE</spring.version>
-        <spring.data.jpa.version>1.5.1.RELEASE</spring.data.jpa.version>
-        <spring.security.version>3.2.3.RELEASE</spring.security.version>
+        <spring.version>4.1.0.RELEASE</spring.version>
+        <spring.data.jpa.version>1.6.4.RELEASE</spring.data.jpa.version>
+        <spring.security.version>3.2.5.RELEASE</spring.security.version>
         <thymeleaf.extras.springsecurity3.version>2.1.1.RELEASE</thymeleaf.extras.springsecurity3.version>
-        <thymeleaf.layout.dialect.version>1.2.3</thymeleaf.layout.dialect.version>
-        <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
-        <usertype.core.version>3.1.0.GA</usertype.core.version>
+        <thymeleaf.layout.dialect.version>1.2.5</thymeleaf.layout.dialect.version>
+        <thymeleaf.version>2.1.3.RELEASE</thymeleaf.version>
+        <usertype.core.version>3.2.0.GA</usertype.core.version>
 
         <!-- Plugin Versions (run "mvn versions:display-property-updates" to check for updates) -->
         <apt.plugin.version>1.1.1</apt.plugin.version>
-        <checkstyle.plugin.version>2.12</checkstyle.plugin.version>
+        <checkstyle.plugin.version>2.12.1</checkstyle.plugin.version>
         <clean.plugin.version>2.5</clean.plugin.version>
         <compiler.plugin.version>3.1</compiler.plugin.version>
         <deploy.plugin.version>2.8.1</deploy.plugin.version>
         <enforcer.plugin.version>1.3.1</enforcer.plugin.version>
         <help.plugin.version>2.2</help.plugin.version>
         <install.plugin.version>2.5.1</install.plugin.version>
-        <jetty.plugin.version>9.1.2.v20140210</jetty.plugin.version>
+        <jetty.plugin.version>9.2.1.v20140609</jetty.plugin.version>
         <properties.plugin.version>1.0-alpha-2</properties.plugin.version>
         <release.plugin.version>2.5</release.plugin.version>
         <resources.plugin.version>2.6</resources.plugin.version>
-        <surefire.plugin.version>2.16</surefire.plugin.version>
+        <surefire.plugin.version>2.17</surefire.plugin.version>
         <tomcat7.plugin.version>2.2</tomcat7.plugin.version>
         <versions.plugin.version>2.1</versions.plugin.version>
         <war.plugin.version>2.4</war.plugin.version>
