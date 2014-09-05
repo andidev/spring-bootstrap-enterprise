@@ -113,6 +113,7 @@ public class ApplicationConfig {
     public ReloadableResourceBundleMessageSource reloadableMessageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames("/WEB-INF/messages/messages");
+        messageSource.setDefaultEncoding("UTF-8");
         if (applicationEnvironment.equals("localhost")) {
             messageSource.setCacheSeconds(1);
         }
