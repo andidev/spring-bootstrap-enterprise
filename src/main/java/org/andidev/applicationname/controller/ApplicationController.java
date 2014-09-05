@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.andidev.applicationname.entity.enums.Role.*;
+import org.andidev.applicationname.service.JsonService;
 import org.andidev.applicationname.service.GroupService;
 import org.andidev.applicationname.service.UserService;
 import static org.andidev.applicationname.util.SecurityUtils.*;
@@ -39,9 +40,10 @@ public class ApplicationController {
 
     @Inject
     private GroupService groupService;
-
     @Inject
     private UserService userService;
+    @Inject
+    private JsonService jsonService;
 
     @RequestMapping({"/"})
     public String root(Model model) {
@@ -64,19 +66,24 @@ public class ApplicationController {
         return "pages/user/settings";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping({"/system/groups"})
-    public String groups(Model model) {
-        model.addAttribute("groups", groupService.findAll());
-        return "pages/system/groups";
-    }
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @RequestMapping({"/system/groups"})
+//    public String groups(Model model) {
+//        List<Group> groups = groupService.findAll();
+//        model.addAttribute("groups", new Groups(groups));
+//        model.addAttribute("roles", jsonService.getRoles());
+//
+//        model.addAttribute("roles", jsonService.getRoles());
+//        model.addAttribute("roles", jsonService.getRoles());
+//        return "pages/system/groups";
+//    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping({"/system/users"})
-    public String users(Model model) {
-        model.addAttribute("users", userService.findAll());
-        return "pages/system/users";
-    }
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @RequestMapping({"/system/users"})
+//    public String users(Model model) {
+//        model.addAttribute("users", userService.findAll());
+//        return "pages/system/users";
+//    }
 
     @PreAuthorize("hasRole('ROLE_DEVELOPER') and !isProductionEnvironment()")
     @RequestMapping({"/system/database"})
@@ -99,6 +106,7 @@ public class ApplicationController {
     public String errors(Model model) {
         return "pages/system/errors";
     }
+
     @Getter
     @Setter
     public class Test {
@@ -120,6 +128,5 @@ public class ApplicationController {
         private BigDecimal number = new BigDecimal(99.99);
         @NumberFormat(style = NumberFormat.Style.PERCENT)
         private BigDecimal percent = new BigDecimal(0.90);
-
     }
 }

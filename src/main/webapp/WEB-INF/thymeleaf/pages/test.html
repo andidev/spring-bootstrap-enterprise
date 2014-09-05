@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:dt="http://github.com/dandelion/datatables"
+      layout:decorator="layouts/layout">
+    <head>
+        <title>Tests</title>
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+
+        <section layout:fragment="content" >
+            <div th:include="fragments/pageheader :: pageheader" th:with="header='Groups', subtext=''" th:remove="tag"/>
+
+
+currentDate = <span th:text="${{object.currentDate}}">Outputs correctly formatted date: 2013-12-16</span>
+<br/>
+
+nestedCurrentDate =
+<span th:each="nestedObject : ${object.nestedObjectInList}">
+    <span th:text="${{nestedObject.nestedCurrentDate}}">Outputs incorrectly unformatted date: 12/16/13 5:00 AM</span>
+</span>
+<br/>
+
+nestedCurrentDate =
+<span th:each="nestedObject : ${object.nestedObjectInList}">
+    <span th:text="${'Val: ' + #conversions.convert(nestedObject.nestedCurrentDate,'String')}">Outputs incorrectly unformatted date: 12/16/13 5:00 AM</span>
+</span>
+<br/>
+
+<!--
+currentDate = <span th:text="${{object.currentDate}}">Outputs correctly formatted date: 2013-12-16</span>
+<br/>
+
+currentDateInlist = <span th:text="${{object.currentDateInList}}">Outputs correctly formatted date: 2013-12-16</span>
+<br/>
+
+nestedCurrentDate = <span th:text="${{object.nestedObject.nestedCurrentDate}}">Outputs correctly formatted date: 2013-12-16</span>
+<br/>
+
+nestedCurrentDateInList = <span th:text="${{object.nestedObject.nestedCurrentDateInList}}">Outputs correctly formatted date: 2013-12-16</span>
+<br/>
+
+nestedObjectInListWithCurrentDate =
+<span th:each="nestedObject : ${object.nestedObjectInList}">
+    <span th:text="${{nestedObject.nestedCurrentDate}}">Outputs incorrectly unformatted date: 12/16/13 5:00 AM</span>
+</span>
+<br/>
+
+nestedObjectInListWithCurrentDateInlist =
+<span th:each="nestedObject : ${object.nestedObjectInList}">
+    <span th:text="${{nestedObject.nestedCurrentDateInList}}">Outputs incorrectly unformatted date: 12/16/13 5:00 AM</span>
+</span>-->
+
+        </section>
+
+    </body>
+</html>

@@ -7,7 +7,7 @@
     <head>
         <title>Groups</title>
     </head>
-    <body>
+    <body th:object="${viewModel}">
 
         <th:block layout:fragment="content">
             <th:block th:include="fragments/pageheader :: pageheader" th:with="header='Groups', subtext=''"/>
@@ -15,16 +15,34 @@
             <table id="groups" class="table table-striped" dt:table="true" dt:sort="true" dt:filter="false" dt:lengthChange="false">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Groupname</th>
                         <th>Roles</th>
+                        <th>Users</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="group : ${groups}">
-                        <td th:text="${group.id}">2</td>
+                    <tr th:each="group : *{groups}" th:attr="data-group-id=${group.id}">
                         <td th:text="${group.groupname}">admin</td>
-                        <td th:text="${group.groupRoles}">admin</td>
+                        <td>
+                            <a href="#" class="edit" data-type="select2" data-title="Add or remove roles"
+                               th:attr="data-source=*{{roles}}, data-pk=${group.id}, data-value=${{group.roles}}"
+                               th:text="*{{groups[__${groupStat.index}__].roles}}"
+                               data-select2='{"multiple": "false"}'></a>
+                        </td>
+                        <td>
+                            <a href="#" class="edit" data-type="select2" data-title="Add or remove users"
+                               th:attr="data-source=*{{users}}, data-pk=${group.id}, data-value=${{group.userIds}}"
+                               th:text="*{{groups[__${groupStat.index}__].userNames}}"
+                               data-select2='{"multiple": "false"}'></a>
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-xs" href="#">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="#">Remove</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" th:text="test"><a class="btn btn-success btn-xs btn-block" href="#">Add</a></td>
                     </tr>
                 </tbody>
             </table>
