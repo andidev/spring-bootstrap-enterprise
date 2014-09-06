@@ -1,6 +1,7 @@
 package org.andidev.applicationname.config;
 
 import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +32,7 @@ public class ThymeleafConfig {
         templateEngine.addDialect(new LayoutDialect());
         templateEngine.addDialect(new SpringSecurityDialect());
         templateEngine.addDialect(new DataTablesDialect());
+        templateEngine.addDialect(new DataAttributeDialect());
         return templateEngine;
     }
 
