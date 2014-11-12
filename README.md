@@ -19,10 +19,15 @@ A Spring Web Application using Hibernate, Thymeleaf and Twitter Bootstrap built 
 * AOP Trace Logging
 * Thymeleaf configured with the Layout Dialect and Dandelion Datatables
 * GUI built with Twitter Bootstrap
-* jQuery, Knockout, Underscore, Data Tables, Font Awesome, X-Editable, Select2 + a lot more front end technologies
+* jQuery, Knockout, Underscore, Data Tables, Font Awesome, X-Editable, Select2 + a t more front end technologies
+* Lombok to generate getters and setters + more
 * ... a lot more
 
 ### Getting Started
+
+Since this project uses [Lombok](http://projectlombok.org/) to generate getters and setters + more you have to install it if you will open the project in Eclipse. Otherwise Eclipse will give you some syntax errors. If you use Netbeans as your IDE you can skip this installation since it is already included by default. IntelliJ users are refered to use the [Lombok IntelliJ Plugin](https://code.google.com/p/lombok-intellij-plugin/).
+
+Installing Lombok for Eclipse is done by executing lombok.jar (doubleclick it, or run java -jar lombok.jar). Then press Install / Update and start Eclipse as usual. lombok.jar can be downloaded from [here](http://projectlombok.org/download.html).
 
 Run it in Jetty
 
@@ -47,6 +52,7 @@ mvn jetty:run -Dapplication.environment=test
 ```
 
 just make sure you have started mysql server before you start jetty if you load other environments than "localhost". No need to create a database schema or tables. Hibernate will do that for you!
+
 
 
 ## License
