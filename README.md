@@ -3,6 +3,8 @@ Spring Bootstrap Enterprise
 
 A Spring Web Application using Hibernate, Thymeleaf and Twitter Bootstrap built to use as a template for new projects. This project is still under heavy development but the master branch should be runnable. Be aware that some old legacy code is still included.
 
+Peaple who found this project may want to take a look at the [JHipster](https://jhipster.github.io/) project. There are a lot of similarities to this project and it is more mature.
+
 ### Some Features
 * 100% Java Config
 * Spring Profiles for Environments (localhost, development, test, production)
